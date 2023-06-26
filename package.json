@@ -123,7 +123,7 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"@navikt/ds-css": "^4.1.4",
+		"@navikt/ds-css": "^4.4.1",
 		"@navikt/ds-tokens": "^4.1.4",
 		"locally-unique-id-generator": "^0.1.5"
 	}
