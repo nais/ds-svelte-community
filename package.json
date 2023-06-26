@@ -91,7 +91,7 @@
 		"@storybook/addon-storysource": "^7.0.21",
 		"@storybook/addon-svelte-csf": "^3.0.3",
 		"@storybook/blocks": "^7.0.21",
-		"@storybook/svelte": "^7.0.21",
+		"@storybook/svelte": "^7.0.23",
 		"@storybook/sveltekit": "^7.0.21",
 		"@storybook/testing-library": "^0.1.0",
 		"@sveltejs/adapter-auto": "^2.1.0",
