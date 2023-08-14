@@ -84,7 +84,7 @@
 	"devDependencies": {
 		"@navikt/aksel-icons": "^4.7.2",
 		"@navikt/ds-tailwind": "^4.7.2",
-		"@storybook/addon-a11y": "7.1.1",
+		"@storybook/addon-a11y": "7.2.3",
 		"@storybook/addon-essentials": "7.1.1",
 		"@storybook/addon-interactions": "7.1.1",
 		"@storybook/addon-links": "7.1.1",
