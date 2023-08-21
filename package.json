@@ -85,7 +85,7 @@
 		"@navikt/aksel-icons": "^4.11.1",
 		"@navikt/ds-tailwind": "^4.11.1",
 		"@storybook/addon-a11y": "7.2.3",
-		"@storybook/addon-essentials": "7.2.3",
+		"@storybook/addon-essentials": "7.3.2",
 		"@storybook/addon-interactions": "7.2.3",
 		"@storybook/addon-links": "7.2.3",
 		"@storybook/addon-storysource": "7.2.3",
