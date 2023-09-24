@@ -1,6 +1,5 @@
-import { BreakpointName } from "@carbon/elements";
 import { parse, walk } from "svelte/compiler";
-import { Ast, Script, Style, TemplateNode } from "svelte/types/compiler/interfaces";
+import type { Ast, Script, Style, TemplateNode } from "svelte/types/compiler/interfaces";
 
 type ContentType = "script" | "style" | "markup";
 
@@ -103,12 +102,6 @@ interface NodeRule extends NodeMeta {
 	};
 }
 
-export interface MediaFeature {
-	type: "MediaFeature";
-	name: "down" | "up" | "bp" | "between" | BreakpointName;
-	value: null | { name: BreakpointName } | { type: "Dimension"; value: string; unit: string };
-}
-
 interface NodeAtRule extends NodeMeta {
 	type: "Atrule";
 	name: string;
@@ -119,7 +112,6 @@ interface NodeAtRule extends NodeMeta {
 			children: Array<{
 				type: "MediaQuery";
 				children: Array<
-					| MediaFeature
 					| {
 							type: "WhiteSpace";
 					  }
@@ -175,7 +167,7 @@ export function walkAndReplace(
 	let cursor = -1 * OFFSET[options.type].length;
 
 	function replaceContent(node: Node, replaceWith: string, replacee?: string) {
-		let replaced = replacee ?? content.slice(node.start + cursor, node.end + cursor);
+		const replaced = replacee ?? content.slice(node.start + cursor, node.end + cursor);
 		content = content.replace(replaced, replaceWith);
 		cursor += replaceWith.length - replaced.length;
 	}
@@ -184,9 +176,13 @@ export function walkAndReplace(
 		return content.slice(node.start + cursor, node.end + cursor);
 	}
 
-	walk(getAst(options.type, ast), {
-		enter(node: Node, parentNode: Node) {
-			replaceWith.apply(this, [{ node, parentNode }, replaceContent, getContent]);
+	walk(getAst(options.type, ast) as never, {
+		enter(node: unknown, parentNode: unknown) {
+			replaceWith.apply(this, [
+				{ node: node as Node, parentNode: parentNode as Node },
+				replaceContent,
+				getContent,
+			]);
 		},
 	});
 
