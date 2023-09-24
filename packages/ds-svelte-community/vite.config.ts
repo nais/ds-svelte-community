@@ -7,10 +7,8 @@ export default defineConfig({
 		environment: "jsdom",
 		include: ["src/**/*.{test,spec}.{js,ts}"],
 		setupFiles: ["./src/testlib/htmldiff.ts"],
-		server: {
-			deps: {
-				inline: ["clsx"],
-			},
+		deps: {
+			inline: ["clsx"],
 		},
 	},
 });

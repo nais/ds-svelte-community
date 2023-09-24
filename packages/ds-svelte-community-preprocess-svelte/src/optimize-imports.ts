@@ -1,5 +1,3 @@
-// import { BuildComponents } from "../build/build-components";
-
 import type { PreprocessorGroup } from "svelte/types/compiler/preprocess";
 import { Components } from "./components";
 import { walkAndReplace } from "./walk-and-replace";
@@ -7,33 +5,43 @@ import { walkAndReplace } from "./walk-and-replace";
 const packageComponent = "@nais/ds-svelte-community";
 const packageIcons = "@nais/ds-svelte-community/icons";
 
+type replacePackage = {
+	match: string;
+	prefix: string;
+};
+
 export function optimizeImports({
-	doNotUseInternal,
+	iconImportPrefix = {
+		match: packageIcons,
+		prefix: packageIcons,
+	},
+	componentsImportPrefix = {
+		match: packageComponent,
+		prefix: packageComponent,
+	},
 }: {
-	doNotUseInternal?: boolean;
+	iconImportPrefix?: replacePackage;
+	componentsImportPrefix?: replacePackage;
 } = {}): Pick<PreprocessorGroup, "script"> {
 	return {
 		script({ filename, content }) {
 			if (filename && !/node_modules/.test(filename) && /page.svelte/.test(filename)) {
-				console.log("Do something filename", filename);
 				const code = walkAndReplace(
 					{
-						type: "script",
 						content,
 						filename,
 					},
 					({ node }, replaceContent) => {
 						if (node.type === "ImportDeclaration") {
-							console.log("NODE SOURCE VALUE", node.source.value);
 							switch (node.source.value) {
-								case packageIcons:
+								case iconImportPrefix.match:
 									replaceContent(
 										node,
 										node.specifiers
 											.map(({ local, imported }) => {
 												if (imported.name in Components.icons) {
 													return `import ${local.name} from "${
-														Components.icons[imported.name].path
+														iconImportPrefix.prefix + Components.icons[imported.name].path
 													}";`;
 												}
 
@@ -44,17 +52,15 @@ export function optimizeImports({
 											})
 											.join("\n"),
 									);
-									if (doNotUseInternal) {
-										console.log("yolo");
-									}
 									break;
-								case packageComponent:
+								case componentsImportPrefix.match:
 									replaceContent(
 										node,
 										node.specifiers
 											.map(({ local, imported }) => {
 												if (imported.name in Components.components) {
 													return `import ${local.name} from "${
+														componentsImportPrefix.prefix +
 														Components.components[imported.name].path
 													}";`;
 												}
@@ -66,9 +72,6 @@ export function optimizeImports({
 											})
 											.join("\n"),
 									);
-									if (doNotUseInternal) {
-										console.log("yolo");
-									}
 									break;
 							}
 						}

@@ -1,3 +1,4 @@
+import { optimizeImports } from "@nais/ds-svelte-community-preprocess-svelte";
 import adapter from "@sveltejs/adapter-auto";
 import { vitePreprocess } from "@sveltejs/kit/vite";
 
@@ -5,7 +6,19 @@ import { vitePreprocess } from "@sveltejs/kit/vite";
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: [vitePreprocess()],
+	preprocess: [
+		vitePreprocess(),
+		optimizeImports({
+			componentsImportPrefix: {
+				match: "$lib",
+				prefix: "$lib/",
+			},
+			iconImportPrefix: {
+				match: "$lib/icons",
+				prefix: "$lib/",
+			},
+		}),
+	],
 
 	kit: {
 		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
