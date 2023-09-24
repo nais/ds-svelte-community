@@ -67,7 +67,7 @@
 	role="tab"
 	aria-controls={ctx.idFor("panel", value)}
 	id={ctx.idFor("tab", value)}
-	aria-selected={$currentValue == value}
+	aria-selected={`${$currentValue == value}`}
 	tabindex={$activeTab == self ? 0 : -1}
 	on:click={() => as != "a" && ctx.activate(value)}
 	on:keydown={handleKeydown}

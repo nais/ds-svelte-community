@@ -6,7 +6,6 @@ import type {
 	HTMLThAttributes,
 } from "svelte/elements";
 import type { Readable } from "svelte/store";
-import type { SortState } from ".";
 
 export const tableSizes = ["medium", "small"] as const;
 export const directions = ["ascending", "descending"] as const;
@@ -52,3 +51,8 @@ export interface DataCellProps extends Omit<HTMLTdAttributes, "align"> {
 }
 
 export type BodyProps = HTMLAttributes<HTMLTableSectionElement>;
+
+export interface SortState {
+	orderBy: string;
+	direction: (typeof directions)[number];
+}
