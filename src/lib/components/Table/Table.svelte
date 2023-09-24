@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher, setContext } from "svelte";
 	import { writable } from "svelte/store";
-	import type { SortState } from ".";
 	import { classes, omit } from "../helpers";
+	import type { TableSortState } from "./type";
 	import { contextKey, type TableContext, type TableProps, type tableSizes } from "./type";
 
 	type $$Props = TableProps;
@@ -20,9 +20,9 @@
 	/**
 	 * Sort state.
 	 */
-	export let sort: SortState | undefined = undefined;
+	export let sort: TableSortState | undefined = undefined;
 
-	let sortState = writable<SortState | undefined>(sort);
+	let sortState = writable<TableSortState | undefined>(sort);
 	$: sortState.set(sort);
 
 	const sortDispatch = createEventDispatcher<{

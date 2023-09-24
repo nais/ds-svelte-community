@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Table, Tbody, Td, Th, Thead, Tr, type SortState } from "$lib";
+	import { Table, Tbody, Td, Th, Thead, Tr, type TableSortState } from "$lib";
 	import { tableSizes } from "$lib/components/Table/type";
 	// eslint-disable-next-line
 	// @ts-ignore
@@ -34,7 +34,7 @@
 		},
 	];
 
-	let sortState: SortState | undefined = undefined;
+	let sortState: TableSortState | undefined = undefined;
 
 	const orderData = () => {
 		if (!sortState || sortState === undefined) {

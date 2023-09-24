@@ -23,14 +23,14 @@ export const getTableContext = () => {
 export type TableContext = {
 	size: (typeof tableSizes)[number];
 	zebraStripes: boolean;
-	sort: Readable<SortState | undefined>;
+	sort: Readable<TableSortState | undefined>;
 	changeSort: (sortKey: string) => void;
 };
 
 export interface TableProps extends HTMLTableAttributes {
 	size?: (typeof tableSizes)[number];
 	zebraStripes?: boolean;
-	sort?: SortState;
+	sort?: TableSortState;
 }
 
 export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
@@ -52,7 +52,7 @@ export interface DataCellProps extends Omit<HTMLTdAttributes, "align"> {
 
 export type BodyProps = HTMLAttributes<HTMLTableSectionElement>;
 
-export interface SortState {
+export interface TableSortState {
 	orderBy: string;
 	direction: (typeof directions)[number];
 }
