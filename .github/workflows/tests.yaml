@@ -1,6 +1,7 @@
 name: Test, lint and check commit
 on:
   push:
+    branches: "*"
 
 jobs:
   unit_test:
