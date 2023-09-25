@@ -1,6 +1,6 @@
 import type { PreprocessorGroup } from "svelte/types/compiler/preprocess";
-import { Components } from "./components";
-import { walkAndReplace } from "./walk-and-replace";
+import { Components } from "./components.js";
+import { walkAndReplace } from "./walk-and-replace.js";
 
 const packageComponent = "@nais/ds-svelte-community";
 const packageIcons = "@nais/ds-svelte-community/icons";

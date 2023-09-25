@@ -1,1 +1,1 @@
-export * from "./optimize-imports";
+export * from "./optimize-imports.js";
