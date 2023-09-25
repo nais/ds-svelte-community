@@ -13,11 +13,11 @@ type replacePackage = {
 export function optimizeImports({
 	iconImportPrefix = {
 		match: packageIcons,
-		prefix: packageIcons,
+		prefix: packageComponent + "/",
 	},
 	componentsImportPrefix = {
 		match: packageComponent,
-		prefix: packageComponent,
+		prefix: packageComponent + "/",
 	},
 }: {
 	iconImportPrefix?: replacePackage;
@@ -25,7 +25,7 @@ export function optimizeImports({
 } = {}): Pick<PreprocessorGroup, "script"> {
 	return {
 		script({ filename, content }) {
-			if (filename && !/node_modules/.test(filename) && /page.svelte/.test(filename)) {
+			if (filename && !/node_modules/.test(filename)) {
 				const code = walkAndReplace(
 					{
 						content,

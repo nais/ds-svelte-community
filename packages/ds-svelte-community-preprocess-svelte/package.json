@@ -50,6 +50,7 @@
 	"files": [
 		"dist",
 		"dist/**/*",
+		"dist/__snapshots__/**/*",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
 	],
