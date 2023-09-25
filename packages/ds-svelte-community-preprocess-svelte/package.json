@@ -1,15 +1,15 @@
 {
 	"name": "@nais/ds-svelte-community-preprocess-svelte",
-	"version": "0.5.0",
+	"version": "0.5.0-pre.1",
 	"homepage": "https://nais.github.io/ds-svelte-community",
 	"repository": "https://github.com/nais/ds-svelte-community.git",
 	"license": "MIT",
 	"scripts": {
 		"check": "tsc",
 		"build": "tsc -p tsconfig.build.json",
-		"package": "publint",
+		"package": "bun run build && publint",
 		"update-components": "bun build/components-list.ts",
-		"prepublishOnly": "npm run package",
+		"prepublishOnly": "bun run package",
 		"test": "bun test",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write ."
