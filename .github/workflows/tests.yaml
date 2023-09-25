@@ -8,6 +8,7 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         package:
           - "ds-svelte-community"
@@ -33,9 +34,10 @@ jobs:
       - name: Install, test and lint
         run: |-
           bun install --frozen-lockfile
-          bun run build:dscps # build ds-svelte-community-preprocess-svelte
+          cd packages/ds-svelte-community-preprocess-svelte
+          bun run build # build ds-svelte-community-preprocess-svelte
 
-          cd packages/${{ matrix.package }}
+          cd ../../packages/${{ matrix.package }}
           bun run build
           bun run test
           bun run lint
