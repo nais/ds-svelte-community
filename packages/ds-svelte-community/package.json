@@ -1,6 +1,6 @@
 {
 	"name": "@nais/ds-svelte-community",
-	"version": "0.5.0-pre.1",
+	"version": "0.5.0-pre.3",
 	"homepage": "https://nais.github.io/ds-svelte-community",
 	"repository": "https://github.com/nais/ds-svelte-community.git",
 	"license": "MIT",
@@ -38,6 +38,11 @@
 			"./css": {
 				"default": "./dist/css/index.css"
 			},
+			"./*": {
+				"types": "./dist/*",
+				"import": "./dist/*",
+				"svelte": "./dist/*"
+			},
 			"typesVersions": {
 				">4.0": {
 					"index.d.ts": [
@@ -56,13 +61,10 @@
 			"import": "./dist/index.js",
 			"svelte": "./dist/index.js"
 		},
-		"./icons": {
-			"types": "./dist/icons/index.d.ts",
-			"import": "./dist/icons/index.js",
-			"svelte": "./dist/icons/index.js"
-		},
-		"./css": {
-			"default": "./dist/css/index.css"
+		"./*": {
+			"types": "./dist/*",
+			"import": "./dist/*",
+			"svelte": "./dist/*"
 		}
 	},
 	"typesVersions": {

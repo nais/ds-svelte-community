@@ -4,6 +4,7 @@ import { walkAndReplace } from "./walk-and-replace.js";
 
 const packageComponent = "@nais/ds-svelte-community";
 const packageIcons = "@nais/ds-svelte-community/icons";
+const packageSourceDir = "@nais/ds-svelte-community/";
 
 type replacePackage = {
 	match: string;
@@ -13,11 +14,11 @@ type replacePackage = {
 export function optimizeImports({
 	iconImportPrefix = {
 		match: packageIcons,
-		prefix: packageComponent + "/",
+		prefix: packageSourceDir,
 	},
 	componentsImportPrefix = {
 		match: packageComponent,
-		prefix: packageComponent + "/",
+		prefix: packageSourceDir,
 	},
 }: {
 	iconImportPrefix?: replacePackage;
