@@ -24,6 +24,7 @@ function parseNested(filepath: string): Set<string> {
 	walk(ast as never, {
 		enter(n: unknown) {
 			const node = n as { type?: string; name?: string; source?: { value?: string } };
+
 			if (node.type === "Identifier" && node.name) {
 				exports.add(node.name);
 			} else if (node.type === "ExportAllDeclaration" && node.source?.value) {

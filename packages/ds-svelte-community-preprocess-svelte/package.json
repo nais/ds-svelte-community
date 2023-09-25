@@ -8,7 +8,9 @@
 		"check": "tsc",
 		"build": "tsc -p tsconfig.build.json",
 		"package": "publint",
+		"update-components": "bun build/components-list.ts",
 		"prepublishOnly": "npm run package",
+		"test": "bun test",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write ."
 	},

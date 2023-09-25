@@ -89,6 +89,9 @@ export const Components: KnownComponents = {
 		Panel: {
 			path: "components/Panel/Panel.svelte",
 		},
+		RemovableChip: {
+			path: "components/Chips/RemovableChip.svelte",
+		},
 		Search: {
 			path: "components/Search/Search.svelte",
 		},
@@ -128,8 +131,20 @@ export const Components: KnownComponents = {
 		Tag: {
 			path: "components/Tag/Tag.svelte",
 		},
+		Tbody: {
+			path: "components/Table/Tbody.svelte",
+		},
+		Td: {
+			path: "components/Table/Td.svelte",
+		},
 		TextField: {
 			path: "components/TextField/TextField.svelte",
+		},
+		Th: {
+			path: "components/Table/Th.svelte",
+		},
+		Thead: {
+			path: "components/Table/Thead.svelte",
 		},
 		ToggleGroup: {
 			path: "components/ToggleGroup/ToggleGroup.svelte",
@@ -139,6 +154,9 @@ export const Components: KnownComponents = {
 		},
 		Tooltip: {
 			path: "components/Tooltip/Tooltip.svelte",
+		},
+		Tr: {
+			path: "components/Table/Tr.svelte",
 		},
 	},
 	icons: {
