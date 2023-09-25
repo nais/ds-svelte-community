@@ -1,9 +1,13 @@
 <script lang="ts">
-	import { Button } from "$lib";
-	import { AirplaneFillIcon, ClockDashedIcon } from "$lib/icons";
+	import { Tab, TabList, TabPanel, Tabs } from "$lib";
+
+	export let value: string;
 </script>
 
-<ClockDashedIcon />
-<AirplaneFillIcon />
+<Tabs {value}>
+	<TabList>
+		<Tab value="a">a</Tab>
+	</TabList>
 
-<Button>Button</Button>
+	<TabPanel value="a">t.content</TabPanel>
+</Tabs>

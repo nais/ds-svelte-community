@@ -1,9 +1,10 @@
-import prettier from "@prettier/sync";
+import type { RenderResult } from "@testing-library/svelte";
 import * as Diff from "diff";
+import prettier from "prettier";
 import type { FunctionComponent, ReactNode } from "react";
 import React from "react";
 import * as ReactDOMServer from "react-dom/server";
-import { expect } from "vitest";
+import type { SvelteComponent } from "svelte";
 
 export type ReactComponent = unknown;
 
@@ -41,7 +42,7 @@ const defaultOpts: DiffOptions = {
 	after: 5,
 };
 
-export function htmldiff(a: HTMLElement, b: HTMLElement, opts: DiffOptions): string {
+export async function htmldiff(a: HTMLElement, b: HTMLElement, opts: DiffOptions): Promise<string> {
 	opts = { ...defaultOpts, ...opts };
 
 	const aclean = cleanTree(a, opts, opts.ignoreElementFromA);
@@ -49,12 +50,13 @@ export function htmldiff(a: HTMLElement, b: HTMLElement, opts: DiffOptions): str
 
 	const result = ["Differences: (left: a, right: b)"];
 
-	const diffResult = prettyDiff(
+	const diffResult = await prettyDiff(
 		aclean.innerHTML,
 		bclean.innerHTML,
 		opts.before || 10,
 		opts.after || 10,
 	);
+
 	if (!diffResult) {
 		return "";
 	}
@@ -62,10 +64,19 @@ export function htmldiff(a: HTMLElement, b: HTMLElement, opts: DiffOptions): str
 	return result.join("\n");
 }
 
+const Node = {
+	/** node is an element. */
+	ELEMENT_NODE: 1,
+	ATTRIBUTE_NODE: 2,
+	/** node is a Text node. */
+	TEXT_NODE: 3,
+	COMMENT_NODE: 8,
+};
+
 function cleanTree(el: HTMLElement, opts: DiffOptions, ignoreFunc?: (tag: HTMLElement) => boolean) {
 	const traverse = (node: HTMLElement, root?: HTMLElement) => {
 		if (node.nodeType === Node.TEXT_NODE) {
-			if (opts.ignoreSpaces && node.textContent?.trim() === "") {
+			if (opts.ignoreSpaces && node.textContent?.trim && node.textContent.trim() === "") {
 				root!.removeChild(node);
 				return true;
 			}
@@ -121,7 +132,9 @@ function cleanTree(el: HTMLElement, opts: DiffOptions, ignoreFunc?: (tag: HTMLEl
 
 			if (opts.ignoreClasses) {
 				const classes = node.classList;
-				classes.remove(...opts.ignoreClasses);
+				opts.ignoreClasses.forEach((c) => {
+					classes.remove(c);
+				});
 			}
 		}
 
@@ -140,9 +153,9 @@ function cleanTree(el: HTMLElement, opts: DiffOptions, ignoreFunc?: (tag: HTMLEl
 const green = (input: string) => "\x1b[32m" + input + "\x1b[0m";
 const red = (input: string) => "\x1b[31m" + input + "\x1b[0m";
 
-function prettyDiff(a: string, b: string, before: number, after: number) {
+async function prettyDiff(a: string, b: string, before: number, after: number) {
 	const lines = [
-		`Pretty diff: ${red("only in a")}, ${green("only in b")}\n`,
+		`Pretty diff: ${red("only in svelte")}, ${green("only in react")}\n`,
 		"Remember that this diff is a tool, not actualy what's tested.\n",
 		`${before} lines before and ${after} lines after a change are shown.\n`,
 	];
@@ -151,8 +164,8 @@ function prettyDiff(a: string, b: string, before: number, after: number) {
 
 	// For some reason, the async version of prettier exits this function before it's done.
 	// So we use the sync version, but it's soooo slow. (But I'd rather have correct output than fast output)
-	const afmt = prettier.format(a, opts);
-	const bfmt = prettier.format(b, opts);
+	const afmt = await prettier.format(a, opts);
+	const bfmt = await prettier.format(b, opts);
 
 	let addedOrRemoved = 0;
 	Diff.diffWords(afmt, bfmt).forEach((part) => {
@@ -174,16 +187,17 @@ function prettyDiff(a: string, b: string, before: number, after: number) {
 	return lines.join("");
 }
 
-function doExpect(
+async function doExpect<T extends SvelteComponent>(
 	opts: DiffOptions,
-	received: unknown,
+	input: RenderResult<T>,
 	comp: ReactComponent,
 	props: object | null,
 	...children: ReactNode[]
-): {
+): Promise<{
 	pass: boolean;
 	message: () => string;
-} {
+}> {
+	let received = input as unknown;
 	if (!(received instanceof HTMLElement)) {
 		if (typeof received === "object") {
 			const r = received as {
@@ -209,7 +223,7 @@ function doExpect(
 		);
 		console.error = error;
 	}
-	const diff = htmldiff(received as HTMLElement, container, opts);
+	const diff = await htmldiff(received as HTMLElement, container, opts);
 
 	return {
 		pass: diff === "",
@@ -217,33 +231,33 @@ function doExpect(
 	};
 }
 
-expect.extend({
-	toMimicReact(
-		received: unknown,
-		comp: ReactComponent,
-		opts?: {
-			opts?: DiffOptions;
-			props?: object;
-			children?: ReactNode[];
-		},
-	) {
-		try {
-			if (!opts) {
-				return doExpect(defaultOpts, received, comp, null);
-			}
-			return doExpect(
-				opts.opts || defaultOpts,
-				received,
-				comp,
-				opts.props || null,
-				...(opts.children || []),
-			);
-		} catch (e) {
-			console.log(e);
-			return {
-				pass: false,
-				message: () => `Unexpected error: ${e}`,
-			};
+export type Options = {
+	opts?: DiffOptions;
+	props?: object;
+	children?: ReactNode[];
+};
+
+export async function toMimicReact<T extends SvelteComponent>(
+	received: RenderResult<T>,
+	comp: ReactComponent,
+	opts?: Options,
+) {
+	try {
+		if (!opts) {
+			return await doExpect(defaultOpts, received, comp, null);
 		}
-	},
-});
+		return await doExpect(
+			opts.opts || defaultOpts,
+			received,
+			comp,
+			opts.props || null,
+			...(opts.children || []),
+		);
+	} catch (e) {
+		console.log(e);
+		return {
+			pass: false,
+			message: () => `Unexpected error: ${e}`,
+		};
+	}
+}

@@ -74,7 +74,7 @@
 		data-orientation="horizontal"
 		role="tablist"
 		aria-orientation="horizontal"
-		style="outline: none"
+		style="outline: none;"
 		tabindex="0"
 	>
 		<slot />

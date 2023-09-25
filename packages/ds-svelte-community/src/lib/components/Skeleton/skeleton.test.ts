@@ -1,18 +1,21 @@
+import { bunmatch } from "$testlib/bunmatch";
 import { Skeleton as ReactSkeleton } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "bun:test";
 import Skeleton from "./Skeleton.svelte";
 import { variants, type Props } from "./type";
 
-describe.concurrent("Skeleton", () => {
+describe("Skeleton", () => {
 	variants.forEach((variant) => {
-		it("renders with HTML similar to ds-react (" + variant + ")", () => {
+		it("renders with HTML similar to ds-react (" + variant + ")", async () => {
 			const props: Props = {
 				variant,
 			};
-			expect(render(Skeleton, props)).toMimicReact(ReactSkeleton, {
-				props,
-			});
+			expect(
+				await bunmatch(render(Skeleton, props), ReactSkeleton, {
+					props,
+				}),
+			).toBeTrue();
 		});
 	});
 

@@ -1,33 +1,39 @@
+import Button from "$lib/components/Button/Button.test.svelte";
+import type { Props } from "$lib/components/Button/type";
+import { bunmatch } from "$testlib/bunmatch";
 import { Button as ReactButton } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "vitest";
-import Button from "./Button.test.svelte";
-import type { Props } from "./type";
+import { afterEach, describe, expect, it } from "bun:test";
 
-describe.concurrent("Button", () => {
+describe("Button", () => {
 	it("renders a button with a label", () => {
 		const r = render(Button, {});
 		expect(r.container.innerHTML).toContain("Click me!");
 	});
 
-	it("renders with HTML similar to ds-react", () => {
-		expect(render(Button, {})).toMimicReact(ReactButton, { children: ["Click me!"] });
+	it("renders with HTML similar to ds-react", async () => {
+		expect(await bunmatch(render(Button, {}), ReactButton, { children: ["Click me!"] })).toBeTrue();
 	});
 
-	it("renders with HTML similar to ds-react with props", () => {
+	it("renders with HTML similar to ds-react with props", async () => {
+		cleanup();
 		const props: Props = {
 			as: "a",
 			variant: "secondary",
 			size: "small",
 		};
-		expect(render(Button, { props })).toMimicReact(ReactButton, { props, children: ["Click me!"] });
+		expect(
+			await bunmatch(render(Button, { props }), ReactButton, { props, children: ["Click me!"] }),
+		).toBeTrue();
 	});
 
-	it("renders with HTML similar to ds-react with disabled", () => {
+	it("renders with HTML similar to ds-react with disabled", async () => {
 		const props: Props = {
 			disabled: true,
 		};
-		expect(render(Button, { props })).toMimicReact(ReactButton, { props, children: ["Click me!"] });
+		expect(
+			await bunmatch(render(Button, { props }), ReactButton, { props, children: ["Click me!"] }),
+		).toBeTrue();
 	});
 
 	// Cannot test loading because of client side check required
@@ -35,26 +41,28 @@ describe.concurrent("Button", () => {
 	// 	const props: Props = {
 	// 		loading: true,
 	// 	};
-	// 	expect(render(Button, { props })).toMimicReact(ReactButton, { props, children: ["Click me!"] });
+	// 	bunmatch(render(Button, { props }), ReactButton, { props, children: ["Click me!"] });
 	// });
 
-	it("renders with HTML similar to ds-react with disabled with as", () => {
+	it("renders with HTML similar to ds-react with disabled with as", async () => {
 		const props: Props = {
 			as: "a",
 			disabled: true,
 		};
-		expect(render(Button, { props })).toMimicReact(ReactButton, {
-			props,
-			children: ["Click me!"],
-			opts: {
-				alterAttrValue: (name, value) => {
-					if (name == "disabled" && value == "true") {
-						return "";
-					}
-					return value;
+		expect(
+			await bunmatch(render(Button, { props }), ReactButton, {
+				props,
+				children: ["Click me!"],
+				opts: {
+					alterAttrValue: (name, value) => {
+						if (name == "disabled" && value == "true") {
+							return "";
+						}
+						return value;
+					},
 				},
-			},
-		});
+			}),
+		).toBeTrue();
 	});
 
 	afterEach(cleanup);
