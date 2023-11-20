@@ -104,7 +104,7 @@
 		"@storybook/addon-interactions": "7.5.3",
 		"@storybook/addon-links": "7.5.3",
 		"@storybook/addon-storysource": "7.5.3",
-		"@storybook/addon-svelte-csf": "4.0.11",
+		"@storybook/addon-svelte-csf": "4.0.12",
 		"@storybook/blocks": "7.5.3",
 		"@storybook/svelte": "7.5.3",
 		"@storybook/sveltekit": "7.5.3",
@@ -112,7 +112,7 @@
 		"@sveltejs/adapter-auto": "^2.1.1",
 		"@sveltejs/kit": "^1.27.6",
 		"@sveltejs/package": "^2.2.2",
-		"@sveltejs/vite-plugin-svelte": "^2.5.2",
+		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@testing-library/svelte": "^4.0.5",
 		"@types/diff": "^5.0.8",
 		"@types/react-dom": "^18.2.15",
@@ -142,7 +142,7 @@
 		"tailwindcss": "^3.3.5",
 		"tslib": "^2.6.2",
 		"typescript": "5.2.2",
-		"vite": "4.5.0"
+		"vite": "5.0.0"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
