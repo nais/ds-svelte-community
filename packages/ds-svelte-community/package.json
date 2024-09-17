@@ -148,7 +148,7 @@
 		"totalist": "^3.0.1",
 		"tslib": "^2.6.2",
 		"typescript": "5.4.3",
-		"vite": "5.2.2"
+		"vite": "5.2.14"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
