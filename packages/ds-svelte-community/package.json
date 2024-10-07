@@ -100,9 +100,9 @@
 	"devDependencies": {
 		"@happy-dom/global-registrator": "^14.2.0",
 		"@nais/ds-svelte-community-preprocess-svelte": "workspace:*",
-		"@navikt/aksel-icons": "^6.3.3",
-		"@navikt/ds-react": "^6.3.3",
-		"@navikt/ds-tailwind": "^6.3.3",
+		"@navikt/aksel-icons": "^7.1.2",
+		"@navikt/ds-react": "^7.1.2",
+		"@navikt/ds-tailwind": "^7.1.2",
 		"@storybook/addon-a11y": "^8.0.2",
 		"@storybook/addon-essentials": "^8.0.2",
 		"@storybook/addon-interactions": "^8.0.2",
@@ -154,8 +154,8 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"@navikt/ds-css": "^6.3.3",
-		"@navikt/ds-tokens": "^6.3.3"
+		"@navikt/ds-css": "^7.1.2",
+		"@navikt/ds-tokens": "^7.1.2"
 	},
 	"overrides": {
 		"@storybook/cli": {
