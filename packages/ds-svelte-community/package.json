@@ -90,7 +90,8 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"vite": "^5.4.9"
+		"vite": "^5.4.9",
+		"svelte": "^5.0.0"
 	},
 	"optionalDependencies": {
 		"svelte-floating-ui": "^1.5.9"
