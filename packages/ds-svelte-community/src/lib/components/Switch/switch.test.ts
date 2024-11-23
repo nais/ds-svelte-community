@@ -12,7 +12,6 @@ describe("Switch", () => {
 		it(`renders with HTML similar to ds-react checked ${checked}`, async () => {
 			const props: Props = {
 				checked,
-				deactivateLabel: "Deaktiver valg",
 				children: createRawSnippet(() => ({
 					render: () => {
 						return "Label";
@@ -21,7 +20,7 @@ describe("Switch", () => {
 			};
 			expect(
 				await bunmatch(render(Switch, props), ReactSwitch, {
-					props: omit(props, "deactivateLabel"),
+					props: omit(props),
 					children: ["Label"],
 					opts: {
 						compareAttrs(node, attr) {

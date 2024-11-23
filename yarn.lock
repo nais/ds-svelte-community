@@ -3373,7 +3373,7 @@ svelte@^4.0.0:
     magic-string "^0.30.11"
     zimmerframe "^1.1.2"
 
-svelte@5.2.7, "svelte@^3 || ^4 || ^5 || ^5.0.0-next.0", "svelte@^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0", "svelte@^3.44.0 || ^4.0.0 || ^5.0.0-next.1", "svelte@^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0", "svelte@^3.59.0 || ^4.0.0-0 || ^5.0.0-next.0 || ^5.0.0", "svelte@^4.0.0 || ^5.0.0-next.0", "svelte@^5.0.0-next.96 || ^5.0.0":
+svelte@5.2.7, "svelte@^3 || ^4 || ^5 || ^5.0.0-next.0", "svelte@^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0", "svelte@^3.44.0 || ^4.0.0 || ^5.0.0-next.1", "svelte@^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0", "svelte@^4.0.0 || ^5.0.0-next.0", svelte@^5.0.0, "svelte@^5.0.0-next.96 || ^5.0.0":
   version "5.2.7"
   resolved "https://registry.npmjs.org/svelte/-/svelte-5.2.7.tgz"
   integrity sha512-cEhPGuLHiH2+Z8B1FwQgiZJgA39uUmJR4516TKrM5zrp0/cuwJkfhUfcTxhAkznanAF5fXUKzvYR4o+Ksx3ZCQ==

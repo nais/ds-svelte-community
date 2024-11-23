@@ -23,6 +23,7 @@
 		"navds-hstack": direction === "row",
 		"navds-stack-gap": !!gap,
 		"navds-stack-align": !!align,
+		"navds-stack-justify": !!justify,
 		"navds-stack-direction": !!direction,
 		"navds-stack-wrap": wrap,
 	})}
