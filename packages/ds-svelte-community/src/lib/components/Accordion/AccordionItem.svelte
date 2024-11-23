@@ -28,6 +28,7 @@
 	class="navds-accordion__item"
 	class:navds-accordion__item--open={open}
 	class:navds-accordion__item--neutral={ctx?.variant === "neutral"}
+	data-expanded={open}
 >
 	<button class="navds-accordion__header" aria-expanded={open} type="button" onclick={handleClick}>
 		<span class="navds-accordion__icon-wrapper">
