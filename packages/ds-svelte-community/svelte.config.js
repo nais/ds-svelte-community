@@ -1,12 +1,11 @@
-import { optimizeImports } from "@nais/ds-svelte-community-preprocess-svelte";
 import adapter from "@sveltejs/adapter-static";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import { mdsvex } from "mdsvex";
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { codeToHtml } from "shiki";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
+import { codeToHtml } from "shiki";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 let theme = "dark-plus";
@@ -51,16 +50,17 @@ const config = {
 				},
 			},
 		}),
-		optimizeImports({
-			componentsImportPrefix: {
-				match: "$lib",
-				prefix: "$lib/",
-			},
-			iconImportPrefix: {
-				match: "$lib/icons",
-				prefix: "$lib/",
-			},
-		}),
+		// Can we just remove this thing?
+		// optimizeImports({
+		// 	componentsImportPrefix: {
+		// 		match: "$lib",
+		// 		prefix: "$lib/",
+		// 	},
+		// 	iconImportPrefix: {
+		// 		match: "$lib/icons",
+		// 		prefix: "$lib/",
+		// 	},
+		// }),
 	],
 
 	kit: {

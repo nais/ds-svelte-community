@@ -31,10 +31,6 @@ export interface Props {
 	 * Checked state.
 	 */
 	checked?: boolean;
-	/**
-	 * Deactivate label.
-	 */
-	deactivateLabel?: string;
 
 	/**
 	 * Label for switch.

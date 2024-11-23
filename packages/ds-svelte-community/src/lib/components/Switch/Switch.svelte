@@ -25,7 +25,6 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		size = "medium",
 		disabled = false,
 		checked = $bindable(false),
-		deactivateLabel = "Deactivate",
 		children,
 		...restProps
 	}: Props = $props();
@@ -51,7 +50,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 			{#if loading}
 				<Loader size="xsmall" aria-live="polite" />
 			{:else if checked}
-				<SelectedIcon label={deactivateLabel} />
+				<SelectedIcon />
 			{/if}
 		</span>
 	</span>
