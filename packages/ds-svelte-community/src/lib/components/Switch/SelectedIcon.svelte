@@ -1,11 +1,3 @@
-<script lang="ts">
-	interface Props {
-		label?: string;
-	}
-
-	let { label = "Deactivate" }: Props = $props();
-</script>
-
 <svg
 	width="12"
 	height="10"
@@ -15,7 +7,6 @@
 	focusable="false"
 	role="img"
 	aria-hidden="true"
-	aria-label={label}
 >
 	<path
 		fill-rule="evenodd"

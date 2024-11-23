@@ -1219,6 +1219,12 @@ export const Components: KnownComponents = {
 		FileImportIcon: {
 			path: "icons/FileImportIcon.svelte",
 		},
+		FileJpegFillIcon: {
+			path: "icons/FileJpegFillIcon.svelte",
+		},
+		FileJpegIcon: {
+			path: "icons/FileJpegIcon.svelte",
+		},
 		FileJsonFillIcon: {
 			path: "icons/FileJsonFillIcon.svelte",
 		},
@@ -1248,6 +1254,12 @@ export const Components: KnownComponents = {
 		},
 		FilePlusIcon: {
 			path: "icons/FilePlusIcon.svelte",
+		},
+		FilePngFillIcon: {
+			path: "icons/FilePngFillIcon.svelte",
+		},
+		FilePngIcon: {
+			path: "icons/FilePngIcon.svelte",
 		},
 		FileResetFillIcon: {
 			path: "icons/FileResetFillIcon.svelte",
@@ -1725,6 +1737,12 @@ export const Components: KnownComponents = {
 		},
 		MeasuringTapeIcon: {
 			path: "icons/MeasuringTapeIcon.svelte",
+		},
+		MedicalThermometerFillIcon: {
+			path: "icons/MedicalThermometerFillIcon.svelte",
+		},
+		MedicalThermometerIcon: {
+			path: "icons/MedicalThermometerIcon.svelte",
 		},
 		MedicineBottleFillIcon: {
 			path: "icons/MedicineBottleFillIcon.svelte",

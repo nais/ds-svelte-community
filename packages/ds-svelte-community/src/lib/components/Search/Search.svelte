@@ -100,14 +100,12 @@
 					/>
 				{/if}
 			{/if}
-			<!-- svelte-ignore a11y_no_redundant_roles -->
 			<input
 				{...omit(restProps, "class", "value", "type", "role")}
 				bind:this={input}
 				bind:value
 				id={baseID}
 				type="search"
-				role="searchbox"
 				class="navds-search__input navds-search__input--{variant} navds-text-field__input navds-body-short navds-body-short--{size}"
 				onkeypress={handleInputKeypress}
 			/>
