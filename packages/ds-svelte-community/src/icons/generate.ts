@@ -1,4 +1,4 @@
-import type { Node } from "estree";
+import type { Node } from "estree-walker";
 import { walk } from "estree-walker";
 import * as fs from "fs";
 import * as path from "path";

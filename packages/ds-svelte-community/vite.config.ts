@@ -7,7 +7,7 @@ import storyProcess from "./src/doclib/preprocessor";
 export default defineConfig({
 	plugins: [
 		storyProcess(),
-		sveltekit(),
+		sveltekit() as never, // Unsure why this is necessary
 		docProcess(path.resolve("..", "..", "node_modules", "svelte2tsx", "index.js")) as never,
 	],
 });
