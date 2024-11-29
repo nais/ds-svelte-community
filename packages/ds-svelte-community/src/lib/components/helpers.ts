@@ -1,5 +1,5 @@
 export function classes(
-	props: SvelteRestProps,
+	props: Record<string, unknown>,
 	...classes: (string | { [key: string]: boolean })[]
 ): string {
 	const c = classes
