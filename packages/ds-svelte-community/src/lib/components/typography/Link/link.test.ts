@@ -2,6 +2,7 @@ import { bunmatch } from "$testlib/bunmatch";
 import { Link as ReactLink } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
+import React from "react";
 import { createRawSnippet } from "svelte";
 import Link from "./Link.svelte";
 import { variants, type LinkProps } from "./type";
@@ -20,14 +21,14 @@ describe("Link", () => {
 							href: "https://nav.no",
 							children: createRawSnippet(() => ({
 								render() {
-									return "Link content";
+									return "<span>Link content</span>";
 								},
 							})),
 						};
 						expect(
 							await bunmatch(render(Link, props), ReactLink, {
 								props,
-								children: ["Link content"],
+								children: [React.createElement("span", {}, "Link content")],
 							}),
 						).toBeTrue();
 					});

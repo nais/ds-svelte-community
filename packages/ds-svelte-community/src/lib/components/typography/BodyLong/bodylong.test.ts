@@ -2,6 +2,7 @@ import { bunmatch } from "$testlib/bunmatch";
 import { BodyLong as ReactBodyLong } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
+import React from "react";
 import { createRawSnippet } from "svelte";
 import BodyLong from "./BodyLong.svelte";
 import type { BodyLongProps } from "./type";
@@ -17,14 +18,14 @@ describe("BodyLong", () => {
 						spacing,
 						children: createRawSnippet(() => ({
 							render() {
-								return "Body long content";
+								return "<span>Body long content</span>";
 							},
 						})),
 					};
 					expect(
 						await bunmatch(render(BodyLong, props), ReactBodyLong, {
 							props,
-							children: ["Body long content"],
+							children: [React.createElement("span", {}, "Body long content")],
 						}),
 					).toBeTrue();
 				});

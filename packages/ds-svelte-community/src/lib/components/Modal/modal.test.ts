@@ -10,7 +10,7 @@ import type { Props } from "./type";
 function textSnippet(text: string) {
 	return createRawSnippet(() => ({
 		render() {
-			return text;
+			return `<span>${text}</span>`;
 		},
 	}));
 }
@@ -31,13 +31,13 @@ describe("Modal", () => {
 				},
 				children: [
 					React.createElement(ReactModal.Header, {
-						children: ["ModalHeader"],
+						children: [React.createElement("span", {}, "ModalHeader")],
 					}),
 					React.createElement(ReactModal.Body, {
-						children: ["ModalContent"],
+						children: [React.createElement("span", {}, "ModalContent")],
 					}),
 					React.createElement(ReactModal.Footer, {
-						children: ["ModalFooter"],
+						children: [React.createElement("span", {}, "ModalFooter")],
 					}),
 				],
 				opts: {

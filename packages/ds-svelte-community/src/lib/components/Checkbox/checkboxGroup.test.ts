@@ -7,17 +7,17 @@ import { createRawSnippet, type Snippet } from "svelte";
 import Checkbox from "./CheckboxGroup.test.svelte";
 import { type CheckboxProps, type Props } from "./type.svelte";
 
+const snippetText = (v: string): Snippet => {
+	return createRawSnippet(() => ({
+		render: () => `<span>${v}</span>`,
+	}));
+};
+
 describe("CheckboxGroup", () => {
 	it("renders CheckboxGroup similar to ds-react", async () => {
 		const props: Omit<Props, "children"> = {
 			legend: "Checkbox legend",
 			value: ["val2", "val3"],
-		};
-
-		const snippetText = (v: string): Snippet => {
-			return createRawSnippet(() => ({
-				render: () => v,
-			}));
 		};
 
 		const items: { value: string; content: string }[] = [
@@ -42,7 +42,7 @@ describe("CheckboxGroup", () => {
 				children: items.map((v, i) => {
 					return React.createElement(ReactCheckbox, {
 						value: v.value,
-						children: v.content,
+						children: React.createElement("span", {}, v.content),
 						key: i,
 					});
 				}),
@@ -91,12 +91,6 @@ describe("CheckboxGroup", () => {
 			value: ["val4"],
 		};
 
-		const snippetText = (v: string): Snippet => {
-			return createRawSnippet(() => ({
-				render: () => v,
-			}));
-		};
-
 		const items: { value: string; description?: string; content: string }[] = [
 			{ value: "val1", description: "Desc", content: "Checkbox content 1" },
 			{ value: "val4", content: "Checkbox content 4" },
@@ -120,7 +114,7 @@ describe("CheckboxGroup", () => {
 					return React.createElement(ReactCheckbox, {
 						value: v.value,
 						description: v.description,
-						children: v.content,
+						children: React.createElement("span", {}, v.content),
 						key: i,
 					});
 				}),

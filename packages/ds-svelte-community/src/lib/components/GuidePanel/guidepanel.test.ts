@@ -2,6 +2,7 @@ import { bunmatch } from "$testlib/bunmatch";
 import { GuidePanel as ReactGuidePanel } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
+import React from "react";
 import { createRawSnippet } from "svelte";
 import GuidePanel from "./GuidePanel.svelte";
 import type { Props } from "./type";
@@ -11,14 +12,14 @@ describe("GuidePanel", () => {
 		const props: Props = {
 			children: createRawSnippet(() => ({
 				render() {
-					return "Guide Panel Content";
+					return "<span>Guide Panel Content</span>";
 				},
 			})),
 		};
 		expect(
 			await bunmatch(render(GuidePanel, props), ReactGuidePanel, {
 				props,
-				children: ["Guide Panel Content"],
+				children: [React.createElement("span", {}, "Guide Panel Content")],
 				opts: {
 					ignoreElementFromA(tag) {
 						return tag.tagName.toLowerCase() == "title";

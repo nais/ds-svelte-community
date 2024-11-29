@@ -2,6 +2,7 @@ import { bunmatch } from "$testlib/bunmatch";
 import { Detail as ReactDetail } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
+import React from "react";
 import { createRawSnippet } from "svelte";
 import Detail from "./Detail.svelte";
 import type { DetailProps } from "./type";
@@ -17,14 +18,14 @@ describe("Detail", () => {
 						spacing,
 						children: createRawSnippet(() => ({
 							render() {
-								return "Detail content";
+								return "<span>Detail content</span>";
 							},
 						})),
 					};
 					expect(
 						await bunmatch(render(Detail, props), ReactDetail, {
 							props,
-							children: ["Detail content"],
+							children: [React.createElement("span", {}, "Detail content")],
 						}),
 					).toBeTrue();
 				});
