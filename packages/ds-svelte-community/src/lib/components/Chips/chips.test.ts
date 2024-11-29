@@ -29,13 +29,15 @@ describe("Chips", () => {
 	});
 
 	// TODO(thokra): For some reason the children doesn't work as expected
-	// in svelte. Only during the test it seems.
-	it.skip("renders Chips Toggle similar to ds-react", async () => {
+	// in svelte. This issue is only during the test it seems.
+	// We therefore ignore the text span in the comparison.
+	it("renders Chips Toggle similar to ds-react", async () => {
 		const props = {
-			values: ["val1", "val2", "val3"],
+			values: ["value1", "value2", "value3"],
 			toggle: true,
-			selected: "val2",
+			selected: "value2",
 		};
+
 		expect(
 			await bunmatch(render(Chips, props), ReactChips, {
 				children: props.values.map((v) => {
@@ -46,12 +48,23 @@ describe("Chips", () => {
 					);
 				}),
 				opts: {
-					compareAttrs(node, attr) {
-						const tag = node.tagName.toLowerCase();
-						if (tag == "path" && attr == "d") {
-							return false;
+					ignoreElementFromA(tag) {
+						if (
+							tag.tagName.toLowerCase() == "span" &&
+							tag.classList.contains("navds-chips__chip-text")
+						) {
+							return true;
 						}
-						return true;
+						return false;
+					},
+					ignoreElementFromB(tag) {
+						if (
+							tag.tagName.toLowerCase() == "span" &&
+							tag.classList.contains("navds-chips__chip-text")
+						) {
+							return true;
+						}
+						return false;
 					},
 				},
 			}),

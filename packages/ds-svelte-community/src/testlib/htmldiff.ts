@@ -162,12 +162,12 @@ function cleanTree(el: HTMLElement, opts: DiffOptions, ignoreFunc?: (tag: HTMLEl
 	return el;
 }
 
-const green = (input: string) => "\x1b[32m" + input + "\x1b[0m";
+const yellow = (input: string) => "\x1b[33m" + input + "\x1b[0m";
 const red = (input: string) => "\x1b[31m" + input + "\x1b[0m";
 
 async function prettyDiff(a: string, b: string, before: number, after: number) {
 	const lines = [
-		`Pretty diff: ${red("only in svelte")}, ${green("only in react")}\n`,
+		`Pretty diff: ${red("only in svelte")}, ${yellow("only in react")}\n`,
 		"Remember that this diff is a tool, not actualy what's tested.\n",
 		`${before} lines before and ${after} lines after a change are shown.\n`,
 	];
@@ -189,7 +189,7 @@ async function prettyDiff(a: string, b: string, before: number, after: number) {
 	Diff.diffWords(afmt, bfmt).forEach((part) => {
 		if (part.added) {
 			addedOrRemoved++;
-			lines.push(`${green(part.value)}`);
+			lines.push(`${yellow(part.value)}`);
 		} else if (part.removed) {
 			addedOrRemoved++;
 			lines.push(`${red(part.value)}`);
