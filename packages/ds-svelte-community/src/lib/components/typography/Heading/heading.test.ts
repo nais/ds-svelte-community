@@ -2,6 +2,7 @@ import { bunmatch } from "$testlib/bunmatch";
 import { Heading as ReactHeading } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
+import React from "react";
 import { createRawSnippet } from "svelte";
 import Heading from "./Heading.svelte";
 import type { HeadingProps } from "./type";
@@ -19,14 +20,14 @@ describe("Heading", () => {
 							level: (level + 1) as never,
 							children: createRawSnippet(() => ({
 								render() {
-									return "Heading content";
+									return "<span>Heading content</span>";
 								},
 							})),
 						};
 						expect(
 							await bunmatch(render(Heading, props), ReactHeading, {
 								props,
-								children: ["Heading content"],
+								children: [React.createElement("span", {}, "Heading content")],
 							}),
 						).toBeTrue();
 					});

@@ -2,6 +2,7 @@ import { bunmatch } from "$testlib/bunmatch";
 import { Label as ReactLabel } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
+import React from "react";
 import { createRawSnippet } from "svelte";
 import Label from "./Label.svelte";
 import type { LabelProps } from "./type";
@@ -17,14 +18,14 @@ describe("Label", () => {
 						spacing,
 						children: createRawSnippet(() => ({
 							render() {
-								return "Label content";
+								return "<span>Label content</span>";
 							},
 						})),
 					};
 					expect(
 						await bunmatch(render(Label, props), ReactLabel, {
 							props,
-							children: ["Label content"],
+							children: [React.createElement("span", {}, "Label content")],
 						}),
 					).toBeTrue();
 				});
