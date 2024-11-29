@@ -4,7 +4,7 @@ import { Generator } from "./generator.js";
 
 export default function docProcess(svelte2tsxPath: string): VitePlugin {
 	return {
-		name: "dssc-docs",
+		name: "vite-plugin-svelte-docs",
 
 		async transform(_code, id) {
 			if (id.endsWith(".svelte?doc")) {
