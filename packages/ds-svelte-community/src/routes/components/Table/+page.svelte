@@ -62,9 +62,11 @@
 	<Story>
 		<Table>
 			<Thead>
-				{#each Object.keys(data[0]) as key}
-					<Th scope="col">{key[0].toUpperCase() + key.slice(1)}</Th>
-				{/each}
+				<Tr>
+					{#each Object.keys(data[0]) as key}
+						<Th scope="col">{key[0].toUpperCase() + key.slice(1)}</Th>
+					{/each}
+				</Tr>
 			</Thead>
 
 			<Tbody>
