@@ -7,6 +7,7 @@
 	focusable="false"
 	role="img"
 	aria-hidden="true"
+	class="navds-switch__checkmark"
 >
 	<path
 		fill-rule="evenodd"
