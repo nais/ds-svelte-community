@@ -49,9 +49,8 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		<span class="navds-switch__thumb">
 			{#if loading}
 				<Loader size="xsmall" aria-live="polite" />
-			{:else if checked}
-				<SelectedIcon />
 			{/if}
+			<SelectedIcon />
 		</span>
 	</span>
 	<label for={id} class="navds-switch__label-wrapper">

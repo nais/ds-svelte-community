@@ -24,10 +24,14 @@
 
 	let iconData = $derived.by(() => {
 		if (search === "") {
-			return iconDataSet;
+			return iconDataSet.filter((i) => !!i.name);
 		}
 
 		return iconDataSet.filter((icon) => {
+			if (!icon.name) {
+				return false;
+			}
+
 			if (icon.name.toLowerCase().includes(search.toLowerCase())) {
 				return true;
 			}

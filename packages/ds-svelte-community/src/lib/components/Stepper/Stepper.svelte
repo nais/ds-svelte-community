@@ -34,6 +34,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	{...omit(restProps, "class")}
 	class={classes(restProps, "navds-stepper")}
 	class:navds-stepper--horizontal={orientation === "horizontal"}
+	data-orientation={orientation}
 >
 	{@render children()}
 </ol>
