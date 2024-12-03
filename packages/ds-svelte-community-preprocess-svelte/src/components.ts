@@ -2434,6 +2434,12 @@ export const Components: KnownComponents = {
 		SectorChartIcon: {
 			path: "icons/SectorChartIcon.svelte",
 		},
+		ShieldCheckmarkFillIcon: {
+			path: "icons/ShieldCheckmarkFillIcon.svelte",
+		},
+		ShieldCheckmarkIcon: {
+			path: "icons/ShieldCheckmarkIcon.svelte",
+		},
 		ShieldFillIcon: {
 			path: "icons/ShieldFillIcon.svelte",
 		},
@@ -2808,6 +2814,12 @@ export const Components: KnownComponents = {
 		},
 		TruckIcon: {
 			path: "icons/TruckIcon.svelte",
+		},
+		TruckPercentFillIcon: {
+			path: "icons/TruckPercentFillIcon.svelte",
+		},
+		TruckPercentIcon: {
+			path: "icons/TruckPercentIcon.svelte",
 		},
 		UmbrellaFillIcon: {
 			path: "icons/UmbrellaFillIcon.svelte",
