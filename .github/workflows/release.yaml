@@ -43,7 +43,7 @@ jobs:
           token_format: "access_token"
 
       - run: bun install
-      - run: bun run gar-login
+      - run: bun run gar-login && bun run build:libs
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
