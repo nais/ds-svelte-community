@@ -40,6 +40,7 @@ jobs:
           service_account: "gh-ds-svelte-community@nais-io.iam.gserviceaccount.com"
           token_format: "access_token"
 
+      - run: bun install
       - run: bun run gar-login
 
       - name: Create Release Pull Request
