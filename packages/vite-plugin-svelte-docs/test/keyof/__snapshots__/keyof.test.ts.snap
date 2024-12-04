@@ -766,6 +766,10 @@ exports[`keyof svelte elements 1`] = `
             "type": "literal",
             "value": ""'svelte:head'"",
           },
+          {
+            "type": "literal",
+            "value": ""'svelte:boundary'"",
+          },
         ],
       },
     },
