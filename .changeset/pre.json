@@ -3,7 +3,10 @@
   "tag": "next",
   "initialVersions": {
     "@nais/ds-svelte-community": "0.7.5",
-    "@nais/ds-svelte-community-preprocess-svelte": "0.7.5"
+    "@nais/ds-svelte-community-preprocess-svelte": "0.7.5",
+    "@nais/vite-plugin-svelte-docs": "0.0.1"
   },
-  "changesets": []
+  "changesets": [
+    "brave-windows-guess"
+  ]
 }
