@@ -1,7 +1,9 @@
 on:
   push:
     tags:
-      - v*
+      - "@nais/ds-svelte-community@*"
+    tags-ignore:
+      - "*-next.*"
 
 jobs:
   # Build job
@@ -27,19 +29,12 @@ jobs:
       - name: Install dependencies
         run: |
           bun install --frozen-lockfile
-          cd packages/ds-svelte-community-preprocess-svelte
-          bun run build # build ds-svelte-community-preprocess-svelte
-
-      - name: Svelte check and lint
-        run: |
-          cd packages/ds-svelte-community
-          bun run check
-          bun run test
+          bun run build:libs
 
       - name: Build Storybook
         run: |
           cd packages/ds-svelte-community
-          bun run build:storybook
+          bun run build:docs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
