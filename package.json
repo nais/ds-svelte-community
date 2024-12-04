@@ -8,12 +8,15 @@
 		"test": "bun run --filter './packages/**' test",
 		"lint": "bun run --filter './packages/**' lint",
 		"check": "bun run --filter './packages/**' check",
-		"sync": "bun run --filter './packages/**' sync"
+		"sync": "bun run --filter './packages/**' sync",
+		"build": "bun run --filter './packages/**' build",
+		"release": "bun run build && changeset publish"
 	},
 	"workspaces": [
 		"packages/*"
 	],
 	"dependencies": {
+		"@changesets/cli": "^2.27.10",
 		"@types/eslint": "^9.6.1",
 		"ts-morph": "^24.0.0"
 	},
