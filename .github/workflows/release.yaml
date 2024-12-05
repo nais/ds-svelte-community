@@ -87,6 +87,8 @@ jobs:
           bun run build:libs
 
       - name: Build docs
+        env:
+          BASE_PATH: "/${{ github.event.repository.name }}"
         run: |
           cd packages/ds-svelte-community
           bun run build:docs
