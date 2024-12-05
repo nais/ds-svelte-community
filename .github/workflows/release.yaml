@@ -59,7 +59,7 @@ jobs:
         id: "prerelease"
         # Use jq to check if the @nais/ds-svelte-community package is a pre-release
         run: |
-          export ACTUAL_RELEASE=$("${{ steps.changesets.outputs.publishedPackages }}" | jq '.[] | select(.name == "@nais/ds-svelte-community") | .version | contains("-next.") | not')
+          export ACTUAL_RELEASE=$(echo "${{ steps.changesets.outputs.publishedPackages }}" | jq '.[] | select(.name == "@nais/ds-svelte-community") | .version | contains("-next.") | not')
           echo "ACTUAL_RELEASE=$ACTUAL_RELEASE" >> $GITHUB_OUTPUT
 
   # Build docs
