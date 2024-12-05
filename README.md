@@ -4,15 +4,9 @@ A Svelte component library for [Aksel](https://aksel.nav.no).
 
 ## Usage
 
-`ds-svelte-community` is hosted on Google Artifact Registry. To use it in your project, you need to add the following to `.npmrc` in the root of your project:
+`ds-svelte-community` is hosted on Google Artifact Registry.
 
-```
-@nais:registry=https://europe-north1-npm.pkg.dev/nais-io/nais-public-npm/
-```
-
-Then you can install the package with `npm install @nais/ds-svelte-community`.
-
-Check out the [Storybook](https://nais.io/ds-svelte-community) for examples of how to use the components.
+Check out the [Documentation](https://nais.io/ds-svelte-community) for examples of how to install the library and how to use the components.
 
 ---
 
@@ -32,10 +26,11 @@ We have configured `bun` to also create a `yarn.lock` file, which is only used b
 
 The library is split into multiple packages in the `packages` directory. Each package has its own `README.md` with more information.
 
-| Package                                 | Description                                                         |
-| --------------------------------------- | ------------------------------------------------------------------- |
-| `ds-svelte-community`                   | The actual component library, including icons.                      |
-| `ds-svelte-community-preprocess-svelte` | A preprocessing step that optimizes usage of the component library. |
+| Package                                 | Description                                                             |
+| --------------------------------------- | ----------------------------------------------------------------------- |
+| `ds-svelte-community`                   | The actual component library, including icons.                          |
+| `ds-svelte-community-preprocess-svelte` | A preprocessing step that optimizes usage of the component library.     |
+| `vite-plugin-svelte-docs`               | A Vite plugin that generates documentation JSON from Svelte components. |
 
 ## GitHub copilot in use
 

@@ -31,7 +31,7 @@ jobs:
           bun install --frozen-lockfile
           bun run build:libs
 
-      - name: Build Storybook
+      - name: Build docs
         run: |
           cd packages/ds-svelte-community
           bun run build:docs
@@ -39,7 +39,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: packages/ds-svelte-community/storybook-static/
+          path: packages/ds-svelte-community/build/
 
   # Deploy job
   deploy:
