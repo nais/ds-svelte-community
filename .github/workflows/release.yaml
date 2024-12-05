@@ -15,8 +15,7 @@ jobs:
       pull-requests: "write"
 
     outputs:
-      published: ${{ steps.changesets.outputs.published }}
-      publishedPackages: ${{ steps.changesets.outputs.publishedPackages }}
+      actual_release: ${{ steps.prerelease.outputs.ACTUAL_RELEASE }}
 
     name: Release
     runs-on: ubuntu-latest
@@ -56,6 +55,12 @@ jobs:
           publish: bun run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Check if pre-release"
+        id: "prerelease"
+        # Use jq to check if the @nais/ds-svelte-community package is a pre-release
+        run: |
+          export ACTUAL_RELEASE=$("${{ steps.changesets.outputs.publishedPackages }}" | jq '.[] | select(.name == "@nais/ds-svelte-community") | .version | contains("-next.") | not')
+          echo "ACTUAL_RELEASE=$ACTUAL_RELEASE" >> $GITHUB_OUTPUT
 
   # Build docs
   build_doc:
@@ -63,7 +68,7 @@ jobs:
     needs: release
     # Only run if @nais/ds-svelte-community is published and version does not contain "-next."
     # It's done with some suboptimal string matching, but it works for now.
-    if: ${{ needs.release.outputs.published == 'true' && contains(needs.release.outputs.publishedPackages, '@nais/ds-svelte-community"') && !contains(needs.release.outputs.publishedPackages, '-next."') }}
+    if: ${{ needs.release.outputs.actual_release == 'true' }}
     steps:
       - uses: actions/checkout@v4
 
