@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import { Box, Button, HStack, Page, PageBlock } from "$lib";
+	import { Box, Button, Detail, HStack, Page, PageBlock } from "$lib";
 	import type { Snippet } from "svelte";
 	import "../doclib/styles.css";
 	import "../lib/css/index.css";
@@ -62,6 +62,11 @@
 						</ul>
 					{/each}
 				</div>
+				<hr />
+				<Detail>
+					<!-- eslint-disable-next-line no-undef -->
+					Version: {__version__}
+				</Detail>
 			</div>
 			<Box style="flex-grow: 1;" paddingInline="3">
 				{@render children()}
