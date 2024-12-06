@@ -56,8 +56,6 @@ describe("which components are implemented", () => {
 		"LinkPanel",
 		"LinkPanelDescription",
 		"LinkPanelTitle",
-		"List",
-		"ListItem",
 		"MonthPicker",
 		"MonthPickerInput",
 		"MonthPickerStandalone",

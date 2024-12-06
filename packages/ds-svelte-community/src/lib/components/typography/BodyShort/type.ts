@@ -1,19 +1,16 @@
 import type { Snippet } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
+import type { TypoProps } from "../typo_shared";
 
-export type BodyShortProps = {
+export interface BodyShortProps extends TypoProps {
 	/**
 	 * medium: 18px, small: 16px
 	 */
-	size?: "medium" | "small";
-	/**
-	 * Adds margin-bottom
-	 */
-	spacing?: boolean;
+	size?: "large" | "medium" | "small";
 	/**
 	 * Tag to use for the body
 	 */
 	as?: keyof SvelteHTMLElements;
 	children: Snippet;
 	[key: string]: unknown;
-};
+}

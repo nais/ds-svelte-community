@@ -1,12 +1,8 @@
 import type { Snippet } from "svelte";
 import type { SvelteHTMLElements } from "svelte/elements";
+import type { TypoProps } from "../typo_shared";
 
-export type DetailProps = {
-	/**
-	 * Adds margin-bottom
-	 */
-	spacing?: boolean;
-
+export interface DetailProps extends TypoProps {
 	/**
 	 * All caps
 	 */
@@ -18,4 +14,4 @@ export type DetailProps = {
 	as?: keyof SvelteHTMLElements;
 	children: Snippet;
 	[key: string]: unknown;
-};
+}
