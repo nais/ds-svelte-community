@@ -102,7 +102,7 @@ export interface DataCellProps {
 	/**
 	 * Data cell contents.
 	 */
-	children: Snippet;
+	children?: Snippet;
 
 	[key: string]: unknown;
 }

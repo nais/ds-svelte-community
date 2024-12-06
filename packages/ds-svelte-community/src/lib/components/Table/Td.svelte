@@ -16,5 +16,5 @@
 	})}
 	size={ctx.size}
 >
-	{@render children()}
+	{@render children?.()}
 </BodyShort>
