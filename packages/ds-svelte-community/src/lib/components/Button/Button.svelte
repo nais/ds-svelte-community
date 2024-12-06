@@ -26,8 +26,14 @@
 		...restProps
 	}: Props = $props();
 
+	let internalRef: HTMLElement | undefined = $state(undefined);
+
+	$effect(() => {
+		ref = internalRef;
+	});
+
 	let overrideWidth = $derived.by(() => {
-		return ref && loading ? ref.getBoundingClientRect().width : 0;
+		return internalRef && loading ? internalRef.getBoundingClientRect().width : 0;
 	});
 </script>
 
@@ -40,7 +46,7 @@
 	class:navds-button--disabled={disabled || overrideWidth > 0}
 	class:navds-button--icon-only={(!!iconLeft || !!iconRight) && !children}
 	class:unstyled={as === "a"}
-	bind:this={ref}
+	bind:this={internalRef}
 	role={as != "button" ? "button" : undefined}
 	disabled={disabled || overrideWidth > 0 ? true : undefined}
 >
