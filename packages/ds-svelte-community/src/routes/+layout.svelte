@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from "$app/paths";
 	import { page } from "$app/stores";
 	import { Box, Button, Detail, HStack, Page, PageBlock } from "$lib";
 	import type { Snippet } from "svelte";
@@ -20,7 +21,7 @@
 		<PageBlock width="2xl" gutters={false}>
 			<Box padding="3">
 				<HStack justify="space-between">
-					<a href="/" class="unstyled">ds-svelte-community</a>
+					<a href={base} class="unstyled">ds-svelte-community</a>
 
 					<a href="https://docs.nais.io" class="unstyled docs-link">NAIS docs</a>
 					<div class="mobile">
@@ -45,7 +46,7 @@
 						<ul>
 							{#each paths as component}
 								{@const href = (
-									key == "pages" ? `/${component}/` : `/${key}/${component}/`
+									key == "pages" ? `${base}/${component}/` : `${base}/${key}/${component}/`
 								).replaceAll("//", "/")}
 								<li>
 									<!-- eslint-disable-next-line svelte/valid-compile using $ to access stores currently errors the validator -->
