@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.2
+
+### Minor Changes
+
+- f5c95ef: Button: Allow Components in icon props
+
 ## 1.0.0-next.1
 
 ### Patch Changes
