@@ -28,6 +28,16 @@ describe("Button", () => {
 		).toBeTrue();
 	});
 
+	it("renders with HTML similar to ds-react with loading", async () => {
+		cleanup();
+		const props: Props = {
+			loading: true,
+		};
+		expect(
+			await bunmatch(render(Button, { props }), ReactButton, { props, children: ["Click me!"] }),
+		).toBeTrue();
+	});
+
 	it("renders with HTML similar to ds-react with disabled", async () => {
 		const props: Props = {
 			disabled: true,
