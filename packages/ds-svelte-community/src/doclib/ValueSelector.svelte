@@ -3,7 +3,7 @@
 	import Button from "$lib/components/Button/Button.svelte";
 	import Select from "$lib/components/Select/Select.svelte";
 	import TextField from "$lib/components/TextField/TextField.svelte";
-	import type { Type } from "@nais/vite-plugin-svelte-docs";
+	import type { DocType } from "@nais/vite-plugin-svelte-docs";
 
 	let {
 		type: outerType,
@@ -12,7 +12,7 @@
 		value,
 		forceEditable = false,
 	}: {
-		type: Type;
+		type: DocType;
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		value: any;
 		onchange: (val: unknown) => void;
@@ -37,7 +37,7 @@
 		return outerType;
 	});
 
-	const selectOptions = (t: Type): unknown[] | false => {
+	const selectOptions = (t: DocType): unknown[] | false => {
 		if (Array.isArray(t)) {
 			return false;
 		}
@@ -73,6 +73,8 @@
 		}
 
 		if (t.type === "snippet") {
+			return false;
+		} else if (t.type === "component") {
 			return false;
 		} else if (t.type === "array") {
 			return false;

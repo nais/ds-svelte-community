@@ -9,7 +9,7 @@
 
 <script lang="ts">
 	import Loader from "../Loader/Loader.svelte";
-	import { classes, omit } from "../helpers";
+	import { classes, isSnippet, omit } from "../helpers";
 	import Label from "../typography/Label/Label.svelte";
 	import type { Props } from "./type";
 
@@ -48,7 +48,14 @@
 		<Loader {size} />
 	{:else}
 		{#if iconLeft}
-			<span class="navds-button__icon">{@render iconLeft()}</span>
+			<span class="navds-button__icon">
+				{#if isSnippet(iconLeft)}
+					{@render iconLeft()}
+				{:else}
+					{@const Icon = iconLeft}
+					<Icon />
+				{/if}
+			</span>
 		{/if}
 		{#if children}
 			<Label as="span" size={size === "medium" ? "medium" : "small"} {children} />
@@ -56,7 +63,12 @@
 
 		{#if iconRight}
 			<span class="navds-button__icon">
-				{@render iconRight()}
+				{#if isSnippet(iconRight)}
+					{@render iconRight()}
+				{:else}
+					{@const Icon = iconRight}
+					<Icon />
+				{/if}
 			</span>
 		{/if}
 	{/if}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ArrowUndoIcon, ChevronDownIcon, ChevronRightIcon } from "$lib/icons";
-	import type { Doc, Slots } from "@nais/vite-plugin-svelte-docs";
+	import type { Doc, DocSlots } from "@nais/vite-plugin-svelte-docs";
 	import Markdown from "svelte-markdown";
 	import TypeRenderer from "./TypeRenderer.svelte";
 	import ValueSelector from "./ValueSelector.svelte";
@@ -16,7 +16,7 @@
 
 	let valueSelectorProps = $derived($state.snapshot(values));
 
-	let snippets = $derived.by((): Slots[] => {
+	let snippets = $derived.by((): DocSlots[] => {
 		return [
 			...doc.slots,
 			...doc.props
@@ -31,7 +31,7 @@
 						}
 					}
 				})
-				.map((p): Slots => {
+				.map((p): DocSlots => {
 					return {
 						name: p.name,
 						description: p.description,

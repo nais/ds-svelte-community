@@ -37,4 +37,8 @@
 			Button with icon
 		</Button>
 	</Story>
+
+	<Story name="Icon component">
+		<Button variant="secondary" iconLeft={GlobeFillIcon}>Button with icon</Button>
+	</Story>
 </Doc>

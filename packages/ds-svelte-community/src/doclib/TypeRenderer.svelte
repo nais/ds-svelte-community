@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { dev } from "$app/environment";
 	import Button from "$lib/components/Button/Button.svelte";
-	import type { Type } from "@nais/vite-plugin-svelte-docs";
+	import type { DocType } from "@nais/vite-plugin-svelte-docs";
 	import TypeRenderer from "./TypeRenderer.svelte";
 
 	let {
 		type: typ,
 		show = true,
 		suffix = "",
-	}: { type: Type; show?: boolean; suffix?: string } = $props();
+	}: { type: DocType; show?: boolean; suffix?: string } = $props();
 
 	const maxItems = 10;
 	let shouldShowAll = $derived(
@@ -39,6 +39,8 @@
 		<code>unknown{suffix}</code>
 	{:else if typ.type == "snippet"}
 		<code>Snippet{suffix}</code>
+	{:else if typ.type == "component"}
+		<code>Component</code>
 	{:else if typ.type == "array"}
 		<TypeRenderer type={typ.of} suffix="[]" />
 	{:else}

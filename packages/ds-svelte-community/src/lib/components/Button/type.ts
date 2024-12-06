@@ -1,4 +1,4 @@
-import type { Snippet } from "svelte";
+import type { Component, Snippet } from "svelte";
 
 export const variants = [
 	"primary",
@@ -43,12 +43,12 @@ interface BaseProps {
 	/**
 	 * Place icon to the left of the content
 	 */
-	iconLeft?: Snippet;
+	iconLeft?: Snippet | Component;
 
 	/**
 	 * Place icon to the right of the content
 	 */
-	iconRight?: Snippet;
+	iconRight?: Snippet | Component;
 
 	/**
 	 * Ref is the button element. Bind to this to obtain the button element.

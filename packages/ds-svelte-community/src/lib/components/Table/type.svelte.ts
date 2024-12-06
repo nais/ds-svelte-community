@@ -79,7 +79,7 @@ export interface TableCellProps {
 	/**
 	 * Cell contents.
 	 */
-	children: Snippet;
+	children?: Snippet;
 
 	[key: string]: unknown;
 }
