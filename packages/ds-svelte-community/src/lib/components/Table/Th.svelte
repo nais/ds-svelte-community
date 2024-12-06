@@ -34,7 +34,7 @@
 			class="navds-table__sort-button"
 			onclick={sortable && sortKey ? () => onclick() : undefined}
 		>
-			{@render children()}
+			{@render children?.()}
 			{#if ctx.sort?.orderBy == sortKey}
 				{#if ctx.sort.direction == "ascending"}
 					<ArrowUpIcon aria-hidden="true" />
@@ -46,6 +46,6 @@
 			{/if}
 		</button>
 	{:else}
-		{@render children()}
+		{@render children?.()}
 	{/if}
 </th>

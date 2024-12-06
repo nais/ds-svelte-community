@@ -8,15 +8,15 @@ import { tsconfigResolver } from "tsconfig-resolver";
 import { convert } from "./svelte.js";
 import type {
 	Doc,
-	Snippet as DocSnippet,
-	Interface,
-	PObject,
-	Prop,
-	SlotLet,
-	Slots,
-	SvelteEvent,
-	Type,
-	TypeParameter,
+	DocInterface,
+	DocPObject,
+	DocProp,
+	DocSlotLet,
+	DocSlots,
+	DocSnippet,
+	DocSvelteEvent,
+	DocType,
+	DocTypeParameter,
 } from "./types.js";
 
 type ContextNode = {
@@ -91,7 +91,7 @@ class Context {
 export class Generator {
 	#project?: Project;
 	#svelte2tsxPath: string;
-	#cache: Map<tsm.Node, Type> = new Map();
+	#cache: Map<tsm.Node, DocType> = new Map();
 
 	/*
 	 * Files that have been checked for various types
@@ -243,8 +243,12 @@ export class Generator {
 						throw new Error("Expected props to be object or union");
 					}
 
-					const parseInterface = (i: Interface, combined: PObject, injectedInherits: string[]) => {
-						const combine = (np: Prop) => {
+					const parseInterface = (
+						i: DocInterface,
+						combined: DocPObject,
+						injectedInherits: string[],
+					) => {
+						const combine = (np: DocProp) => {
 							const existing = combined.properties.find((p) => p.name === np.name);
 							if (existing) {
 								if (existing.description == "") {
@@ -292,7 +296,7 @@ export class Generator {
 
 					if (props.type == "union") {
 						// Combine all properties
-						const combined: PObject = { type: "object", properties: [] };
+						const combined: DocPObject = { type: "object", properties: [] };
 
 						const injectedInherits: string[] = [];
 						props.values.forEach((p) => {
@@ -308,7 +312,7 @@ export class Generator {
 
 						props = combined;
 					} else if (props.type == "interface") {
-						const combined: PObject = { type: "object", properties: [] };
+						const combined: DocPObject = { type: "object", properties: [] };
 						parseInterface(props, combined, []);
 						props = combined;
 					}
@@ -375,7 +379,7 @@ export class Generator {
 						name: p.name,
 						description: p.description,
 						type: p.type,
-					} as SvelteEvent;
+					} as DocSvelteEvent;
 					if (p.optional !== undefined) {
 						ret.optional = p.optional;
 					}
@@ -403,7 +407,10 @@ export class Generator {
 			});
 		}
 
-		const sortFn = (a: Prop | Slots | SvelteEvent, b: Prop | Slots | SvelteEvent) => {
+		const sortFn = (
+			a: DocProp | DocSlots | DocSvelteEvent,
+			b: DocProp | DocSlots | DocSvelteEvent,
+		) => {
 			if (a.optional && !b.optional) {
 				return 1;
 			}
@@ -426,7 +433,7 @@ export class Generator {
 		};
 	}
 
-	#typeOf(parentContext: Context, node: tsm.Node): Type {
+	#typeOf(parentContext: Context, node: tsm.Node): DocType {
 		if (this.#cache.has(node)) {
 			return this.#cache.get(node)!;
 		}
@@ -435,7 +442,7 @@ export class Generator {
 		this.#cache.set(node, ret);
 		return ret;
 	}
-	#typeOfUncached(parentContext: Context, node: tsm.Node): Type {
+	#typeOfUncached(parentContext: Context, node: tsm.Node): DocType {
 		if (!node) {
 			parentContext.log("No node");
 			return { type: "unknown" };
@@ -502,7 +509,7 @@ export class Generator {
 			case ts.SyntaxKind.InterfaceDeclaration: {
 				const id = node as tsm.InterfaceDeclaration;
 
-				const i: Interface = {
+				const i: DocInterface = {
 					type: "interface",
 					name: id.getName(),
 				};
@@ -527,7 +534,7 @@ export class Generator {
 						}
 						return this.#propertySignature(new Context(m, ctx), m);
 					})
-					.filter((m) => m != undefined) as Prop[];
+					.filter((m) => m != undefined) as DocProp[];
 
 				const heritage = id.getHeritageClauses();
 				if (heritage.length > 0) {
@@ -539,7 +546,7 @@ export class Generator {
 				id.getTypeParameters().forEach((tp) => {
 					const name = tp.getName();
 					const constraint = tp.getConstraint();
-					const tpp: TypeParameter = {
+					const tpp: DocTypeParameter = {
 						type: "typeParameter",
 						name,
 					};
@@ -587,7 +594,7 @@ export class Generator {
 			case ts.SyntaxKind.PropertyAssignment:
 				break;
 			case ts.SyntaxKind.IndexedAccessType:
-				return ((): Type => {
+				return ((): DocType => {
 					const iatn = node as tsm.IndexedAccessTypeNode;
 					const otn = iatn.getObjectTypeNode() as tsm.TypeReferenceNode;
 
@@ -666,7 +673,7 @@ export class Generator {
 		return { type: "unknown" };
 	}
 
-	#keyof(ctx: Context, node: tsm.TypeOperatorTypeNode): Type {
+	#keyof(ctx: Context, node: tsm.TypeOperatorTypeNode): DocType {
 		const type = this.#typeOf(ctx, node.getTypeNode());
 		if (Array.isArray(type) || (type.type != "object" && type.type != "interface")) {
 			if (!Array.isArray(type) && type.type === "unknown") {
@@ -694,9 +701,9 @@ export class Generator {
 		return { type: "union", values: keys.map((k) => ({ type: "literal", value: `"${k}"` })) };
 	}
 
-	#typeLiteral(ctx: Context, node: tsm.TypeLiteralNode): Type {
+	#typeLiteral(ctx: Context, node: tsm.TypeLiteralNode): DocType {
 		const members = node.getMembers();
-		const lets: Prop[] = [];
+		const lets: DocProp[] = [];
 		members.forEach((m) => {
 			if (!m.isKind(ts.SyntaxKind.PropertySignature)) {
 				return;
@@ -706,7 +713,7 @@ export class Generator {
 		return { type: "object", properties: lets };
 	}
 
-	#propertySignature(ctx: Context, ps: tsm.PropertySignature): Prop {
+	#propertySignature(ctx: Context, ps: tsm.PropertySignature): DocProp {
 		const name = ps.getName();
 		const optional = ps.hasQuestionToken();
 		const type = this.#typeOf(ctx, ps.getTypeNodeOrThrow());
@@ -716,7 +723,7 @@ export class Generator {
 		return { name, type, description, optional };
 	}
 
-	#parenthesizedType(ctx: Context, node: tsm.ParenthesizedTypeNode): Type {
+	#parenthesizedType(ctx: Context, node: tsm.ParenthesizedTypeNode): DocType {
 		const children: tsm.Node[] = [];
 		node.forEachChild((c) => {
 			children.push(c);
@@ -728,7 +735,7 @@ export class Generator {
 		throw new Error("Multiple children in parenthesized type for " + node.getText());
 	}
 
-	#importSpecifier(ctx: Context, node: tsm.ImportSpecifier): Type {
+	#importSpecifier(ctx: Context, node: tsm.ImportSpecifier): DocType {
 		let sym = node.getNameNode().getSymbolOrThrow();
 		if (sym.isAlias()) {
 			sym = sym.getAliasedSymbolOrThrow();
@@ -737,7 +744,7 @@ export class Generator {
 		return this.#typeOf(ctx, sym.getDeclarations()[0]);
 	}
 
-	#identifier(ctx: Context, node: tsm.Identifier): Type {
+	#identifier(ctx: Context, node: tsm.Identifier): DocType {
 		const sym = node.getSymbolOrThrow();
 		if (sym.isAlias()) {
 			return this.#typeOf(ctx, sym.getAliasedSymbolOrThrow().getDeclarations()[0]);
@@ -749,7 +756,7 @@ export class Generator {
 		return this.#typeOf(ctx, decl);
 	}
 
-	#typeReference(ctx: Context, node: tsm.TypeReferenceNode): Type {
+	#typeReference(ctx: Context, node: tsm.TypeReferenceNode): DocType {
 		// node.
 		// const type = node.getType();
 		// const symbol = type.getSymbol();
@@ -776,7 +783,7 @@ export class Generator {
 				if (type.isKind(ts.SyntaxKind.TupleType)) {
 					const tuple = type as tsm.TupleTypeNode;
 					const tctx = new Context(tuple, ctx);
-					const types = tuple.getElements().map((e, i): SlotLet => {
+					const types = tuple.getElements().map((e, i): DocSlotLet => {
 						return { name: `let_${i}`, type: this.#typeOf(tctx, e) };
 					});
 					return { type: "snippet", lets: types };
@@ -785,6 +792,8 @@ export class Generator {
 				}
 			}
 			return { type: "snippet", lets: [] };
+		} else if (node.getTypeName().getText() === "Component") {
+			return { type: "component" };
 		}
 
 		const symbol = node.getTypeName().getSymbol();

@@ -1,3 +1,5 @@
+import type { Component, Snippet } from "svelte";
+
 export function classes(
 	props: Record<string, unknown>,
 	...classes: (string | { [key: string]: boolean })[]
@@ -94,3 +96,7 @@ export const omit = (obj: object, ...props: string[]) =>
 			}),
 			{},
 		);
+
+export const isComponent = (value: Component | Snippet): value is Component => value.length === 2;
+
+export const isSnippet = (value: Component | Snippet): value is Snippet => value.length === 1;
