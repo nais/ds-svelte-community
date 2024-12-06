@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.4
+
+### Patch Changes
+
+- [#141](https://github.com/nais/ds-svelte-community/pull/141) [`55aebf0`](https://github.com/nais/ds-svelte-community/commit/55aebf03ee9c5cd6969e2ab9a55fa7fd090b7195) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Td: Allow empty children
+
 ## 1.0.0-next.3
 
 ### Patch Changes
