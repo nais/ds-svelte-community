@@ -1,22 +1,21 @@
+<!--
+@component
+
+Part of a set of components for displaying text with consistent typography.
+-->
+
 <script lang="ts">
 	import { classes } from "../../helpers";
+	import { typoClasses, withoutTypoData } from "../typo_shared";
 	import type { DetailProps } from "./type";
 
-	let {
-		spacing = false,
-		uppercase = false,
-		as = "p",
-		children,
-		...restProps
-	}: DetailProps = $props();
+	let { as = "p", children, ...restProps }: DetailProps = $props();
 </script>
 
 <svelte:element
 	this={as}
-	{...restProps}
-	class={classes(restProps, "navds-detail")}
-	class:navds-typo--spacing={spacing}
-	class:navds-typo--uppercase={uppercase}
+	{...withoutTypoData(restProps)}
+	class={classes(restProps, "navds-detail", typoClasses(restProps))}
 >
 	{@render children()}
 </svelte:element>

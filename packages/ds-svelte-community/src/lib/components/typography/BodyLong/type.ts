@@ -1,11 +1,12 @@
 import type { Snippet } from "svelte";
+import type { TypoProps } from "../typo_shared";
 
-export type BodyLongProps = {
+export interface BodyLongProps extends TypoProps {
 	/**
 	 * The size of the body
 	 * medium: 18px, small: 16px
 	 */
-	size?: "medium" | "small";
+	size?: "large" | "medium" | "small";
 
 	/**
 	 * Adds margin-bottom
@@ -20,4 +21,4 @@ export type BodyLongProps = {
 	children: Snippet;
 
 	[key: string]: unknown;
-};
+}

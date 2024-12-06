@@ -86,6 +86,12 @@ export const Components: KnownComponents = {
 		Link: {
 			path: "components/typography/Link/Link.svelte",
 		},
+		List: {
+			path: "components/List/List.svelte",
+		},
+		ListItem: {
+			path: "components/List/ListItem.svelte",
+		},
 		Loader: {
 			path: "components/Loader/Loader.svelte",
 		},
