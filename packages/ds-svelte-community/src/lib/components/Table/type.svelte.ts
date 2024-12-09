@@ -41,7 +41,7 @@ export interface TableProps {
 	/**
 	 * Callback for sort change.
 	 */
-	onSortChange?: (sortKey: string) => void;
+	onsortchange?: (sortKey: string) => void;
 
 	[key: string]: unknown;
 }

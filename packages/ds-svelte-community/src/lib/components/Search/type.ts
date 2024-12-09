@@ -57,7 +57,7 @@ export interface Props {
 	/**
 	 * Event when the input is cleared
 	 */
-	onClear?: (
+	onclear?: (
 		_: { event: MouseEvent; trigger: "Click" } | { event: KeyboardEvent; trigger: "Escape" },
 	) => void;
 

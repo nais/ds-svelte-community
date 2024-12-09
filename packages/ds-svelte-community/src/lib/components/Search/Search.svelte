@@ -38,7 +38,7 @@
 		loading = false,
 		searchIconText = "Search",
 		button,
-		onClear,
+		onclear,
 		...restProps
 	}: Props = $props();
 
@@ -52,8 +52,8 @@
 
 	function handleClearClick(event: MouseEvent) {
 		// Called when clear is triggered
-		if (onClear) {
-			onClear({ event, trigger: "Click" });
+		if (onclear) {
+			onclear({ event, trigger: "Click" });
 		}
 		value = "";
 		input?.focus();
@@ -62,8 +62,8 @@
 	function handleInputKeypress(event: KeyboardEvent) {
 		if (event.key === "Escape" && value != "") {
 			// Called when clear is triggered
-			if (onClear) {
-				onClear({ event, trigger: "Escape" });
+			if (onclear) {
+				onclear({ event, trigger: "Escape" });
 			}
 			value = "";
 			input?.focus();

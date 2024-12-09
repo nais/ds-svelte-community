@@ -26,7 +26,7 @@
 		children,
 		closeButton = false,
 		closeButtonIconText = "Close message",
-		onClose = () => {},
+		onclose = () => {},
 		...restProps
 	}: Props = $props();
 </script>
@@ -71,7 +71,7 @@
 				size="small"
 				variant="tertiary-neutral"
 				type="button"
-				onclick={onClose}
+				onclick={onclose}
 			>
 				{#snippet iconLeft()}
 					<XMarkIcon title={closeButtonIconText} />
