@@ -84,7 +84,7 @@
 	<Story name="Sortable">
 		<Table
 			sort={sortState}
-			onSortChange={(key) => {
+			onsortchange={(key) => {
 				if (!sortState) {
 					sortState = {
 						orderBy: key,
