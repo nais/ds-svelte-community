@@ -56,7 +56,7 @@ export interface Props {
 	 *
 	 * **Requires closeButton to be true**.
 	 */
-	onClose?: () => void;
+	onclose?: () => void;
 
 	[key: string]: unknown;
 }

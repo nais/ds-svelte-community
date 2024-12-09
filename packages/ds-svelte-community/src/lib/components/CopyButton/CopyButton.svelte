@@ -25,7 +25,7 @@
 		activeDuration = 2000,
 		title = "Copy",
 		activeTitle = "Copied",
-		activeChanged,
+		activechanged,
 		icon,
 		...restProps
 	}: Props = $props();
@@ -46,14 +46,14 @@
 		navigator.clipboard.writeText(copyText);
 		active = true;
 
-		if (activeChanged) {
-			activeChanged(active);
+		if (activechanged) {
+			activechanged(active);
 		}
 
 		timeout = setTimeout(() => {
 			active = false;
-			if (activeChanged) {
-				activeChanged(active);
+			if (activechanged) {
+				activechanged(active);
 			}
 
 			timeout = null;

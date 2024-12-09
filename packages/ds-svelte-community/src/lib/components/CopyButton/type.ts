@@ -41,7 +41,7 @@ export interface Props {
 	/**
 	 *  Called whenever the active-state changes
 	 */
-	activeChanged?: (active: boolean) => void;
+	activechanged?: (active: boolean) => void;
 
 	/**
 	 * Use custom icons. The snippet receives the active-state as argument.

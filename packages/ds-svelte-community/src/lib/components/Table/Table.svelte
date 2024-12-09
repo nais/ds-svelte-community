@@ -17,7 +17,7 @@ The component names differ from `@navikt/ds-react` to align with the HTML standa
 		zebraStripes = false,
 		sort,
 		children,
-		onSortChange,
+		onsortchange,
 		...restProps
 	}: TableProps = $props();
 
@@ -26,7 +26,7 @@ The component names differ from `@navikt/ds-react` to align with the HTML standa
 	$effect(() => {
 		ctx.size = size;
 		ctx.zebraStripes = zebraStripes;
-		ctx.changeSort = onSortChange;
+		ctx.changeSort = onsortchange;
 		ctx.sort = sort;
 	});
 
