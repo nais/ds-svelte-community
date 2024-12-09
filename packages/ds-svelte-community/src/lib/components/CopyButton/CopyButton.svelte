@@ -64,7 +64,6 @@
 <button
 	{...omit(restProps, "class")}
 	type="button"
-	aria-live="polite"
 	class={classes(
 		restProps,
 		"navds-copybutton",
@@ -88,11 +87,11 @@
 
 		{#if text}
 			{#if active}
-				<Label as="span" size={size === "medium" ? "medium" : "small"} aria-live="polite">
+				<Label as="span" size={size === "medium" ? "medium" : "small"}>
 					{activeText}
 				</Label>
 			{:else}
-				<Label as="span" size={size === "medium" ? "medium" : "small"} aria-live="polite">
+				<Label as="span" size={size === "medium" ? "medium" : "small"}>
 					{text}
 				</Label>
 			{/if}
