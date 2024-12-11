@@ -95,6 +95,5 @@
 		getResponsiveValue("r", "flex-basis", flexBasis),
 		getResponsiveValue("r", "flex-grow", flexGrow),
 		getResponsiveValue("r", "flex-shrink", flexShrink),
-	)}
-	>{#if children}{@render children()}{/if}</svelte:element
+	)}>{@render children?.()}</svelte:element
 >

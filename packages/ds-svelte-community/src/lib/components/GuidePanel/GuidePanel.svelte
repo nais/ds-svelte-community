@@ -19,7 +19,7 @@
 	class:navds-guide-panel--poster={poster === true}
 	class:navds-guide-panel--not-poster={poster === false}
 	class:navds-guide-panel--responsive-poster={poster === undefined}
-	data-responsive="true"
+	data-responsive={poster === undefined}
 >
 	<div class="navds-guide">
 		{#if illustration}

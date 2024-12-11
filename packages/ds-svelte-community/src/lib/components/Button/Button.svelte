@@ -35,12 +35,16 @@
 	let overrideWidth = $derived.by(() => {
 		return internalRef && loading ? internalRef.getBoundingClientRect().width : 0;
 	});
+
+	let style = $derived(typeof restProps.style == "string" ? restProps.style : null);
 </script>
 
 <svelte:element
 	this={as}
 	{...omit(disabled ? omit(restProps, "href", "class") : restProps, "class")}
-	style={overrideWidth ? `width: ${overrideWidth}px` : undefined}
+	style={overrideWidth
+		? `width: ${overrideWidth}px;${style ? " " + style : ""}`
+		: style || undefined}
 	class={classes(restProps, "navds-button", `navds-button--${variant}`, `navds-button--${size}`)}
 	class:navds-button--loading={loading}
 	class:navds-button--disabled={disabled || overrideWidth > 0}
