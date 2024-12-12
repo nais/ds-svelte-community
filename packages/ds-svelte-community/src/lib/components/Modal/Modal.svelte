@@ -78,7 +78,12 @@
 <dialog
 	{...omit(restProps, "class")}
 	bind:this={dialog}
-	onclose={() => (open = false)}
+	onclose={(e) => {
+		open = false;
+		if (restProps.onclose && typeof restProps.onclose === "function") {
+			restProps.onclose(e);
+		}
+	}}
 	onclick={(e) => {
 		if (e.target === dialog) {
 			dialog.close();
