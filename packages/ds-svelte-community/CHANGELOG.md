@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.8
+
+### Patch Changes
+
+- [#153](https://github.com/nais/ds-svelte-community/pull/153) [`33e79e5`](https://github.com/nais/ds-svelte-community/commit/33e79e5ab7a2f3f11e1356af296f4965f1eafedf) Thanks [@frodesundby](https://github.com/frodesundby)! - Modal component now handles custom onclose functions
+
 ## 1.0.0-next.7
 
 ### Patch Changes
