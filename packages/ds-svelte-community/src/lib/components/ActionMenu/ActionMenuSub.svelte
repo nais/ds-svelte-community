@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	import ChevronRightIcon from "$lib/icons/ChevronRightIcon.svelte";
-	import type { Snippet } from "svelte";
+	import { type Snippet } from "svelte";
 	import newUniqueId from "../local-unique-id";
 	import ActionMenuMarker from "./ActionMenuMarker.svelte";
 
