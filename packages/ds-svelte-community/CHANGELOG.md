@@ -1,5 +1,13 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.9
+
+### Patch Changes
+
+- [#158](https://github.com/nais/ds-svelte-community/pull/158) [`5219fa6`](https://github.com/nais/ds-svelte-community/commit/5219fa689d2758930f41eefc62e599006dd2d331) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add extends to most component props to type restProps
+
+  Updates to doc generation to support this
+
 ## 1.0.0-next.8
 
 ### Patch Changes
