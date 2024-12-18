@@ -1,4 +1,5 @@
 import type { Component, Snippet } from "svelte";
+import type { HTMLAnchorAttributes, HTMLButtonAttributes } from "svelte/elements";
 
 export const variants = [
 	"primary",
@@ -23,7 +24,7 @@ interface BaseProps {
 	 *
 	 * Prevent the user from interacting with the button: it cannot be pressed or focused.
 	 */
-	disabled?: boolean;
+	disabled?: boolean | null;
 
 	/**
 	 * Changes padding, height, and font-size.
@@ -41,27 +42,25 @@ interface BaseProps {
 	children?: Snippet;
 
 	/**
-	 * Place icon to the left of the content
+	 * Button icon
 	 */
-	iconLeft?: Snippet | Component;
+	icon?: Snippet | Component;
 
 	/**
-	 * Place icon to the right of the content
+	 * Button icon position
 	 */
-	iconRight?: Snippet | Component;
+	iconPosition?: "left" | "right";
 
 	/**
 	 * Ref is the button element. Bind to this to obtain the button element.
 	 */
 	ref?: Element;
-
-	[key: string]: unknown;
 }
 
-interface ButtonProps extends BaseProps {
+interface ButtonButtonProps extends BaseProps, HTMLButtonAttributes {
 	as?: "button";
 }
-interface AnchorProps extends BaseProps {
+interface ButtonAnchorProps extends BaseProps, HTMLAnchorAttributes {
 	/**
 	 * Element to render
 	 */
@@ -72,4 +71,4 @@ interface AnchorProps extends BaseProps {
 	href: string;
 }
 
-export type Props = ButtonProps | AnchorProps;
+export type ButtonProps = ButtonButtonProps | ButtonAnchorProps;

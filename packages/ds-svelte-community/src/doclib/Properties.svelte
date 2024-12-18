@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { ArrowUndoIcon, ChevronDownIcon, ChevronRightIcon } from "$lib/icons";
 	import type { Doc, DocSlots } from "@nais/vite-plugin-svelte-docs";
-	import Markdown from "svelte-markdown";
+	import Markdown from "./Markdown.svelte";
 	import TypeRenderer from "./TypeRenderer.svelte";
 	import ValueSelector from "./ValueSelector.svelte";
 
@@ -106,7 +106,7 @@
 									</div>
 								</td>
 								<td class="description">
-									<Markdown source={prop.description} />
+									<Markdown content={prop.description ?? ""} />
 									<TypeRenderer type={prop.type} />
 								</td>
 								<td>
@@ -158,7 +158,7 @@
 						{#each snippets as snippet}
 							<tr>
 								<td><strong>{snippet.name}</strong></td>
-								<td class="description"><Markdown source={snippet.description} /></td>
+								<td class="description"><Markdown content={snippet.description ?? ""} /></td>
 								<td>&nbsp;</td>
 								<td>-</td>
 							</tr>
@@ -185,7 +185,7 @@
 						{#each doc.events as event}
 							<tr>
 								<td><strong>{event.name}</strong></td>
-								<td class="description"><Markdown source={event.description} /></td>
+								<td class="description"><Markdown content={event.description ?? ""} /></td>
 								<td>&nbsp;</td>
 								<td>-</td>
 							</tr>
@@ -194,10 +194,24 @@
 				{/if}
 			</tbody>
 		</table>
+
+		{#if doc.externalExtends.length > 0}
+			<p>
+				Properties included from:
+				{#each doc.externalExtends as ext, i}
+					{i > 0 ? ", " : ""}
+					<code>{ext}</code>
+				{/each}
+			</p>
+		{/if}
 	</section>
 {/if}
 
 <style>
+	p {
+		font-size: 0.9rem;
+	}
+
 	.title {
 		font-size: var(--a-font-size-medium);
 		font-weight: var(--a-font-weight-bold);

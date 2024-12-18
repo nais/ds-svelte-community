@@ -12,5 +12,4 @@ export interface BodyShortProps extends TypoProps {
 	 */
 	as?: keyof SvelteHTMLElements;
 	children: Snippet;
-	[key: string]: unknown;
 }

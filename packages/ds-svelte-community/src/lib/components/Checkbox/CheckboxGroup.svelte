@@ -9,7 +9,7 @@
 	import Fieldset from "$lib/components/Fieldset/Fieldset.svelte";
 	import newUniqueId from "$lib/components/local-unique-id";
 	import { getContext } from "svelte";
-	import { CheckboxGroupContext, type Props } from "./type.svelte";
+	import { CheckboxGroupContext, type CheckboxGroupProps } from "./type.svelte";
 
 	const contextKey = Symbol("CheckboxGroupContext");
 
@@ -23,7 +23,7 @@
 
 <script lang="ts">
 	import { hasContext, setContext } from "svelte";
-	import { classes } from "../helpers";
+	import { classes, omit } from "../helpers";
 
 	let {
 		value = $bindable([]),
@@ -37,21 +37,8 @@
 		description,
 		children,
 		...restProps
-	}: Props = $props();
+	}: CheckboxGroupProps = $props();
 
-	// const ctx: CheckboxGroupContext = {
-	// 	change: (value: unknown) => {
-	// 		if ($valuesStore.includes(value)) {
-	// 			valuesStore.update((values) => values.filter((v) => v !== value));
-	// 		} else {
-	// 			valuesStore.update((values) => [...values, value]);
-	// 		}
-	// 	},
-	// 	values: valuesStore,
-	// 	groupControlled: value !== undefined,
-	// 	hasError: errorStore,
-	// 	size,
-	// };
 	const ctx = new CheckboxGroupContext();
 	ctx.values = value;
 	ctx.groupControlled = value !== undefined;
@@ -66,7 +53,7 @@
 </script>
 
 <Fieldset
-	{...restProps}
+	{...omit(restProps, "class")}
 	{error}
 	{errorId}
 	{hideLegend}

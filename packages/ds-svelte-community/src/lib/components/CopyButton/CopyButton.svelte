@@ -14,7 +14,7 @@
 	import { onDestroy } from "svelte";
 	import { classes, omit } from "../helpers";
 	import { Label } from "../typography";
-	import type { Props } from "./type";
+	import type { CopyButtonProps } from "./type";
 
 	let {
 		size = "medium",
@@ -28,7 +28,7 @@
 		activechanged,
 		icon,
 		...restProps
-	}: Props = $props();
+	}: CopyButtonProps = $props();
 
 	let active = $state(false);
 	let timeout: ReturnType<typeof setTimeout> | null = null;

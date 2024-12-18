@@ -8,7 +8,7 @@
 
 <script lang="ts" module>
 	import { getContext } from "svelte";
-	import type { AccordionContext, Props } from "./type";
+	import type { AccordionContext, AccordionProps } from "./type";
 
 	const contextKey = Symbol("AccordionContext");
 
@@ -28,12 +28,12 @@
 		indent = true,
 		children,
 		...restProps
-	}: Props = $props();
+	}: AccordionProps = $props();
 
 	class Context {
-		variant: Props["variant"] = $derived(variant);
-		headingSize: Props["headingSize"] = $derived(headingSize);
-		size: Props["size"] = $derived(size);
+		variant: AccordionProps["variant"] = $derived(variant);
+		headingSize: AccordionProps["headingSize"] = $derived(headingSize);
+		size: AccordionProps["size"] = $derived(size);
 	}
 
 	const ctx = new Context();

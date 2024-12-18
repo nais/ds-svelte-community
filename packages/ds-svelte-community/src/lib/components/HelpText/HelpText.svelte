@@ -3,7 +3,6 @@
 	HelpText gives users an explanation of unknown terms or concepts, which is displayed when they need it.
 
 	Read more about this component in the [Aksel documentation](https://aksel.nav.no/komponenter/core/helptext).
-
 -->
 
 <script lang="ts">
@@ -26,10 +25,6 @@
 </script>
 
 <div class="navds-help-text {wrapperClass}">
-	<!-- onClick={(e) => {
-			setOpen((x) => !x);
-			onClick?.(e);
-		}} -->
 	<button
 		bind:this={btnEl}
 		{...omit(restProps, "class")}

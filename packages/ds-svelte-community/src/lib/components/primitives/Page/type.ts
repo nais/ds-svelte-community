@@ -1,9 +1,10 @@
 import type { HTMLElements } from "$lib/components/utils/elements";
 import type bgColors from "@navikt/ds-tokens/src/colors-bg.json";
 import type { Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 export const widths = ["text", "md", "lg", "xl", "2xl"] as const;
 
-export interface PageProps {
+export interface PageProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * Overrides html-tag
 	 */
@@ -30,11 +31,9 @@ export interface PageProps {
 	 * Footer content
 	 */
 	footer?: Snippet;
-
-	[key: string]: unknown;
 }
 
-export interface PageBlockProps {
+export interface PageBlockProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * Predefined max-width
 	 * @example
@@ -59,6 +58,4 @@ export interface PageBlockProps {
 	 * Content
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }

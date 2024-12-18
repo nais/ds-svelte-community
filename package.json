@@ -9,7 +9,7 @@
 		"lint": "bun run --filter './packages/**' lint",
 		"check": "bun run --filter './packages/**' check",
 		"sync": "bun run --filter './packages/**' sync",
-		"build": "bun run --filter './packages/**' build",
+		"build": "bun run build:libs && bun run --filter './packages/**' build:package",
 		"release": "bun run build && changeset publish"
 	},
 	"workspaces": [
@@ -24,7 +24,6 @@
 		"@changesets/changelog-github": "^0.5.0",
 		"glob": "^11.0.0",
 		"source-map-js": "^1.2.1",
-		"svelte-highlight": "^7.7.0",
-		"svelte-markdown": "^0.4.1"
+		"svelte-highlight": "^7.8.0"
 	}
 }

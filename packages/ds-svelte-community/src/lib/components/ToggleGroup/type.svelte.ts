@@ -1,4 +1,5 @@
 import { getContext, type Snippet } from "svelte";
+import type { HTMLAttributes, HTMLButtonAttributes } from "svelte/elements";
 
 export class ToggleGroupContext {
 	value: string = $state("");
@@ -19,7 +20,7 @@ export function getToggleGroupContext() {
 export const sizes = ["medium", "small"] as const;
 export const variants = ["action", "neutral"] as const;
 
-export interface ToggleGroupProps {
+export interface ToggleGroupProps extends Omit<HTMLAttributes<HTMLDivElement>, "onchange"> {
 	/**
 	 * Controlled selected value.
 	 */
@@ -45,11 +46,9 @@ export interface ToggleGroupProps {
 	 * Callback when value changes.
 	 */
 	onchange?: (value: string) => void;
-
-	[key: string]: unknown;
 }
 
-export interface ToggleGroupItemProps {
+export interface ToggleGroupItemProps extends HTMLButtonAttributes {
 	/**
 	 * Value of this tab.
 	 */
@@ -59,6 +58,4 @@ export interface ToggleGroupItemProps {
 	 * Label of this tab.
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }

@@ -1,6 +1,7 @@
 import type { Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
-export type HeadingProps = {
+export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
 	/** Heading level */
 	level?: "1" | "2" | "3" | "4" | "5" | "6";
 	/** Heading size */
@@ -11,5 +12,4 @@ export type HeadingProps = {
 	as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span" | undefined;
 
 	children: Snippet;
-	[key: string]: unknown;
-};
+}

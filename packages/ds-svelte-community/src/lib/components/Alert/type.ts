@@ -3,7 +3,7 @@ import type { Snippet } from "svelte";
 export const variants = ["error", "warning", "info", "success"] as const;
 export const sizes = ["medium", "small"] as const;
 
-export interface Props {
+export interface AlertProps {
 	/**
 	 * Changes colors and icon usage when changed
 	 */
@@ -57,6 +57,4 @@ export interface Props {
 	 * **Requires closeButton to be true**.
 	 */
 	onclose?: () => void;
-
-	[key: string]: unknown;
 }

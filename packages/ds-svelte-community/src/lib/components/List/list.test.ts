@@ -90,17 +90,17 @@ describe("List", () => {
 				},
 				children: [
 					React.createElement(ReactList.Item, {
-						...props.items,
+						...(props.items as object),
 						children: "Item 1",
 						icon: React.createElement(ReactCircleIcon, { "aria-hidden": "true" }),
 					}),
 					React.createElement(ReactList.Item, {
-						...props.items,
+						...(props.items as object),
 						children: "Item 2",
 						icon: React.createElement(ReactCircleIcon, { "aria-hidden": "true" }),
 					}),
 					React.createElement(ReactList.Item, {
-						...props.items,
+						...(props.items as object),
 						children: "Item 3",
 						icon: React.createElement(ReactCircleIcon, { "aria-hidden": "true" }),
 					}),

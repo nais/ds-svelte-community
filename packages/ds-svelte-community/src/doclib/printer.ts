@@ -3,7 +3,8 @@ import { default as PrettierPluginSvelte, type PrettierConfig } from "prettier-p
 import BabelPrettier from "prettier/parser-babel";
 import TSPrettier from "prettier/parser-typescript";
 import ESTreePrettier from "prettier/plugins/estree.js";
-import { parse, type LegacyInlineComponent, type LegacySvelteNode } from "svelte/compiler";
+import { parse } from "svelte/compiler";
+import type { LegacyInlineComponent, LegacySvelteNode } from "./svelte_legacy_types";
 
 export async function format(code: string) {
 	const formatConfig: PrettierConfig = {

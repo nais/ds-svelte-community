@@ -1,8 +1,9 @@
 import type { Snippet } from "svelte";
+import type { HTMLInputAttributes } from "svelte/elements";
 
-export interface Props {
+export interface SwitchProps extends Omit<HTMLInputAttributes, "size"> {
 	/**
-	 * If enabled shows the label and description for screenreaders only.
+	 * If enabled shows the label and description for screen readers only.
 	 */
 	hideLabel?: boolean;
 	/**
@@ -15,7 +16,7 @@ export interface Props {
 	 */
 	position?: "left" | "right";
 	/**
-	 * Adds a description to extend labling of Switch.
+	 * Adds a description to extend labeling of Switch.
 	 */
 	description?: string;
 	/**
@@ -36,6 +37,4 @@ export interface Props {
 	 * Label for switch.
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }

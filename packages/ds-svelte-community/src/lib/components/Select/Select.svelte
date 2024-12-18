@@ -16,7 +16,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	import Detail from "../typography/Detail/Detail.svelte";
 	import ErrorMessage from "../typography/ErrorMessage/ErrorMessage.svelte";
 	import Label from "../typography/Label/Label.svelte";
-	import type { Props } from "./type";
+	import type { SelectProps } from "./type";
 
 	let {
 		label = "",
@@ -29,7 +29,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		children,
 		description,
 		...restProps
-	}: Props = $props();
+	}: SelectProps = $props();
 
 	const baseID = newUniqueId();
 	const id = "select-" + baseID;
@@ -54,7 +54,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 				{@render description()}
 			</BodyLong>
 		{:else}
-			<Detail class="navds-form-field__description {srOnlyClass}" size="small" as="div">
+			<Detail class="navds-form-field__description {srOnlyClass}" as="div">
 				{@render description()}
 			</Detail>
 		{/if}

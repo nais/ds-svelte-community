@@ -1,9 +1,9 @@
 import { getContext, type Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 import newUniqueId from "../local-unique-id";
 
 export const sizes = ["small", "medium"] as const;
 export const iconPositions = ["left", "top"] as const;
-export const ases = ["button", "a"] as const;
 
 export class TabContext {
 	value: string = $state("");
@@ -52,7 +52,7 @@ export function getTabsContext(): TabContext {
 	return context;
 }
 
-export interface TabProps {
+export interface TabProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * Value of the tab.
 	 */
@@ -68,21 +68,17 @@ export interface TabProps {
 	/**
 	 * Element to render as.
 	 */
-	as?: (typeof ases)[number];
-
-	[key: string]: unknown;
+	as?: "button" | "a";
 }
 
-export interface TabListProps {
+export interface TabListProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Tab list items.
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }
 
-export interface TabPanelProps {
+export interface TabPanelProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Value of the tab.
 	 */
@@ -91,11 +87,9 @@ export interface TabPanelProps {
 	 * Content of the tab panel.
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }
 
-export interface TabsProps {
+export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Changes padding and font-size.
 	 */
@@ -120,6 +114,4 @@ export interface TabsProps {
 	 * `TabList` and `TabPanel` components.
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }

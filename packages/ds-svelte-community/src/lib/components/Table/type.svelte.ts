@@ -1,4 +1,10 @@
 import { getContext, type Snippet } from "svelte";
+import type {
+	HTMLAttributes,
+	HTMLTableAttributes,
+	HTMLTdAttributes,
+	HTMLThAttributes,
+} from "svelte/elements";
 
 export const tableSizes = ["medium", "small"] as const;
 export const directions = ["ascending", "descending"] as const;
@@ -20,7 +26,7 @@ export class TableContext {
 	changeSort?: (sortKey: string) => void;
 }
 
-export interface TableProps {
+export interface TableProps extends HTMLTableAttributes {
 	/**
 	 * Changes padding.
 	 */
@@ -42,11 +48,9 @@ export interface TableProps {
 	 * Callback for sort change.
 	 */
 	onsortchange?: (sortKey: string) => void;
-
-	[key: string]: unknown;
 }
 
-export interface TableRowProps {
+export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
 	/**
 	 * Highlight row as selected.
 	 */
@@ -59,11 +63,9 @@ export interface TableRowProps {
 	 * Row contents.
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }
 
-export interface TableCellProps {
+export interface TableHeaderCellProps extends HTMLThAttributes {
 	/**
 	 * Cell alignment.
 	 */
@@ -80,20 +82,16 @@ export interface TableCellProps {
 	 * Cell contents.
 	 */
 	children?: Snippet;
-
-	[key: string]: unknown;
 }
 
-export interface HeaderProps {
+export interface TableHeaderProps extends HTMLAttributes<HTMLTableSectionElement> {
 	/**
 	 * Table header contents.
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }
 
-export interface DataCellProps {
+export interface TableDataCellProps extends HTMLTdAttributes {
 	/**
 	 * Cell alignment.
 	 */
@@ -103,17 +101,13 @@ export interface DataCellProps {
 	 * Data cell contents.
 	 */
 	children?: Snippet;
-
-	[key: string]: unknown;
 }
 
-export interface BodyProps {
+export interface BodyProps extends HTMLAttributes<HTMLTableSectionElement> {
 	/**
 	 * Table body contents.
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }
 
 export interface TableSortState {

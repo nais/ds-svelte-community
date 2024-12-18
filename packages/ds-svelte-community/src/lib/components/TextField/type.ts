@@ -1,9 +1,10 @@
 import type { Snippet } from "svelte";
+import type { HTMLInputAttributes } from "svelte/elements";
 
 export const types = ["number", "email", "password", "tel", "text", "url"] as const;
 export const sizes = ["medium", "small"] as const;
 
-export interface Props {
+export interface TextFieldProps extends Omit<HTMLInputAttributes, "size"> {
 	/**
 	 * Controlled value.
 	 */
@@ -13,7 +14,7 @@ export interface Props {
 	 */
 	htmlSize?: number;
 	/**
-	 * If enabled shows the label and description for screenreaders only.
+	 * If enabled shows the label and description for screen readers only.
 	 */
 	hideLabel?: boolean;
 	/**
@@ -51,6 +52,4 @@ export interface Props {
 	 * Description for input element.
 	 */
 	description?: string | Snippet;
-
-	[key: string]: unknown;
 }

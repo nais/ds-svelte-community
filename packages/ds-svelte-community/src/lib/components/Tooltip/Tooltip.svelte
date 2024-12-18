@@ -168,7 +168,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 			{#if keys.length > 0}
 				<span class="navds-tooltip__keys">
 					{#each keys as key}
-						<Detail size="small" as="kbd" class="navds-tooltip__key">
+						<Detail as="kbd" class="navds-tooltip__key">
 							{key}
 						</Detail>
 					{/each}

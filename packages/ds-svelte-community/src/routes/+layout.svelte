@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { base } from "$app/paths";
-	import { page } from "$app/stores";
+	import { page } from "$app/state";
 	import { Box, Button, Detail, HStack, Page, PageBlock } from "$lib";
 	import type { Snippet } from "svelte";
 	import "../doclib/styles.css";
@@ -52,7 +52,7 @@
 									<!-- eslint-disable-next-line svelte/valid-compile using $ to access stores currently errors the validator -->
 									<a
 										class="unstyled"
-										class:active={$page.url.pathname === href}
+										class:active={page.url.pathname === href}
 										{href}
 										data-sveltekit-preload-data="tap"
 									>

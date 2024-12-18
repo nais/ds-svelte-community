@@ -89,6 +89,7 @@ export type DocProp = {
 	optional: boolean;
 	default?: string;
 	bindable?: boolean;
+	inherited?: boolean;
 };
 
 export type DocSvelteEvent = {
@@ -104,4 +105,5 @@ export type Doc = {
 	events: DocSvelteEvent[];
 	slots: DocSlots[];
 	props: DocProp[];
+	externalExtends: string[];
 };

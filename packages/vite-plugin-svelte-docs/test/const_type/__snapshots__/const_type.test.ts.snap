@@ -4,6 +4,7 @@ exports[`const type inline 1`] = `
 {
   "description": "",
   "events": [],
+  "externalExtends": [],
   "name": "Component",
   "props": [
     {

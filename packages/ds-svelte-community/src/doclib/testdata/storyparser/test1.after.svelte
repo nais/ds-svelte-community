@@ -10,7 +10,7 @@
 
 {#snippet docSnippet2({ docProps }: { docProps: { [key: string]: unknown } })}
 	<Button variant="secondary" {...docProps}>
-		{#snippet iconLeft()}
+		{#snippet icon()}
 			<GlobeFillIcon />
 		{/snippet}
 	</Button>
@@ -49,7 +49,7 @@
 		{
 			name: "Icon only",
 			source:
-				"PHNjcmlwdCBsYW5nPSJ0cyI+CglpbXBvcnQgeyBCdXR0b24gfSBmcm9tICJAb3RoZXJMaWIiOwoJaW1wb3J0IEdsb2JlRmlsbEljb24gZnJvbSAiQG90aGVyTGliL2ljb25zL0dsb2JlRmlsbEljb24uc3ZlbHRlIjsKPC9zY3JpcHQ+Cgo8QnV0dG9uIHtkb2NQcm9wc30+Cgl7I3NuaXBwZXQgaWNvbkxlZnQoKX0KCQk8R2xvYmVGaWxsSWNvbiAvPgoJey9zbmlwcGV0fQo8L0J1dHRvbj4K",
+				"PHNjcmlwdCBsYW5nPSJ0cyI+CglpbXBvcnQgeyBCdXR0b24gfSBmcm9tICJAb3RoZXJMaWIiOwoJaW1wb3J0IEdsb2JlRmlsbEljb24gZnJvbSAiQG90aGVyTGliL2ljb25zL0dsb2JlRmlsbEljb24uc3ZlbHRlIjsKPC9zY3JpcHQ+Cgo8QnV0dG9uIHtkb2NQcm9wc30+Cgl7I3NuaXBwZXQgaWNvbigpfQoJCTxHbG9iZUZpbGxJY29uIC8+Cgl7L3NuaXBwZXR9CjwvQnV0dG9uPgo=",
 			snippet: docSnippet2,
 			locked: false,
 			props: [{ key: "variant", value: '"secondary"' }],

@@ -13,7 +13,7 @@
 </script>
 
 <script lang="ts">
-	import { classes } from "../helpers";
+	import { classes, omit } from "../helpers";
 	import { BodyLong, BodyShort, Heading } from "../typography";
 	import type { HeadingProps } from "../typography/Heading/type";
 	import { SetListContext } from "./context";
@@ -40,7 +40,7 @@
 
 <BodyLong
 	as="div"
-	{...restProps}
+	{...omit(restProps, "class")}
 	{size}
 	class={classes(restProps, "navds-list", `navds-list--${size}`)}
 >

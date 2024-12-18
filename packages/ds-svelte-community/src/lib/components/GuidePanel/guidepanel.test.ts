@@ -5,11 +5,11 @@ import { afterEach, describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import GuidePanel from "./GuidePanel.svelte";
-import type { Props } from "./type";
+import type { GuidePanelProps } from "./type";
 
 describe("GuidePanel", () => {
 	it("renders with HTML similar to ds-react", async () => {
-		const props: Props = {
+		const props: GuidePanelProps = {
 			children: createRawSnippet(() => ({
 				render() {
 					return "<span>Guide Panel Content</span>";

@@ -61,7 +61,7 @@
 			}
 			return ret;
 		} else if (t.type === "literal") {
-			return [JSON.parse(t.value)];
+			return [JSON.parse(t.value.replace(/^'|'$/g, '"'))];
 		} else if (t.type === "undefined") {
 			return [undefined];
 		}
@@ -159,7 +159,7 @@
 			value={fromText(value || '""') as string}
 			size="small"
 			type={subType.type === "number" ? "number" : "text"}
-			onchange={(e: InputEvent) => {
+			onchange={(e) => {
 				onchange(toText((e.target as HTMLInputElement).value));
 			}}
 		/>

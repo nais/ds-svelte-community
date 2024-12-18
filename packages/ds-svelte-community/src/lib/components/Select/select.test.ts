@@ -4,11 +4,11 @@ import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
 import React from "react";
 import Select from "./Select.test.svelte";
-import type { Props } from "./type";
+import type { SelectProps } from "./type";
 
 describe("Select", () => {
 	it("renders with HTML similar to ds-react", async () => {
-		const props: Omit<Props, "children"> = {
+		const props: Omit<SelectProps, "children"> = {
 			label: "Select country",
 		};
 		expect(

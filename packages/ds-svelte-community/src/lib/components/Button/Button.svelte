@@ -11,7 +11,7 @@
 	import Loader from "../Loader/Loader.svelte";
 	import { classes, isSnippet, omit } from "../helpers";
 	import Label from "../typography/Label/Label.svelte";
-	import type { Props } from "./type";
+	import type { ButtonProps } from "./type";
 
 	let {
 		variant = "primary",
@@ -20,11 +20,11 @@
 		loading = false,
 		as = "button",
 		children,
-		iconLeft,
-		iconRight,
+		icon,
 		ref = $bindable(),
+		iconPosition = "left",
 		...restProps
-	}: Props = $props();
+	}: ButtonProps = $props();
 
 	let internalRef: HTMLElement | undefined = $state(undefined);
 
@@ -44,7 +44,7 @@
 	class={classes(restProps, "navds-button", `navds-button--${variant}`, `navds-button--${size}`)}
 	class:navds-button--loading={loading}
 	class:navds-button--disabled={disabled || overrideWidth > 0}
-	class:navds-button--icon-only={(!!iconLeft || !!iconRight) && !children}
+	class:navds-button--icon-only={!!icon && !children}
 	class:unstyled={as === "a"}
 	bind:this={internalRef}
 	role={as != "button" ? "button" : undefined}
@@ -53,12 +53,12 @@
 	{#if overrideWidth}
 		<Loader {size} />
 	{:else}
-		{#if iconLeft}
+		{#if icon && iconPosition == "left"}
 			<span class="navds-button__icon">
-				{#if isSnippet(iconLeft)}
-					{@render iconLeft()}
+				{#if isSnippet(icon)}
+					{@render icon()}
 				{:else}
-					{@const Icon = iconLeft}
+					{@const Icon = icon}
 					<Icon />
 				{/if}
 			</span>
@@ -67,12 +67,12 @@
 			<Label as="span" size={size === "medium" ? "medium" : "small"} {children} />
 		{/if}
 
-		{#if iconRight}
+		{#if icon && iconPosition == "right"}
 			<span class="navds-button__icon">
-				{#if isSnippet(iconRight)}
-					{@render iconRight()}
+				{#if isSnippet(icon)}
+					{@render icon()}
 				{:else}
-					{@const Icon = iconRight}
+					{@const Icon = icon}
 					<Icon />
 				{/if}
 			</span>

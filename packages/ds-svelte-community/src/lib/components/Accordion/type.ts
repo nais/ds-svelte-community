@@ -1,4 +1,5 @@
 import type { Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
 export const variants = ["default", "neutral"] as const;
 
@@ -6,7 +7,7 @@ export const sizes = ["large", "medium", "small"] as const;
 
 export const headingSizes = ["large", "medium", "small", "xsmall"] as const;
 
-export interface Props {
+export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * The variant of the accordion.
 	 */
@@ -33,7 +34,7 @@ export interface Props {
 	children: Snippet;
 }
 
-export interface ItemProps {
+export interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Whether the accordion item is open or not.
 	 */
@@ -56,7 +57,7 @@ export interface ItemProps {
 }
 
 export type AccordionContext = {
-	variant: Props["variant"];
-	headingSize: Props["headingSize"];
-	size: Props["size"];
+	variant: AccordionProps["variant"];
+	headingSize: AccordionProps["headingSize"];
+	size: AccordionProps["size"];
 };

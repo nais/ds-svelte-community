@@ -1,14 +1,14 @@
 import MagicString from "magic-string";
+import { parse } from "svelte/compiler";
+import { Project } from "ts-morph";
+import { walk } from "zimmerframe";
+import { format, removeAttrs } from "./printer";
 import {
-	parse,
 	type LegacyElementLike,
 	type LegacyInlineComponent,
 	type LegacyThenBlock,
 	type SnippetBlock,
-} from "svelte/compiler";
-import { Project } from "ts-morph";
-import { walk } from "zimmerframe";
-import { format, removeAttrs } from "./printer";
+} from "./svelte_legacy_types";
 
 type CompiledStory = { name?: string; source: string; snippet: string; locked: boolean };
 
@@ -273,7 +273,6 @@ export class StoryParser {
 			modern: false,
 		});
 
-		//@ts-expect-error we know it's there
 		if (ast.html.type !== "Fragment") {
 			this.log("Not a fragment", ast.html.type);
 			return false;

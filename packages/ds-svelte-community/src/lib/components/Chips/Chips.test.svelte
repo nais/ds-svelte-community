@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { RemovableChip, ToggleChip } from ".";
 	import Chips from "./Chips.svelte";
-	import type { Props, RemovableProps } from "./type";
+	import type { ChipsProps, RemovableChipProps } from "./type";
 
 	interface Props_1 {
 		values: string[];
 		toggle?: boolean;
-		size?: Props["size"];
-		variant?: RemovableProps["variant"];
+		size?: ChipsProps["size"];
+		variant?: RemovableChipProps["variant"];
 		selected?: string;
 	}
 

@@ -6,7 +6,7 @@
 <script lang="ts">
 	import XMarkIcon from "$lib/icons/XMarkIcon.svelte";
 	import { classes, omit } from "../helpers";
-	import type { RemovableProps } from "./type";
+	import type { RemovableChipProps } from "./type";
 
 	let {
 		variant = "action",
@@ -15,7 +15,7 @@
 		value,
 		ondelete,
 		...restProps
-	}: RemovableProps = $props();
+	}: RemovableChipProps = $props();
 </script>
 
 <button

@@ -1,10 +1,11 @@
 import { type Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
 export const sizes = ["small", "medium"] as const;
 
-export interface FieldsetProps {
+export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
 	/**
-	 * If enabled shows the legend and description for screenreaders only
+	 * If enabled shows the legend and description for screen readers only
 	 */
 	hideLegend?: boolean;
 
@@ -44,6 +45,4 @@ export interface FieldsetProps {
 	children: Snippet;
 
 	description?: string | Snippet;
-
-	[key: string]: unknown;
 }

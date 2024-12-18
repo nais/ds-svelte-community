@@ -3,11 +3,11 @@ import { Loader as ReactLoader } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
 import Loader from "./Loader.svelte";
-import type { Props } from "./type";
+import type { LoaderProps } from "./type";
 
 describe("Loader", () => {
 	it("renders with HTML similar to ds-react", async () => {
-		const props: Props = {
+		const props: LoaderProps = {
 			title: "Loading",
 		};
 		expect(

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Step, Stepper } from ".";
-	import type { Props } from "./type.svelte";
+	import type { StepperProps } from "./type.svelte";
 
-	let props: Omit<Props, "children"> = $props();
+	let props: Omit<StepperProps, "children"> = $props();
 </script>
 
 <Stepper {...props}>

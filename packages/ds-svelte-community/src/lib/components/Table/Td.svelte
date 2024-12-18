@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { classes, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
-	import { getTableContext, type DataCellProps } from "./type.svelte";
+	import { getTableContext, type TableDataCellProps } from "./type.svelte";
 
-	let { align, children, ...restProps }: DataCellProps = $props();
+	let { align, children, ...restProps }: TableDataCellProps = $props();
 
 	const ctx = getTableContext();
 </script>

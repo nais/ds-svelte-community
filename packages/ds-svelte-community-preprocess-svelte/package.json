@@ -62,7 +62,7 @@
 	"dependencies": {
 		"estree-walker": "^3.0.3",
 		"prettier": "^3.4.2",
-		"svelte": "5.9.0",
+		"svelte": "5.14.3",
 		"typescript": "^5.7.2"
 	},
 	"type": "module",

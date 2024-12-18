@@ -8,9 +8,9 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 <script lang="ts">
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Detail from "../typography/Detail/Detail.svelte";
-	import type { Props } from "./type";
+	import type { TagProps } from "./type";
 
-	let { variant = "info", size = "medium", as = "span", children, text }: Props = $props();
+	let { variant = "info", size = "medium", as = "span", children, text }: TagProps = $props();
 
 	const Component = $derived(size == "medium" ? BodyShort : Detail);
 </script>

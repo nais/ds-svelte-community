@@ -19,6 +19,4 @@ export interface BodyLongProps extends TypoProps {
 	as?: "p" | "span" | "div";
 
 	children: Snippet;
-
-	[key: string]: unknown;
 }

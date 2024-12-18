@@ -3,11 +3,11 @@ import { CopyButton as ReactCopyButton } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
 import CopyButton from "./CopyButton.test.svelte";
-import type { Props } from "./type";
+import type { CopyButtonProps } from "./type";
 
 describe("CopyButton", () => {
 	it("renders with HTML similar to ds-react", async () => {
-		const props: Props = {
+		const props: CopyButtonProps = {
 			text: "Copy",
 			copyText: "Copy text",
 		};
@@ -35,7 +35,7 @@ describe("CopyButton", () => {
 	});
 
 	it("renders with HTML similar to ds-react with text", async () => {
-		const props: Props = {
+		const props: CopyButtonProps = {
 			copyText: "Copy text",
 			text: "Custom text",
 		};

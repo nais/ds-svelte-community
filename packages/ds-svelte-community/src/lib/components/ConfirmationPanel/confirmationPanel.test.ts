@@ -3,11 +3,11 @@ import { ConfirmationPanel as ReactConfirmationPanel } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
 import ConfirmationPanel from "./ConfirmationPanel.test.svelte";
-import type { Props } from "./type";
+import type { ConfirmationPanelProps } from "./type";
 
 describe("ConfirmationPanel", () => {
 	it("renders with HTML similar to ds-react", async () => {
-		const props: Props = {
+		const props: ConfirmationPanelProps = {
 			value: "val3",
 			label: "Label",
 		};

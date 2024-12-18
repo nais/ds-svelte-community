@@ -1,8 +1,9 @@
 import type { Snippet } from "svelte";
+import type { HTMLDialogAttributes } from "svelte/elements";
 
 export const sizes = ["small", "medium"] as const;
 
-export interface Props {
+export interface ModalProps extends HTMLDialogAttributes {
 	/**
 	 * Set open to `true` to open the dialog. Set to `false` to close it.
 	 * Recommended to use with `bind:open`.
@@ -40,6 +41,4 @@ export interface Props {
 	 * Footer content.
 	 */
 	footer?: Snippet;
-
-	[key: string]: unknown;
 }

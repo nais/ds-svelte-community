@@ -1,6 +1,6 @@
 <script lang="ts" module>
-	import type { ItemProps } from "./type";
-	type TestItem = ItemProps & { content: string };
+	import type { AccordionItemProps } from "./type";
+	type TestItem = AccordionItemProps & { content: string };
 
 	export type TestProps = {
 		items: TestItem[];

@@ -1,4 +1,6 @@
-export interface TypoProps {
+import type { HTMLAttributes } from "svelte/elements";
+
+export interface TypoProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * Truncate text overflow with ellipsis.
 	 */
@@ -12,7 +14,7 @@ export interface TypoProps {
 	 */
 	align?: "start" | "center" | "end";
 	/**
-	 * Visually hide text. Text will still be accessible for screenreaders.
+	 * Visually hide text. Text will still be accessible for screen readers.
 	 */
 	visuallyHidden?: boolean;
 	/**

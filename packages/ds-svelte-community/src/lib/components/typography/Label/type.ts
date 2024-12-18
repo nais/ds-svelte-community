@@ -1,6 +1,7 @@
 import type { Snippet } from "svelte";
+import type { HTMLLabelAttributes } from "svelte/elements";
 
-export type LabelProps = {
+export interface LabelProps extends HTMLLabelAttributes {
 	/**
 	 * medium: 18px, small: 16px
 	 */
@@ -18,6 +19,4 @@ export type LabelProps = {
 	 * Content
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
-};
+}

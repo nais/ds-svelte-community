@@ -12,7 +12,7 @@
 
 <script lang="ts">
 	import { classes, omit } from "../helpers";
-	import type { Props } from "./type";
+	import type { LoaderProps } from "./type";
 
 	let {
 		size = "medium",
@@ -20,7 +20,7 @@
 		transparent = false,
 		variant = "neutral",
 		...restProps
-	}: Props = $props();
+	}: LoaderProps = $props();
 
 	const id = "ldr" + newUniqueId();
 </script>

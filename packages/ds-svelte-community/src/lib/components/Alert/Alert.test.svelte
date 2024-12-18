@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Alert from "./Alert.svelte";
-	import type { Props } from "./type";
+	import type { AlertProps } from "./type";
 
-	let props: Omit<Props, "children"> = $props();
+	let props: Omit<AlertProps, "children"> = $props();
 </script>
 
 <Alert {...props}>Some alert</Alert>

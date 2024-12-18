@@ -1,16 +1,10 @@
 <script lang="ts">
 	import MagnifyingGlassIcon from "$lib/icons/MagnifyingGlassIcon.svelte";
+	import type { HTMLButtonAttributes } from "svelte/elements";
 	import Button from "../Button/Button.svelte";
 	import { classes } from "../helpers";
 
-	let {
-		size = "medium",
-		variant = "primary",
-		loading = false,
-		disabled = false,
-		searchIconText = "",
-		...restProps
-	}: {
+	interface Props extends HTMLButtonAttributes {
 		/**
 		 * Size of button.
 		 */
@@ -31,8 +25,16 @@
 		 * Aria label for icon
 		 */
 		searchIconText?: string;
-		[key: string]: unknown;
-	} = $props();
+	}
+
+	let {
+		size = "medium",
+		variant = "primary",
+		loading = false,
+		disabled = false,
+		searchIconText = "",
+		...restProps
+	}: Props = $props();
 </script>
 
 <Button
@@ -43,7 +45,7 @@
 	class={classes(restProps, "navds-search__button-search")}
 	{disabled}
 >
-	{#snippet iconLeft()}
+	{#snippet icon()}
 		<MagnifyingGlassIcon title={searchIconText} />
 	{/snippet}
 </Button>

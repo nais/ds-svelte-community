@@ -1,9 +1,12 @@
 import type { Snippet } from "svelte";
+import type { HTMLButtonAttributes, HTMLInputAttributes } from "svelte/elements";
 
 export const sizes = ["medium", "small"] as const;
 export const variants = ["primary", "secondary", "simple"] as const;
 
-export interface Props {
+export interface SearchProps
+	extends Omit<HTMLInputAttributes, "size" | "value" | "type" | "role" | "onclick">,
+		Pick<HTMLButtonAttributes, "onclick"> {
 	/**
 	 * Search label.
 	 * @note Will be hidden by default, is required for accessibility reasons.
@@ -65,6 +68,4 @@ export interface Props {
 	 * Custom button
 	 */
 	button?: Snippet;
-
-	[key: string]: unknown;
 }

@@ -1,6 +1,7 @@
 import type { Component, Snippet } from "svelte";
+import type { HTMLAttributes, HTMLLiAttributes } from "svelte/elements";
 
-export interface ListProps {
+export interface ListProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
 	children: Snippet;
 	/**
 	 * HTML list element to render.
@@ -22,11 +23,9 @@ export interface ListProps {
 	 * Changes margin-block on list and font size on items.
 	 */
 	size?: "small" | "medium" | "large";
-
-	[key: string]: unknown;
 }
 
-export interface ListItemProps {
+export interface ListItemProps extends Omit<HTMLLiAttributes, "title"> {
 	/**
 	 * List item content.
 	 */
@@ -39,6 +38,4 @@ export interface ListItemProps {
 	 * Icon to be used instead of bullet (unordered lists only).
 	 */
 	icon?: Snippet | Component;
-
-	[key: string]: unknown;
 }

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Select from "./Select.svelte";
-	import type { Props } from "./type";
+	import type { SelectProps } from "./type";
 
-	let props: Omit<Props, "children"> = $props();
+	let props: Omit<SelectProps, "children"> = $props();
 </script>
 
 <Select {...props}>

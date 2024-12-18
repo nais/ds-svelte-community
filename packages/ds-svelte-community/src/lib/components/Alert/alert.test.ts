@@ -4,7 +4,7 @@ import { Alert as ReactAlert } from "@navikt/ds-react";
 import { render } from "@testing-library/svelte";
 import { describe, expect, it } from "bun:test";
 import Alert from "./Alert.test.svelte";
-import { sizes, variants, type Props } from "./type";
+import { sizes, variants, type AlertProps } from "./type";
 
 describe("Alert", () => {
 	it("renders an Alert with a label", () => {
@@ -18,7 +18,7 @@ describe("Alert", () => {
 
 	testVariants.forEach(({ size, variant, close }) => {
 		it(`renders similar to ds-reacth with size ${size} and variant ${variant}. close button: ${close}`, async () => {
-			const props: Omit<Props, "children"> = {
+			const props: Omit<AlertProps, "children"> = {
 				size: size as never,
 				variant: variant as never,
 				closeButton: close,
@@ -64,7 +64,7 @@ describe("Alert", () => {
 	});
 
 	it("renders similar to ds-reacth with other props", async () => {
-		const props: Omit<Props, "children"> = {
+		const props: Omit<AlertProps, "children"> = {
 			fullWidth: true,
 			inline: true,
 			variant: "info",

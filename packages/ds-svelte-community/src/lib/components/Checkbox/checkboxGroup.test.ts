@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet, type Snippet } from "svelte";
 import Checkbox from "./CheckboxGroup.test.svelte";
-import { type CheckboxProps, type Props } from "./type.svelte";
+import { type CheckboxGroupProps, type CheckboxProps } from "./type.svelte";
 
 const snippetText = (v: string): Snippet => {
 	return createRawSnippet(() => ({
@@ -15,7 +15,7 @@ const snippetText = (v: string): Snippet => {
 
 describe("CheckboxGroup", () => {
 	it("renders CheckboxGroup similar to ds-react", async () => {
-		const props: Omit<Props, "children"> = {
+		const props: Omit<CheckboxGroupProps, "children"> = {
 			legend: "Checkbox legend",
 			value: ["val2", "val3"],
 		};
@@ -85,7 +85,7 @@ describe("CheckboxGroup", () => {
 
 	// TODO(thokra): Check sizes etc.
 	it(`renders CheckboxGroup similar to ds-react with descriptions`, async () => {
-		const props: Omit<Props, "children"> = {
+		const props: Omit<CheckboxGroupProps, "children"> = {
 			legend: "Checkbox legend",
 			description: "Checkbox description",
 			value: ["val4"],

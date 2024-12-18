@@ -59,6 +59,7 @@ describe("v5", () => {
 		expect(doc).toEqual({
 			name: "asdf",
 			description: "Some simple *description* of the component",
+			externalExtends: [],
 			events: [
 				{
 					description: "",

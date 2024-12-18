@@ -9,8 +9,9 @@ import type {
 	SpacingScale,
 } from "$lib/components/utils/types";
 import type { Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
-export interface BoxProps {
+export interface BoxProps extends HTMLAttributes<HTMLElement> {
 	/** Background color. Accepts a color token. */
 	background?: BackgroundToken;
 	/** Border color. Accepts a color token. */
@@ -64,6 +65,4 @@ export interface BoxProps {
 	 * Content
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }

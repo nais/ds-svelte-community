@@ -1,6 +1,7 @@
 import type { Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
-export type ErrorMessageProps = {
+export interface ErrorMessageProps extends HTMLAttributes<HTMLParagraphElement> {
 	/**
 	 * The size of the body
 	 * medium: 18px, small: 16px
@@ -12,5 +13,4 @@ export type ErrorMessageProps = {
 	as?: "p" | "span";
 
 	children: Snippet;
-	[key: string]: unknown;
-};
+}

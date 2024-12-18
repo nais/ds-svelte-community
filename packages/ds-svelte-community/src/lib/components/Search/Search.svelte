@@ -23,7 +23,7 @@
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Label from "../typography/Label/Label.svelte";
 	import SearchButton from "./SearchButton.svelte";
-	import type { Props } from "./type";
+	import type { SearchProps } from "./type";
 
 	let {
 		label,
@@ -40,7 +40,7 @@
 		button,
 		onclear,
 		...restProps
-	}: Props = $props();
+	}: SearchProps = $props();
 
 	let hasError = false;
 
@@ -122,7 +122,14 @@
 		{#if button}
 			{@render button()}
 		{:else if variant != "simple"}
-			<SearchButton onclick {disabled} {variant} {size} {loading} {searchIconText} />
+			<SearchButton
+				onclick={restProps?.onclick}
+				{disabled}
+				{variant}
+				{size}
+				{loading}
+				{searchIconText}
+			/>
 		{/if}
 	</div>
 	<div class="navds-form-field__error" aria-relevant="additions removals" aria-live="polite">

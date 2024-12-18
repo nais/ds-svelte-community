@@ -1,6 +1,8 @@
+import type { HTMLAttributes } from "svelte/elements";
+
 export const sizes = ["medium", "small", "xsmall"] as const;
 
-export interface Props {
+export interface PaginationProps extends Omit<HTMLAttributes<HTMLDivElement>, "onchange"> {
 	/**
 	 * Changes padding, height and font-size.
 	 */
@@ -41,6 +43,4 @@ export interface Props {
 	prevNextTexts?: boolean;
 
 	onchange?: (_: { page: number }) => void;
-
-	[key: string]: unknown;
 }

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import ConfirmationPanel from "./ConfirmationPanel.svelte";
-	import type { Props } from "./type";
+	import type { ConfirmationPanelProps } from "./type";
 
-	let props: Omit<Omit<Props, "label">, "children"> = $props();
+	let props: Omit<Omit<ConfirmationPanelProps, "label">, "children"> = $props();
 </script>
 
 <ConfirmationPanel {...props}>

@@ -1,7 +1,10 @@
 import type { Snippet } from "svelte";
+import type { HTMLButtonAttributes } from "svelte/elements";
 import type { PopoverProps } from "../Popover/type";
 
-export interface HelpTextProps extends Pick<PopoverProps, "strategy" | "placement"> {
+export interface HelpTextProps
+	extends Pick<PopoverProps, "strategy" | "placement">,
+		HTMLButtonAttributes {
 	/**
 	 * Adds a title-tooltip with the given text
 	 */
@@ -15,6 +18,4 @@ export interface HelpTextProps extends Pick<PopoverProps, "strategy" | "placemen
 	 * Help content
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }

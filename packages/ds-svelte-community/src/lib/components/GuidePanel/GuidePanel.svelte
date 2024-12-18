@@ -8,9 +8,9 @@
 <script lang="ts">
 	import { classes, omit } from "../helpers";
 	import Illustration from "./GuidePanelIllustration.svelte";
-	import type { Props } from "./type";
+	import type { GuidePanelProps } from "./type";
 
-	let { poster, illustration, children, ...restProps }: Props = $props();
+	let { poster, illustration, children, ...restProps }: GuidePanelProps = $props();
 </script>
 
 <div
@@ -19,6 +19,7 @@
 	class:navds-guide-panel--poster={poster === true}
 	class:navds-guide-panel--not-poster={poster === false}
 	class:navds-guide-panel--responsive-poster={poster === undefined}
+	data-responsive="true"
 >
 	<div class="navds-guide">
 		{#if illustration}

@@ -13,5 +13,4 @@ export interface DetailProps extends TypoProps {
 	 */
 	as?: keyof SvelteHTMLElements;
 	children: Snippet;
-	[key: string]: unknown;
 }
