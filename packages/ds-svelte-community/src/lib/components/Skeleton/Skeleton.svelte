@@ -7,14 +7,14 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <script lang="ts">
 	import { classes, omit } from "../helpers";
-	import type { Props } from "./type";
+	import type { SkeletonProps } from "./type";
 
-	let { variant, height, width, children, ...restProps }: Props = $props();
+	let { variant, height, width, children, ...restProps }: SkeletonProps = $props();
 
 	const style = (
 		restProps: { [index: string]: unknown },
-		width: Props["width"],
-		height: Props["height"],
+		width: SkeletonProps["width"],
+		height: SkeletonProps["height"],
 	): string | undefined => {
 		let ret = "";
 		if (restProps.style) {

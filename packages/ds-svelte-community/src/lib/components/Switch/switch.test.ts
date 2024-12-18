@@ -6,12 +6,12 @@ import React from "react";
 import { createRawSnippet } from "svelte";
 import { omit } from "../helpers";
 import Switch from "./Switch.svelte";
-import type { Props } from "./type";
+import type { SwitchProps } from "./type";
 
 describe("Switch", () => {
 	[false, true].forEach((checked) => {
 		it(`renders with HTML similar to ds-react checked ${checked}`, async () => {
-			const props: Props = {
+			const props: SwitchProps = {
 				checked,
 				children: createRawSnippet(() => ({
 					render: () => {

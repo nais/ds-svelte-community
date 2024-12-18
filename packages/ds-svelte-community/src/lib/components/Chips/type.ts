@@ -1,20 +1,19 @@
 import type { Snippet } from "svelte";
+import type { HTMLAnchorAttributes, HTMLAttributes, HTMLButtonAttributes } from "svelte/elements";
 
 export const sizes = ["medium", "small"] as const;
 export const variants = ["action", "neutral"] as const;
 
-export interface Props {
+export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
 	size?: (typeof sizes)[number];
 
 	/**
-	 * List of chips. Wrapp `RemovableChip` and `ToggleChip` with `<li>`
+	 * List of chips. Wrap `RemovableChip` and `ToggleChip` with `<li>`
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }
 
-export interface ToggleProps {
+interface BaseToggleProps {
 	/**
 	 * Toggles aria-pressed and visual-changes
 	 */
@@ -39,16 +38,19 @@ export interface ToggleProps {
 	 * Custom content, will use `value` if not provided
 	 */
 	children?: Snippet;
-
-	/**
-	 * What element to use for the chip
-	 */
-	as?: "button" | "a";
-
-	[key: string]: unknown;
 }
 
-export interface RemovableProps {
+interface ButtonToggleProps extends BaseToggleProps, Omit<HTMLButtonAttributes, "value"> {
+	as?: "button";
+}
+
+interface AnchorToggleProps extends BaseToggleProps, HTMLAnchorAttributes {
+	as: "a";
+}
+
+export type ToggleChipProps = ButtonToggleProps | AnchorToggleProps;
+
+export interface RemovableChipProps extends HTMLButtonAttributes {
 	/**
 	 * Chip-variants
 	 */
@@ -73,6 +75,4 @@ export interface RemovableProps {
 	 * Called when the user clicks the remove button
 	 */
 	ondelete?: () => void;
-
-	[key: string]: unknown;
 }

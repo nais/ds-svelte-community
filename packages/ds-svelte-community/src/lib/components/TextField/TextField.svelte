@@ -11,7 +11,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 <script lang="ts">
 	import { BodyShort, Detail, ErrorMessage, Label } from "$lib";
 	import { classes, omit } from "../helpers";
-	import type { Props } from "./type";
+	import type { TextFieldProps } from "./type";
 
 	let {
 		value = $bindable(""),
@@ -26,7 +26,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		label,
 		description,
 		...restProps
-	}: Props = $props();
+	}: TextFieldProps = $props();
 
 	const inputDescriptionId = `tf-desc-${id}`;
 

@@ -8,8 +8,8 @@
 		size = "medium",
 		disabled = false,
 		children,
-		iconLeft,
-		iconRight,
+		icon,
+		iconPosition,
 		...restProps
 	}: {
 		/**
@@ -34,11 +34,12 @@
 		/**
 		 * Left icon
 		 */
-		iconLeft?: Snippet;
+		icon?: Snippet;
+
 		/**
-		 * Right icon
+		 * Icon position
 		 */
-		iconRight?: Snippet;
+		iconPosition?: "left" | "right";
 
 		[key: string]: unknown;
 	} = $props();
@@ -51,8 +52,8 @@
 	data-selected={selected}
 	{disabled}
 	{size}
-	{iconLeft}
-	{iconRight}
+	{icon}
+	{iconPosition}
 	{children}
 	class={classes(restProps, "navds-pagination__item", {
 		"navds-pagination__item--selected": selected,

@@ -9,9 +9,15 @@
 	import { classes, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Heading from "../typography/Heading/Heading.svelte";
-	import type { Props } from "./type";
+	import type { ErrorSummaryProps } from "./type";
 
-	let { size = "medium", heading, headingTag = "h2", children, ...restProps }: Props = $props();
+	let {
+		size = "medium",
+		heading,
+		headingTag = "h2",
+		children,
+		...restProps
+	}: ErrorSummaryProps = $props();
 </script>
 
 <div

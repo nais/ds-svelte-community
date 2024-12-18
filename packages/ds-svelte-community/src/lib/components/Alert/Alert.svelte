@@ -14,7 +14,7 @@
 	import { default as ErrorFilledIcon } from "$lib/icons/XMarkOctagonFillIcon.svelte";
 	import { classes, omit } from "../helpers";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
-	import type { Props } from "./type";
+	import type { AlertProps } from "./type";
 
 	let {
 		variant = "info",
@@ -28,7 +28,7 @@
 		closeButtonIconText = "Close message",
 		onclose = () => {},
 		...restProps
-	}: Props = $props();
+	}: AlertProps = $props();
 </script>
 
 <div
@@ -73,7 +73,7 @@
 				type="button"
 				onclick={onclose}
 			>
-				{#snippet iconLeft()}
+				{#snippet icon()}
 					<XMarkIcon title={closeButtonIconText} />
 				{/snippet}
 			</Button>

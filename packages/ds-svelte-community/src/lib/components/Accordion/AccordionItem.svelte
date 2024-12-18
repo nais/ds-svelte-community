@@ -1,12 +1,12 @@
 <script lang="ts">
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
-	import { omit } from "../helpers";
+	import { classes, omit } from "../helpers";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import Heading from "../typography/Heading/Heading.svelte";
 	import { GetAccordionContext } from "./Accordion.svelte";
-	import type { ItemProps } from "./type";
+	import type { AccordionItemProps } from "./type";
 
-	let { open = false, heading, children, ...restProps }: ItemProps = $props();
+	let { open = false, heading, children, ...restProps }: AccordionItemProps = $props();
 
 	const ctx = GetAccordionContext();
 
@@ -25,7 +25,7 @@
 
 <div
 	{...omit(restProps, "class")}
-	class="navds-accordion__item"
+	class={classes(restProps, "navds-accordion__item")}
 	class:navds-accordion__item--open={open}
 	class:navds-accordion__item--neutral={ctx?.variant === "neutral"}
 	data-expanded={open}

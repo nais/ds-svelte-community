@@ -22,7 +22,7 @@
 
 	<Story name="Icon only">
 		<Button variant="secondary">
-			{#snippet iconLeft()}
+			{#snippet icon()}
 				<GlobeFillIcon />
 			{/snippet}
 		</Button>

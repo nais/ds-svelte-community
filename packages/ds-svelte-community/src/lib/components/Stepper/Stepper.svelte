@@ -8,7 +8,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 <script lang="ts">
 	import { setContext } from "svelte";
 	import { classes, omit } from "../helpers";
-	import { StepperContext, contextKey, type Props } from "./type.svelte";
+	import { StepperContext, contextKey, type StepperProps } from "./type.svelte";
 
 	let {
 		orientation = "vertical",
@@ -17,7 +17,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		onchange,
 		children,
 		...restProps
-	}: Props = $props();
+	}: StepperProps = $props();
 
 	const context = new StepperContext(activeStep, orientation, interactive, onchange);
 	$effect(() => {

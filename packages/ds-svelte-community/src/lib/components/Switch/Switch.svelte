@@ -15,7 +15,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Detail from "../typography/Detail/Detail.svelte";
 	import SelectedIcon from "./SelectedIcon.svelte";
-	import type { Props } from "./type";
+	import type { SwitchProps } from "./type";
 
 	let {
 		hideLabel = false,
@@ -27,7 +27,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		checked = $bindable(false),
 		children,
 		...restProps
-	}: Props = $props();
+	}: SwitchProps = $props();
 
 	const id = `switch-${newUniqueId()}`;
 </script>
@@ -69,7 +69,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 						{description}
 					</BodyShort>
 				{:else}
-					<Detail as="div" size="small" class="navds-switch__description">
+					<Detail as="div" class="navds-switch__description">
 						{description}
 					</Detail>
 				{/if}

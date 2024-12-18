@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { classes, omit } from "../helpers";
-	import type { HeaderProps } from "./type.svelte";
+	import type { TableHeaderProps } from "./type.svelte";
 
-	let { children, ...restProps }: HeaderProps = $props();
+	let { children, ...restProps }: TableHeaderProps = $props();
 </script>
 
 <thead {...omit(restProps, "class")} class={classes(restProps, "navds-table__header")}>

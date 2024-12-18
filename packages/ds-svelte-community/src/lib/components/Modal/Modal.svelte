@@ -15,7 +15,7 @@
 	import Button from "../Button/Button.svelte";
 	import { classes, omit } from "../helpers";
 	import Heading from "../typography/Heading/Heading.svelte";
-	import { sizes, type Props } from "./type";
+	import { sizes, type ModalProps } from "./type";
 
 	let {
 		open = $bindable(false),
@@ -27,7 +27,7 @@
 		children,
 		footer,
 		...restProps
-	}: Props = $props();
+	}: ModalProps = $props();
 
 	let dialog: HTMLDialogElement;
 
@@ -61,7 +61,7 @@
 	});
 
 	const isKnownSize = (w: unknown) => (w ? sizes.includes(w as never) : false);
-	function styles(w: Props["width"]): string | undefined {
+	function styles(w: ModalProps["width"]): string | undefined {
 		if (typeof w === "number") {
 			return `width: ${w}px`;
 		}
@@ -103,7 +103,7 @@
 				variant="tertiary-neutral"
 				onclick={() => (open = false)}
 			>
-				{#snippet iconLeft()}
+				{#snippet icon()}
 					<XMarkIcon title={closeIconText} />
 				{/snippet}
 			</Button>

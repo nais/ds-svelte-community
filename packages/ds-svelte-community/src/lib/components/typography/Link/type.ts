@@ -1,9 +1,10 @@
 import type { HTMLElements } from "$lib/components/utils/elements";
 import type { Snippet } from "svelte";
+import type { HTMLAnchorAttributes } from "svelte/elements";
 
 export const variants = ["action", "neutral", "subtle"] as const;
 
-export interface LinkProps {
+export interface LinkProps extends HTMLAnchorAttributes {
 	href: string;
 
 	/**
@@ -25,6 +26,4 @@ export interface LinkProps {
 	as?: HTMLElements;
 
 	children: Snippet;
-
-	[key: string]: unknown;
 }

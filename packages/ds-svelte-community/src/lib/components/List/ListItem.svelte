@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classes, isSnippet } from "../helpers";
+	import { classes, isSnippet, omit } from "../helpers";
 	import { BodyLong } from "../typography";
 	import { GetListContext } from "./context";
 	import type { ListItemProps } from "./types";
@@ -9,7 +9,7 @@
 	const ctx = GetListContext();
 </script>
 
-<li {...restProps} class={classes(restProps, "navds-list__item")}>
+<li {...omit(restProps, "class")} class={classes(restProps, "navds-list__item")}>
 	{#if ctx && ctx.type === "ul"}
 		<div
 			class={classes({}, "navds-list__item-marker", {

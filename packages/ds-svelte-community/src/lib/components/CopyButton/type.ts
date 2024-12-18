@@ -1,9 +1,10 @@
 import type { Snippet } from "svelte";
+import type { HTMLButtonAttributes } from "svelte/elements";
 
 export const sizes = ["xsmall", "small", "medium"] as const;
 export const variants = ["action", "neutral"] as const;
 
-export interface Props {
+export interface CopyButtonProps extends HTMLButtonAttributes {
 	size?: (typeof sizes)[number];
 	variant?: (typeof variants)[number];
 
@@ -48,6 +49,4 @@ export interface Props {
 	 * Should only return a single icon.
 	 */
 	icon?: Snippet<[boolean]>;
-
-	[key: string]: unknown;
 }

@@ -1,10 +1,11 @@
 import type { Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
 export const sizes = ["small", "medium"] as const;
 
-export interface Props {
+export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
 	/**
-	 * Render illustation above content. Will be true on mobile (< 480px) if not set.
+	 * Render illustration above content. Will be true on mobile (< 480px) if not set.
 	 */
 	poster?: boolean;
 
@@ -17,8 +18,4 @@ export interface Props {
 	 * Content
 	 */
 	children: Snippet;
-}
-
-export interface GuideProps {
-	size?: (typeof sizes)[number];
 }

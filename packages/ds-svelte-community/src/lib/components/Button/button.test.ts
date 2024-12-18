@@ -1,5 +1,5 @@
 import Button from "$lib/components/Button/Button.test.svelte";
-import type { Props } from "$lib/components/Button/type";
+import type { ButtonProps } from "$lib/components/Button/type";
 import { bunmatch } from "$testlib/bunmatch";
 import { Button as ReactButton } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte" with { type: "browser" };
@@ -17,7 +17,7 @@ describe("Button", () => {
 
 	it("renders with HTML similar to ds-react with props", async () => {
 		cleanup();
-		const props: Props = {
+		const props: ButtonProps = {
 			as: "a",
 			href: "/",
 			variant: "secondary",
@@ -30,7 +30,7 @@ describe("Button", () => {
 
 	it("renders with HTML similar to ds-react with loading", async () => {
 		cleanup();
-		const props: Props = {
+		const props: ButtonProps = {
 			loading: true,
 		};
 		expect(
@@ -39,7 +39,7 @@ describe("Button", () => {
 	});
 
 	it("renders with HTML similar to ds-react with disabled", async () => {
-		const props: Props = {
+		const props: ButtonProps = {
 			disabled: true,
 		};
 		expect(
@@ -56,7 +56,7 @@ describe("Button", () => {
 	// });
 
 	it("renders with HTML similar to ds-react with disabled with as", async () => {
-		const props: Props = {
+		const props: ButtonProps = {
 			as: "a",
 			href: "/",
 			disabled: true,

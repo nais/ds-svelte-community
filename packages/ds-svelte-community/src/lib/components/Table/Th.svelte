@@ -3,9 +3,15 @@
 	import ArrowsUpDownIcon from "$lib/icons/ArrowsUpDownIcon.svelte";
 	import ArrowUpIcon from "$lib/icons/ArrowUpIcon.svelte";
 	import { classes, omit } from "../helpers";
-	import { getTableContext, type TableCellProps } from "./type.svelte";
+	import { getTableContext, type TableHeaderCellProps } from "./type.svelte";
 
-	let { align, sortKey = "", sortable = false, children, ...restProps }: TableCellProps = $props();
+	let {
+		align,
+		sortKey = "",
+		sortable = false,
+		children,
+		...restProps
+	}: TableHeaderCellProps = $props();
 
 	const ctx = getTableContext();
 

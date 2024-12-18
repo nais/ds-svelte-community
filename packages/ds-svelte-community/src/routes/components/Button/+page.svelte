@@ -22,7 +22,7 @@
 
 	<Story name="Icon only">
 		<Button variant="secondary">
-			{#snippet iconLeft()}
+			{#snippet icon()}
 				<GlobeFillIcon />
 			{/snippet}
 		</Button>
@@ -30,7 +30,7 @@
 
 	<Story name="With icon">
 		<Button variant="secondary">
-			{#snippet iconLeft()}
+			{#snippet icon()}
 				<GlobeFillIcon />
 			{/snippet}
 
@@ -39,6 +39,6 @@
 	</Story>
 
 	<Story name="Icon component">
-		<Button variant="secondary" iconLeft={GlobeFillIcon}>Button with icon</Button>
+		<Button variant="secondary" icon={GlobeFillIcon} iconPosition="right">Button with icon</Button>
 	</Story>
 </Doc>

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Pagination from "./Pagination.svelte";
-	import type { Props } from "./type";
+	import type { PaginationProps } from "./type";
 
-	let props: Props = $props();
+	let props: PaginationProps = $props();
 </script>
 
 <Pagination {...props}></Pagination>

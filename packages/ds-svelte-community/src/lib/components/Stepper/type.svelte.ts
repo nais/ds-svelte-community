@@ -1,5 +1,5 @@
 import { getContext, type Snippet } from "svelte";
-import type { HTMLAnchorAttributes } from "svelte/elements";
+import type { HTMLAnchorAttributes, HTMLOlAttributes } from "svelte/elements";
 
 export const orientations = ["horizontal", "vertical"] as const;
 
@@ -48,7 +48,7 @@ export const getStepperContext = (): StepperContext => {
 	return context;
 };
 
-export interface Props {
+export interface StepperProps extends Omit<HTMLOlAttributes, "onchange"> {
 	/**
 	 * Current active step.
 	 * @note Stepper index starts at 1, not 0
@@ -84,6 +84,4 @@ export interface StepProps extends HTMLAnchorAttributes {
 	interactive?: boolean;
 
 	children: Snippet;
-
-	[key: string]: unknown;
 }

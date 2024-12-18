@@ -5,7 +5,7 @@
 	import Alert from "$lib/components/Alert/Alert.svelte";
 	import type { Doc } from "@nais/vite-plugin-svelte-docs";
 	import { type Snippet } from "svelte";
-	import SvelteMarkdown from "svelte-markdown";
+	import Markdown from "./Markdown.svelte";
 	import Properties from "./Properties.svelte";
 	import Renderer, { type ComponentOptions } from "./Renderer.svelte";
 	import type { StorySnippet } from "./Story.svelte";
@@ -93,7 +93,7 @@
 
 <h1>{customTitle ?? doc.name}</h1>
 
-<SvelteMarkdown source={doc.description} />
+<Markdown content={doc.description} />
 
 {#if extraDescription}
 	<div class="extra">
@@ -142,7 +142,7 @@
 {#each extraChildrenDoc as doc}
 	<h3>{doc.name}</h3>
 	{#if doc.description}
-		<SvelteMarkdown source={doc.description} />
+		<Markdown content={doc.description} />
 	{/if}
 	<Properties {doc} />
 {/each}

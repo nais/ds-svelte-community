@@ -1,8 +1,9 @@
 import type { Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
 export const sizes = ["medium", "small"] as const;
 
-export interface Props {
+export interface ConfirmationPanelProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Error message for element.
 	 */
@@ -42,6 +43,4 @@ export interface Props {
 	 * Label text
 	 */
 	label: string | Snippet;
-
-	[key: string]: unknown;
 }

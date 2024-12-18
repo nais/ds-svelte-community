@@ -1,22 +1,8 @@
 <script lang="ts">
-	import type { Snippet } from "svelte";
 	import { omit } from "../helpers";
+	import type { ErrorSummaryItemProps } from "./type";
 
-	let {
-		href,
-		children,
-		...restProps
-	}: {
-		/**
-		 * Link to the element that has the error
-		 */
-		href: string;
-		/**
-		 * The error message
-		 */
-		children: Snippet;
-		[key: string]: unknown;
-	} = $props();
+	let { href, children, ...restProps }: ErrorSummaryItemProps = $props();
 </script>
 
 <li>

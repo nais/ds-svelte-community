@@ -1,11 +1,12 @@
 import type { BreakpointsAlias } from "$lib/components/utils/types";
 import type { Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
 export interface ResponsiveProps extends BaseResponsiveProps {
 	variant: "show" | "hide";
 }
 
-export interface BaseResponsiveProps {
+export interface BaseResponsiveProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * @example
 	 * above='md'

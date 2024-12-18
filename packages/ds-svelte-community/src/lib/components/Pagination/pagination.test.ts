@@ -3,11 +3,11 @@ import { Pagination as ReactPagination } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
 import Pagination from "./Pagination.test.svelte";
-import type { Props } from "./type";
+import type { PaginationProps } from "./type";
 
 describe("Pagination", () => {
 	it("renders with HTML similar to ds-react", async () => {
-		const props: Props = {
+		const props: PaginationProps = {
 			count: 100,
 			page: 22,
 			prevNextTexts: true,

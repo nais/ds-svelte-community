@@ -1,90 +1,113 @@
 declare module "*.svelte?doc" {
-	type Unknown = {
+	export type DocUnknown = {
 		type: "unknown";
 	};
 
-	type SimpleType = {
+	export type DocSimpleType = {
 		type: "string" | "number" | "boolean" | "undefined" | "null";
 	};
 
-	type Union = {
+	export type DocUnion = {
 		type: "union";
-		values: Type[];
+		values: DocType[];
 	};
 
-	type Literal = {
+	export type DocArray = {
+		type: "array";
+		of: DocType;
+	};
+
+	export type DocLiteral = {
 		type: "literal";
 		value: string;
 	};
 
-	type PObject = {
+	export type DocPObject = {
 		type: "object";
-		properties: Prop[];
+		properties: DocProp[];
 	};
 
-	type PFunction = {
+	export type DocPFunction = {
 		type: "function";
 		signature: string;
 	};
 
-	type Snippet = {
-		type: "snippet";
-		lets: SlotLet[];
+	export type DocPComponent = {
+		type: "component";
 	};
 
-	type Interface = {
+	export type DocSnippet = {
+		type: "snippet";
+		lets: DocSlotLet[];
+	};
+
+	export type DocInterface = {
 		type: "interface";
 		name: string;
+		members?: DocProp[];
+		inherits?: DocType;
+		external?: boolean;
+		typeArguments?: DocTypeParameter[];
 	};
 
-	type Type =
-		| Union
-		| Unknown
-		| Type[]
-		| Literal
-		| PObject
-		| PFunction
-		| Snippet
-		| SimpleType
-		| Interface;
-
-	type SlotLet = {
+	export type DocTypeParameter = {
+		type: "typeParameter";
 		name: string;
-		type: Type;
+		constraint?: DocType;
 	};
 
-	type Slots = {
+	export type DocType =
+		| DocUnion
+		| DocUnknown
+		| DocType[]
+		| DocLiteral
+		| DocPObject
+		| DocPFunction
+		| DocSnippet
+		| DocSimpleType
+		| DocInterface
+		| DocTypeParameter
+		| DocArray
+		| DocPComponent;
+
+	export type DocSlotLet = {
+		name: string;
+		type: DocType;
+	};
+
+	export type DocSlots = {
 		name: string;
 		description?: string;
-		lets: SlotLet[];
+		lets: DocSlotLet[];
 		snippet?: boolean;
 		optional: boolean;
 	};
 
-	type Prop = {
+	export type DocProp = {
 		name: string;
 		description?: string;
-		type: Type;
+		type: DocType;
 		optional: boolean;
 		default?: string;
 		bindable?: boolean;
+		inherited?: boolean;
 	};
 
-	type SvelteEvent = {
+	export type DocSvelteEvent = {
 		name: string;
 		description?: string;
-		type?: Type;
+		type?: DocType;
 		optional: boolean;
 	};
 
-	type Doc = {
+	export type Doc = {
 		name: string;
 		description: string;
-		events: SvelteEvent[];
-		slots: Slots[];
-		props: Prop[];
+		events: DocSvelteEvent[];
+		slots: DocSlots[];
+		props: DocProp[];
+		externalExtends: string[];
 	};
 
-	const src: Doc;
 	export default src;
 }

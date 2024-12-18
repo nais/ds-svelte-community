@@ -5,16 +5,17 @@ describe("params", () => {
 	test("svelte elements", async () => {
 		const filename = "asdf.svelte";
 		const code = `<script lang="ts">
+    import type { HTMLAttributes } from "svelte/elements";
+
     interface GenericNumber<NumType, X> {
       zeroValue: NumType;
       y: X;
       add: (x: NumType, y: NumType) => NumType;
     }
 
-    interface Props {
+    interface Props extends HTMLAttributes<HTMLDivElement> {
       num: GenericNumber<number, unknown>;
     }
-
 
     let props : Props = $props();
   </script>

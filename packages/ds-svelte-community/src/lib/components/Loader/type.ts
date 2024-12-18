@@ -1,3 +1,5 @@
+import type { SVGAttributes } from "svelte/elements";
+
 export const sizes = [
 	"3xlarge",
 	"2xlarge",
@@ -10,7 +12,7 @@ export const sizes = [
 
 export const variants = ["neutral", "interaction", "inverted"] as const;
 
-export interface Props {
+export interface LoaderProps extends SVGAttributes<SVGElement> {
 	/**
 	 * Changes Loader width/height
 	 * 64px | 40px | 32px | 24px | 20px | 16px
@@ -28,6 +30,4 @@ export interface Props {
 	 * Sets svg-background to transparent
 	 */
 	transparent?: boolean;
-
-	[key: string]: unknown;
 }

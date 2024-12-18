@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import Modal from "./Modal.svelte";
-import type { Props } from "./type";
+import type { ModalProps } from "./type";
 
 function textSnippet(text: string) {
 	return createRawSnippet(() => ({
@@ -17,7 +17,7 @@ function textSnippet(text: string) {
 
 describe("Modal", () => {
 	it("renders with HTML similar to ds-react", async () => {
-		const props: Props = {
+		const props: ModalProps = {
 			open: true,
 			closeIconText: "Lukk",
 			children: textSnippet("ModalContent"),

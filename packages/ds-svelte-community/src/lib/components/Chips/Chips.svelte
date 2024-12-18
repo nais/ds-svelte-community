@@ -9,9 +9,9 @@
 
 <script lang="ts">
 	import { classes, omit } from "../helpers";
-	import type { Props } from "./type";
+	import type { ChipsProps } from "./type";
 
-	let { size = "medium", children, ...restProps }: Props = $props();
+	let { size = "medium", children, ...restProps }: ChipsProps = $props();
 </script>
 
 <ul

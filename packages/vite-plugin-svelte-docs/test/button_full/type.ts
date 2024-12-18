@@ -1,4 +1,5 @@
 import type { Snippet } from "svelte";
+import type { HTMLAnchorAttributes, HTMLButtonAttributes } from "svelte/elements";
 
 export const variants = [
 	"primary",
@@ -23,7 +24,7 @@ interface BaseProps {
 	 *
 	 * Prevent the user from interacting with the button: it cannot be pressed or focused.
 	 */
-	disabled?: boolean;
+	disabled?: boolean | null;
 
 	/**
 	 * Changes padding, height, and font-size.
@@ -58,10 +59,10 @@ interface BaseProps {
 	[key: string]: unknown;
 }
 
-interface ButtonProps extends BaseProps {
+interface ButtonProps extends BaseProps, HTMLButtonAttributes {
 	as?: "button";
 }
-interface AnchorProps extends BaseProps {
+interface AnchorProps extends BaseProps, HTMLAnchorAttributes {
 	as: "a";
 	href: string;
 }

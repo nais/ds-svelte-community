@@ -1,8 +1,8 @@
 <script lang="ts">
 	import TextField from "./TextField.svelte";
-	import type { Props } from "./type";
+	import type { TextFieldProps } from "./type";
 
-	let props: Omit<Omit<Omit<Props, "children">, "label">, "description"> = $props();
+	let props: Omit<Omit<Omit<TextFieldProps, "children">, "label">, "description"> = $props();
 </script>
 
 <TextField {...props}>

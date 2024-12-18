@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { Checkbox, CheckboxGroup } from "$lib";
-	import type { CheckboxProps, Props } from "./type.svelte";
+	import type { CheckboxGroupProps, CheckboxProps } from "./type.svelte";
 
-	let { wrapper, items }: { wrapper: Omit<Props, "children">; items: CheckboxProps[] } = $props();
+	let {
+		wrapper,
+		items,
+	}: { wrapper: Omit<CheckboxGroupProps, "children">; items: CheckboxProps[] } = $props();
 </script>
 
-<CheckboxGroup legend="" {...wrapper}>
+<CheckboxGroup {...wrapper}>
 	{#each items as item}
 		<Checkbox {...item} />
 	{/each}

@@ -2,7 +2,7 @@
 	import type { Component } from "svelte";
 	import type { StackProps } from "./type";
 	export interface StackPropsTest extends Omit<StackProps, "children"> {
-		component: Component;
+		component: Component<StackProps>;
 	}
 </script>
 

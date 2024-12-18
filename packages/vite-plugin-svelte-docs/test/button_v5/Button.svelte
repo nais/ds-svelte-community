@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
+	import { HTMLAttributes } from "svelte/elements";
 
-	type Props = {
+	interface Props extends HTMLAttributes<HTMLButtonElement> {
 		/**
 		 * Select some type
 		 */
@@ -16,7 +17,7 @@
 		 */
 		children: Snippet;
 		named?: Snippet<[string]>;
-	};
+	}
 
 	let { type = "button", color, onClick, children, named }: Props = $props();
 </script>

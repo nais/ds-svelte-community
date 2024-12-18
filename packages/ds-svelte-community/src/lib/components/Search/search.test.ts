@@ -4,11 +4,11 @@ import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
 import { omit } from "../helpers";
 import Search from "./Search.svelte";
-import type { Props } from "./type";
+import type { SearchProps } from "./type";
 
 describe("Search", () => {
 	it("renders with HTML similar to ds-react", async () => {
-		const props: Props = {
+		const props: SearchProps = {
 			label: "Label fragment",
 			value: "Value",
 			searchIconText: "Søk",

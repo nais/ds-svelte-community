@@ -4,6 +4,9 @@ exports[`params svelte elements 1`] = `
 {
   "description": "",
   "events": [],
+  "externalExtends": [
+    "HTMLAttributes<HTMLDivElement>",
+  ],
   "name": "asdf",
   "props": [
     {

@@ -3,11 +3,11 @@ import { TextField as ReactTextField } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
 import TextField from "./TextField.test.svelte";
-import type { Props } from "./type";
+import type { TextFieldProps } from "./type";
 
 describe("TextField", () => {
 	it("renders with HTML similar to ds-react", async () => {
-		const props: Omit<Omit<Omit<Props, "children">, "label">, "description"> = {};
+		const props: Omit<Omit<Omit<TextFieldProps, "children">, "label">, "description"> = {};
 		expect(
 			await bunmatch(render(TextField, props), ReactTextField, {
 				props: {

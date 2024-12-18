@@ -5,7 +5,7 @@
 
 <script lang="ts">
 	import { classes, omit } from "../helpers";
-	import type { ToggleProps } from "./type";
+	import type { ToggleChipProps } from "./type";
 
 	let {
 		selected = $bindable(false),
@@ -15,7 +15,7 @@
 		as = "button",
 		children,
 		...restProps
-	}: ToggleProps = $props();
+	}: ToggleChipProps = $props();
 </script>
 
 <!-- Called when the user clicks the toggle -->
@@ -35,10 +35,10 @@
 	data-pressed={selected}
 	onclick={as == "a"
 		? undefined
-		: (e: MouseEvent) => {
+		: (e: unknown) => {
 				selected = !selected;
 				if (restProps && "onclick" in restProps && typeof restProps.onclick === "function") {
-					restProps.onclick(e);
+					restProps.onclick(e as never);
 				}
 			}}
 >

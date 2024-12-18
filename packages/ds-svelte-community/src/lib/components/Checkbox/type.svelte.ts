@@ -1,9 +1,13 @@
 import type { Snippet } from "svelte";
-import type { ChangeEventHandler } from "svelte/elements";
+import type {
+	ChangeEventHandler,
+	HTMLFieldsetAttributes,
+	HTMLInputAttributes,
+} from "svelte/elements";
 
 export const sizes = ["medium", "small"] as const;
 
-export interface Props {
+export interface CheckboxGroupProps extends HTMLFieldsetAttributes {
 	/**
 	 * Controlled state for checkboxes.
 	 */
@@ -53,8 +57,6 @@ export interface Props {
 	 * List of checkboxes
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }
 
 export class CheckboxGroupContext {
@@ -81,7 +83,7 @@ export class CheckboxGroupContext {
 	}
 }
 
-export interface CheckboxProps {
+export interface CheckboxProps extends Omit<HTMLInputAttributes, "size"> {
 	/**
 	 * The value of the HTML element.
 	 */
@@ -138,6 +140,4 @@ export interface CheckboxProps {
 	 * onchange event
 	 */
 	onchange?: ChangeEventHandler<HTMLInputElement>;
-
-	[key: string]: unknown;
 }

@@ -10,24 +10,29 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 All extra props are passed to the root element."
 ,
   "events": [],
+  "externalExtends": [
+    "HTMLButtonAttributes",
+    "HTMLAnchorAttributes",
+  ],
   "name": "Button",
   "props": [
     {
       "default": ""button"",
       "description": "",
       "name": "as",
-      "optional": false,
+      "optional": true,
       "type": {
-        "type": "literal",
-        "value": ""button"",
-      },
-    },
-    {
-      "description": "",
-      "name": "href",
-      "optional": false,
-      "type": {
-        "type": "string",
+        "type": "union",
+        "values": [
+          {
+            "type": "literal",
+            "value": ""button"",
+          },
+          {
+            "type": "literal",
+            "value": ""a"",
+          },
+        ],
       },
     },
     {
@@ -40,7 +45,24 @@ Prevent the user from interacting with the button: it cannot be pressed or focus
       "name": "disabled",
       "optional": true,
       "type": {
-        "type": "boolean",
+        "type": "union",
+        "values": [
+          {
+            "type": "boolean",
+          },
+          {
+            "type": "literal",
+            "value": "null",
+          },
+        ],
+      },
+    },
+    {
+      "description": "",
+      "name": "href",
+      "optional": true,
+      "type": {
+        "type": "string",
       },
     },
     {

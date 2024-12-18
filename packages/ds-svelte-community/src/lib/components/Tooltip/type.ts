@@ -41,6 +41,4 @@ export interface TooltipProps {
 	 * Content to which the tooltip will activate.
 	 */
 	children: Snippet;
-
-	[key: string]: unknown;
 }

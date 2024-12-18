@@ -1,15 +1,13 @@
 import type { Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
-/**
- * Changes font-size, padding and gaps
- */
 export const variants = ["circle", "rectangle", "rounded", "text"] as const;
 
-export interface Props {
+export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Changes the shape of the skeleton.
 	 */
-	variant: (typeof variants)[number];
+	variant: "circle" | "rectangle" | "rounded" | "text";
 
 	/**
 	 * When not inferring height from children, you must specify height.

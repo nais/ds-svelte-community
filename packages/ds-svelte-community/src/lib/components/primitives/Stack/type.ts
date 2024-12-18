@@ -32,6 +32,4 @@ export interface StackProps extends BasePrimitiveProps {
 	gap?: ResponsiveProp<SpacingScale>;
 
 	children: Snippet;
-
-	[key: string]: unknown;
 }

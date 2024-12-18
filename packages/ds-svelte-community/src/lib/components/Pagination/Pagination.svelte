@@ -11,7 +11,7 @@
 	import { classes, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Item from "./Item.svelte";
-	import type { Props } from "./type";
+	import type { PaginationProps } from "./type";
 
 	// TODO: Fix bug when navigating back and forth. Some pages will not show, but ellipsis will.
 
@@ -26,7 +26,7 @@
 		prevNextTexts = false,
 		onchange,
 		...restProps
-	}: Props = $props();
+	}: PaginationProps = $props();
 
 	const getSteps = (page: number) => {
 		const range = (start: number, end: number) =>
@@ -84,7 +84,7 @@
 				{size}
 				onclick={() => handlePageChange(page - 1)}
 			>
-				{#snippet iconLeft()}
+				{#snippet icon()}
 					<ChevronLeftIcon {...prevNextTexts ? { "aria-hidden": true } : { title: prevText }} />
 				{/snippet}
 				{#if prevNextTexts}
@@ -123,8 +123,9 @@
 				page={page + 1}
 				{size}
 				onclick={() => handlePageChange(page + 1)}
+				iconPosition="right"
 			>
-				{#snippet iconRight()}
+				{#snippet icon()}
 					<ChevronRightIcon {...prevNextTexts ? { "aria-hidden": true } : { title: nextText }} />
 				{/snippet}
 				{#if prevNextTexts}

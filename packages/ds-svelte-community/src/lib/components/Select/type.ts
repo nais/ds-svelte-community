@@ -1,19 +1,18 @@
 import type { Snippet } from "svelte";
+import type { HTMLSelectAttributes } from "svelte/elements";
 
 /**
  * Changes font-size, padding and gaps
  */
 export const sizes = ["medium", "small"] as const;
 
-export interface Props {
-	// htmlSize?: number; // This looks really bad if set, so we don't want to expose it
-
+export interface SelectProps extends Omit<HTMLSelectAttributes, "size"> {
 	/**
 	 * Label for select.
 	 */
 	label?: string;
 	/**
-	 * If enabled shows the label and description for screenreaders only.
+	 * If enabled shows the label and description for screen readers only.
 	 */
 	hideLabel?: boolean;
 	/**

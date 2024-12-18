@@ -153,6 +153,7 @@ export class Generator {
 			props: [],
 			slots: [],
 			events: [],
+			externalExtends: [],
 		};
 
 		let description = "";
@@ -247,6 +248,7 @@ export class Generator {
 						i: DocInterface,
 						combined: DocPObject,
 						injectedInherits: string[],
+						union = false,
 					) => {
 						const combine = (np: DocProp) => {
 							const existing = combined.properties.find((p) => p.name === np.name);
@@ -255,7 +257,7 @@ export class Generator {
 									existing.description = np.description;
 								}
 								if (existing.optional && !np.optional) {
-									existing.optional = false;
+									existing.optional = true;
 								}
 								if (existing.default == undefined && np.default != undefined) {
 									existing.default = np.default;
@@ -263,10 +265,20 @@ export class Generator {
 								if (!existing.bindable && np.bindable) {
 									existing.bindable = true;
 								}
-								if (!Array.isArray(existing.type) && existing.type.type === "union") {
-									existing.type.values.push(np.type);
+								if (!Array.isArray(existing.type)) {
+									if (existing.type.type === "union") {
+										existing.type.values.push(np.type);
+									} else if (existing.type.type === "literal") {
+										existing.type = { type: "union", values: [existing.type, np.type] };
+										combined.properties = combined.properties.filter(
+											(p) => p.name !== existing.name,
+										);
+										combined.properties.push(existing);
+									}
 								}
 								return;
+							} else if (union) {
+								np.optional = true;
 							}
 							combined.properties.push(np);
 						};
@@ -275,6 +287,7 @@ export class Generator {
 							if (!Array.isArray(i.inherits)) {
 								throw new Error("Expected inherits to be an array");
 							}
+
 							i.inherits.forEach((i) => {
 								if (!Array.isArray(i) && i.type == "unknown") {
 									return;
@@ -288,8 +301,13 @@ export class Generator {
 								if (injectedInherits.includes(i.name)) {
 									return;
 								}
-								i.members?.forEach(combine);
+
 								injectedInherits.push(i.name);
+								if (i.external) {
+									ret.externalExtends.push(i.name);
+									return;
+								}
+								i.members?.forEach(combine);
 							});
 						}
 					};
@@ -307,7 +325,7 @@ export class Generator {
 								);
 							}
 
-							parseInterface(p, combined, injectedInherits);
+							parseInterface(p, combined, injectedInherits, true);
 						});
 
 						props = combined;
@@ -516,14 +534,14 @@ export class Generator {
 
 				if (id.getSourceFile().getFilePath().indexOf("node_modules") >= 0) {
 					i.external = true;
-
-					if (
-						id.getName() === "Element" &&
-						id.getSourceFile().getFilePath().indexOf("/node_modules/typescript/lib/lib.dom.d.ts") >=
-							0
-					) {
-						return i;
-					}
+					return i;
+					// if (
+					// 	id.getName() === "Element" &&
+					// 	id.getSourceFile().getFilePath().indexOf("/node_modules/typescript/lib/lib.dom.d.ts") >=
+					// 		0
+					// ) {
+					// 	return i;
+					// }
 				}
 
 				i.members = id
@@ -538,8 +556,8 @@ export class Generator {
 
 				const heritage = id.getHeritageClauses();
 				if (heritage.length > 0) {
-					i.inherits = heritage.map((h) => {
-						return this.#typeOf(ctx, h.getTypeNodes()[0]);
+					i.inherits = heritage.flatMap((h) => {
+						return h.getTypeNodes().map((t) => this.#typeOf(ctx, t));
 					});
 				}
 
@@ -581,6 +599,11 @@ export class Generator {
 							});
 						});
 						return o;
+					}
+
+					// Only if this is an extend expression
+					if (ewta.getParent().isKind(ts.SyntaxKind.HeritageClause)) {
+						return { type: "interface", name: ewta.getText(), external: true };
 					}
 
 					// console.log("Expression with type argument");

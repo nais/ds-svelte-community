@@ -1,5 +1,6 @@
 import type { HTMLElements } from "$lib/components/utils/elements";
 import type { Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
 export const variants = [
 	"warning",
@@ -22,7 +23,7 @@ export const variants = [
 
 export const sizes = ["medium", "small", "xsmall"] as const;
 
-export interface Props {
+export interface TagProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * Changes visual profile of tag.
 	 */

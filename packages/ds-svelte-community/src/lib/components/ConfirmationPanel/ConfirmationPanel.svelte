@@ -15,7 +15,7 @@
 	import { classes, omit } from "../helpers";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import ErrorMessage from "../typography/ErrorMessage/ErrorMessage.svelte";
-	import type { Props } from "./type";
+	import type { ConfirmationPanelProps } from "./type";
 
 	let {
 		error = "",
@@ -27,7 +27,7 @@
 		children,
 		label,
 		...restProps
-	}: Props = $props();
+	}: ConfirmationPanelProps = $props();
 
 	let uid = $derived(id || "confirmation-panel-" + newUniqueId());
 </script>

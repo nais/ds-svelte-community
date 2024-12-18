@@ -1,5 +1,4 @@
 import { describe, expect, test } from "bun:test";
-import * as fs from "fs/promises";
 import * as path from "path";
 import { Doc } from "../../src";
 import { Generator } from "../../src/generator";
@@ -7,7 +6,7 @@ import { Generator } from "../../src/generator";
 describe("v5", () => {
 	test("pick_full", async () => {
 		const filename = path.resolve(import.meta.dir, "Pick.svelte").replace(".svelte", ".ts");
-		const code = (await fs.readFile(filename.replace(".ts", ".svelte"))).toString();
+		const code = await Bun.file(filename.replace(".ts", ".svelte")).text();
 
 		const gen = new Generator(require.resolve("svelte2tsx"));
 		await gen.setup();
@@ -38,6 +37,7 @@ describe("v5", () => {
 			],
 			slots: [],
 			events: [],
+			externalExtends: [],
 		};
 
 		expect(doc.props).toStrictEqual(expected.props);

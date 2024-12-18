@@ -29,7 +29,6 @@
 	const showErrorMsg = $derived(!disabled && !!error);
 </script>
 
-<!-- aria-invalid={error ? "true" : undefined} -->
 <fieldset
 	{...omit(restProps, "class", "aria-invalid", "aria-describedby")}
 	class={classes(restProps, "navds-fieldset", `navds-fieldset--${size}`)}

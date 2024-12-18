@@ -1,8 +1,8 @@
 <script lang="ts">
 	import CopyButton from "./CopyButton.svelte";
-	import type { Props } from "./type";
+	import type { CopyButtonProps } from "./type";
 
-	let props: Props = $props();
+	let props: CopyButtonProps = $props();
 </script>
 
 <CopyButton {...props} />
