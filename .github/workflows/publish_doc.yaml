@@ -1,0 +1,67 @@
+name: Build and deploy Docs
+
+on:
+  push:
+    tags:
+      - "@nais/ds-svelte-community@*"
+  workflow_dispatch:
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  # Build docs
+  build_doc:
+    runs-on: ubuntu-latest
+    # Only run if @nais/ds-svelte-community is published and version does not contain "-next."
+    # It's done with some suboptimal string matching, but it works for now.
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install asdf
+        uses: asdf-vm/actions/setup@v3
+
+      - name: asdf cache
+        id: asdf-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.asdf/
+          key: ${{ runner.os }}-${{ hashFiles('**/.tool-versions') }}
+
+      - name: Install CD tools from .tool-versions
+        if: steps.asdf-cache.outputs.cache-hit != 'true'
+        uses: asdf-vm/actions/install@v3
+
+      - name: Install dependencies
+        run: |
+          bun install --frozen-lockfile
+          bun run build:libs
+
+      - name: Build docs
+        env:
+          BASE_PATH: "/${{ github.event.repository.name }}"
+        run: |
+          cd packages/ds-svelte-community
+          bun run build:docs
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: packages/ds-svelte-community/build/
+
+    # Deploy job
+  deploy:
+    needs: build_doc
+
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # or the latest "vX.X.X" version tag for this action
