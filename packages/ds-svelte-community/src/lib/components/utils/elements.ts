@@ -1,3 +1,5 @@
+import type { HTMLAnchorAttributes, HTMLAttributes } from "svelte/elements";
+
 export type HTMLElements =
 	| "a"
 	| "abbr"
@@ -115,3 +117,15 @@ export type HTMLElements =
 	| "video"
 	| "wbr"
 	| "webview";
+
+export type HTMLElementType = HTMLElementTypeGeneric | HTMLElementTypeAnchor;
+
+interface HTMLElementTypeGeneric extends HTMLAttributes<HTMLDivElement> {
+	/** HTML element to render as. */
+	as?: Omit<HTMLElements, "a">;
+}
+
+interface HTMLElementTypeAnchor extends HTMLAnchorAttributes {
+	/** HTML element to render as. */
+	as?: "a";
+}

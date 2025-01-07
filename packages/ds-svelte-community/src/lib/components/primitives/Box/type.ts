@@ -9,9 +9,9 @@ import type {
 	SpacingScale,
 } from "$lib/components/utils/types";
 import type { Snippet } from "svelte";
-import type { HTMLAttributes } from "svelte/elements";
+import type { HTMLAnchorAttributes, HTMLAttributes } from "svelte/elements";
 
-export interface BoxProps extends HTMLAttributes<HTMLElement> {
+export interface BaseBoxProps extends HTMLAttributes<HTMLDivElement> {
 	/** Background color. Accepts a color token. */
 	background?: BackgroundToken;
 	/** Border color. Accepts a color token. */
@@ -66,3 +66,11 @@ export interface BoxProps extends HTMLAttributes<HTMLElement> {
 	 */
 	children: Snippet;
 }
+
+interface BoxAnchorProps
+	extends Omit<BaseBoxProps, keyof HTMLAnchorAttributes>,
+		HTMLAnchorAttributes {
+	as: "a";
+}
+
+export type BoxProps = BaseBoxProps | BoxAnchorProps;

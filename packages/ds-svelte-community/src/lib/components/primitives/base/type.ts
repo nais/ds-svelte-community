@@ -1,8 +1,8 @@
+import type { HTMLElements } from "$lib/components/utils/elements";
 import type { ResponsiveProp, SpacingScale } from "$lib/components/utils/types";
 import type { Snippet } from "svelte";
-import type { HTMLAttributes } from "svelte/elements";
 
-export interface BasePrimitiveProps extends HTMLAttributes<HTMLElement> {
+export interface BasePrimitiveProps {
 	/**
 	 * Padding around children.
 	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
@@ -172,6 +172,8 @@ export interface BasePrimitiveProps extends HTMLAttributes<HTMLElement> {
 	 */
 	flexGrow?: ResponsiveProp<string>;
 
-	as?: string;
+	as?: HTMLElements;
 	children?: Snippet;
+
+	[key: string]: unknown;
 }

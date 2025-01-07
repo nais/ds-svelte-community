@@ -1,9 +1,10 @@
 import type { Snippet } from "svelte";
+import type { HTMLAttributes } from "svelte/elements";
 
 export const variants = ["error", "warning", "info", "success"] as const;
 export const sizes = ["medium", "small"] as const;
 
-export interface AlertProps {
+export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Changes colors and icon usage when changed
 	 */
