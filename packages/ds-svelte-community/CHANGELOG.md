@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.10
+
+### Patch Changes
+
+- [#172](https://github.com/nais/ds-svelte-community/pull/172) [`d72e08b`](https://github.com/nais/ds-svelte-community/commit/d72e08b1acf6120f3f02058520059950aff7ed9c) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Some more attributes fixes
+
 ## 1.0.0-next.9
 
 ### Patch Changes
