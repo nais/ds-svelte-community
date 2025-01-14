@@ -107,6 +107,6 @@ ActionMenu is a dropdown menu for actions and navigation. Often used to collect 
 	}
 
 	.polyfill-wrapper {
-		display: inline-block;
+		display: contents;
 	}
 </style>

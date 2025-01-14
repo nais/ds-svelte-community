@@ -15,3 +15,10 @@ You should add the following import to your root `+layout.svelte` file:
 This CSS extends [@navikt/ds-css](https://github.com/navikt/aksel/tree/main/%40navikt/core/css) and will style `a`s as `Link` components.
 
 If you want unstyled `a`, you can add the class `unstyled` to prevent this styling.
+
+
+## Tailwind
+
+If you want to use Tailwind, follow the [official guide to configure SvelteKit with Tailwind](https://tailwindcss.com/docs/guides/sveltekit).
+
+Although, you might not need to add `@tailwind base;` and `@tailwind components;` to your `.css` file.

@@ -5,6 +5,8 @@ import type {
 	ReferenceAction,
 	UpdatePosition,
 } from "svelte-floating-ui";
+import type { VirtualElement } from "svelte-floating-ui/dom";
+import type { Writable } from "svelte/store";
 
 let create: (
 	initOptions?: ComputeConfig,
@@ -23,7 +25,18 @@ if (isPolyfilled) {
 			middleware: [flip(), offset(5), shift()],
 			...initOptions,
 		};
-		return createFloatingActions(opts);
+		const [refAction, contentAction, updatePosition] = createFloatingActions(opts);
+
+		return [
+			(e: HTMLElement | Writable<VirtualElement> | VirtualElement) => {
+				if ("firstElementChild" in e && e.firstElementChild) {
+					return refAction(e.firstElementChild);
+				}
+				return refAction(e);
+			},
+			contentAction,
+			updatePosition,
+		];
 	};
 }
 
