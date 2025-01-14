@@ -1,43 +1,38 @@
 import { browser } from "$app/environment";
-import type {
-	ComputeConfig,
-	ContentAction,
-	ReferenceAction,
-	UpdatePosition,
+import {
+	createFloatingActions as cfa,
+	type ComputeConfig,
+	type ContentAction,
+	type ReferenceAction,
+	type UpdatePosition,
 } from "svelte-floating-ui";
-import type { VirtualElement } from "svelte-floating-ui/dom";
+import { flip, offset, shift } from "svelte-floating-ui/core";
+import { type VirtualElement } from "svelte-floating-ui/dom";
 import type { Writable } from "svelte/store";
-
-let create: (
-	initOptions?: ComputeConfig,
-) => [ReferenceAction, ContentAction, UpdatePosition] = () => {
-	return [() => {}, () => {}, () => {}];
-};
 
 export const isPolyfilled = browser && !("anchorName" in document.documentElement.style);
 
-if (isPolyfilled) {
-	const { createFloatingActions } = await import("svelte-floating-ui");
-	const { flip, offset, shift } = await import("svelte-floating-ui/dom");
+export const createFloatingActions: (
+	initOptions?: ComputeConfig,
+) => [ReferenceAction, ContentAction, UpdatePosition] = (initOptions) => {
+	if (!isPolyfilled) {
+		return [() => {}, () => {}, () => {}];
+	}
 
-	create = (initOptions?: ComputeConfig) => {
-		const opts: ComputeConfig = {
-			middleware: [flip(), offset(5), shift()],
-			...initOptions,
-		};
-		const [refAction, contentAction, updatePosition] = createFloatingActions(opts);
-
-		return [
-			(e: HTMLElement | Writable<VirtualElement> | VirtualElement) => {
-				if ("firstElementChild" in e && e.firstElementChild) {
-					return refAction(e.firstElementChild);
-				}
-				return refAction(e);
-			},
-			contentAction,
-			updatePosition,
-		];
+	const opts: ComputeConfig = {
+		middleware: [flip(), offset(5), shift()],
+		...initOptions,
 	};
-}
+	const [refAction, contentAction, updatePosition] = cfa(opts);
 
-export const createFloatingActions = create;
+	return [
+		(e: HTMLElement | Writable<VirtualElement> | VirtualElement) => {
+			if ("firstElementChild" in e && e.firstElementChild) {
+				return refAction(e.firstElementChild);
+			}
+			return refAction(e);
+		},
+		contentAction,
+		updatePosition,
+	];
+};
