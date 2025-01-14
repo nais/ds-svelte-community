@@ -1,29 +1,43 @@
 import type { HTMLElements } from "$lib/components/utils/elements";
-import type { Snippet } from "svelte";
+import type { Component, Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 
 export const variants = [
 	"warning",
 	"warning-filled",
+	"warning-moderate",
 	"error",
 	"error-filled",
+	"error-moderate",
 	"info",
 	"info-filled",
+	"info-moderate",
 	"success",
 	"success-filled",
+	"success-moderate",
 	"neutral",
 	"neutral-filled",
+	"neutral-moderate",
 	"alt1",
 	"alt1-filled",
+	"alt1-moderate",
 	"alt2",
 	"alt2-filled",
+	"alt2-moderate",
 	"alt3",
 	"alt3-filled",
+	"alt3-moderate",
+	"meta-purple",
+	"meta-purple-filled",
+	"meta-purple-moderate",
+	"meta-lime",
+	"meta-lime-filled",
+	"meta-lime-moderate",
 ] as const;
 
 export const sizes = ["medium", "small", "xsmall"] as const;
 
-export interface TagProps extends HTMLAttributes<HTMLElement> {
+export interface TagProps extends Omit<HTMLAttributes<HTMLElement>, "children"> {
 	/**
 	 * Changes visual profile of tag.
 	 */
@@ -39,9 +53,10 @@ export interface TagProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * Tag content.
 	 */
-	children?: Snippet;
+	children: Snippet | string;
+
 	/**
-	 * Tag content. Will be used if `children` is not provided.
+	 * Icon
 	 */
-	text?: string;
+	icon?: Snippet | Component;
 }

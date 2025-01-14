@@ -77,7 +77,7 @@
 		class="navds-fieldset__error"
 	>
 		{#if showErrorMsg}
-			<ErrorMessage {size}>{error}</ErrorMessage>
+			<ErrorMessage {size} showIcon>{error}</ErrorMessage>
 		{/if}
 	</div>
 </fieldset>

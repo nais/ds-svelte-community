@@ -63,6 +63,7 @@
 	type="button"
 	onclick={handleClick}
 	onkeydown={keydown}
+	data-selected={state === "on"}
 >
 	<BodyShort as="span" class="navds-toggle-group__button-inner" size={ctx.size}>
 		{@render children()}
