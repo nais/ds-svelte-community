@@ -3,6 +3,9 @@
 	import { page } from "$app/stores";
 	import { Chips, ToggleChip } from "$lib";
 	import Alert from "$lib/components/Alert/Alert.svelte";
+	import Box from "$lib/components/primitives/Box/Box.svelte";
+	import Tag from "$lib/components/Tag/Tag.svelte";
+	import Heading from "$lib/components/typography/Heading/Heading.svelte";
 	import type { Doc } from "@nais/vite-plugin-svelte-docs";
 	import { type Snippet } from "svelte";
 	import Markdown from "./Markdown.svelte";
@@ -60,38 +63,15 @@
 	$effect(() => {
 		values = storyProps();
 	});
-
-	// $effect(() => {
-	// 	console.log("Run effect");
-	// 	const story = stories?.find((s) => s.name === tab);
-	// 	if (story) {
-	// 		console.log("Found story");
-	// 		untrack(() => {
-	// 			values = {};
-	// 			story.props.forEach((p) => {
-	// 				values[p.key] = p.value;
-	// 			});
-	// 		});
-	// 	} else {
-	// 		console.log("No story");
-	// 	}
-	// });
-	// let values = $derived.by(() => {
-	// 	const ret: Record<string, unknown> = {};
-	// 	stories
-	// 		?.find((s) => s.name === tab)
-	// 		?.props.forEach((p) => {
-	// 			ret[p.key] = p.value;
-	// 		});
-	// 	return ret;
-	// });
 </script>
 
 <svelte:head>
 	<title>{customTitle ?? doc.name} &bullet; ds-svelte-community</title>
 </svelte:head>
 
-<h1>{customTitle ?? doc.name}</h1>
+<Box as="header" paddingBlock="4 2">
+	<Heading level="1" size="large">{customTitle ?? doc.name}</Heading>
+</Box>
 
 <Markdown content={doc.description} />
 
@@ -125,10 +105,23 @@
 	<Renderer children={story.snippet} source={atob(story.source)} {values} {preview} />
 {/if}
 
-<h2>Properties</h2>
+{#snippet experimental(experimental: boolean | undefined)}
+	{#if experimental}
+		<Tag variant="alt1" size="xsmall">Beta</Tag>
+	{/if}
+{/snippet}
+
+<Heading level="2">
+	Properties
+	{#if extraChildrenDoc.length == 0}
+		{@render experimental(doc.experimental)}
+	{/if}
+</Heading>
 
 {#if extraChildrenDoc.length > 0}
-	<h3>{doc.name}</h3>
+	<Box paddingBlock="4 0">
+		<Heading level="3" size="small">{doc.name} {@render experimental(doc.experimental)}</Heading>
+	</Box>
 {/if}
 
 {#key tab}
@@ -140,7 +133,9 @@
 {/key}
 
 {#each extraChildrenDoc as doc}
-	<h3>{doc.name}</h3>
+	<Box paddingBlock="4 0">
+		<Heading level="3" size="small">{doc.name} {@render experimental(doc.experimental)}</Heading>
+	</Box>
 	{#if doc.description}
 		<Markdown content={doc.description} />
 	{/if}

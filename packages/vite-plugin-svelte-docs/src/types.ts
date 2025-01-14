@@ -106,4 +106,5 @@ export type Doc = {
 	slots: DocSlots[];
 	props: DocProp[];
 	externalExtends: string[];
+	experimental?: boolean;
 };
