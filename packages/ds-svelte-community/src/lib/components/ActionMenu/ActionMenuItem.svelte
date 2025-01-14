@@ -4,18 +4,33 @@
 	import ActionMenuMarker from "./ActionMenuMarker.svelte";
 
 	interface Props {
+		/**
+		 * Keyboard shortcut for the item.
+		 */
 		shortcut?: string;
 		/**
 		 * Styles the item as a destructive action.
 		 */
 		variant?: "danger";
+		/**
+		 * Disables the item.
+		 */
 		disabled?: boolean;
+		/**
+		 * Icon to display next to the item.
+		 */
 		icon?: Snippet | Component;
+		/**
+		 * Callback when the item is selected.
+		 */
 		onSelect?: () => void;
+		/**
+		 * Content of the item.
+		 */
 		children: Snippet;
 	}
 
-	let { shortcut, variant, disabled, children, icon: Icon }: Props = $props();
+	let { shortcut, variant, disabled = false, children, icon: Icon }: Props = $props();
 
 	let keys = $derived(shortcut && shortcut.split("+").map((key) => key.trim()));
 </script>
@@ -48,3 +63,19 @@
 		</ActionMenuMarker>
 	{/if}
 </div>
+
+<style>
+	@media (hover: hover) {
+		.navds-action-menu__item:focus {
+			outline: none;
+			background-color: inherit;
+			color: inherit;
+		}
+
+		.navds-action-menu__item:hover {
+			outline: none;
+			background-color: var(--a-surface-action-subtle-hover);
+			color: var(--a-text-default);
+		}
+	}
+</style>

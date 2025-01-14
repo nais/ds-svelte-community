@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	export const docBeta = true;
+	export const experimental = true;
 </script>
 
 <script lang="ts">
@@ -7,14 +7,25 @@
 	import { type Snippet } from "svelte";
 	import newUniqueId from "../local-unique-id";
 	import ActionMenuMarker from "./ActionMenuMarker.svelte";
+	import { createFloatingActions, isPolyfilled } from "./floating_wrapper";
 
 	interface Props {
+		/**
+		 * The trigger for the action menu. Can be a string or a snippet.
+		 */
 		trigger: string | Snippet;
+		/**
+		 * The content of the action menu.
+		 */
 		children: Snippet;
 	}
 	let { trigger, children }: Props = $props();
 
 	const id = "ds-ams-" + newUniqueId();
+
+	const [floatingRef, floatingContent] = createFloatingActions({
+		placement: "right-start",
+	});
 
 	let el: HTMLButtonElement | null = $state(null);
 	let open = $state(false);
@@ -22,6 +33,7 @@
 
 <button
 	bind:this={el}
+	use:floatingRef
 	role="menuitem"
 	aria-haspopup="menu"
 	class="navds-action-menu__item navds-action-menu__sub-trigger"
@@ -42,14 +54,16 @@
 </button>
 
 <div
+	use:floatingContent
 	{id}
 	role="menu"
 	popover="auto"
 	dir="ltr"
 	class="navds-action-menu__content"
-	style="position-anchor: --{id}; --__ac-action-menu-content-transform-origin: var(--ac-floating-transform-origin); --__ac-action-menu-content-available-height: var(--ac-floating-available-height); "
+	style={isPolyfilled
+		? undefined
+		: `position-anchor: --${id}; --__ac-action-menu-content-transform-origin: var(--ac-floating-transform-origin); --__ac-action-menu-content-available-height: var(--ac-floating-available-height); `}
 	ontoggle={(e) => {
-		console.log(e);
 		open = e.newState == "open";
 	}}
 >

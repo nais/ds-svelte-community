@@ -44,8 +44,8 @@
 	});
 </script>
 
-{#if doc.props.length + doc.slots.length + doc.events.length > 0}
-	<section>
+<section>
+	{#if doc.props.length + doc.slots.length + doc.events.length > 0}
 		<table>
 			<thead>
 				<tr>
@@ -194,18 +194,19 @@
 				{/if}
 			</tbody>
 		</table>
-
-		{#if doc.externalExtends.length > 0}
-			<p>
-				Properties included from:
-				{#each doc.externalExtends as ext, i}
-					{i > 0 ? ", " : ""}
-					<code>{ext}</code>
-				{/each}
-			</p>
-		{/if}
-	</section>
-{/if}
+	{:else}
+		<p>No properties, snippets or events.</p>
+	{/if}
+	{#if doc.externalExtends.length > 0}
+		<p>
+			Properties included from:
+			{#each doc.externalExtends as ext, i}
+				{i > 0 ? ", " : ""}
+				<code>{ext}</code>
+			{/each}
+		</p>
+	{/if}
+</section>
 
 <style>
 	p {

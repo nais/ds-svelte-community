@@ -2,6 +2,7 @@
 	import { base } from "$app/paths";
 	import { page } from "$app/state";
 	import { Box, Button, Detail, HStack, Page, PageBlock } from "$lib";
+	import Tag from "$lib/components/Tag/Tag.svelte";
 	import type { Snippet } from "svelte";
 	import "../doclib/styles.css";
 	import "../lib/css/index.css";
@@ -44,7 +45,7 @@
 					{#each Object.entries(data.paths) as [key, paths]}
 						<strong>{toTitle(key)}</strong>
 						<ul>
-							{#each paths as component}
+							{#each paths as [component, experimental]}
 								{@const href = (
 									key == "pages" ? `${base}/${component}/` : `${base}/${key}/${component}/`
 								).replaceAll("//", "/")}
@@ -57,6 +58,10 @@
 										data-sveltekit-preload-data="tap"
 									>
 										{component ? component : "Home"}
+
+										{#if experimental}
+											<Tag variant="alt1" size="small" style="margin-left: 0.2rem;">Beta</Tag>
+										{/if}
 									</a>
 								</li>
 							{/each}

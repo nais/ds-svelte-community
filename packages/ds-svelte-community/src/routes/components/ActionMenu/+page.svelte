@@ -1,17 +1,31 @@
+<script lang="ts" module>
+	export const experimental = true;
+</script>
+
 <script lang="ts">
 	import doc from "$lib/components/ActionMenu/ActionMenu.svelte?doc";
+	import docActionMenuCheckboxItem from "$lib/components/ActionMenu/ActionMenuCheckboxItem.svelte?doc";
+	import docActionMenuDivider from "$lib/components/ActionMenu/ActionMenuDivider.svelte?doc";
+	import docActionMenuGroup from "$lib/components/ActionMenu/ActionMenuGroup.svelte?doc";
+	import docActionMenuItem from "$lib/components/ActionMenu/ActionMenuItem.svelte?doc";
+	import docActionMenuRadioGroup from "$lib/components/ActionMenu/ActionMenuRadioGroup.svelte?doc";
+	import docActionMenuRadioItem from "$lib/components/ActionMenu/ActionMenuRadioItem.svelte?doc";
+	import docActionMenuSub from "$lib/components/ActionMenu/ActionMenuSub.svelte?doc";
 
 	import Doc from "$doclib/Doc.svelte";
 	import Story from "$doclib/Story.svelte";
 	import { Alert, Button, Table, Tbody, Td, Th, Thead, Tr } from "$lib";
-	import ActionMenu from "$lib/components/ActionMenu/ActionMenu.svelte";
-	import ActionMenuCheckboxItem from "$lib/components/ActionMenu/ActionMenuCheckboxItem.svelte";
-	import ActionMenuDivider from "$lib/components/ActionMenu/ActionMenuDivider.svelte";
-	import ActionMenuGroup from "$lib/components/ActionMenu/ActionMenuGroup.svelte";
-	import ActionMenuItem from "$lib/components/ActionMenu/ActionMenuItem.svelte";
-	import ActionMenuRadioGroup from "$lib/components/ActionMenu/ActionMenuRadioGroup.svelte";
-	import ActionMenuRadioItem from "$lib/components/ActionMenu/ActionMenuRadioItem.svelte";
-	import ActionMenuSub from "$lib/components/ActionMenu/ActionMenuSub.svelte";
+	import {
+		ActionMenu,
+		ActionMenuCheckboxItem,
+		ActionMenuDivider,
+		ActionMenuGroup,
+		ActionMenuItem,
+		ActionMenuRadioGroup,
+		ActionMenuRadioItem,
+		ActionMenuSub,
+	} from "$lib/experimental";
+
 	import {
 		BarChartIcon,
 		ChevronDownIcon,
@@ -25,19 +39,19 @@
 	const data = [
 		{
 			id: "03121",
-			status: "Avslått",
+			status: "Declined",
 		},
 		{
 			id: "16066",
-			status: "Mottatt",
+			status: "Received",
 		},
 		{
 			id: "18124",
-			status: "Godkjent",
+			status: "Accepted",
 		},
 		{
 			id: "24082",
-			status: "Mottatt",
+			status: "Received",
 		},
 	];
 
@@ -46,14 +60,25 @@
 		fnr: false,
 		tags: true,
 	});
-	let rows = $state(5);
+	let rows = $state(25);
 
 	const handleCheckboxChange = (checkboxId: string, checked: boolean) => {
 		console.log(checkboxId, checked);
 	};
 </script>
 
-<Doc {doc}>
+<Doc
+	{doc}
+	extraChildrenDoc={[
+		docActionMenuCheckboxItem,
+		docActionMenuDivider,
+		docActionMenuGroup,
+		docActionMenuItem,
+		docActionMenuRadioGroup,
+		docActionMenuRadioItem,
+		docActionMenuSub,
+	]}
+>
 	{#snippet extraDescription()}
 		<Alert variant="warning">
 			This component only includes the CSS from the React ActionMenu component and not a migration
@@ -61,26 +86,16 @@
 			<a href="https://caniuse.com/css-anchor-positioning">
 				supported in Chrome and Chromium-based browsers.
 			</a>
-		</Alert>
+		</Alert><br />
+		<Alert variant="warning">Keyboard interaction is missing.</Alert>
 	{/snippet}
 
 	<Story>
-		<ActionMenu>
-			{#snippet trigger(props)}
-				<Button variant="secondary-neutral" {...props}>
-					{#snippet iconRight()}
-						<ChevronDownIcon aria-hidden="true" />
-					{/snippet}
-					Click me
-				</Button>
-			{/snippet}
-
-			<ActionMenuGroup label="Systemer og oppslagsverk">
-				<ActionMenuItem>A-inntekt</ActionMenuItem>
-				<ActionMenuItem>Aa-registeret</ActionMenuItem>
-				<ActionMenuItem>Gosys</ActionMenuItem>
-				<ActionMenuItem>Modia Sykefraværsoppfølging</ActionMenuItem>
-				<ActionMenuItem>Modia Personoversikt</ActionMenuItem>
+		<ActionMenu trigger="Wide menu button">
+			<ActionMenuGroup label="Systems">
+				<ActionMenuItem>Aivenator</ActionMenuItem>
+				<ActionMenuItem>Fasit</ActionMenuItem>
+				<ActionMenuItem>Naiserator</ActionMenuItem>
 			</ActionMenuGroup>
 		</ActionMenu>
 	</Story>
@@ -88,25 +103,25 @@
 	<Story name="Groups">
 		<ActionMenu>
 			{#snippet trigger(props)}
-				<Button variant="secondary-neutral" {...props}>
-					{#snippet iconRight()}
+				<Button variant="secondary-neutral" iconPosition="right" {...props}>
+					{#snippet icon()}
 						<ChevronDownIcon aria-hidden="true" />
 					{/snippet}
 					Click me
 				</Button>
 			{/snippet}
-			<ActionMenuGroup label="Gosys">
-				<ActionMenuItem icon={PersonIcon}>Personoversikt</ActionMenuItem>
-				<ActionMenuItem icon={PersonGroupIcon}>Arbeidsgiveroversikt</ActionMenuItem>
-				<ActionMenuItem icon={HandshakeIcon}>Samhandlere</ActionMenuItem>
-				<ActionMenuItem icon={BarChartIcon}>Oppgavestatistikk</ActionMenuItem>
-				<ActionMenuItem icon={MagnifyingGlassIcon}>Søk journalpost</ActionMenuItem>
+			<ActionMenuGroup label="navikt">
+				<ActionMenuItem icon={HandshakeIcon}>mock-oauth2-server</ActionMenuItem>
+				<ActionMenuItem icon={PersonIcon}>aksel</ActionMenuItem>
+				<ActionMenuItem icon={PersonGroupIcon}>DSF</ActionMenuItem>
+				<ActionMenuItem icon={BarChartIcon}>offentlig</ActionMenuItem>
+				<ActionMenuItem icon={MagnifyingGlassIcon}>github-app-token-generator</ActionMenuItem>
 			</ActionMenuGroup>
 			<ActionMenuDivider />
-			<ActionMenuGroup label="Systemer og oppslagsverk">
-				<ActionMenuItem>A-inntekt</ActionMenuItem>
-				<ActionMenuItem>Aa-registeret</ActionMenuItem>
-				<ActionMenuItem>Modia</ActionMenuItem>
+			<ActionMenuGroup label="nais">
+				<ActionMenuItem>doc</ActionMenuItem>
+				<ActionMenuItem>naiserator</ActionMenuItem>
+				<ActionMenuItem>wonderwall</ActionMenuItem>
 			</ActionMenuGroup>
 		</ActionMenu>
 	</Story>
@@ -114,25 +129,25 @@
 	<Story name="Shortcuts">
 		<ActionMenu>
 			{#snippet trigger(props)}
-				<Button variant="secondary-neutral" {...props}>
-					{#snippet iconRight()}
+				<Button variant="secondary-neutral" iconPosition="right" {...props}>
+					{#snippet icon()}
 						<ChevronDownIcon aria-hidden="true" />
 					{/snippet}
 					Click me
 				</Button>
 			{/snippet}
-			<ActionMenuGroup label="Gosys">
-				<ActionMenuItem shortcut="Ctrl+A">Personoversikt</ActionMenuItem>
-				<ActionMenuItem shortcut="Ctrl+K">Arbeidsgiveroversikt</ActionMenuItem>
-				<ActionMenuItem shortcut="Ctrl+S">Samhandlere</ActionMenuItem>
-				<ActionMenuItem shortcut="Ctrl+E">Oppgavestatistikk</ActionMenuItem>
-				<ActionMenuItem shortcut="Ctrl+L">Søk journalpost</ActionMenuItem>
+			<ActionMenuGroup label="navikt">
+				<ActionMenuItem shortcut="Ctrl+A">mock-oauth2-server</ActionMenuItem>
+				<ActionMenuItem shortcut="Ctrl+K">aksel</ActionMenuItem>
+				<ActionMenuItem shortcut="Ctrl+S">DSF</ActionMenuItem>
+				<ActionMenuItem shortcut="Ctrl+E">offentlig</ActionMenuItem>
+				<ActionMenuItem shortcut="Ctrl+L">github-app-token-generator</ActionMenuItem>
 			</ActionMenuGroup>
 			<ActionMenuDivider />
-			<ActionMenuGroup label="Systemer og oppslagsverk">
-				<ActionMenuItem>A-inntekt</ActionMenuItem>
-				<ActionMenuItem>Aa-registeret</ActionMenuItem>
-				<ActionMenuItem>Modia</ActionMenuItem>
+			<ActionMenuGroup label="nais">
+				<ActionMenuItem>doc</ActionMenuItem>
+				<ActionMenuItem>naiserator</ActionMenuItem>
+				<ActionMenuItem>wonderwall</ActionMenuItem>
 			</ActionMenuGroup>
 		</ActionMenu>
 	</Story>
@@ -147,32 +162,32 @@
 				</Tr>
 			</Thead>
 			<Tbody>
-				{#each data as { id, status }, i}
-					<Tr key={i + status} shadeOnHover={false}>
+				{#each data as { id, status }}
+					<Tr shadeOnHover={false}>
 						<Th scope="row">{id}</Th>
 						<Td>{status}</Td>
 						<Td align="right">
 							<ActionMenu align="end">
 								{#snippet trigger(props)}
 									<Button variant="tertiary-neutral" size="small" {...props}>
-										{#snippet iconLeft()}
-											<MenuElipsisVerticalIcon title="Saksmeny" />
+										{#snippet icon()}
+											<MenuElipsisVerticalIcon title="Case menu" />
 										{/snippet}
 									</Button>
 								{/snippet}
-								<ActionMenuGroup label={`Sak #${id}`}>
-									<ActionMenuItem onSelect={console.info}>Ta sak</ActionMenuItem>
-									<ActionMenuSub trigger="Endre status">
-										<ActionMenuItem onSelect={console.info}>Avslått</ActionMenuItem>
-										<ActionMenuItem onSelect={console.info}>Godkjent</ActionMenuItem>
-										<ActionMenuSub trigger="Andre valg">
-											<ActionMenuItem onSelect={console.info}>Til godkjenning</ActionMenuItem>
-											<ActionMenuItem onSelect={console.info}>Under behandling</ActionMenuItem>
-											<ActionMenuItem onSelect={console.info}>Under kontroll</ActionMenuItem>
+								<ActionMenuGroup label={`Case #${id}`}>
+									<ActionMenuItem onSelect={console.info}>Assign case</ActionMenuItem>
+									<ActionMenuSub trigger="Change status">
+										<ActionMenuItem onSelect={console.info}>Declined</ActionMenuItem>
+										<ActionMenuItem onSelect={console.info}>Accepted</ActionMenuItem>
+										<ActionMenuSub trigger="Other choices">
+											<ActionMenuItem onSelect={console.info}>For approval</ActionMenuItem>
+											<ActionMenuItem onSelect={console.info}>In progress</ActionMenuItem>
+											<ActionMenuItem onSelect={console.info}>Under control</ActionMenuItem>
 										</ActionMenuSub>
 									</ActionMenuSub>
-									<ActionMenuSub trigger="Tildel saksbehandler">
-										<ActionMenuGroup label="Saksbehandlere">
+									<ActionMenuSub trigger="Assign to">
+										<ActionMenuGroup label="Case managers">
 											<ActionMenuItem onSelect={console.info}>Ola Normann</ActionMenuItem>
 											<ActionMenuItem onSelect={console.info}>Bo Ramberg</ActionMenuItem>
 											<ActionMenuItem onSelect={console.info} disabled>Ole Olsen</ActionMenuItem>
@@ -187,7 +202,7 @@
 									<ActionMenuDivider />
 
 									<ActionMenuItem variant="danger" onSelect={console.info}>
-										Slett sak
+										Delete case
 									</ActionMenuItem>
 								</ActionMenuGroup>
 							</ActionMenu>
@@ -198,49 +213,58 @@
 		</Table>
 	</Story>
 
-	<Story name="Filter">
-		<ActionMenu>
-			{#snippet trigger(props)}
-				<Button variant="secondary-neutral" icon={ChevronDownIcon} iconPosition="right" {...props}>
-					Filter
-				</Button>
-			{/snippet}
-			<ActionMenuGroup label="Kolonner">
-				<ActionMenuCheckboxItem
-					checked={Object.values(views).every(Boolean)
-						? true
-						: Object.values(views).some(Boolean)
-							? "indeterminate"
-							: false}
-				>
-					Velg alle
-				</ActionMenuCheckboxItem>
-				<ActionMenuCheckboxItem
-					bind:checked={views.started}
-					onchange={(checked) => handleCheckboxChange("started", checked)}
-				>
-					Oppfølging startet
-				</ActionMenuCheckboxItem>
-				<ActionMenuCheckboxItem
-					bind:checked={views.fnr}
-					onchange={(checked) => handleCheckboxChange("fnr", checked)}
-				>
-					Fødselsnummer
-				</ActionMenuCheckboxItem>
-				<ActionMenuCheckboxItem
-					bind:checked={views.tags}
-					onchange={(checked) => handleCheckboxChange("tags", checked)}
-				>
-					Tags
-				</ActionMenuCheckboxItem>
-			</ActionMenuGroup>
-			<ActionMenuDivider />
-			<ActionMenuRadioGroup value={rows} label="Rader per side">
-				<ActionMenuRadioItem value="5">5</ActionMenuRadioItem>
-				<ActionMenuRadioItem value="10">10</ActionMenuRadioItem>
-				<ActionMenuRadioItem value="25">25</ActionMenuRadioItem>
-				<ActionMenuRadioItem value="50">50</ActionMenuRadioItem>
-			</ActionMenuRadioGroup>
-		</ActionMenu>
+	<Story name="Filter" locked>
+		<div>
+			<ActionMenu>
+				{#snippet trigger(props)}
+					<Button
+						variant="secondary-neutral"
+						icon={ChevronDownIcon}
+						iconPosition="right"
+						{...props}
+					>
+						Filter
+					</Button>
+				{/snippet}
+				<ActionMenuGroup label="Columns">
+					<ActionMenuCheckboxItem
+						checked={Object.values(views).every(Boolean)
+							? true
+							: Object.values(views).some(Boolean)
+								? "indeterminate"
+								: false}
+					>
+						Select all
+					</ActionMenuCheckboxItem>
+					<ActionMenuCheckboxItem
+						bind:checked={views.started}
+						onchange={(checked) => handleCheckboxChange("started", checked)}
+					>
+						Follow-up started
+					</ActionMenuCheckboxItem>
+					<ActionMenuCheckboxItem
+						bind:checked={views.fnr}
+						onchange={(checked) => handleCheckboxChange("fnr", checked)}
+					>
+						Identity number
+					</ActionMenuCheckboxItem>
+					<ActionMenuCheckboxItem
+						bind:checked={views.tags}
+						onchange={(checked) => handleCheckboxChange("tags", checked)}
+					>
+						Tags
+					</ActionMenuCheckboxItem>
+				</ActionMenuGroup>
+				<ActionMenuDivider />
+				<ActionMenuRadioGroup bind:value={rows} label="Rows per page">
+					<ActionMenuRadioItem value="5">5</ActionMenuRadioItem>
+					<ActionMenuRadioItem value="10">10</ActionMenuRadioItem>
+					<ActionMenuRadioItem value="25">25</ActionMenuRadioItem>
+					<ActionMenuRadioItem value="50">50</ActionMenuRadioItem>
+				</ActionMenuRadioGroup>
+			</ActionMenu>
+
+			<pre>{JSON.stringify({ rows, views }, undefined, "  ")}</pre>
+		</div>
 	</Story>
 </Doc>

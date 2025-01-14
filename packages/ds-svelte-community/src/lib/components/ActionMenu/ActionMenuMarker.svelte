@@ -1,32 +1,28 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
+	import { classes } from "../helpers";
 
 	type MarkerProps = {
-		children: Snippet;
+		/**
+		 * The class of the marker.
+		 */
 		class: string;
+		/**
+		 * The placement of the marker.
+		 */
 		placement: "left" | "right";
+		/**
+		 * The content of the marker.
+		 */
+		children: Snippet;
 	};
 
-	let { children, class: klass, placement }: MarkerProps = $props();
+	let { children, placement, ...restProps }: MarkerProps = $props();
 </script>
 
 <div
 	aria-hidden="true"
-	class={`${klass} navds-action-menu__marker navds-action-menu__marker--${placement}`}
+	class={classes(restProps, "navds-action-menu__marker", `navds-action-menu__marker--${placement}`)}
 >
 	{@render children()}
 </div>
-<!-- const Marker = ({ children, className, placement }: MarkerProps) => {
-  return (
-    <div
-      aria-hidden
-      className={cl(
-        className,
-        "navds-action-menu__marker",
-        `navds-action-menu__marker--${placement}`,
-      )}
-    >
-      {children}
-    </div>
-  );
-}; -->

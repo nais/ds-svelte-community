@@ -2,8 +2,17 @@
 	import type { Snippet } from "svelte";
 
 	interface Props {
+		/**
+		 * Value of the checkbox.
+		 */
 		checked?: boolean | "indeterminate";
+		/**
+		 * Content of the checkbox.
+		 */
 		children: Snippet;
+		/**
+		 * Callback when the checkbox is toggled.
+		 */
 		onchange?: (event: boolean) => void;
 	}
 
@@ -80,3 +89,24 @@
 		</div>
 	</div>
 </button>
+
+<style>
+	@media (hover: hover) {
+		.navds-action-menu__item:focus {
+			outline: none;
+			background-color: inherit;
+			color: inherit;
+		}
+
+		.navds-action-menu__item {
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		.navds-action-menu__item:hover {
+			outline: none;
+			background-color: var(--a-surface-action-subtle-hover);
+			color: var(--a-text-default);
+		}
+	}
+</style>

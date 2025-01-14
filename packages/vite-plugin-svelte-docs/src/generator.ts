@@ -158,6 +158,12 @@ export class Generator {
 
 		let description = "";
 		sourceFile.getExportSymbols().forEach((sym) => {
+			if (sym.getName() === "experimental") {
+				ret.experimental =
+					(sym.getValueDeclaration()?.getChildrenOfKind(ts.SyntaxKind.TrueKeyword).length ?? 0) > 0;
+				return;
+			}
+
 			// Only if default export
 			if (sym.getName() !== "default") {
 				return;
@@ -210,165 +216,171 @@ export class Generator {
 					}).length > 0
 				);
 			});
-		if (variableStatements.length !== 1) {
-			throw new Error("Expected 1 variable statement, got " + variableStatements.length);
+		if (variableStatements.length > 1) {
+			throw new Error("Expected maximum 1 variable statement, got " + variableStatements.length);
 		}
 		const vs = variableStatements[0];
 		const defaults: Record<string, tsm.Node> = {};
-		vs.getDeclarations()[0].forEachChild((c) => {
-			const cctx = new Context(c, ctx);
-			switch (c.getKind()) {
-				case ts.SyntaxKind.ObjectBindingPattern: {
-					const props = c.getChildrenOfKind(ts.SyntaxKind.BindingElement);
-					props.forEach((p) => {
-						if (!p.hasInitializer()) {
-							ctx.log("No initializer", p.getText());
-							return;
+		if (variableStatements.length == 1) {
+			vs.getDeclarations()[0].forEachChild((c) => {
+				const cctx = new Context(c, ctx);
+				switch (c.getKind()) {
+					case ts.SyntaxKind.ObjectBindingPattern: {
+						const props = c.getChildrenOfKind(ts.SyntaxKind.BindingElement);
+						props.forEach((p) => {
+							if (!p.hasInitializer()) {
+								ctx.log("No initializer", p.getText());
+								return;
+							}
+
+							const name = p.getNameNode().getText();
+							const initializer = p.getInitializer();
+							defaults[name] = initializer!;
+						});
+						break;
+					}
+					case ts.SyntaxKind.TypeReference: {
+						const tr = c as tsm.TypeReferenceNode;
+						let props = this.#typeOf(ctx, tr);
+
+						if (
+							Array.isArray(props) ||
+							(props.type != "union" && props.type != "object" && props.type != "interface")
+						) {
+							cctx.log("Expected props to be object or union type", props);
+							throw new Error("Expected props to be object or union");
 						}
 
-						const name = p.getNameNode().getText();
-						const initializer = p.getInitializer();
-						defaults[name] = initializer!;
-					});
-					break;
-				}
-				case ts.SyntaxKind.TypeReference: {
-					const tr = c as tsm.TypeReferenceNode;
-					let props = this.#typeOf(ctx, tr);
-
-					if (
-						Array.isArray(props) ||
-						(props.type != "union" && props.type != "object" && props.type != "interface")
-					) {
-						cctx.log("Expected props to be object or union type", props);
-						throw new Error("Expected props to be object or union");
-					}
-
-					const parseInterface = (
-						i: DocInterface,
-						combined: DocPObject,
-						injectedInherits: string[],
-						union = false,
-					) => {
-						const combine = (np: DocProp) => {
-							const existing = combined.properties.find((p) => p.name === np.name);
-							if (existing) {
-								if (existing.description == "") {
-									existing.description = np.description;
-								}
-								if (existing.optional && !np.optional) {
-									existing.optional = true;
-								}
-								if (existing.default == undefined && np.default != undefined) {
-									existing.default = np.default;
-								}
-								if (!existing.bindable && np.bindable) {
-									existing.bindable = true;
-								}
-								if (!Array.isArray(existing.type)) {
-									if (existing.type.type === "union") {
-										existing.type.values.push(np.type);
-									} else if (existing.type.type === "literal") {
-										existing.type = { type: "union", values: [existing.type, np.type] };
-										combined.properties = combined.properties.filter(
-											(p) => p.name !== existing.name,
-										);
-										combined.properties.push(existing);
+						const parseInterface = (
+							i: DocInterface,
+							combined: DocPObject,
+							injectedInherits: string[],
+							union = false,
+						) => {
+							const combine = (np: DocProp) => {
+								const existing = combined.properties.find((p) => p.name === np.name);
+								if (existing) {
+									if (existing.description == "") {
+										existing.description = np.description;
 									}
-								}
-								return;
-							} else if (union) {
-								np.optional = true;
-							}
-							combined.properties.push(np);
-						};
-						i.members?.forEach(combine);
-						if (i.inherits) {
-							if (!Array.isArray(i.inherits)) {
-								throw new Error("Expected inherits to be an array");
-							}
-
-							i.inherits.forEach((i) => {
-								if (!Array.isArray(i) && i.type == "unknown") {
+									if (existing.optional && !np.optional) {
+										existing.optional = true;
+									}
+									if (existing.default == undefined && np.default != undefined) {
+										existing.default = np.default;
+									}
+									if (!existing.bindable && np.bindable) {
+										existing.bindable = true;
+									}
+									if (!Array.isArray(existing.type)) {
+										if (existing.type.type === "union") {
+											existing.type.values.push(np.type);
+										} else if (existing.type.type === "literal") {
+											existing.type = { type: "union", values: [existing.type, np.type] };
+											combined.properties = combined.properties.filter(
+												(p) => p.name !== existing.name,
+											);
+											combined.properties.push(existing);
+										}
+									}
 									return;
+								} else if (union) {
+									np.optional = true;
 								}
-								if (Array.isArray(i) || i.type != "interface") {
-									cctx.log("Expected interface type in inherits", i);
+								combined.properties.push(np);
+							};
+							i.members?.forEach(combine);
+							if (i.inherits) {
+								if (!Array.isArray(i.inherits)) {
+									throw new Error("Expected inherits to be an array");
+								}
+
+								i.inherits.forEach((i) => {
+									if (!Array.isArray(i) && i.type == "unknown") {
+										return;
+									}
+									if (Array.isArray(i) || i.type != "interface") {
+										cctx.log("Expected interface type in inherits", i);
+										throw new Error(
+											`Expected interface type in inherits, got ${Array.isArray(i) ? "array" : i.type}`,
+										);
+									}
+									if (injectedInherits.includes(i.name)) {
+										return;
+									}
+
+									injectedInherits.push(i.name);
+									if (i.external) {
+										ret.externalExtends.push(i.name);
+										return;
+									}
+									i.members?.forEach(combine);
+								});
+							}
+						};
+
+						if (props.type == "union") {
+							// Combine all properties
+							const combined: DocPObject = { type: "object", properties: [] };
+
+							const injectedInherits: string[] = [];
+							props.values.forEach((p) => {
+								if (Array.isArray(p) || p.type != "interface") {
+									cctx.log("Expected interface type in union", p);
 									throw new Error(
-										`Expected interface type in inherits, got ${Array.isArray(i) ? "array" : i.type}`,
+										`Expected interface type in union, got ${Array.isArray(p) ? "array" : p.type}`,
 									);
 								}
-								if (injectedInherits.includes(i.name)) {
-									return;
-								}
 
-								injectedInherits.push(i.name);
-								if (i.external) {
-									ret.externalExtends.push(i.name);
-									return;
-								}
-								i.members?.forEach(combine);
+								parseInterface(p, combined, injectedInherits, true);
 							});
+
+							props = combined;
+						} else if (props.type == "interface") {
+							const combined: DocPObject = { type: "object", properties: [] };
+							parseInterface(props, combined, []);
+							props = combined;
 						}
-					};
 
-					if (props.type == "union") {
-						// Combine all properties
-						const combined: DocPObject = { type: "object", properties: [] };
-
-						const injectedInherits: string[] = [];
-						props.values.forEach((p) => {
-							if (Array.isArray(p) || p.type != "interface") {
-								cctx.log("Expected interface type in union", p);
-								throw new Error(
-									`Expected interface type in union, got ${Array.isArray(p) ? "array" : p.type}`,
-								);
+						props.properties.forEach((p) => {
+							ret.props.push(p);
+							if (!Object.keys(defaults).includes(p.name)) {
+								cctx.log("No default for prop", p.name);
+								return;
 							}
-
-							parseInterface(p, combined, injectedInherits, true);
+							const def = defaults[p.name];
+							// Check if $bindable function call
+							if (def.isKind(ts.SyntaxKind.CallExpression)) {
+								const expr = def.getExpression();
+								if (
+									expr &&
+									expr.isKind(ts.SyntaxKind.Identifier) &&
+									expr.getText() == "$bindable"
+								) {
+									p.bindable = true;
+									const args = def.getArguments();
+									if (args.length === 0) {
+										return;
+									} else if (args.length == 1) {
+										p.default = args[0].getText();
+										return;
+									} else {
+										throw new Error("Expected 1 argument for $bindable");
+									}
+								}
+							} else {
+								p.default = def.getText();
+							}
 						});
 
-						props = combined;
-					} else if (props.type == "interface") {
-						const combined: DocPObject = { type: "object", properties: [] };
-						parseInterface(props, combined, []);
-						props = combined;
+						break;
 					}
-
-					props.properties.forEach((p) => {
-						ret.props.push(p);
-						if (!Object.keys(defaults).includes(p.name)) {
-							cctx.log("No default for prop", p.name);
-							return;
-						}
-						const def = defaults[p.name];
-						// Check if $bindable function call
-						if (def.isKind(ts.SyntaxKind.CallExpression)) {
-							const expr = def.getExpression();
-							if (expr && expr.isKind(ts.SyntaxKind.Identifier) && expr.getText() == "$bindable") {
-								p.bindable = true;
-								const args = def.getArguments();
-								if (args.length === 0) {
-									return;
-								} else if (args.length == 1) {
-									p.default = args[0].getText();
-									return;
-								} else {
-									throw new Error("Expected 1 argument for $bindable");
-								}
-							}
-						} else {
-							p.default = def.getText();
-						}
-					});
-
-					break;
+					default:
+						ctx.log("Unknown kind", c.getKindName());
+						break;
 				}
-				default:
-					ctx.log("Unknown kind", c.getKindName());
-					break;
-			}
-		});
+			});
+		}
 
 		ctx.timeEnd("func");
 

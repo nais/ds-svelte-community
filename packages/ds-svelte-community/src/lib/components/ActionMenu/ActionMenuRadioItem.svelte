@@ -3,7 +3,13 @@
 	import { getRadioGroupContext } from "./context.svelte";
 
 	interface Props {
+		/**
+		 * The value of the radio item.
+		 */
 		value: unknown;
+		/**
+		 * Content of the radio item.
+		 */
 		children: Snippet;
 	}
 
@@ -11,7 +17,7 @@
 
 	const ctx = getRadioGroupContext();
 
-	let checked = $derived(value === ctx.currentValue);
+	let checked = $derived(ctx.currentValue == value);
 	let state = $derived(checked ? "checked" : "unchecked");
 </script>
 
@@ -81,5 +87,19 @@
 	button {
 		width: 100%;
 		box-sizing: border-box;
+	}
+
+	@media (hover: hover) {
+		.navds-action-menu__item:focus {
+			outline: none;
+			background-color: inherit;
+			color: inherit;
+		}
+
+		.navds-action-menu__item:hover {
+			outline: none;
+			background-color: var(--a-surface-action-subtle-hover);
+			color: var(--a-text-default);
+		}
 	}
 </style>

@@ -6,19 +6,28 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 -->
 
 <script lang="ts">
+	import { classes, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Detail from "../typography/Detail/Detail.svelte";
 	import type { TagProps } from "./type";
 
-	let { variant = "info", size = "medium", as = "span", children, text }: TagProps = $props();
+	let {
+		variant = "info",
+		size = "medium",
+		as = "span",
+		children,
+		text,
+		...restProps
+	}: TagProps = $props();
 
 	const Component = $derived(size == "medium" ? BodyShort : Detail);
 </script>
 
 <Component
 	{as}
+	{...omit(restProps, "class")}
 	size={size == "medium" ? "medium" : "small"}
-	class="navds-tag navds-tag--{variant} navds-tag--{size}"
+	class={classes(restProps, "navds-tag", "navds-tag--" + variant, "navds-tag--" + size)}
 >
 	{#if children}
 		{@render children()}

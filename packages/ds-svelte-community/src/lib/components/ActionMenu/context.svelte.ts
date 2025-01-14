@@ -1,7 +1,7 @@
 import { getContext, setContext } from "svelte";
 
 export class ActionMenuRadioGroupContext {
-	currentValue: unknown = $state();
+	currentValue: unknown = $state(undefined);
 	values: unknown[] = $state([]);
 
 	setValue(value: unknown) {

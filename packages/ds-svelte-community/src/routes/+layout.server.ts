@@ -1,8 +1,8 @@
 import type { LayoutServerLoad } from "./$types";
 
 export const load: LayoutServerLoad = async () => {
-	const paths: Record<string, string[]> = {
-		pages: [""],
+	const paths: Record<string, [string, boolean][]> = {
+		pages: [["", false]],
 	};
 
 	// _page.svelte.js, _page.svx.js is when building for production
@@ -16,7 +16,7 @@ export const load: LayoutServerLoad = async () => {
 			continue;
 		}
 
-		paths["pages"].push(file);
+		paths["pages"].push([file, false]);
 	}
 
 	// Check for +page in dev, and _page.svelte.js when building for production
@@ -34,7 +34,10 @@ export const load: LayoutServerLoad = async () => {
 			paths[key] = [];
 		}
 
-		paths[key].push(file);
+		const source = await Bun.file(import.meta.dirname + "/" + path).text();
+		const experimental = source.includes("export const experimental = true;");
+
+		paths[key].push([file, experimental]);
 	}
 
 	for (const key in paths) {

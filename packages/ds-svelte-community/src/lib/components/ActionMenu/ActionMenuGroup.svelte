@@ -2,7 +2,13 @@
 	import type { Snippet } from "svelte";
 
 	interface Props {
+		/**
+		 * Label for the group.
+		 */
 		label: string;
+		/**
+		 * Content of the group.
+		 */
 		children: Snippet;
 	}
 
