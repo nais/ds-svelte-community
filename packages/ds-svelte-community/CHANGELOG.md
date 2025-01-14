@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.12
+
+### Patch Changes
+
+- [#182](https://github.com/nais/ds-svelte-community/pull/182) [`8cd0d41`](https://github.com/nais/ds-svelte-community/commit/8cd0d417bc2c1eb75e3e178d5ce1851813fe5ccc) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Fix error with await on root when building docs
+
 ## 1.0.0-next.11
 
 ### Patch Changes
