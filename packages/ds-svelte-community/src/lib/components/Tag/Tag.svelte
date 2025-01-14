@@ -6,23 +6,53 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 -->
 
 <script lang="ts">
+	import { classes, isSnippet, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Detail from "../typography/Detail/Detail.svelte";
 	import type { TagProps } from "./type";
 
-	let { variant = "info", size = "medium", as = "span", children, text }: TagProps = $props();
+	let {
+		variant = "info",
+		size = "medium",
+		as = "span",
+		children,
+		icon,
+		...restProps
+	}: TagProps = $props();
 
 	const Component = $derived(size == "medium" ? BodyShort : Detail);
+
+	let filledVariant = $derived(variant?.endsWith("-filled") && "strong");
+	let moderateVariant = $derived(variant?.endsWith("-moderate") && "moderate");
+	let color = $derived(variant?.replace("-filled", "").replace("-moderate", ""));
 </script>
 
 <Component
 	{as}
+	{...omit(restProps, "size", "class")}
 	size={size == "medium" ? "medium" : "small"}
-	class="navds-tag navds-tag--{variant} navds-tag--{size}"
+	class={classes(
+		restProps,
+		"navds-tag",
+		`navds-tag--${variant}`,
+		`navds-tag--${size}`,
+		`navds-tag--${filledVariant || moderateVariant || "outline"}`,
+		`navds-tag--${color}`,
+	)}
 >
-	{#if children}
-		{@render children()}
+	{#if icon}
+		<span class="navds-tag__icon--left">
+			{#if isSnippet(icon)}
+				{@render icon()}
+			{:else}
+				{@const Icon = icon}
+				<Icon />
+			{/if}
+		</span>
+	{/if}
+	{#if typeof children === "string"}
+		{children}
 	{:else}
-		{text}
+		{@render children()}
 	{/if}
 </Component>

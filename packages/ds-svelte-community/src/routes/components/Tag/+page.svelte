@@ -11,6 +11,6 @@
 		<Tag>Tag label</Tag>
 	</Story>
 	<Story name="Using text prop">
-		<Tag text="Tag label" variant="error" />
+		<Tag children="Tag label" variant="error" />
 	</Story>
 </Doc>

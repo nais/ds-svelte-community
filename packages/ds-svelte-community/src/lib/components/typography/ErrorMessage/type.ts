@@ -12,5 +12,7 @@ export interface ErrorMessageProps extends HTMLAttributes<HTMLParagraphElement> 
 	/** Tag to use for the body */
 	as?: "p" | "span";
 
+	showIcon?: boolean;
+
 	children: Snippet;
 }
