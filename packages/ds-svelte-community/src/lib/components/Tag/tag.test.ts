@@ -8,7 +8,7 @@ import { variants, type TagProps } from "./type";
 describe("Tag", () => {
 	variants.forEach((variant) => {
 		it("renders with HTML similar to ds-react variant " + variant, async () => {
-			const props: TagProps = {
+			const props: Omit<TagProps, "children"> = {
 				variant,
 			};
 			expect(

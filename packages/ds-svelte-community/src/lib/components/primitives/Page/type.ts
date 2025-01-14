@@ -1,5 +1,5 @@
 import type { HTMLElements } from "$lib/components/utils/elements";
-import type bgColors from "@navikt/ds-tokens/src/colors-bg.json";
+import type { BackgroundColorToken } from "$lib/components/utils/types";
 import type { Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 export const widths = ["text", "md", "lg", "xl", "2xl"] as const;
@@ -12,7 +12,7 @@ export interface PageProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * Background color. Accepts a color token.
 	 */
-	background?: keyof typeof bgColors.a | "surface-subtle";
+	background?: BackgroundColorToken;
 	/**
 	 * Places footer below page-fold
 	 */
