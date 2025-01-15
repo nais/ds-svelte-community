@@ -73,6 +73,11 @@
 </div>
 
 <style>
+	button {
+		background: transparent;
+		border: none;
+	}
+
 	.navds-action-menu__item {
 		width: 100%;
 		box-sizing: border-box;
