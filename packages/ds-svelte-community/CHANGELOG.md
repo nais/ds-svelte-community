@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.13
+
+### Patch Changes
+
+- [#184](https://github.com/nais/ds-svelte-community/pull/184) [`139aabd`](https://github.com/nais/ds-svelte-community/commit/139aabd90103d65dffe4068e5483d8772a417531) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Fix issue with clearing button styles
+
 ## 1.0.0-next.12
 
 ### Patch Changes
