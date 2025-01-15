@@ -3,7 +3,7 @@ name: Build and deploy Docs
 on:
   push:
     tags:
-      - "@nais/ds-svelte-community@*"
+      - "@nais/ds-svelte-community@**"
   workflow_dispatch:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
