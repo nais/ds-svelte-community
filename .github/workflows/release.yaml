@@ -62,19 +62,4 @@ jobs:
         run: |
           # export ACTUAL_RELEASE=$(echo "${{ steps.changesets.outputs.publishedPackages }}" | jq '.[] | select(.name == "@nais/ds-svelte-community") | .version | contains("-next.") | not')
           export ACTUAL_RELEASE=true
-          export MAIN_TAG=$(echo "${{ steps.changesets.outputs.publishedPackages }}" | jq -r '.[] | select(.name == "@nais/ds-svelte-community") | .version')
           echo "ACTUAL_RELEASE=$ACTUAL_RELEASE" >> $GITHUB_OUTPUT
-          echo "MAIN_TAG=$MAIN_TAG" >> $GITHUB_OUTPUT
-
-      - name: "Trigger publish_doc workflow"
-        if: ${{ steps.changesets.outputs.published == 'true' && steps.prerelease.outputs.ACTUAL_RELEASE == 'true' }}
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.actions.createWorkflowDispatch({
-              owner: 'nais',
-              repo: 'ds-svelte-community',
-              workflow_id: 'publish_doc.yaml',
-              ref: '@nais/ds-svelte-community@${{ steps.prerelease.outputs.MAIN_TAG }}'
-            })
