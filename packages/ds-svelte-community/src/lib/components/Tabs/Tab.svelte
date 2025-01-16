@@ -71,6 +71,7 @@
 	)}
 	class:navds-tabs__tab--icon-only={icon && !children}
 	class:unstyled={as === "a"}
+	data-state={ctx.value == value ? "active" : "inactive"}
 	type="button"
 	role="tab"
 	aria-controls={ctx.idFor("panel", value)}

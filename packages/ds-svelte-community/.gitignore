@@ -12,3 +12,4 @@ vite.config.ts.timestamp-*
 /storybook-static
 /src/testlib/*.d.ts
 !/src/testlib/ambient.d.ts
+.vscode

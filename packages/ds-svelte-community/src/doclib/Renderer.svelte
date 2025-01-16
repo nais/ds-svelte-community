@@ -118,9 +118,9 @@
 
 <style>
 	.preview {
-		background-color: var(--a-surface-default);
-		border: 1px solid var(--a-border-default);
-		border-radius: var(--a-border-radius-medium);
+		background-color: var(--ax-bg-default, var(--a-surface-default));
+		border: 1px solid var(--ax-border-default, var(--a-border-default));
+		border-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
 		min-height: 250px;
 		position: relative;
 
@@ -141,13 +141,16 @@
 	}
 
 	.code-preview {
-		font-size: var(--a-font-size-small);
+		font-size: var(--ax-font-size-small, var(--a-font-size-small));
 		position: relative;
 
 		.copy-code {
-			--ac-copybutton-neutral-text: var(--a-text-on-inverted);
-			--ac-copybutton-neutral-hover-text: var(--a-surface-alt-1-subtle);
-			--ac-copybutton-neutral-active-text: var(--a-surface-alt-1-moderate);
+			--ac-copybutton-neutral-text: var(--ax-text-default, var(--a-text-on-inverted));
+			--ac-copybutton-neutral-hover-text: var(--ax-text-meta-purple, var(--a-surface-alt-1-subtle));
+			--ac-copybutton-neutral-active-text: var(
+				--ax-text-meta-purple-strong,
+				var(--a-surface-alt-1-moderate)
+			);
 			display: none;
 
 			position: absolute;
@@ -161,8 +164,8 @@
 
 		& :global(pre) {
 			margin-top: 0;
-			border-bottom-left-radius: var(--a-border-radius-medium);
-			border-bottom-right-radius: var(--a-border-radius-medium);
+			border-bottom-left-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
+			border-bottom-right-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
 		}
 	}
 
@@ -170,15 +173,16 @@
 		position: absolute;
 		bottom: -1px;
 		right: -1px;
-		font-size: var(--a-font-size-small);
-		border: 1px solid var(--a-border-default);
+		font-size: var(--ax-font-size-small, var(--a-font-size-small));
+		border: 1px solid var(--ax-border-default, var(--a-border-default));
 		border-radius: 0;
-		border-top-left-radius: var(--a-border-radius-medium);
+		border-top-left-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
 		padding: 0.2rem 0.5rem;
 		cursor: pointer;
+		background: var(--ax-bg-default);
 
 		&:hover {
-			background-color: var(--a-surface-alt-1-subtle);
+			background-color: var(--ax-bg-meta-purple-moderate-hover, var(--a-surface-alt-1-subtle));
 		}
 	}
 </style>
