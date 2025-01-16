@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.15
+
+### Patch Changes
+
+- [#191](https://github.com/nais/ds-svelte-community/pull/191) [`c7b1e02`](https://github.com/nais/ds-svelte-community/commit/c7b1e0223d852d6c492c2de0469215081ce8bb28) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Preview darkside
+
 ## 1.0.0-next.14
 
 ### Patch Changes
