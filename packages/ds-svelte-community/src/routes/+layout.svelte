@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { base } from "$app/paths";
 	import { page } from "$app/state";
-	import { Box, Button, Detail, HStack, Page, PageBlock } from "$lib";
+	import { Box, Detail, Page, PageBlock } from "$lib";
+	import InternalHeader from "$lib/components/InternalHeader/InternalHeader.svelte";
+	import InternalHeaderButton from "$lib/components/InternalHeader/InternalHeaderButton.svelte";
+	import InternalHeaderTitle from "$lib/components/InternalHeader/InternalHeaderTitle.svelte";
+	import Spacer from "$lib/components/primitives/Stack/Spacer.svelte";
 	import Tag from "$lib/components/Tag/Tag.svelte";
 	import type { Snippet } from "svelte";
 	import "../doclib/styles.css";
@@ -18,26 +22,21 @@
 </script>
 
 <Page background="bg-subtle">
-	<Box as="header" background="surface-inverted" style="color:var(--a-text-on-inverted);">
-		<PageBlock width="2xl" gutters={false}>
-			<Box padding="3">
-				<HStack justify="space-between">
-					<a href={base} class="unstyled">ds-svelte-community</a>
+	<InternalHeader>
+		<InternalHeaderTitle as="a" href="/">ds-svelte-community</InternalHeaderTitle>
+		<Spacer />
+		<InternalHeaderButton as="a" href="https://docs.nais.io">Nais Docs</InternalHeaderButton>
+		<div class="mobile">
+			<InternalHeaderButton
+				onclick={() => {
+					showSidebar = !showSidebar;
+				}}
+			>
+				Toggle menu
+			</InternalHeaderButton>
+		</div>
+	</InternalHeader>
 
-					<a href="https://docs.nais.io" class="unstyled docs-link">NAIS docs</a>
-					<div class="mobile">
-						<Button
-							variant={"primary-neutral"}
-							size="xsmall"
-							onclick={() => {
-								showSidebar = !showSidebar;
-							}}>Toggle menu</Button
-						>
-					</div>
-				</HStack>
-			</Box>
-		</PageBlock>
-	</Box>
 	<PageBlock as="main" width="2xl" style="flex-grow: 1;">
 		<div class="wrapper">
 			<div class="sidebar" class:show={showSidebar}>
@@ -106,13 +105,13 @@
 		min-width: 200px;
 		max-width: 200px;
 		padding: 1rem 0;
-		padding-inline-start: var(--a-spacing-3);
-		border-right: 1px solid var(--a-border-divider);
+		padding-inline-start: var(--ax-spacing-3, var(--a-spacing-3));
+		border-right: 1px solid var(--ax-border-subtle, var(--a-border-divider));
 	}
 
 	.section {
 		& > strong {
-			font-size: var(--a-font-size-medium);
+			font-size: var(--ax-font-size-medium, var(--a-font-size-medium));
 		}
 
 		ul {
@@ -126,54 +125,44 @@
 			}
 
 			a {
-				color: var(--a-grayalpha-800);
+				color: var(--ax-text-neutral, var(--a-grayalpha-800));
 				font-feature-settings: normal;
-				font-size: var(--a-font-size-medium);
-				line-height: var(--a-font-line-height-large);
+				font-size: var(--ax-font-size-medium, var(--a-font-size-medium));
+				line-height: var(--ax-font-line-height-large, var(--a-font-line-height-large));
 				padding: 0.125rem 0;
-				padding-inline: var(--a-spacing-3) var(--a-spacing-2);
+				padding-inline: var(--ax-spacing-3, var(--a-spacing-3))
+					var(--ax-spacing-2, var(--a-spacing-2));
 				text-decoration: none;
 				text-underline-offset: 2px;
 				width: 100%;
 				display: block;
-				border-top-left-radius: var(--a-border-radius-medium);
-				border-bottom-left-radius: var(--a-border-radius-medium);
+				border-top-left-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
+				border-bottom-left-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
 
 				&:hover {
-					background-color: var(--a-grayalpha-100);
-					color: var(--a-grayalpha-900);
+					background-color: var(--ax-bg-neutral, var(--a-grayalpha-100));
+					color: var(--ax-text-default, var(--a-grayalpha-900));
 				}
 
 				&:active {
-					background-color: var(--a-surface-alt-1-subtle);
+					background-color: var(--ax-bg-meta-purple-hover, var(--a-surface-alt-1-subtle));
 				}
 
 				&.active {
-					background-color: var(--a-surface-alt-1);
-					color: var(--a-text-on-alt-1);
+					background-color: var(--ax-bg-meta-purple-strong, var(--a-surface-alt-1));
+					color: var(--ax-text-meta-purple-contrast, var(--a-text-on-alt-1));
 				}
 			}
 		}
 	}
 
-	.docs-link {
-		opacity: 0.7;
-		&:hover {
-			opacity: 1;
-		}
-	}
-
 	@media (max-width: 1000px) {
-		.docs-link {
-			display: none;
-		}
-
 		.wrapper {
 			flex-direction: column;
 		}
 
 		.mobile {
-			display: block;
+			display: contents;
 		}
 
 		.sidebar {
@@ -181,10 +170,10 @@
 			min-width: unset;
 			max-width: unset;
 			border: 0;
-			padding-inline: var(--a-spacing-3);
-			border-bottom: 2px solid var(--a-border-divider);
+			padding-inline: var(--ax-spacing-3, var(--a-spacing-3));
+			border-bottom: 2px solid var(--ax-border-neutral, var(--a-border-divider));
 			position: absolute;
-			background: var(--__ac-page-background);
+			background: var(--ax-bg-default, var(--__ac-page-background));
 			display: none;
 			z-index: 100;
 
@@ -198,7 +187,7 @@
 
 				a {
 					border-radius: 0;
-					border-radius: var(--a-border-radius-medium);
+					border-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
 				}
 			}
 		}

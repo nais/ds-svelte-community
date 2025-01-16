@@ -159,6 +159,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 			id="r7"
 			class={classes(restProps, "navds-tooltip", "navds-detail", "navds-detail--small")}
 			data-side={placement}
+			data-state={open ? "open" : "closed"}
 			style="position: absolute;  visibility: visible; {tooltipStyles}"
 			bind:clientWidth={tooltipWidth}
 			bind:clientHeight={tooltipHeight}

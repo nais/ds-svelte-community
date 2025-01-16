@@ -32,6 +32,7 @@ const translateExceptionToCSS = (exception: string) => {
 };
 
 const translateTokenStringToCSS = (
+	domain: "a" | "ax",
 	componentProp: string,
 	tokenString: string,
 	tokenSubgroup: string,
@@ -46,7 +47,7 @@ const translateTokenStringToCSS = (
 				return `calc((100vw - ${width}%)/-2)`;
 			}
 
-			let output = `var(--a-${tokenSubgroup}-${x})`;
+			let output = `var(--${domain}-${tokenSubgroup}-${x})`;
 			if (tokenExceptions.includes(x)) {
 				output = translateExceptionToCSS(x);
 			}
@@ -76,6 +77,15 @@ export function getResponsiveProps<T extends string>(
 	if (typeof responsiveProp === "string") {
 		return {
 			[`--__ac-${componentName}-${componentProp}-xs`]: translateTokenStringToCSS(
+				"a",
+				componentProp,
+				responsiveProp,
+				tokenSubgroup,
+				tokenExceptions,
+				invert,
+			),
+			[`--__axc-${componentName}-${componentProp}-xs`]: translateTokenStringToCSS(
+				"ax",
 				componentProp,
 				responsiveProp,
 				tokenSubgroup,
@@ -89,6 +99,16 @@ export function getResponsiveProps<T extends string>(
 	Object.entries(responsiveProp).forEach(([breakpointAlias, aliasOrScale]) => {
 		styleProps[`--__ac-${componentName}-${componentProp}-${breakpointAlias}`] =
 			translateTokenStringToCSS(
+				"a",
+				componentProp,
+				aliasOrScale,
+				tokenSubgroup,
+				tokenExceptions,
+				invert,
+			);
+		styleProps[`--__axc-${componentName}-${componentProp}-${breakpointAlias}`] =
+			translateTokenStringToCSS(
+				"ax",
 				componentProp,
 				aliasOrScale,
 				tokenSubgroup,

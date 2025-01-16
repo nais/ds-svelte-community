@@ -48,7 +48,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	<span class="navds-switch__track">
 		<span class="navds-switch__thumb">
 			{#if loading}
-				<Loader size="xsmall" aria-live="polite" />
+				<Loader size="xsmall" aria-live="polite" variant={checked ? "interaction" : "inverted"} />
 			{/if}
 			<SelectedIcon />
 		</span>
