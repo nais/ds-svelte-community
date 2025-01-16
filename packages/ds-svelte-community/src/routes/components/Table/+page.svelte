@@ -1,6 +1,5 @@
 <script lang="ts">
 	import doc from "$lib/components/Table/Table.svelte?doc";
-	import TableTest from "$lib/components/Table/Table.test.svelte";
 	import tbodyDoc from "$lib/components/Table/Tbody.svelte?doc";
 	import tdDoc from "$lib/components/Table/Td.svelte?doc";
 	import thDoc from "$lib/components/Table/Th.svelte?doc";
@@ -126,28 +125,3 @@
 		</Table>
 	</Story>
 </Doc>
-
-<TableTest
-	data={[
-		{
-			col1: "val1",
-			col2: "val2",
-		},
-		{
-			col1: "val1",
-			col2: "val2",
-		},
-		{
-			col1: "val1",
-			col2: "val2",
-		},
-		{
-			col1: "val1",
-			col2: "val2",
-		},
-		{
-			col1: "val1",
-			col2: "val2",
-		},
-	]}
-/>
