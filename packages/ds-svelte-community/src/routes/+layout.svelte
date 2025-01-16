@@ -23,7 +23,7 @@
 
 <Page background="bg-subtle">
 	<InternalHeader>
-		<InternalHeaderTitle as="a" href="/">ds-svelte-community</InternalHeaderTitle>
+		<InternalHeaderTitle as="a" href={base}>ds-svelte-community</InternalHeaderTitle>
 		<Spacer />
 		<InternalHeaderButton as="a" href="https://docs.nais.io">Nais Docs</InternalHeaderButton>
 		<div class="mobile">
