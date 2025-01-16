@@ -9,7 +9,7 @@
 	import Tag from "$lib/components/Tag/Tag.svelte";
 	import type { Snippet } from "svelte";
 	import "../doclib/styles.css";
-	import "../lib/css/darkside.css";
+	import "../lib/css/index.css";
 	import type { LayoutData } from "./$types";
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();

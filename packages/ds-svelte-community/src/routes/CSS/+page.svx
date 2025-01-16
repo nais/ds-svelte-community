@@ -22,3 +22,9 @@ If you want unstyled `a`, you can add the class `unstyled` to prevent this styli
 If you want to use Tailwind, follow the [official guide to configure SvelteKit with Tailwind](https://tailwindcss.com/docs/guides/sveltekit).
 
 Although, you might not need to add `@tailwind base;` and `@tailwind components;` to your `.css` file.
+
+## Darkside
+
+To preview darkside, import `@nais/ds-svelte-community/css/darkside.css` instead of `@nais/ds-svelte-community/css`.
+
+Add `navds-theme` as a class to your `body` element, and optionally the `dark` class.
