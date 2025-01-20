@@ -4,21 +4,25 @@
 
 <script lang="ts">
 	import doc from "$lib/components/InternalHeader/InternalHeader.svelte?doc";
+	import buttonDoc from "$lib/components/InternalHeader/InternalHeaderButton.svelte?doc";
+	import titleDoc from "$lib/components/InternalHeader/InternalHeaderTitle.svelte?doc";
+	import userDoc from "$lib/components/InternalHeader/InternalHeaderUser.svelte?doc";
+	import userButtonDoc from "$lib/components/InternalHeader/InternalHeaderUserButton.svelte?doc";
 
 	import Doc from "$doclib/Doc.svelte";
 	import Story from "$doclib/Story.svelte";
 	import { Search } from "$lib";
-	import InternalHeader from "$lib/components/InternalHeader/InternalHeader.svelte";
-	import InternalHeaderButton from "$lib/components/InternalHeader/InternalHeaderButton.svelte";
-	import InternalHeaderTitle from "$lib/components/InternalHeader/InternalHeaderTitle.svelte";
-	import InternalHeaderUser from "$lib/components/InternalHeader/InternalHeaderUser.svelte";
-	import InternalHeaderUserButton from "$lib/components/InternalHeader/InternalHeaderUserButton.svelte";
 	import Spacer from "$lib/components/primitives/Stack/Spacer.svelte";
 	import {
 		ActionMenu,
 		ActionMenuDivider,
 		ActionMenuGroup,
 		ActionMenuItem,
+		InternalHeader,
+		InternalHeaderButton,
+		InternalHeaderTitle,
+		InternalHeaderUser,
+		InternalHeaderUserButton,
 	} from "$lib/experimental";
 	import {
 		BarChartIcon,
@@ -30,7 +34,11 @@
 	} from "$lib/icons";
 </script>
 
-<Doc {doc} preview={{ width: "80%" }}>
+<Doc
+	{doc}
+	preview={{ width: "80%" }}
+	extraChildrenDoc={[buttonDoc, titleDoc, userDoc, userButtonDoc]}
+>
 	<Story>
 		<InternalHeader>
 			<InternalHeaderTitle as="h1">My application</InternalHeaderTitle>
