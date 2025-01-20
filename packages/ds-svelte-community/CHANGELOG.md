@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.16
+
+### Patch Changes
+
+- [#195](https://github.com/nais/ds-svelte-community/pull/195) [`1ef503a`](https://github.com/nais/ds-svelte-community/commit/1ef503a2dac91bcd579153584354bcd9d5aa9427) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Expose InternalHeader as experimental
+
 ## 1.0.0-next.15
 
 ### Patch Changes
