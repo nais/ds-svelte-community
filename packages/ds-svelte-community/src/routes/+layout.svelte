@@ -19,13 +19,11 @@
 	}
 
 	let showSidebar = $state(false);
-
-	let baseNoDot = $derived(base.replace(/^\./, ""));
 </script>
 
 <Page background="bg-subtle">
 	<InternalHeader>
-		<InternalHeaderTitle as="a" href={baseNoDot + "/"}>ds-svelte-community</InternalHeaderTitle>
+		<InternalHeaderTitle as="a" href={base + "/"}>ds-svelte-community</InternalHeaderTitle>
 		<Spacer />
 		<InternalHeaderButton as="a" href="https://docs.nais.io">Nais Docs</InternalHeaderButton>
 		<div class="mobile">
@@ -48,16 +46,14 @@
 						<ul>
 							{#each paths as [component, experimental]}
 								{@const href = (
-									key == "pages"
-										? `${baseNoDot}/${component}/`
-										: `${baseNoDot}/${key}/${component}/`
+									key == "pages" ? `/${component}/` : `/${key}/${component}/`
 								).replaceAll("//", "/")}
 								<li>
 									<!-- eslint-disable-next-line svelte/valid-compile using $ to access stores currently errors the validator -->
 									<a
 										class="unstyled"
-										class:active={page.url.pathname === href}
-										{href}
+										class:active={page.url.pathname == href}
+										href={base + href}
 										data-sveltekit-preload-data="tap"
 									>
 										{component ? component : "Home"}
