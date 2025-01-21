@@ -35,7 +35,7 @@ export const load: LayoutServerLoad = async () => {
 		}
 
 		const source = await Bun.file(import.meta.dirname + "/" + path).text();
-		const experimental = source.includes("export const experimental = true;");
+		const experimental = source.includes("const experimental = true;");
 
 		paths[key].push([file, experimental]);
 	}
