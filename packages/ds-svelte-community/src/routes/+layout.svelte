@@ -19,6 +19,11 @@
 	}
 
 	let showSidebar = $state(false);
+
+	function compare(id: string | null, a: string) {
+		const testID = a.replace(/\/+$/, "");
+		return id === testID || (id == "/" && testID == "");
+	}
 </script>
 
 <Page background="bg-subtle">
@@ -52,7 +57,7 @@
 									<!-- eslint-disable-next-line svelte/valid-compile using $ to access stores currently errors the validator -->
 									<a
 										class="unstyled"
-										class:active={page.url.pathname == href}
+										class:active={compare(page.route.id, href)}
 										href={base + href}
 										data-sveltekit-preload-data="tap"
 									>
