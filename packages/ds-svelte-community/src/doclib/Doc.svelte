@@ -35,7 +35,7 @@
 		extraChildrenDoc?: Doc[];
 		children?: Snippet;
 		componentOptions?: ComponentOptions;
-		preview?: { width?: string };
+		preview?: { width?: string; extraPaddingBottom?: string };
 		stories?: Story[];
 		extraDescription?: Snippet;
 	} = $props();

@@ -70,7 +70,6 @@ describe("which components are implemented", () => {
 		"ReadMore",
 		"Spacer",
 		"TableColumnHeader",
-		"TableExpandableRow",
 		"Textarea",
 		"Timeline",
 		"TimelinePeriod",
@@ -88,6 +87,7 @@ describe("which components are implemented", () => {
 		Th: "TableHeaderCell",
 		Tbody: "TableBody",
 		Thead: "TableHeader",
+		ExpandableRow: "TableExpandableRow",
 
 		RemovableChip: "ChipsRemovable",
 		ToggleChip: "ChipsToggle",

@@ -65,6 +65,52 @@ export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
 	children: Snippet;
 }
 
+export interface TableExpandableRowProps extends TableRowProps {
+	/**
+	 * Placement of toggle button
+	 */
+	togglePlacement?: "left" | "right";
+	/**
+	 * Opens component if 'true', closes if 'false'
+	 * Using this prop removes automatic control of open-state
+	 */
+	open?: boolean;
+	/**
+	 * Change handler for open
+	 */
+	onopenchange?: (open: boolean) => void;
+	/**
+	 * Disable expansion. shadeOnHover will not be visible.
+	 */
+	expansionDisabled?: boolean;
+	/**
+	 * Makes the whole row clickable
+	 */
+	expandOnRowClick?: boolean;
+	/**
+	 * The width of the expanded row's internal cell
+	 */
+	colSpan?: number;
+	/**
+	 * Optional left, right-gutter for content
+	 */
+	contentGutter?: "left" | "right" | "none";
+
+	/**
+	 * Description for the toggle button when the row is expanded
+	 */
+	showLessText?: string;
+	/**
+	 * Description for the toggle button when the row is collapsed
+	 */
+	showMoreText?: string;
+
+	/**
+	 * Content of the expanded row
+	 */
+	content: Snippet | string;
+}
+
 export interface TableHeaderCellProps extends HTMLThAttributes {
 	/**
 	 * Cell alignment.

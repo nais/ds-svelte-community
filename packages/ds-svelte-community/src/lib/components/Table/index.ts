@@ -1,3 +1,4 @@
+export { default as ExpandableRow } from "./ExpandableRow.svelte";
 export { default as Table } from "./Table.svelte";
 export { default as Tbody } from "./Tbody.svelte";
 export { default as Td } from "./Td.svelte";
