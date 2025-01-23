@@ -1,5 +1,15 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.17
+
+### Patch Changes
+
+- [#200](https://github.com/nais/ds-svelte-community/pull/200) [`4fe1d5e`](https://github.com/nais/ds-svelte-community/commit/4fe1d5e8a5d1b5ba1a19e17700c94c3c6745f06d) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Various small fixes and upgrade deps
+
+- [#206](https://github.com/nais/ds-svelte-community/pull/206) [`d46c86a`](https://github.com/nais/ds-svelte-community/commit/d46c86a148d3a586c2a59b09f18eef45bd1a0ea8) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add ExpandableRow
+
+- [#203](https://github.com/nais/ds-svelte-community/pull/203) [`a872436`](https://github.com/nais/ds-svelte-community/commit/a872436452f8d67595991fef62e8a7fe45fb096d) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade dependencies
+
 ## 1.0.0-next.16
 
 ### Patch Changes
