@@ -3,13 +3,22 @@ import type { Plugin as VitePlugin } from "vite";
 import { Generator } from "./generator.js";
 
 export default function docProcess(svelte2tsxPath: string): VitePlugin {
+	const gen = new Generator(svelte2tsxPath);
+	gen.setup();
 	return {
 		name: "vite-plugin-svelte-docs",
+		watchChange(id, { event }) {
+			if (event == "delete") {
+				gen.remove(id);
+				return;
+			}
+			if (id.endsWith(".ts") || id.endsWith(".js")) {
+				gen.refresh(id);
+			}
+		},
 
 		async transform(_code, id) {
 			if (id.endsWith(".svelte?doc")) {
-				const gen = new Generator(svelte2tsxPath);
-				await gen.setup();
 				const filename = id.replace(/\?doc$/, "");
 
 				// const source = Bun.file(filename);
