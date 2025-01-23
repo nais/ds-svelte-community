@@ -59,6 +59,9 @@ export const Components: KnownComponents = {
 		ErrorSummaryItem: {
 			path: "components/ErrorSummary/ErrorSummaryItem.svelte",
 		},
+		ExpandableRow: {
+			path: "components/Table/ExpandableRow.svelte",
+		},
 		Fieldset: {
 			path: "components/Fieldset/Fieldset.svelte",
 		},

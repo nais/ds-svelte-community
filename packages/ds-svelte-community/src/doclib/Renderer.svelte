@@ -29,7 +29,7 @@
 		componentOptions?: ComponentOptions;
 		children: StorySnippet;
 		source?: string;
-		preview?: { width?: string };
+		preview?: { width?: string; extraPaddingBottom?: string };
 	} = $props();
 
 	let showCode = $state(false);
@@ -96,7 +96,11 @@
 </script>
 
 <div class="preview" class:center={options.center} class:show-code={code && showCode}>
-	<div class="preview-wrapper" style="width: {preview?.width}">
+	<div
+		class="preview-wrapper"
+		style="width: {preview?.width}"
+		style:padding-bottom={preview?.extraPaddingBottom}
+	>
 		{@render children({ docProps: dejsonify(values) })}
 		<!-- <svelte:component this={component} children={defaultBody} {...restProps} /> -->
 	</div>

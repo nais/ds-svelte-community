@@ -1,4 +1,5 @@
 <script lang="ts">
+	import expandableRowDoc from "$lib/components/Table/ExpandableRow.svelte?doc";
 	import doc from "$lib/components/Table/Table.svelte?doc";
 	import tbodyDoc from "$lib/components/Table/Tbody.svelte?doc";
 	import tdDoc from "$lib/components/Table/Td.svelte?doc";
@@ -8,7 +9,7 @@
 
 	import Doc from "$doclib/Doc.svelte";
 	import Story from "$doclib/Story.svelte";
-	import { Table, Tbody, Td, Th, Thead, Tr, type TableSortState } from "$lib";
+	import { ExpandableRow, Table, Tbody, Td, Th, Thead, Tr, type TableSortState } from "$lib";
 
 	const data = [
 		{
@@ -58,7 +59,11 @@
 	let orderedData = $state(orderData());
 </script>
 
-<Doc {doc} extraChildrenDoc={[theadDoc, tbodyDoc, thDoc, tdDoc, trDoc]} preview={{ width: "90%" }}>
+<Doc
+	{doc}
+	extraChildrenDoc={[theadDoc, tbodyDoc, trDoc, thDoc, tdDoc, expandableRowDoc]}
+	preview={{ width: "90%", extraPaddingBottom: "20px" }}
+>
 	<Story>
 		<Table>
 			<Thead>
@@ -106,11 +111,13 @@
 			}}
 		>
 			<Thead>
-				{#each Object.keys(data[0]) as key}
-					<Th scope="col" sortable={true} sortKey={key}>
-						{key[0].toUpperCase() + key.slice(1)}
-					</Th>
-				{/each}
+				<Tr>
+					{#each Object.keys(data[0]) as key}
+						<Th scope="col" sortable={true} sortKey={key}>
+							{key[0].toUpperCase() + key.slice(1)}
+						</Th>
+					{/each}
+				</Tr>
 			</Thead>
 
 			<Tbody>
@@ -120,6 +127,33 @@
 						<Td>{row.phone}</Td>
 						<Td>{row.expiry}</Td>
 					</Tr>
+				{/each}
+			</Tbody>
+		</Table>
+	</Story>
+
+	<Story name="Expandable row">
+		<Table>
+			<Thead>
+				<Tr>
+					<Th />
+					<Th scope="col">Navn</Th>
+					<Th scope="col">Fødselsnr.</Th>
+					<Th scope="col">Start</Th>
+				</Tr>
+			</Thead>
+			<Tbody>
+				{#each data as { name, phone, expiry }}
+					<ExpandableRow expandOnRowClick={true} onopenchange={(open) => console.log(open)}>
+						{#snippet content()}
+							Content of <code>ExpandableRow</code>
+							<br />
+							{name}
+						{/snippet}
+						<Th scope="row">{name}</Th>
+						<Td>{phone}</Td>
+						<Td>{expiry}</Td>
+					</ExpandableRow>
 				{/each}
 			</Tbody>
 		</Table>
