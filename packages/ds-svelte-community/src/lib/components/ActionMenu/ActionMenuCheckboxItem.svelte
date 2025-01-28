@@ -91,6 +91,10 @@
 </button>
 
 <style>
+	button {
+		border: none;
+		background-color: transparent;
+	}
 	@media (hover: hover) {
 		.navds-action-menu__item:focus {
 			outline: none;

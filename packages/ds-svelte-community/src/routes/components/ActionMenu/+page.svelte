@@ -65,6 +65,9 @@
 	const handleCheckboxChange = (checkboxId: string, checked: boolean) => {
 		console.log(checkboxId, checked);
 	};
+	const handleRadioButtonChange = (value: unknown) => {
+		console.log(value);
+	};
 </script>
 
 <Doc
@@ -250,17 +253,27 @@
 					</ActionMenuCheckboxItem>
 					<ActionMenuCheckboxItem
 						bind:checked={views.tags}
-						onchange={(checked) => handleCheckboxChange("tags", checked)}
+						onchange={(checked) => {
+							handleCheckboxChange("tags", checked);
+						}}
 					>
 						Tags
 					</ActionMenuCheckboxItem>
 				</ActionMenuGroup>
 				<ActionMenuDivider />
 				<ActionMenuRadioGroup bind:value={rows} label="Rows per page">
-					<ActionMenuRadioItem value="5">5</ActionMenuRadioItem>
-					<ActionMenuRadioItem value="10">10</ActionMenuRadioItem>
-					<ActionMenuRadioItem value="25">25</ActionMenuRadioItem>
-					<ActionMenuRadioItem value="50">50</ActionMenuRadioItem>
+					<ActionMenuRadioItem value="5" onselect={(value) => handleRadioButtonChange(value)}
+						>5</ActionMenuRadioItem
+					>
+					<ActionMenuRadioItem value="10" onselect={(value) => handleRadioButtonChange(value)}
+						>10</ActionMenuRadioItem
+					>
+					<ActionMenuRadioItem value="25" onselect={(value) => handleRadioButtonChange(value)}
+						>25</ActionMenuRadioItem
+					>
+					<ActionMenuRadioItem value="50" onselect={(value) => handleRadioButtonChange(value)}
+						>50</ActionMenuRadioItem
+					>
 				</ActionMenuRadioGroup>
 			</ActionMenu>
 
