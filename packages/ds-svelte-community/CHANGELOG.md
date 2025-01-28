@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.18
+
+### Patch Changes
+
+- [#207](https://github.com/nais/ds-svelte-community/pull/207) [`8acbd91`](https://github.com/nais/ds-svelte-community/commit/8acbd91f5dd8c61f3faf214e4125038c59ce6c23) Thanks [@rbjornstad](https://github.com/rbjornstad)! - Style changes to ActionMenuRadioItem and ActionMenuCheckboxItem. Add onselect callback to ActionMenuRadioItem.
+
 ## 1.0.0-next.17
 
 ### Patch Changes
