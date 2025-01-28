@@ -28,7 +28,7 @@
 	class="navds-action-menu__item navds-action-menu__item--has-icon"
 	data-state={state}
 	data-index="0"
-	style="user-select: none;"
+	style="user-select: none; border: none; background-color: transparent;"
 	onclick={() => {
 		checked = checked === "indeterminate" ? false : !checked;
 		onchange?.(checked);

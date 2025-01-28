@@ -11,9 +11,13 @@
 		 * Content of the radio item.
 		 */
 		children: Snippet;
+		/**
+		 * Callback when the item is selected.
+		 */
+		onselect?: (event: unknown) => void;
 	}
 
-	let { value, children }: Props = $props();
+	let { value, children, onselect }: Props = $props();
 
 	const ctx = getRadioGroupContext();
 
@@ -26,9 +30,11 @@
 	tabindex="0"
 	aria-checked={checked}
 	class="navds-action-menu__item navds-action-menu__item--has-icon"
+	style="border: none; background-color: transparent;"
 	data-state={state}
 	onclick={() => {
 		ctx.setValue(value);
+		onselect?.(value);
 	}}
 >
 	{@render children()}
