@@ -28,7 +28,7 @@
 	class="navds-action-menu__item navds-action-menu__item--has-icon"
 	data-state={state}
 	data-index="0"
-	style="user-select: none; border: none; background-color: transparent;"
+	style="user-select: none;"
 	onclick={() => {
 		checked = checked === "indeterminate" ? false : !checked;
 		onchange?.(checked);
@@ -91,6 +91,10 @@
 </button>
 
 <style>
+	button {
+		border: none;
+		background-color: transparent;
+	}
 	@media (hover: hover) {
 		.navds-action-menu__item:focus {
 			outline: none;

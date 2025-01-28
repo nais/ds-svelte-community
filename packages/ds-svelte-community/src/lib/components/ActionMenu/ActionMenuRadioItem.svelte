@@ -14,7 +14,7 @@
 		/**
 		 * Callback when the item is selected.
 		 */
-		onselect?: (event: unknown) => void;
+		onselect?: (value: unknown) => void;
 	}
 
 	let { value, children, onselect }: Props = $props();
@@ -30,7 +30,7 @@
 	tabindex="0"
 	aria-checked={checked}
 	class="navds-action-menu__item navds-action-menu__item--has-icon"
-	style="border: none; background-color: transparent;"
+	style="border: none;"
 	data-state={state}
 	onclick={() => {
 		ctx.setValue(value);
@@ -93,6 +93,7 @@
 	button {
 		width: 100%;
 		box-sizing: border-box;
+		background-color: transparent;
 	}
 
 	@media (hover: hover) {
