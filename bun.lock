@@ -17,7 +17,7 @@
     },
     "packages/ds-svelte-community": {
       "name": "@nais/ds-svelte-community",
-      "version": "1.0.0-next.16",
+      "version": "1.0.0-next.18",
       "dependencies": {
         "@navikt/ds-css": "^7.10.0",
         "@navikt/ds-tokens": "^7.10.0",
@@ -68,12 +68,12 @@
       },
       "peerDependencies": {
         "svelte": "^5.0.0",
-        "vite": "^5.4.9",
+        "vite": "^5.4.9 || ^6.0.3",
       },
     },
     "packages/ds-svelte-community-preprocess-svelte": {
       "name": "@nais/ds-svelte-community-preprocess-svelte",
-      "version": "1.0.0-next.2",
+      "version": "1.0.0-next.3",
       "dependencies": {
         "estree-walker": "^3.0.3",
         "prettier": "^3.4.2",
@@ -89,7 +89,7 @@
     },
     "packages/vite-plugin-svelte-docs": {
       "name": "@nais/vite-plugin-svelte-docs",
-      "version": "0.0.2-next.0",
+      "version": "0.0.2-next.1",
       "dependencies": {
         "svelte2tsx": "0.7.34",
         "vite": "^6.0.11",
