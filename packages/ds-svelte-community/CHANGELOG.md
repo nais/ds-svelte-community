@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.19
+
+### Patch Changes
+
+- [#209](https://github.com/nais/ds-svelte-community/pull/209) [`f8894e3`](https://github.com/nais/ds-svelte-community/commit/f8894e3871b61189e5a9cc4daef041717535a1f4) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add Vite 6 as peer dep
+
 ## 1.0.0-next.18
 
 ### Patch Changes
