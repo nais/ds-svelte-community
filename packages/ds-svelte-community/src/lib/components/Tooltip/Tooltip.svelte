@@ -188,7 +188,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	}
 
 	.ds-svelte-tooltip-wrapper {
-		display: inline-block;
+		display: contents;
 		position: relative;
 	}
 </style>
