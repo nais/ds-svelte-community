@@ -236,6 +236,13 @@
 							: Object.values(views).some(Boolean)
 								? "indeterminate"
 								: false}
+						onchange={(checked) => {
+							views = {
+								started: checked,
+								fnr: checked,
+								tags: checked,
+							};
+						}}
 					>
 						Select all
 					</ActionMenuCheckboxItem>
