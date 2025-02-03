@@ -30,7 +30,7 @@
 	data-index="0"
 	style="user-select: none;"
 	onclick={() => {
-		checked = checked === "indeterminate" ? false : !checked;
+		checked = checked === "indeterminate" ? true : !checked;
 		onchange?.(checked);
 	}}
 >
