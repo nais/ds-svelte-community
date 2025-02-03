@@ -1,5 +1,15 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.20
+
+### Minor Changes
+
+- [#213](https://github.com/nais/ds-svelte-community/pull/213) [`2b9ed03`](https://github.com/nais/ds-svelte-community/commit/2b9ed036781abc2a0c0a5504bda24e9463114131) Thanks [@andnorda](https://github.com/andnorda)! - Selecting an indeterminate checkbox checks all child items
+
+### Patch Changes
+
+- [#212](https://github.com/nais/ds-svelte-community/pull/212) [`14c76fc`](https://github.com/nais/ds-svelte-community/commit/14c76fcb07ee0b61229b66cbd57415b0210d61ff) Thanks [@andnorda](https://github.com/andnorda)! - Fix bug in checking if clicks are outside dialog.
+
 ## 1.0.0-next.19
 
 ### Patch Changes
