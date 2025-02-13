@@ -1,16 +1,32 @@
+<script lang="ts" module>
+	import { page } from "$app/state";
+	export const globalProps = () => {
+		const darkside = page.url.searchParams.get("darkside");
+		if (darkside) {
+			return `?darkside=${darkside}`;
+		}
+		return "";
+	};
+</script>
+
 <script lang="ts">
 	import { base } from "$app/paths";
-	import { page } from "$app/state";
 	import { Box, Detail, Page, PageBlock } from "$lib";
 	import InternalHeader from "$lib/components/InternalHeader/InternalHeader.svelte";
 	import InternalHeaderButton from "$lib/components/InternalHeader/InternalHeaderButton.svelte";
 	import InternalHeaderTitle from "$lib/components/InternalHeader/InternalHeaderTitle.svelte";
 	import Spacer from "$lib/components/primitives/Stack/Spacer.svelte";
 	import Tag from "$lib/components/Tag/Tag.svelte";
+	import Theme from "$lib/components/Theme/Theme.svelte";
 	import type { Snippet } from "svelte";
 	import "../doclib/styles.css";
-	import "../lib/css/index.css";
 	import type { LayoutData } from "./$types";
+
+	if (page.url.searchParams.get("darkside")) {
+		import("../lib/css/darkside.css");
+	} else {
+		import("../lib/css/index.css");
+	}
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
@@ -26,64 +42,95 @@
 	}
 </script>
 
-<Page background="bg-subtle">
-	<InternalHeader>
-		<InternalHeaderTitle as="a" href={base + "/"}>ds-svelte-community</InternalHeaderTitle>
-		<Spacer />
-		<InternalHeaderButton as="a" href="https://docs.nais.io">Nais Docs</InternalHeaderButton>
-		<div class="mobile">
-			<InternalHeaderButton
-				onclick={() => {
-					showSidebar = !showSidebar;
-				}}
-			>
-				Toggle menu
-			</InternalHeaderButton>
-		</div>
-	</InternalHeader>
-
-	<PageBlock as="main" width="2xl" style="flex-grow: 1;">
-		<div class="wrapper">
-			<div class="sidebar" class:show={showSidebar}>
-				<div class="section">
-					{#each Object.entries(data.paths) as [key, paths]}
-						<strong>{toTitle(key)}</strong>
-						<ul>
-							{#each paths as [component, experimental]}
-								{@const href = (
-									key == "pages" ? `/${component}/` : `/${key}/${component}/`
-								).replaceAll("//", "/")}
-								<li>
-									<!-- eslint-disable-next-line svelte/valid-compile using $ to access stores currently errors the validator -->
-									<a
-										class="unstyled"
-										class:active={compare(page.route.id, href)}
-										href={base + href}
-										data-sveltekit-preload-data="tap"
-									>
-										{component ? component : "Home"}
-
-										{#if experimental}
-											<Tag variant="alt1" size="small" style="margin-left: 0.2rem;">Beta</Tag>
-										{/if}
-									</a>
-								</li>
-							{/each}
-						</ul>
-					{/each}
-				</div>
-				<hr />
-				<Detail>
-					<!-- eslint-disable-next-line no-undef -->
-					Version: {__version__}
-				</Detail>
+{#snippet pageSnippet()}
+	<Page background="bg-subtle">
+		<InternalHeader>
+			<InternalHeaderTitle as="a" href={base + "/"}>ds-svelte-community</InternalHeaderTitle>
+			<Spacer />
+			<InternalHeaderButton as="a" href="https://docs.nais.io">Nais Docs</InternalHeaderButton>
+			<div class="mobile">
+				<InternalHeaderButton
+					onclick={() => {
+						showSidebar = !showSidebar;
+					}}
+				>
+					Toggle menu
+				</InternalHeaderButton>
 			</div>
-			<Box style="flex-grow: 1;" paddingInline="3">
-				{@render children()}
-			</Box>
-		</div>
-	</PageBlock>
-</Page>
+		</InternalHeader>
+
+		<PageBlock as="main" width="2xl" style="flex-grow: 1;">
+			<div class="wrapper">
+				<div class="sidebar" class:show={showSidebar}>
+					<div class="section">
+						{#each Object.entries(data.paths) as [key, paths]}
+							<strong>{toTitle(key)}</strong>
+							<ul>
+								{#each paths as [component, experimental]}
+									{@const href = (
+										key == "pages" ? `/${component}/` : `/${key}/${component}/`
+									).replaceAll("//", "/")}
+									<li>
+										<!-- eslint-disable-next-line svelte/valid-compile using $ to access stores currently errors the validator -->
+										<a
+											class="unstyled"
+											class:active={compare(page.route.id, href)}
+											href={base + href + globalProps()}
+											data-sveltekit-preload-data="tap"
+										>
+											{component ? component : "Home"}
+
+											{#if experimental}
+												<Tag variant="alt1" size="small" style="margin-left: 0.2rem;">Beta</Tag>
+											{/if}
+										</a>
+									</li>
+								{/each}
+							</ul>
+						{/each}
+					</div>
+					<hr />
+					<Detail>
+						<!-- eslint-disable-next-line no-undef -->
+						Version: {__version__}
+						{#if page.url.searchParams.get("darkside") != "dark"}
+							<br /><a
+								href="?darkside=dark"
+								data-sveltekit-reload={!page.url.searchParams.get("darkside")}
+								data-sveltekit-noscroll
+							>
+								Try dark darkside
+							</a>
+						{/if}
+						{#if !page.url.searchParams.get("darkside") || page.url.searchParams.get("darkside") == "dark"}
+							<br /><a
+								href="?darkside=light"
+								data-sveltekit-reload={!page.url.searchParams.get("darkside")}
+								data-sveltekit-noscroll
+							>
+								Try light darkside
+							</a>
+						{/if}
+						{#if page.url.searchParams.get("darkside")}
+							<br /><a href="?" data-sveltekit-reload>Remove darkside</a>
+						{/if}
+					</Detail>
+				</div>
+				<Box style="flex-grow: 1;" paddingInline="3">
+					{@render children()}
+				</Box>
+			</div>
+		</PageBlock>
+	</Page>
+{/snippet}
+
+{#if page.url.searchParams.get("darkside")}
+	<Theme theme={page.url.searchParams.get("darkside") == "dark" ? "dark" : "light"}>
+		{@render pageSnippet()}
+	</Theme>
+{:else}
+	{@render pageSnippet()}
+{/if}
 
 <style>
 	.wrapper {

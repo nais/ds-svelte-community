@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
+	import { GetTheme } from "../Theme/Theme.svelte";
 	import { getRadioGroupContext } from "./context.svelte";
 
 	interface Props {
@@ -20,6 +21,7 @@
 	let { value, children, onselect }: Props = $props();
 
 	const ctx = getRadioGroupContext();
+	const theme = GetTheme();
 
 	let checked = $derived(ctx.currentValue == value);
 	let state = $derived(checked ? "checked" : "unchecked");
@@ -63,27 +65,42 @@
 						stroke-width="2"
 						fill="var(--ax-bg-default, var(--a-surface-default))"
 					></rect></g
-				><g class="navds-action-menu__indicator-icon--checked"
-					><rect
-						x="1"
-						y="1"
-						width="22"
-						height="22"
-						rx="11"
-						fill="var(--ax-bg-default, var(--a-surface-default))"
-					></rect><rect
-						x="1"
-						y="1"
-						width="22"
-						height="22"
-						rx="11"
-						stroke="var(--ax-bg-accent-strong-pressed, var(--a-surface-action-selected))"
-						stroke-width="2"
-					></rect><path
-						d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
-						fill="var(--ax-bg-accent-strong-pressed, var(--a-surface-action-selected))"
-					></path></g
-				></svg
+				>
+				{#if theme}
+					<g class="navds-action-menu__indicator-icon--checked">
+						<rect width="24" height="24" rx="12" fill="var(--ax-bg-accent-strong-pressed)" />
+						<rect
+							x="8"
+							y="8"
+							width="8"
+							height="8"
+							rx="4"
+							fill="var(--ax-bg-default, var(--a-surface-default))"
+						/>
+					</g>
+				{:else}
+					<g class="navds-action-menu__indicator-icon--checked"
+						><rect
+							x="1"
+							y="1"
+							width="22"
+							height="22"
+							rx="11"
+							fill="var(--ax-bg-default, var(--a-surface-default))"
+						></rect><rect
+							x="1"
+							y="1"
+							width="22"
+							height="22"
+							rx="11"
+							stroke="var(--ax-bg-accent-strong-pressed, var(--a-surface-action-selected))"
+							stroke-width="2"
+						></rect><path
+							d="M20 12C20 16.4178 16.4178 20 12 20C7.58222 20 4 16.4178 4 12C4 7.58222 7.58222 4 12 4C16.4178 4 20 7.58222 20 12Z"
+							fill="var(--ax-bg-accent-strong-pressed, var(--a-surface-action-selected))"
+						></path></g
+					>
+				{/if}</svg
 			>
 		</div>
 	</div>

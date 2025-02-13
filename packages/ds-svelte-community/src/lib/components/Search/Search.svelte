@@ -17,7 +17,9 @@
 	import { Loader } from "$lib";
 	import MagnifyingGlassIcon from "$lib/icons/MagnifyingGlassIcon.svelte";
 	import XMarkIcon from "$lib/icons/XMarkIcon.svelte";
+	import Button from "../Button/Button.svelte";
 	import { classes, omit } from "../helpers";
+	import { GetTheme } from "../Theme/Theme.svelte";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Label from "../typography/Label/Label.svelte";
 	import SearchButton from "./SearchButton.svelte";
@@ -39,6 +41,8 @@
 		onclear,
 		...restProps
 	}: SearchProps = $props();
+
+	const theme = GetTheme();
 
 	let hasError = false;
 
@@ -69,6 +73,8 @@
 			event.preventDefault();
 		}
 	}
+
+	let showClearButton = $derived(clearButton && !disabled && value);
 </script>
 
 <div
@@ -109,12 +115,27 @@
 				onkeypress={handleInputKeypress}
 			/>
 			{#if value && clearButton}
-				<button type="button" class="navds-search__button-clear" onclick={handleClearClick}>
-					<span class="navds-sr-only">
-						{clearButtonLabel ? clearButtonLabel : "Empty"}
-					</span>
-					<XMarkIcon aria-hidden />
-				</button>
+				{#if theme}
+					<Button
+						class="navds-search__button-clear"
+						variant="tertiary-neutral"
+						size={size === "medium" ? "small" : "xsmall"}
+						title={clearButtonLabel}
+						hidden={!showClearButton}
+						onclick={handleClearClick}
+					>
+						{#snippet icon()}
+							<XMarkIcon aria-hidden />
+						{/snippet}
+					</Button>
+				{:else}
+					<button type="button" class="navds-search__button-clear" onclick={handleClearClick}>
+						<span class="navds-sr-only">
+							{clearButtonLabel ? clearButtonLabel : "Empty"}
+						</span>
+						<XMarkIcon aria-hidden />
+					</button>
+				{/if}
 			{/if}
 		</div>
 

@@ -2,6 +2,7 @@
 	import type { Snippet } from "svelte";
 	import Button from "../Button/Button.svelte";
 	import { classes, omit } from "../helpers";
+	import { GetTheme } from "../Theme/Theme.svelte";
 
 	let {
 		selected = false,
@@ -43,11 +44,13 @@
 
 		[key: string]: unknown;
 	} = $props();
+
+	const theme = GetTheme();
 </script>
 
 <Button
 	{...omit(restProps, "class")}
-	variant="tertiary"
+	variant={theme ? "tertiary-neutral" : "tertiary"}
 	aria-current={selected}
 	data-selected={selected}
 	{disabled}
