@@ -1,6 +1,6 @@
 import type { LayoutServerLoad } from "./$types";
 
-export const load: LayoutServerLoad = async () => {
+export const load: LayoutServerLoad = async ({ params }) => {
 	const paths: Record<string, [string, boolean][]> = {
 		pages: [["", false]],
 	};
@@ -46,6 +46,7 @@ export const load: LayoutServerLoad = async () => {
 
 	return {
 		paths,
+		theme: params.theme,
 	};
 };
 

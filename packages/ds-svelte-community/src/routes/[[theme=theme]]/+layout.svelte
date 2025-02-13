@@ -1,16 +1,6 @@
-<script lang="ts" module>
-	import { page } from "$app/state";
-	export const globalProps = () => {
-		const darkside = page.url.searchParams.get("darkside");
-		if (darkside) {
-			return `?darkside=${darkside}`;
-		}
-		return "";
-	};
-</script>
-
 <script lang="ts">
 	import { base } from "$app/paths";
+	import { page } from "$app/state";
 	import { Box, Detail, Page, PageBlock } from "$lib";
 	import InternalHeader from "$lib/components/InternalHeader/InternalHeader.svelte";
 	import InternalHeaderButton from "$lib/components/InternalHeader/InternalHeaderButton.svelte";
@@ -19,16 +9,17 @@
 	import Tag from "$lib/components/Tag/Tag.svelte";
 	import Theme from "$lib/components/Theme/Theme.svelte";
 	import type { Snippet } from "svelte";
-	import "../doclib/styles.css";
+	import "../../doclib/styles.css";
 	import type { LayoutData } from "./$types";
 
-	if (page.url.searchParams.get("darkside")) {
-		import("../lib/css/darkside.css");
-	} else {
-		import("../lib/css/index.css");
-	}
-
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
+
+	// TODO: Do something smarter about this, maybe using <svelte:head>?
+	if (data.theme) {
+		import("../../lib/css/darkside.css");
+	} else {
+		import("../../lib/css/index.css");
+	}
 
 	function toTitle(str: string) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
@@ -37,15 +28,26 @@
 	let showSidebar = $state(false);
 
 	function compare(id: string | null, a: string) {
+		id = id ? id.replace("/[[theme=theme]]", "") : null;
 		const testID = a.replace(/\/+$/, "");
 		return id === testID || (id == "/" && testID == "");
 	}
+
+	let baseURL = $derived.by(() => {
+		if (data.theme) {
+			return base + "/" + data.theme;
+		}
+		return base;
+	});
+	let compURL = $derived.by(() => {
+		return page.url.pathname.replace(`/${data.theme}/`, "").replace(/^\/+/, "");
+	});
 </script>
 
 {#snippet pageSnippet()}
 	<Page background="bg-subtle">
 		<InternalHeader>
-			<InternalHeaderTitle as="a" href={base + "/"}>ds-svelte-community</InternalHeaderTitle>
+			<InternalHeaderTitle as="a" href={baseURL + "/"}>ds-svelte-community</InternalHeaderTitle>
 			<Spacer />
 			<InternalHeaderButton as="a" href="https://docs.nais.io">Nais Docs</InternalHeaderButton>
 			<div class="mobile">
@@ -75,7 +77,7 @@
 										<a
 											class="unstyled"
 											class:active={compare(page.route.id, href)}
-											href={base + href + globalProps()}
+											href={baseURL + href}
 											data-sveltekit-preload-data="tap"
 										>
 											{component ? component : "Home"}
@@ -93,26 +95,26 @@
 					<Detail>
 						<!-- eslint-disable-next-line no-undef -->
 						Version: {__version__}
-						{#if page.url.searchParams.get("darkside") != "dark"}
+						{#if data.theme != "dark"}
 							<br /><a
-								href="?darkside=dark"
-								data-sveltekit-reload={!page.url.searchParams.get("darkside")}
+								href="{base}/dark/{compURL}"
+								data-sveltekit-reload={!data.theme}
 								data-sveltekit-noscroll
 							>
 								Try dark darkside
 							</a>
 						{/if}
-						{#if !page.url.searchParams.get("darkside") || page.url.searchParams.get("darkside") == "dark"}
+						{#if !data.theme || data.theme == "dark"}
 							<br /><a
-								href="?darkside=light"
-								data-sveltekit-reload={!page.url.searchParams.get("darkside")}
+								href="{base}/light/{compURL}"
+								data-sveltekit-reload={!data.theme}
 								data-sveltekit-noscroll
 							>
 								Try light darkside
 							</a>
 						{/if}
-						{#if page.url.searchParams.get("darkside")}
-							<br /><a href="?" data-sveltekit-reload>Remove darkside</a>
+						{#if data.theme}
+							<br /><a href="{base}/{compURL}" data-sveltekit-reload>Remove darkside</a>
 						{/if}
 					</Detail>
 				</div>
@@ -124,8 +126,8 @@
 	</Page>
 {/snippet}
 
-{#if page.url.searchParams.get("darkside")}
-	<Theme theme={page.url.searchParams.get("darkside") == "dark" ? "dark" : "light"}>
+{#if data.theme}
+	<Theme theme={data.theme as "dark" | "light"}>
 		{@render pageSnippet()}
 	</Theme>
 {:else}

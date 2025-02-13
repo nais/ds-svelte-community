@@ -8,7 +8,6 @@
 	import Heading from "$lib/components/typography/Heading/Heading.svelte";
 	import type { Doc } from "@nais/vite-plugin-svelte-docs";
 	import { type Snippet } from "svelte";
-	import { globalProps } from "../routes/+layout.svelte";
 	import Markdown from "./Markdown.svelte";
 	import Properties from "./Properties.svelte";
 	import Renderer, { type ComponentOptions } from "./Renderer.svelte";
@@ -64,8 +63,6 @@
 	$effect(() => {
 		values = storyProps();
 	});
-
-	let globalSearchParams = $derived(globalProps().replace("?", ""));
 </script>
 
 <svelte:head>
@@ -94,9 +91,7 @@
 				data-sveltekit-replacestate
 				value={name}
 				selected={name === tab}
-				href={name == "Default"
-					? "./" + globalProps()
-					: `?tab=${name}` + (globalSearchParams ? `&${globalSearchParams}` : "")}
+				href={name == "Default" ? `./` : `./?tab=${name}`}
 			>
 				{name}
 			</ToggleChip>
