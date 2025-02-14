@@ -83,9 +83,12 @@
 			restProps.onclose(e);
 		}
 	}}
-	onclick={({ clientX, clientY }) => {
+	onclick={({ target, clientX, clientY }) => {
 		const { left, right, top, bottom } = dialog.getBoundingClientRect();
-		if (clientX < left || clientX > right || clientY < top || clientY > bottom) {
+		if (
+			target === dialog &&
+			(clientX < left || clientX > right || clientY < top || clientY > bottom)
+		) {
 			dialog.close();
 		}
 	}}
