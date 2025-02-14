@@ -1,5 +1,15 @@
 # @nais/vite-plugin-svelte-docs
 
+## 0.0.2-next.2
+
+### Patch Changes
+
+- [#219](https://github.com/nais/ds-svelte-community/pull/219) [`087efb9`](https://github.com/nais/ds-svelte-community/commit/087efb9168db994a7bb944bbad66d91d86aac52c) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Use $props.id() instead of custom unique id generator
+
+  This requires Svelte 5.20 or later
+
+  Also update dependencies
+
 ## 0.0.2-next.1
 
 ### Patch Changes

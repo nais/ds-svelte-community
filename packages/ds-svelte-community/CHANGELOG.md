@@ -1,5 +1,17 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.21
+
+### Patch Changes
+
+- [#219](https://github.com/nais/ds-svelte-community/pull/219) [`087efb9`](https://github.com/nais/ds-svelte-community/commit/087efb9168db994a7bb944bbad66d91d86aac52c) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Use $props.id() instead of custom unique id generator
+
+  This requires Svelte 5.20 or later
+
+  Also update dependencies
+
+- [#222](https://github.com/nais/ds-svelte-community/pull/222) [`7c0ae4f`](https://github.com/nais/ds-svelte-community/commit/7c0ae4f891d60b34a68f678507fcb2f49c2dfe5a) Thanks [@andnorda](https://github.com/andnorda)! - fix bug where clicking select option closes dialog in firefox
+
 ## 1.0.0-next.20
 
 ### Minor Changes
