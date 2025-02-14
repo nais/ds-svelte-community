@@ -6,10 +6,6 @@
 	Read more about this component in the [Aksel documentation](https://aksel.nav.no/komponenter/core/confirmationpanel).
  -->
 
-<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-</script>
-
 <script lang="ts">
 	import { Checkbox } from "../Checkbox";
 	import { classes, omit } from "../helpers";
@@ -29,7 +25,9 @@
 		...restProps
 	}: ConfirmationPanelProps = $props();
 
-	let uid = $derived(id || "confirmation-panel-" + newUniqueId());
+	const cuid = $props.id();
+
+	let uid = $derived(id || "confirmation-panel-" + cuid);
 </script>
 
 <div

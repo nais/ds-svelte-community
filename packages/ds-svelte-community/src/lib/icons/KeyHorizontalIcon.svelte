@@ -1,7 +1,3 @@
-<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-</script>
-
 <script lang="ts">
 	import type { Snippet } from "svelte";
 
@@ -18,7 +14,7 @@
 
 	let { title, children, ...restProps }: Props = $props();
 
-	const id = newUniqueId();
+	const id = $props.id();
 </script>
 
 <svg

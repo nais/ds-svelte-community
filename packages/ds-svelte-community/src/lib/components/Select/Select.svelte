@@ -5,10 +5,6 @@ Select gives the user the ability to choose from predefined answer options.
 Read more about this component in the [Aksel documentation](https://aksel.nav.no/komponenter/core/select).
 -->
 
-<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-</script>
-
 <script lang="ts">
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
 	import { classes, omit } from "../helpers";
@@ -31,7 +27,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		...restProps
 	}: SelectProps = $props();
 
-	const baseID = newUniqueId();
+	const baseID = $props.id();
 	const id = "select-" + baseID;
 	const errorID = "select-error-" + baseID;
 	let srOnlyClass = hideLabel ? "navds-sr-only" : "";

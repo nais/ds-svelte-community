@@ -1,11 +1,9 @@
-<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-</script>
-
 <script lang="ts">
+	const uid = $props.id();
+
 	let {
 		title = "NAV guide illustration",
-		titleID = "ill" + newUniqueId(),
+		titleID = "ill" + uid,
 		...restProps
 	}: {
 		title?: string;

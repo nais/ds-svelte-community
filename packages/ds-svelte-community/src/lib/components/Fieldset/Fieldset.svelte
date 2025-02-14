@@ -1,22 +1,20 @@
-<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-	import { type FieldsetProps } from "./type";
-</script>
-
 <script lang="ts">
 	import { classes, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Detail from "../typography/Detail/Detail.svelte";
 	import ErrorMessage from "../typography/ErrorMessage/ErrorMessage.svelte";
 	import Label from "../typography/Label/Label.svelte";
+	import { type FieldsetProps } from "./type";
+
+	const uid = $props.id();
 
 	let {
 		hideLegend = false,
 		error = "",
-		errorId = "fserr-" + newUniqueId(),
+		errorId = "fserr-" + uid,
 		size = "medium",
 		disabled = false,
-		id = "fs-" + newUniqueId(),
+		id = "fs-" + uid,
 		legend,
 		children,
 		description,

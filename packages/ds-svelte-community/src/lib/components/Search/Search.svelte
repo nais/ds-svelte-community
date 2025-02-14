@@ -8,8 +8,6 @@
 <script lang="ts" module>
 	/* TODO: Add error handling */
 
-	import newUniqueId from "$lib/components/local-unique-id";
-
 	export type SearchClearEvent =
 		| { trigger: "Click"; event: MouseEvent }
 		| { trigger: "Escape"; event: KeyboardEvent };
@@ -44,7 +42,8 @@
 
 	let hasError = false;
 
-	const baseID = "search-" + newUniqueId();
+	const uid = $props.id();
+	const baseID = "search-" + uid;
 
 	let srOnlyClass = $derived(hideLabel ? "navds-sr-only" : "");
 

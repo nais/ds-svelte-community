@@ -12,7 +12,6 @@ ActionMenu is a dropdown menu for actions and navigation. Often used to collect 
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
 	import { type Snippet } from "svelte";
 	import Button from "../Button/Button.svelte";
-	import newUniqueId from "../local-unique-id";
 	import { createFloatingActions, isPolyfilled } from "./floating_wrapper";
 
 	interface Props {
@@ -42,7 +41,8 @@ ActionMenu is a dropdown menu for actions and navigation. Often used to collect 
 	}
 	let { align = "start", trigger, children }: Props = $props();
 
-	const id = "ds-am-" + newUniqueId();
+	const uid = $props.id();
+	const id = "ds-am-" + uid;
 
 	const [floatingRef, floatingContent] = createFloatingActions({
 		placement: "bottom-start",

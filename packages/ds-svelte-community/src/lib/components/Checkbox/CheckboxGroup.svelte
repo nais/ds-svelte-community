@@ -7,7 +7,6 @@
 
 <script lang="ts" module>
 	import Fieldset from "$lib/components/Fieldset/Fieldset.svelte";
-	import newUniqueId from "$lib/components/local-unique-id";
 	import { getContext } from "svelte";
 	import { CheckboxGroupContext, type CheckboxGroupProps } from "./type.svelte";
 
@@ -25,6 +24,8 @@
 	import { hasContext, setContext } from "svelte";
 	import { classes, omit } from "../helpers";
 
+	const uid = $props.id();
+
 	let {
 		value = $bindable([]),
 		hideLegend = false,
@@ -32,7 +33,7 @@
 		errorId = "",
 		size = "medium",
 		disabled = false,
-		id = "cbg-" + newUniqueId(),
+		id = "cbg-" + uid,
 		legend,
 		description,
 		children,

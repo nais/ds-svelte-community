@@ -1,7 +1,3 @@
-<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-</script>
-
 <script lang="ts">
 	import { onDestroy } from "svelte";
 	import { omit } from "../helpers";
@@ -11,7 +7,7 @@
 
 	let { completed = false, interactive, children, ...restProps }: StepProps = $props();
 
-	const id = newUniqueId();
+	const id = $props.id();
 	const ctx = getStepperContext();
 
 	let isInteractive = $derived.by(() => {

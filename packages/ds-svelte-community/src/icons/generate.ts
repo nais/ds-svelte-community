@@ -134,11 +134,7 @@ function templateSvelte(source: string, filename: string) {
 		},
 	});
 
-	return `<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-</script>
-
-<script lang="ts">
+	return `<script lang="ts">
 	import type { Snippet } from "svelte";
 
 	type Props = {
@@ -154,7 +150,7 @@ function templateSvelte(source: string, filename: string) {
 
 	let { title, children, ...restProps }: Props = $props();
 
-  const id = newUniqueId();
+  const id = $props.id();
 </script>
 
 <svg${svg_attributes} aria-labelledby={title ? id : undefined} {...restProps}>

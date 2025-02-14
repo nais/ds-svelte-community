@@ -19,7 +19,6 @@
 </script>
 
 <!-- Called when the user clicks the toggle -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}

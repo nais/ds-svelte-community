@@ -1,7 +1,3 @@
-<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-</script>
-
 <script lang="ts">
 	import { classes } from "../helpers";
 
@@ -21,7 +17,8 @@
 
 	let { title, filled, ...restProps }: Props = $props();
 
-	const titleId = "ht-" + newUniqueId();
+	const uid = $props.id();
+	const titleId = "ht-" + uid;
 </script>
 
 <svg

@@ -5,15 +5,13 @@
 	Read more about this component in the [Aksel documentation](https://aksel.nav.no/komponenter/core/checkbox).
 -->
 
-<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-</script>
-
 <script lang="ts">
 	import { classes, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import { GetCheckboxGroupContext } from "./CheckboxGroup.svelte";
 	import type { CheckboxProps } from "./type.svelte";
+
+	const uid = $props.id();
 
 	let {
 		error = false,
@@ -23,7 +21,7 @@
 		description = "",
 		size,
 		disabled = false,
-		id = "cb-" + newUniqueId(),
+		id = "cb-" + uid,
 		checked = $bindable(undefined),
 		children,
 		onchange,
@@ -32,7 +30,7 @@
 
 	const ctx = GetCheckboxGroupContext();
 
-	const lblID = "cblbl-" + newUniqueId();
+	const lblID = "cblbl-" + uid;
 
 	if (ctx && ctx.groupControlled) {
 		if (checked !== undefined) {
