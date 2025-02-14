@@ -102,7 +102,7 @@
 		"svelte-floating-ui": "^1.5.9"
 	},
 	"devDependencies": {
-		"@happy-dom/global-registrator": "^17.1.0",
+		"@happy-dom/global-registrator": "^15.11.7",
 		"@nais/ds-svelte-community-preprocess-svelte": "workspace:*",
 		"@nais/vite-plugin-svelte-docs": "workspace:*",
 		"@navikt/aksel-icons": "^7.12.2",

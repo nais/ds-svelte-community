@@ -71,6 +71,7 @@ describe("which components are implemented", () => {
 		"Spacer",
 		"TableColumnHeader",
 		"Textarea",
+		"Theme",
 		"Timeline",
 		"TimelinePeriod",
 		"TimelinePin",

@@ -2527,6 +2527,12 @@ export const Components: KnownComponents = {
 		SnowIcon: {
 			path: "icons/SnowIcon.svelte",
 		},
+		SortDownIcon: {
+			path: "icons/SortDownIcon.svelte",
+		},
+		SortUpIcon: {
+			path: "icons/SortUpIcon.svelte",
+		},
 		SparkLargeIcon: {
 			path: "icons/SparkLargeIcon.svelte",
 		},

@@ -94,6 +94,7 @@
 				/>
 			</svg>
 		</span>
+		<span class="navds-checkbox__icon-indeterminate"></span>
 		{#if children}
 			<span class="navds-checkbox__content" class:navds-sr-only={hideLabel}>
 				<BodyShort as="span" {size} class="navds-checkbox__label-text" aria-hidden>
