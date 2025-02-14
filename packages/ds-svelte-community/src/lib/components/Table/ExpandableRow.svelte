@@ -8,7 +8,6 @@ Create an expandable row in a table. `content` will be shown when the row is exp
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
 	import { slide } from "svelte/transition";
 	import { classes, omit } from "../helpers";
-	import newUniqueId from "../local-unique-id";
 	import Td from "./Td.svelte";
 	import Tr from "./Tr.svelte";
 	import type { TableExpandableRowProps } from "./type.svelte";
@@ -28,7 +27,8 @@ Create an expandable row in a table. `content` will be shown when the row is exp
 		...restProps
 	}: TableExpandableRowProps = $props();
 
-	const id = `erow-${newUniqueId()}`;
+	const uid = $props.id();
+	const id = `erow-${uid}`;
 
 	function isInteractiveTarget(elm: HTMLElement) {
 		if (elm.nodeName === "TD" || elm.nodeName === "TH" || !elm.parentElement) {

@@ -6,10 +6,6 @@
 	Read more about this component in the [Aksel documentation](https://aksel.nav.no/komponenter/core/loader).
 -->
 
-<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-</script>
-
 <script lang="ts">
 	import { classes, omit } from "../helpers";
 	import type { LoaderProps } from "./type";
@@ -22,7 +18,8 @@
 		...restProps
 	}: LoaderProps = $props();
 
-	const id = "ldr" + newUniqueId();
+	const uid = $props.id();
+	const id = "ldr" + uid;
 </script>
 
 <svg

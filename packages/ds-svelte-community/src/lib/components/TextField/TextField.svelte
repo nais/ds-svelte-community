@@ -4,22 +4,21 @@ TextField is a classic input element that gives users the ability to write short
 
 Read more about this component in the [Aksel documentation](https://aksel.nav.no/komponenter/core/textfield).
 -->
-<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-</script>
 
 <script lang="ts">
 	import { BodyShort, Detail, ErrorMessage, Label } from "$lib";
 	import { classes, omit } from "../helpers";
 	import type { TextFieldProps } from "./type";
 
+	const uid = $props.id();
+
 	let {
 		value = $bindable(""),
-		id = "tf-" + newUniqueId(),
+		id = "tf-" + uid,
 		hideLabel = false,
 		type = "text",
 		error = "",
-		errorId = "tf-" + newUniqueId(),
+		errorId = "tf-" + uid,
 		size = "medium",
 		disabled = false,
 		htmlSize,

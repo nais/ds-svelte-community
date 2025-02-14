@@ -1,6 +1,5 @@
 import { getContext, type Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
-import newUniqueId from "../local-unique-id";
 
 export const sizes = ["small", "medium"] as const;
 export const iconPositions = ["left", "top"] as const;
@@ -14,10 +13,11 @@ export class TabContext {
 	tabs: HTMLElement[] = $state([]);
 	tabIndex: Record<string, HTMLElement> = $state({});
 	activeTab?: HTMLElement = $state();
-	baseID: string = newUniqueId();
+	baseID: string;
 
-	constructor(value: string) {
+	constructor(value: string, baseID: string) {
 		this.value = value;
+		this.baseID = baseID;
 	}
 	activate(value: string) {
 		this.value = value;

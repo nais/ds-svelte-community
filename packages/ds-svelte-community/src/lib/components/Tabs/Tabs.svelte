@@ -21,7 +21,8 @@
 		...restProps
 	}: TabsProps = $props();
 
-	const ctx = new TabContext(value);
+	const id = $props.id();
+	const ctx = new TabContext(value, id);
 	$effect(() => {
 		ctx.value = value;
 		ctx.loop = loop;

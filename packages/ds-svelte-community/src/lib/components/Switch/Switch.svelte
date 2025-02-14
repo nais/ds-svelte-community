@@ -5,10 +5,6 @@ Switch is used to quickly change between two states. Often to toggle preferences
 Read more about this component in the [Aksel documentation](https://aksel.nav.no/komponenter/core/switch).
 -->
 
-<script lang="ts" module>
-	import newUniqueId from "$lib/components/local-unique-id";
-</script>
-
 <script lang="ts">
 	import Loader from "../Loader/Loader.svelte";
 	import { classes, omit } from "../helpers";
@@ -29,7 +25,8 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		...restProps
 	}: SwitchProps = $props();
 
-	const id = `switch-${newUniqueId()}`;
+	const uid = $props.id();
+	const id = `switch-${uid}`;
 </script>
 
 <div

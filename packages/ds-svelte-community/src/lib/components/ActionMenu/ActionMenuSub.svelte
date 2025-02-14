@@ -5,7 +5,6 @@
 <script lang="ts">
 	import ChevronRightIcon from "$lib/icons/ChevronRightIcon.svelte";
 	import { type Snippet } from "svelte";
-	import newUniqueId from "../local-unique-id";
 	import ActionMenuMarker from "./ActionMenuMarker.svelte";
 	import { createFloatingActions, isPolyfilled } from "./floating_wrapper";
 
@@ -21,7 +20,8 @@
 	}
 	let { trigger, children }: Props = $props();
 
-	const id = "ds-ams-" + newUniqueId();
+	const uid = $props.id();
+	const id = "ds-ams-" + uid;
 
 	const [floatingRef, floatingContent] = createFloatingActions({
 		placement: "right-start",

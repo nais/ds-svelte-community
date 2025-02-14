@@ -775,6 +775,8 @@ export { default as SkipBackwardIcon } from "./SkipBackwardIcon.svelte";
 export { default as SkipForwardFillIcon } from "./SkipForwardFillIcon.svelte";
 export { default as SkipForwardIcon } from "./SkipForwardIcon.svelte";
 export { default as SnowIcon } from "./SnowIcon.svelte";
+export { default as SortDownIcon } from "./SortDownIcon.svelte";
+export { default as SortUpIcon } from "./SortUpIcon.svelte";
 export { default as SparkLargeIcon } from "./SparkLargeIcon.svelte";
 export { default as SparkSmallIcon } from "./SparkSmallIcon.svelte";
 export { default as SparklesFillIcon } from "./SparklesFillIcon.svelte";
