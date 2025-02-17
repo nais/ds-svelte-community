@@ -77,7 +77,7 @@
 
 	$effect(() => {
 		if (anchorEl && popover) {
-			floatingRef(anchorEl);
+			floatingRef(anchorEl as HTMLElement);
 			anchorEl.addEventListener("focusout", () => {
 				open = false;
 			});
