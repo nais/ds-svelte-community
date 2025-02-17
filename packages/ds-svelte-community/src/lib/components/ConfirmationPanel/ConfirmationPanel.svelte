@@ -36,6 +36,7 @@
 	class:navds-confirmation-panel--small={size === "small"}
 	class:navds-confirmation-panel--error={error != ""}
 	class:navds-confirmation-panel--checked={!!checked}
+	data-color-role="warning"
 >
 	<div class="navds-confirmation-panel__inner">
 		{#if children}
