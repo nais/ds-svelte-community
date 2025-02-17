@@ -1081,6 +1081,9 @@ export const Components: KnownComponents = {
 		ExpandIcon: {
 			path: "icons/ExpandIcon.svelte",
 		},
+		ExpandVerticalIcon: {
+			path: "icons/ExpandVerticalIcon.svelte",
+		},
 		ExternalLinkFillIcon: {
 			path: "icons/ExternalLinkFillIcon.svelte",
 		},
@@ -2268,6 +2271,12 @@ export const Components: KnownComponents = {
 		},
 		QrCodeScanningIcon: {
 			path: "icons/QrCodeScanningIcon.svelte",
+		},
+		QuestionmarkCircleFillIcon: {
+			path: "icons/QuestionmarkCircleFillIcon.svelte",
+		},
+		QuestionmarkCircleIcon: {
+			path: "icons/QuestionmarkCircleIcon.svelte",
 		},
 		QuestionmarkDiamondFillIcon: {
 			path: "icons/QuestionmarkDiamondFillIcon.svelte",
