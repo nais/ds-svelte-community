@@ -28,9 +28,9 @@ export const createFloatingActions: (
 	return [
 		(e: HTMLElement | Writable<VirtualElement> | VirtualElement) => {
 			if ("firstElementChild" in e && e.firstElementChild) {
-				return refAction(e.firstElementChild);
+				return refAction(e.firstElementChild as HTMLElement);
 			}
-			return refAction(e);
+			return refAction(e as HTMLElement);
 		},
 		contentAction,
 		updatePosition,
