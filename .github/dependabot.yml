@@ -5,12 +5,12 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
+  - package-ecosystem: "bun" # See documentation for possible values
     directory: "/packages/ds-svelte-community" # Location of package manifests
     schedule:
       interval: "weekly"
     groups:
-      npm:
+      other:
         patterns:
           - "*"
         exclude-patterns:
@@ -18,12 +18,12 @@ updates:
       aksel:
         patterns:
           - "@navikt/*"
-  - package-ecosystem: "npm" # See documentation for possible values
+  - package-ecosystem: "bun" # See documentation for possible values
     directory: "/packages/ds-svelte-community-preprocess-svelte" # Location of package manifests
     schedule:
       interval: "weekly"
     groups:
-      npm:
+      other:
         patterns:
           - "*"
 
