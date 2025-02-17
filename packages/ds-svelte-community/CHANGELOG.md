@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.22
+
+### Minor Changes
+
+- [#223](https://github.com/nais/ds-svelte-community/pull/223) [`8780daa`](https://github.com/nais/ds-svelte-community/commit/8780daa69d81664cc4327159ee95ae9c9a6d70b6) Thanks [@andnorda](https://github.com/andnorda)! - New icons from Aksel
+
 ## 1.0.0-next.21
 
 ### Patch Changes
