@@ -9,7 +9,7 @@
 	import { classes, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import { GetCheckboxGroupContext } from "./CheckboxGroup.svelte";
-	import type { CheckboxProps } from "./type.svelte";
+	import type { CheckboxProps } from "./type";
 
 	const uid = $props.id();
 

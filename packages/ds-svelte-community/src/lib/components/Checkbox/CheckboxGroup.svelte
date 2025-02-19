@@ -8,8 +8,31 @@
 <script lang="ts" module>
 	import Fieldset from "$lib/components/Fieldset/Fieldset.svelte";
 	import { getContext } from "svelte";
-	import { CheckboxGroupContext, type CheckboxGroupProps } from "./type.svelte";
+	import { sizes, type CheckboxGroupProps } from "./type";
 
+	export class CheckboxGroupContext {
+		values: unknown[] = $state([]);
+		groupControlled: boolean | undefined = $state(undefined);
+		hasError = $state(false);
+		size: (typeof sizes)[number] = $state("medium");
+		// change: (value: unknown) => void;
+		// groupControlled: boolean;
+		// values: Readable<unknown[]>;
+		// hasError: Readable<boolean>;
+		// size: (typeof sizes)[number];
+
+		onchange(value: unknown) {
+			if (!this.groupControlled) {
+				return;
+			}
+
+			if (this.values.includes(value)) {
+				this.values.splice(this.values.indexOf(value), 1);
+			} else {
+				this.values.push(value);
+			}
+		}
+	}
 	const contextKey = Symbol("CheckboxGroupContext");
 
 	export function GetCheckboxGroupContext(): CheckboxGroupContext | undefined {

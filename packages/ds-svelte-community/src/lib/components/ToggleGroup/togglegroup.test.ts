@@ -33,24 +33,6 @@ describe("ToggleGroup", () => {
 
 						return true;
 					},
-
-					alterAttrValue(name, value) {
-						// TODO: Figure out why after switching to happy-dom `outline: none` is replaced with full syntax.
-						if (
-							name == "style" &&
-							value == "outline-style: none; outline-width: initial; outline-color: none"
-						) {
-							value = "outline: none";
-						}
-						return value;
-					},
-					// compareAttrs(node, attr) {
-					// 	// Remove attrs known to be unique
-					// 	if (["id", "aria-describedby", "for"].includes(attr)) {
-					// 		return false;
-					// 	}
-					// 	return true;
-					// },
 				},
 			}),
 		).toBeTrue();

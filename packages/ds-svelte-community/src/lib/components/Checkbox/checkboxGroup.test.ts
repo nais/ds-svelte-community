@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet, type Snippet } from "svelte";
 import Checkbox from "./CheckboxGroup.test.svelte";
-import { type CheckboxGroupProps, type CheckboxProps } from "./type.svelte";
+import { type CheckboxGroupProps, type CheckboxProps } from "./type";
 
 const snippetText = (v: string): Snippet => {
 	return createRawSnippet(() => ({
@@ -19,7 +19,7 @@ TypeError: component is not an Object. (evaluating 'FILENAME in component')
       at [ADD_OWNER] (/home/thomas/Development/nais/ds-svelte-community/node_modules/svelte/src/internal/client/dev/ownership.js:255:16)
 ✗ CheckboxGroup > renders CheckboxGroup similar to ds-react with descriptions
 */
-describe.skip("CheckboxGroup", () => {
+describe("CheckboxGroup", () => {
 	it("renders CheckboxGroup similar to ds-react", async () => {
 		const props: Omit<CheckboxGroupProps, "children"> = {
 			legend: "Checkbox legend",
