@@ -74,8 +74,8 @@
 
 		.navds-action-menu__item:hover {
 			outline: none;
-			background-color: var(--a-surface-action-subtle-hover);
-			color: var(--a-text-default);
+			background-color: var(--ax-bg-accent-moderate-hoverA, var(--a-surface-action-subtle-hover));
+			color: var(--ax-text-neutral, var(--a-text-default));
 		}
 	}
 </style>

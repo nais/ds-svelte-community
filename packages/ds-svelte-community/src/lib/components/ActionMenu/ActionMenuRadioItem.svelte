@@ -55,7 +55,7 @@
 						width="24"
 						height="24"
 						rx="12"
-						fill="var(--ax-border-default, var(--a-border-default))"
+						fill="var(--ax-border-neutral, var(--a-border-default))"
 					></rect><rect
 						x="1"
 						y="1"
@@ -122,8 +122,8 @@
 
 		.navds-action-menu__item:hover {
 			outline: none;
-			background-color: var(--a-surface-action-subtle-hover);
-			color: var(--a-text-default);
+			background-color: var(--ax-bg-accent-moderate-hoverA, var(--a-surface-action-subtle-hover));
+			color: var(--ax-text-neutral, var(--a-text-default));
 		}
 	}
 </style>
