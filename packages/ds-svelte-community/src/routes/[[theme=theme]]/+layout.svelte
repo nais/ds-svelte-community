@@ -45,7 +45,7 @@
 </script>
 
 {#snippet pageSnippet()}
-	<Page background="bg-subtle">
+	<Page background={data.theme ? undefined : "bg-subtle"}>
 		<InternalHeader>
 			<InternalHeaderTitle as="a" href={baseURL + "/"}>ds-svelte-community</InternalHeaderTitle>
 			<Spacer />
@@ -159,8 +159,8 @@
 		min-width: 200px;
 		max-width: 200px;
 		padding: 1rem 0;
-		padding-inline-start: var(--ax-spacing-3, var(--a-spacing-3));
-		border-right: 1px solid var(--ax-border-subtle, var(--a-border-divider));
+		padding-inline-start: var(--ax-space-12, var(--a-spacing-3));
+		border-right: 1px solid var(--ax-border-neutral-subtle, var(--a-border-divider));
 	}
 
 	.section {
@@ -184,8 +184,7 @@
 				font-size: var(--ax-font-size-medium, var(--a-font-size-medium));
 				line-height: var(--ax-font-line-height-large, var(--a-font-line-height-large));
 				padding: 0.125rem 0;
-				padding-inline: var(--ax-spacing-3, var(--a-spacing-3))
-					var(--ax-spacing-2, var(--a-spacing-2));
+				padding-inline: var(--ax-space-12, var(--a-spacing-3)) var(--ax-space-8, var(--a-spacing-2));
 				text-decoration: none;
 				text-underline-offset: 2px;
 				width: 100%;
@@ -224,7 +223,7 @@
 			min-width: unset;
 			max-width: unset;
 			border: 0;
-			padding-inline: var(--ax-spacing-3, var(--a-spacing-3));
+			padding-inline: var(--ax-space-12, var(--a-spacing-3));
 			border-bottom: 2px solid var(--ax-border-neutral, var(--a-border-divider));
 			position: absolute;
 			background: var(--ax-bg-default, var(--__ac-page-background));

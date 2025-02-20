@@ -5,7 +5,7 @@
 
 	let {
 		as = "div",
-		background = "bg-default",
+		background = undefined,
 		footerPosition = undefined,
 		contentBlockPadding = "end",
 		children,
@@ -14,9 +14,12 @@
 	}: PageProps = $props();
 
 	const theme = GetTheme();
+	if (!theme && !background) {
+		background = "bg-default";
+	}
 
 	if (process.env.NODE_ENV !== "production" && theme && background) {
-		console.warn(`Prop \`background\` is deprecated and cannot be used with theme-support. `);
+		console.warn(`<Page>: Prop "background" is deprecated and cannot be used with theme-support. `);
 	}
 
 	let belowFold = $derived(footerPosition === "belowFold");

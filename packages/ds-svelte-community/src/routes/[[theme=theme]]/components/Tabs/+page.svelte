@@ -52,14 +52,14 @@
 	}
 
 	.examplePanel1 {
-		background-color: var(--a-gray-50);
+		background-color: var(--ax-accent-100A, var(--a-gray-50));
 	}
 
 	.examplePanel2 {
-		background-color: var(--a-green-50);
+		background-color: var(--ax-accent-300A, var(--a-green-50));
 	}
 
 	.examplePanel3 {
-		background-color: var(--a-red-50);
+		background-color: var(--ax-accent-400A, var(--a-red-50));
 	}
 </style>

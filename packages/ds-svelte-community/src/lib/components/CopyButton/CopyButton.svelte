@@ -12,7 +12,9 @@
 	import CheckmarkIcon from "$lib/icons/CheckmarkIcon.svelte";
 	import FilesIcon from "$lib/icons/FilesIcon.svelte";
 	import { onDestroy } from "svelte";
+	import Button from "../Button/Button.svelte";
 	import { classes, omit } from "../helpers";
+	import { GetTheme } from "../Theme/Theme.svelte";
 	import { Label } from "../typography";
 	import type { CopyButtonProps } from "./type";
 
@@ -25,6 +27,7 @@
 		activeDuration = 2000,
 		title = "Copy",
 		activeTitle = "Copied",
+		iconPosition = "left",
 		activechanged,
 		icon,
 		...restProps
@@ -32,6 +35,7 @@
 
 	let active = $state(false);
 	let timeout: ReturnType<typeof setTimeout> | null = null;
+	const theme = GetTheme();
 
 	onDestroy(() => {
 		if (timeout) {
@@ -61,40 +65,73 @@
 	};
 </script>
 
-<button
-	{...omit(restProps, "class")}
-	type="button"
-	class={classes(
-		restProps,
-		"navds-copybutton",
-		`navds-copybutton--${size}`,
-		`navds-copybutton--${variant}`,
-	)}
-	class:navds-copybutton--icon-only={!text}
-	class:navds-copybutton--active={active}
-	onclick={handleClick}
->
-	<span class="navds-copybutton__content">
-		<span class="navds-copybutton__icon">
-			{#if icon}
-				{@render icon(active)}
+{#if theme}
+	{@const nestedIcon = icon}
+	{#snippet children()}
+		{#if active}
+			{activeText}
+		{:else}
+			{text}
+		{/if}
+	{/snippet}
+
+	<Button
+		type="button"
+		class={classes(restProps, "navds-copybutton")}
+		{...restProps}
+		variant={variant === "action" ? "tertiary" : "tertiary-neutral"}
+		onclick={handleClick}
+		{iconPosition}
+		data-active={active}
+		{size}
+		children={text ? children : undefined}
+	>
+		{#snippet icon()}
+			{#if nestedIcon}
+				{@render nestedIcon(active)}
 			{:else if active}
 				<CheckmarkIcon aria-hidden={!!text} title={text ? undefined : activeTitle} />
 			{:else}
 				<FilesIcon aria-hidden={!!text} title={text ? undefined : title} />
 			{/if}
-		</span>
+		{/snippet}
+	</Button>
+{:else}
+	<button
+		{...omit(restProps, "class")}
+		type="button"
+		class={classes(
+			restProps,
+			"navds-copybutton",
+			`navds-copybutton--${size}`,
+			`navds-copybutton--${variant}`,
+		)}
+		class:navds-copybutton--icon-only={!text}
+		class:navds-copybutton--active={active}
+		onclick={handleClick}
+	>
+		<span class="navds-copybutton__content">
+			<span class="navds-copybutton__icon">
+				{#if icon}
+					{@render icon(active)}
+				{:else if active}
+					<CheckmarkIcon aria-hidden={!!text} title={text ? undefined : activeTitle} />
+				{:else}
+					<FilesIcon aria-hidden={!!text} title={text ? undefined : title} />
+				{/if}
+			</span>
 
-		{#if text}
-			{#if active}
-				<Label as="span" size={size === "medium" ? "medium" : "small"}>
-					{activeText}
-				</Label>
-			{:else}
-				<Label as="span" size={size === "medium" ? "medium" : "small"}>
-					{text}
-				</Label>
+			{#if text}
+				{#if active}
+					<Label as="span" size={size === "medium" ? "medium" : "small"}>
+						{activeText}
+					</Label>
+				{:else}
+					<Label as="span" size={size === "medium" ? "medium" : "small"}>
+						{text}
+					</Label>
+				{/if}
 			{/if}
-		{/if}
-	</span>
-</button>
+		</span>
+	</button>
+{/if}
