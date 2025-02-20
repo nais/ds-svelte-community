@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Checkbox, CheckboxGroup } from "$lib";
-	import type { CheckboxGroupProps, CheckboxProps } from "./type.svelte";
+	import type { CheckboxGroupProps, CheckboxProps } from "./type";
 
 	let {
 		wrapper,

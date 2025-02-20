@@ -59,30 +59,6 @@ export interface CheckboxGroupProps extends HTMLFieldsetAttributes {
 	children: Snippet;
 }
 
-export class CheckboxGroupContext {
-	values: unknown[] = $state([]);
-	groupControlled: boolean | undefined = $state(undefined);
-	hasError = $state(false);
-	size: (typeof sizes)[number] = $state("medium");
-	// change: (value: unknown) => void;
-	// groupControlled: boolean;
-	// values: Readable<unknown[]>;
-	// hasError: Readable<boolean>;
-	// size: (typeof sizes)[number];
-
-	onchange(value: unknown) {
-		if (!this.groupControlled) {
-			return;
-		}
-
-		if (this.values.includes(value)) {
-			this.values.splice(this.values.indexOf(value), 1);
-		} else {
-			this.values.push(value);
-		}
-	}
-}
-
 export interface CheckboxProps extends Omit<HTMLInputAttributes, "size"> {
 	/**
 	 * The value of the HTML element.

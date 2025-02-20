@@ -1,10 +1,10 @@
-import { GlobalRegistrator } from "@happy-dom/global-registrator";
 import { plugin, type OnLoadCallback } from "bun";
+import "global-jsdom/register";
+import rop from "resize-observer-polyfill";
 import { transformWithEsbuild } from "vite";
 
-const oldConsole = console;
-GlobalRegistrator.register();
-window.console = oldConsole;
+// Add polyfill for ResizeObserver
+global.ResizeObserver = rop;
 
 await plugin({
 	name: "svelte loader",
