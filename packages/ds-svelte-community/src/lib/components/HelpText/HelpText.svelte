@@ -7,6 +7,7 @@
 
 <script lang="ts">
 	import Popover from "../Popover/Popover.svelte";
+	import { GetTheme } from "../Theme/Theme.svelte";
 	import { classes, omit } from "../helpers";
 	import HelpTextIcon from "./HelpTextIcon.svelte";
 	import type { HelpTextProps } from "./type";
@@ -19,6 +20,8 @@
 		children,
 		...restProps
 	}: HelpTextProps = $props();
+
+	const theme = GetTheme();
 
 	let btnEl: HTMLButtonElement | undefined = $state(undefined);
 	let open = $state(false);
@@ -44,7 +47,8 @@
 		anchorEl={btnEl}
 		{placement}
 		{strategy}
-		offset={12}
+		offset={theme ? 8 : 12}
+		arrow={!theme}
 	>
 		{@render children()}
 	</Popover>

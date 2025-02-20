@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { classes, omit } from "$lib/components/helpers";
+	import { GetTheme } from "$lib/components/Theme/Theme.svelte";
 	import { combineStyles, getResponsiveProps, getResponsiveValue } from "$lib/components/utils/css";
 	import type { ResponsiveProp } from "$lib/components/utils/types";
 	import type { HGridProps } from "./type";
 
 	let { columns, gap, align, as = "div", children, ...restProps }: HGridProps = $props();
+
+	const theme = GetTheme();
+	const prefix = theme ? "ax" : "a";
 
 	function formatGrid(props?: ResponsiveProp<number | string>): ResponsiveProp<number | string> {
 		if (!props) {
@@ -41,10 +45,11 @@
 	})}
 	style={combineStyles(
 		restProps,
-		getResponsiveProps(`hgrid`, "gap", "spacing", gap),
-		getResponsiveValue(`hgrid`, "columns", formatGrid(columns)),
+		getResponsiveProps(prefix, `hgrid`, "gap", "spacing", gap),
+		getResponsiveValue(prefix, `hgrid`, "columns", formatGrid(columns)),
 	)}
-	style:--__ac-hgrid-align={align}
+	style:--__ac-hgrid-align={prefix == "a" ? align : undefined}
+	style:--__axc-hgrid-align={prefix == "ax" ? align : undefined}
 >
 	{@render children()}
 </svelte:element>

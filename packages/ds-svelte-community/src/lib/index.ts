@@ -26,6 +26,7 @@ export * from "./components/Table";
 export * from "./components/Tabs";
 export * from "./components/Tag";
 export * from "./components/TextField";
+export { default as Theme } from "./components/Theme/Theme.svelte";
 export * from "./components/ToggleGroup";
 export * from "./components/Tooltip";
 export * from "./components/typography";

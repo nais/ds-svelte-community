@@ -1,16 +1,26 @@
 <script lang="ts">
 	import { classes, omit } from "$lib/components/helpers";
+	import { GetTheme } from "$lib/components/Theme/Theme.svelte";
 	import type { PageProps } from "./type";
 
 	let {
 		as = "div",
-		background = "bg-default",
+		background = undefined,
 		footerPosition = undefined,
 		contentBlockPadding = "end",
 		children,
 		footer,
 		...restProps
 	}: PageProps = $props();
+
+	const theme = GetTheme();
+	if (!theme && !background) {
+		background = "bg-default";
+	}
+
+	if (process.env.NODE_ENV !== "production" && theme && background) {
+		console.warn(`<Page>: Prop "background" is deprecated and cannot be used with theme-support. `);
+	}
 
 	let belowFold = $derived(footerPosition === "belowFold");
 </script>

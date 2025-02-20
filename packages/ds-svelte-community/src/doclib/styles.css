@@ -4,7 +4,7 @@ code {
 	background: var(--ax-bg-meta-purple-moderate, var(--a-surface-alt-1-subtle));
 	border-radius: var(--ax-border-radius-small, var(--a-border-radius-small));
 	padding: 0.1rem 0.3rem;
-	font-size: 0.7rem;
+	font-size: var(--ax-font-size-small, 0.7rem);
 }
 
 .shiki {

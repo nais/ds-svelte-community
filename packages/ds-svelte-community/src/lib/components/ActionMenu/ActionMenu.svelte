@@ -103,6 +103,7 @@ ActionMenu is a dropdown menu for actions and navigation. Often used to collect 
 	.navds-action-menu__content {
 		margin: 0;
 		border: 0;
+		padding: 0;
 		outline: none;
 	}
 

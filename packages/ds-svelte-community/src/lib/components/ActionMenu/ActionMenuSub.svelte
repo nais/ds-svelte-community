@@ -84,14 +84,15 @@
 
 		&:hover {
 			outline: none;
-			background-color: var(--a-surface-action-subtle-hover);
-			color: var(--a-text-default);
+			background-color: var(--ax-bg-accent-moderate-hoverA, var(--a-surface-action-subtle-hover));
+			color: var(--ax-text-neutral, var(--a-text-default));
 		}
 	}
 
 	.navds-action-menu__content {
 		margin: 0;
 		border: 0;
+		padding: 0;
 		outline: none;
 		pointer-events: auto;
 		position-area: right span-bottom;

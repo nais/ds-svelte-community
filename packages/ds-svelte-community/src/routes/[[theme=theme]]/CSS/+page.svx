@@ -28,3 +28,15 @@ Although, you might not need to add `@tailwind base;` and `@tailwind components;
 To preview darkside, import `@nais/ds-svelte-community/css/darkside.css` instead of `@nais/ds-svelte-community/css`.
 
 Add `navds-theme` as a class to your `body` element, and optionally the `dark` class.
+
+Wrap the entire page in a `<Theme>` component.
+
+```svelte
+<script lang="ts">
+	import { Theme } from "@nais/ds-svelte-community";
+</script>
+
+<Theme theme="dark">
+	Page contents
+</Theme
+```

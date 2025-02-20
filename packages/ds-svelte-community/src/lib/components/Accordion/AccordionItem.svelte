@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
 	import { classes, omit } from "../helpers";
+	import { GetTheme } from "../Theme/Theme.svelte";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import Heading from "../typography/Heading/Heading.svelte";
 	import { GetAccordionContext } from "./Accordion.svelte";
@@ -9,6 +10,7 @@
 	let { open = false, heading, children, ...restProps }: AccordionItemProps = $props();
 
 	const ctx = GetAccordionContext();
+	const theme = GetTheme();
 
 	const handleClick = () => {
 		open = !open;
@@ -21,6 +23,14 @@
 	if (!ctx) {
 		console.error("<AccordionItem> was used outside of an <Accordion> component");
 	}
+
+	let headingSize = $derived.by(() => {
+		/* Fallback to "medium" Accordion-size if any other sizes are used */
+		if (theme) {
+			return ctx?.size === "small" ? "xsmall" : "small";
+		}
+		return ctx?.headingSize ?? "small";
+	});
 </script>
 
 <div
@@ -34,7 +44,7 @@
 		<span class="navds-accordion__icon-wrapper">
 			<ChevronDownIcon class="navds-accordion__header-chevron" aria-hidden="true" />
 		</span>
-		<Heading size={ctx?.headingSize} as="span" class="navds-accordion__header-content">
+		<Heading size={headingSize} as="span" class="navds-accordion__header-content">
 			{#if typeof heading === "string"}
 				{heading}
 			{:else if heading}
@@ -49,7 +59,11 @@
 		aria-hidden={open ? undefined : true}
 		class="navds-accordion__content{open ? '' : ' navds-accordion__content--closed'}"
 	>
-		{@render children()}
+		{#if theme}
+			<div class="navds-accordion__content-inner">{@render children()}</div>
+		{:else}
+			{@render children()}
+		{/if}
 	</BodyLong>
 	<!-- </div> -->
 </div>
