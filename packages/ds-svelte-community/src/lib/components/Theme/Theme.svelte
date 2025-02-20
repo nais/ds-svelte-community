@@ -54,6 +54,8 @@
 	const ctx = newContext(theme ?? parent?.theme ?? "light");
 
 	$effect(() => {
+		// Hack to make this only run when the `theme` variable changes
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		theme;
 		untrack(() => {
 			ctx.theme = theme ?? parent?.theme ?? "light";
