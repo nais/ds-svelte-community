@@ -42,6 +42,13 @@
 		}
 	}
 
+	let checkedValue = $derived.by(() => {
+		if (ctx && ctx.groupControlled) {
+			return ctx.values.includes(value);
+		}
+		return checked;
+	});
+
 	const hasErrorStore = ctx ? ctx.hasError : null;
 	let hasError = $derived(hasErrorStore ? hasErrorStore : error);
 
@@ -62,9 +69,11 @@
 		aria-invalid={hasError ? "true" : undefined}
 		aria-labelledby={lblID}
 		bind:indeterminate
-		bind:checked
+		checked={checkedValue}
 		{value}
 		onchange={(e) => {
+			checked = e.currentTarget.checked;
+
 			if (ctx) {
 				ctx.onchange(value);
 			}
