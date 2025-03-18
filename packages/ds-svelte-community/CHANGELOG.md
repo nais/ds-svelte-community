@@ -1,5 +1,13 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.23
+
+### Patch Changes
+
+- [#233](https://github.com/nais/ds-svelte-community/pull/233) [`506751c`](https://github.com/nais/ds-svelte-community/commit/506751c560677cab0692d19f3b9593120625a437) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Introduce Theme component to support darkside
+
+- [#230](https://github.com/nais/ds-svelte-community/pull/230) [`3602a4a`](https://github.com/nais/ds-svelte-community/commit/3602a4ac743b55c69f5c0dd23eacc58b36d21dff) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Fix reactivity of CheckboxGroup value
+
 ## 1.0.0-next.22
 
 ### Minor Changes
