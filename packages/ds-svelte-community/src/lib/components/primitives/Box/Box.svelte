@@ -8,6 +8,7 @@
 
 <script lang="ts">
 	import { classes, omit } from "$lib/components/helpers";
+	import { GetTheme } from "$lib/components/Theme/Theme.svelte";
 	import { combineStyles, getResponsiveProps } from "$lib/components/utils/css";
 	import BasePrimitive from "../base/BasePrimitive.svelte";
 	import type { BoxProps } from "./type";
@@ -22,6 +23,15 @@
 		children,
 		...restProps
 	}: BoxProps = $props();
+
+	const theme = GetTheme();
+	if (process.env.NODE_ENV !== "production" && theme && (background || borderColor || shadow)) {
+		console.warn(
+			`<Box /> with properties 'background', 'borderColor' or 'shadow' cannot be used with darkmode-support.`,
+		);
+	}
+
+	const prefix = theme ? "ax" : "a";
 </script>
 
 <BasePrimitive
@@ -36,18 +46,18 @@
 	})}
 	style={combineStyles(
 		restProps,
-		getResponsiveProps("box", "border-radius", "border-radius", borderRadius, false, ["0"]),
+		getResponsiveProps(prefix, "box", "border-radius", "border-radius", borderRadius, false, ["0"]),
 		{
-			"--__ac-box-background": background ? `var(--a-${background})` : null,
-			"--__ac-box-border-color": borderColor ? `var(--a-${borderColor})` : null,
-			"--__ac-box-border-width": borderWidth
+			[`--__${prefix}c-box-background`]: background ? `var(--a-${background})` : null,
+			[`--__${prefix}c-box-border-color`]: borderColor ? `var(--a-${borderColor})` : null,
+			[`--__${prefix}c-box-shadow`]: shadow ? `var(--a-shadow-${shadow})` : null,
+			[`--__${prefix}c-box-border-width`]: borderWidth
 				? borderWidth
 						.split(" ")
 						.map((x) => `${x}px`)
 						.join(" ")
 				: null,
-			"--__ac-box-shadow": shadow ? `var(--a-shadow-${shadow})` : null,
 		},
 	)}
-	>{#if children}{@render children()}{/if}</BasePrimitive
->
+	{children}
+/>

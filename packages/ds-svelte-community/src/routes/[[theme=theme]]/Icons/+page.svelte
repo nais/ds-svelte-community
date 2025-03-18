@@ -76,7 +76,7 @@
 
 <div class="wrapper">
 	<div class="grid" style="--size: {size}rem">
-		{#each iconData as icon}
+		{#each iconData as icon (icon.name)}
 			{@const Icon = getIcon(icon.name)}
 			<button
 				class="icon"
@@ -89,7 +89,11 @@
 					<span>{icon.name}</span>
 					<span>{icon.category}</span>
 				</div>
-				<Icon style="width: {size}rem; height: {size}rem" />
+				{#if Icon}
+					<Icon style="width: {size}rem; height: {size}rem" />
+				{:else}
+					<span>{icon.name} failed</span>
+				{/if}
 			</button>
 		{/each}
 	</div>

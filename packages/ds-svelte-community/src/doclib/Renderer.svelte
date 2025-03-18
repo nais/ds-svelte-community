@@ -123,7 +123,7 @@
 <style>
 	.preview {
 		background-color: var(--ax-bg-default, var(--a-surface-default));
-		border: 1px solid var(--ax-border-default, var(--a-border-default));
+		border: 1px solid var(--ax-border-neutral, var(--a-border-default));
 		border-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
 		min-height: 250px;
 		position: relative;
@@ -178,7 +178,7 @@
 		bottom: -1px;
 		right: -1px;
 		font-size: var(--ax-font-size-small, var(--a-font-size-small));
-		border: 1px solid var(--ax-border-default, var(--a-border-default));
+		border: 1px solid var(--ax-border-neutral, var(--a-border-default));
 		border-radius: 0;
 		border-top-left-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
 		padding: 0.2rem 0.5rem;

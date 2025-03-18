@@ -14,6 +14,7 @@
 
 	import { writable } from "svelte/store";
 	import { classes, omit } from "../helpers";
+	import { GetTheme } from "../Theme/Theme.svelte";
 	import type { PopoverProps } from "./type";
 
 	let {
@@ -29,13 +30,14 @@
 		...restProps
 	}: PopoverProps = $props();
 
+	const theme = GetTheme();
 	const arrowRef = writable<HTMLElement | null>(null);
 
 	const [floatingRef, floatingContent, update] = createFloatingActions({
 		placement,
 		strategy,
 		middleware: [
-			offsetMW(offset ?? (arrow ? 16 : 4)),
+			offsetMW(offset ?? (theme ? 8 : arrow ? 16 : 4)),
 			flip ? flipMW({ padding: 5, fallbackPlacements: ["bottom", "top"] }) : null,
 			shiftMW({ padding: 12 }),
 			arrow ? arrowMW({ element: arrowRef, padding: 0 }) : null,
@@ -96,7 +98,7 @@
 	<div class="navds-popover__content {contentClass}">
 		{@render children()}
 	</div>
-	{#if arrow}
+	{#if !theme && arrow}
 		<div class="navds-popover__arrow" bind:this={$arrowRef}></div>
 	{/if}
 </div>

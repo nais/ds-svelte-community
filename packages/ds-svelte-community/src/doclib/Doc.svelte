@@ -91,7 +91,7 @@
 				data-sveltekit-replacestate
 				value={name}
 				selected={name === tab}
-				href={name == "Default" ? "./" : `?tab=${name}`}
+				href={name == "Default" ? `./` : `./?tab=${name}`}
 			>
 				{name}
 			</ToggleChip>

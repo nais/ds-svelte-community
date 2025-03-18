@@ -7,6 +7,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 <script lang="ts">
 	import { Detail } from "$lib";
 	import { classes } from "../helpers";
+	import { GetTheme } from "../Theme/Theme.svelte";
 	import type { TooltipProps } from "./type";
 
 	let {
@@ -21,6 +22,8 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		children,
 		...restProps
 	}: TooltipProps = $props();
+
+	const theme = GetTheme();
 
 	$effect(() => {
 		if (content.length > maxChar) {
@@ -175,7 +178,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 					{/each}
 				</span>
 			{/if}
-			{#if arrow}
+			{#if !theme && arrow}
 				<div class="navds-tooltip__arrow" style={arrowStyles}></div>
 			{/if}
 		</div>

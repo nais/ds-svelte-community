@@ -45,6 +45,11 @@ export interface CopyButtonProps extends HTMLButtonAttributes {
 	activechanged?: (active: boolean) => void;
 
 	/**
+	 * Position of the icon
+	 */
+	iconPosition?: "left" | "right";
+
+	/**
 	 * Use custom icons. The snippet receives the active-state as argument.
 	 * Should only return a single icon.
 	 */
