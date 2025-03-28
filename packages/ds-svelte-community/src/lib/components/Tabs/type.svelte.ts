@@ -69,6 +69,11 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
 	 * Element to render as.
 	 */
 	as?: "button" | "a";
+
+	/**
+	 * URL to navigate to if `as` is set to "a".
+	 */
+	href?: string;
 }
 
 export interface TabListProps extends HTMLAttributes<HTMLDivElement> {
