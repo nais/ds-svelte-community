@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.24
+
+### Patch Changes
+
+- [#240](https://github.com/nais/ds-svelte-community/pull/240) [`04c7116`](https://github.com/nais/ds-svelte-community/commit/04c71166cb9b6f81f0488f76daa1c6fe333701e9) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add href to tab component
+
 ## 1.0.0-next.23
 
 ### Patch Changes
