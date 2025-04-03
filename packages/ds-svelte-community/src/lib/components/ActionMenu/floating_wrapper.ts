@@ -4,17 +4,16 @@ import {
 	type ComputeConfig,
 	type ContentAction,
 	type ReferenceAction,
-	type UpdatePosition,
+	type Update,
+	type VirtualElementStore,
 } from "svelte-floating-ui";
-import { flip, offset, shift } from "svelte-floating-ui/core";
-import { type VirtualElement } from "svelte-floating-ui/dom";
-import type { Writable } from "svelte/store";
+import { flip, offset, shift, type VirtualElement } from "svelte-floating-ui/dom";
 
 export const isPolyfilled = browser && !("anchorName" in document.documentElement.style);
 
 export const createFloatingActions: (
 	initOptions?: ComputeConfig,
-) => [ReferenceAction, ContentAction, UpdatePosition] = (initOptions) => {
+) => [ReferenceAction, ContentAction, Update] = (initOptions) => {
 	if (!isPolyfilled) {
 		return [() => {}, () => {}, () => {}];
 	}
@@ -26,7 +25,7 @@ export const createFloatingActions: (
 	const [refAction, contentAction, updatePosition] = cfa(opts);
 
 	return [
-		(e: HTMLElement | Writable<VirtualElement> | VirtualElement) => {
+		(e: HTMLElement | SVGElement | VirtualElementStore | VirtualElement) => {
 			if ("firstElementChild" in e && e.firstElementChild) {
 				return refAction(e.firstElementChild as HTMLElement);
 			}

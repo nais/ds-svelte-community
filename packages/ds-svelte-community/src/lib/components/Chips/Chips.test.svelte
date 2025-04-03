@@ -21,7 +21,7 @@
 </script>
 
 <Chips {size}>
-	{#each values as value}
+	{#each values as value (value)}
 		<li>
 			{#if toggle}
 				<ToggleChip selected={value == selected} {value}>{value}</ToggleChip>

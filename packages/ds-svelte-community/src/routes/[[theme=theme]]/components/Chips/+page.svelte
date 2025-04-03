@@ -27,7 +27,7 @@
 <Doc {doc} extraChildrenDoc={[toggleDoc, removableDoc]}>
 	<Story>
 		<Chips>
-			{#each values as value}
+			{#each values as value (value.name)}
 				<li>
 					<RemovableChip
 						value={value.name}
@@ -42,7 +42,7 @@
 
 	<Story name="ToggleChips">
 		<Chips>
-			{#each toggleValues as value}
+			{#each toggleValues as value (value.name)}
 				<ToggleChip value={value.name} bind:selected={value.selected}>
 					{value.name}
 				</ToggleChip>

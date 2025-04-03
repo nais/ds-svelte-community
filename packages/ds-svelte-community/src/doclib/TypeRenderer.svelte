@@ -22,11 +22,11 @@
 
 {#if show}
 	{#if Array.isArray(typ)}
-		{#each typ as t, i}
+		{#each typ as t, i (i)}
 			<TypeRenderer type={t} show={shouldShowAll || showAll || i < maxItems} />
 		{/each}
 	{:else if typ.type == "union"}
-		{#each typ.values as t, i}
+		{#each typ.values as t, i (i)}
 			<TypeRenderer type={t} show={shouldShowAll || showAll || i < maxItems} />
 		{/each}
 	{:else if ["string", "number", "boolean", "undefined", "null"].includes(typ.type)}

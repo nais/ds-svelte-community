@@ -18,7 +18,7 @@
 	<Story locked>
 		<div class="wrapper">
 			<div class="grid">
-				{#each PopoverPlacement as placement}
+				{#each PopoverPlacement as placement (placement)}
 					<div style:grid-area={placement}>
 						<Demo {placement} />
 					</div>

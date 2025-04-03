@@ -16,7 +16,7 @@
 </script>
 
 <Accordion>
-	{#each items as item}
+	{#each items as item (item)}
 		<AccordionItem {...omit(item, "content")}>{item.content}</AccordionItem>
 	{/each}
 </Accordion>

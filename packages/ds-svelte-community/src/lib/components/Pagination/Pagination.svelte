@@ -92,7 +92,7 @@
 				{/if}
 			</Item>
 		</li>
-		{#each steps as step}
+		{#each steps as step, i (i)}
 			{@const n = Number(step)}
 			{#if isNaN(n)}
 				<li class="navds-pagination__ellipsis">

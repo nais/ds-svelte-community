@@ -83,7 +83,7 @@
 
 <div class="menu">
 	<Chips>
-		{#each stories || [] as { name }}
+		{#each stories || [] as { name } (name)}
 			<ToggleChip
 				as="a"
 				variant="action"
@@ -132,7 +132,7 @@
 	{/if}
 {/key}
 
-{#each extraChildrenDoc as doc}
+{#each extraChildrenDoc as doc (doc.name)}
 	<Box paddingBlock="4 0">
 		<Heading level="3" size="small">{doc.name} {@render experimental(doc.experimental)}</Heading>
 	</Box>

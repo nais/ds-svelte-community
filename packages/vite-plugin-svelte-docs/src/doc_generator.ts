@@ -70,7 +70,7 @@ export class DocGenerator {
 		});
 		ret.description = description;
 
-		const func = sourceFile.getFunction("render");
+		const func = sourceFile.getFunction("render") ?? sourceFile.getFunction("$$render");
 		if (!func) {
 			throw new Error("No render function found");
 		}

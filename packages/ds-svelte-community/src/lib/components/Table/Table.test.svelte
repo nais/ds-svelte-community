@@ -11,16 +11,16 @@
 <Table>
 	<Thead>
 		<Tr>
-			{#each Object.keys(data[0]) as key}
+			{#each Object.keys(data[0]) as key (key)}
 				<Th scope="col">{key}</Th>
 			{/each}
 		</Tr>
 	</Thead>
 
 	<Tbody>
-		{#each data as row}
+		{#each data as row (row)}
 			<Tr>
-				{#each Object.keys(row) as key, index}
+				{#each Object.keys(row) as key, index (key)}
 					{#if index === 0}
 						<Th scope="row">{row[key]}</Th>
 					{:else}

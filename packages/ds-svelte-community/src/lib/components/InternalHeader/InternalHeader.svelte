@@ -20,7 +20,7 @@
 <!-- This component is always in dark mode, so we wrap it with a custom Theme component if a theme is set. -->
 {#if theme}
 	<Theme
-		theme={"dark"}
+		theme="dark"
 		{children}
 		class={classes(restProps, "navds-internalheader")}
 		{...omit(restProps, "class")}
