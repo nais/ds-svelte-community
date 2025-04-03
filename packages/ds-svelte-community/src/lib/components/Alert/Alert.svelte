@@ -33,41 +33,56 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-alert", `navds-alert--${variant}`, `navds-alert--${size}`)}
-	class:navds-alert--full-width={fullWidth}
-	class:navds-alert--inline={inline}
-	class:navds-alert--close-button={closeButton}
+	class={classes([
+		restProps.class,
+		"navds-alert",
+		`navds-alert--${variant}`,
+		`navds-alert--${size}`,
+		{
+			"navds-alert--full-width": fullWidth,
+			"navds-alert--inline": inline,
+			"navds-alert--close-button": closeButton,
+		},
+	])}
 >
 	{#if variant == "error"}
-		<ErrorFilledIcon class="navds-alert__icon" title={iconTitleText ? iconTitleText : "Error"} />
+		<ErrorFilledIcon
+			class={classes("navds-alert__icon")}
+			title={iconTitleText ? iconTitleText : "Error"}
+		/>
 	{:else if variant == "warning"}
 		<WarningFilledIcon
-			class="navds-alert__icon"
+			class={classes("navds-alert__icon")}
 			title={iconTitleText ? iconTitleText : "Warning"}
 		/>
 	{:else if variant == "info"}
 		<InformationFilledIcon
-			class="navds-alert__icon"
+			class={classes("navds-alert__icon")}
 			title={iconTitleText ? iconTitleText : "Information"}
 		/>
 	{:else if variant == "success"}
 		<SuccessFilledIcon
-			class="navds-alert__icon"
+			class={classes("navds-alert__icon")}
 			title={iconTitleText ? iconTitleText : "Success"}
 		/>
 	{/if}
 	<BodyLong
 		as="div"
 		{size}
-		class={`navds-alert__wrapper ${contentMaxWidth && "navds-alert__wrapper--maxwidth"}`}
+		class={classes([
+			"navds-alert__wrapper",
+			{
+				"navds-alert__wrapper--maxwidth": contentMaxWidth,
+			},
+		])}
 	>
 		{@render children()}
 	</BodyLong>
 
 	{#if closeButton && !inline}
-		<div class="navds-alert__button-wrapper">
+		<div class={classes("navds-alert__button-wrapper")}>
 			<Button
-				class="navds-alert__button"
+				class={classes("navds-alert__button")}
 				size="small"
 				variant="tertiary-neutral"
 				type="button"

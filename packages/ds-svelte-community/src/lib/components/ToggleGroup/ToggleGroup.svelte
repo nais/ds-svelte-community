@@ -44,14 +44,21 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	});
 </script>
 
-<div {...omit(restProps, "class")} class={classes(restProps, "navds-toggle-group__wrapper")}>
+<div
+	{...omit(restProps, "class")}
+	class={classes([restProps.class, "navds-toggle-group__wrapper"])}
+>
 	{#if label}
-		<Label {size} class="navds-toggle-group__label">{label}</Label>
+		<Label {size} class={classes("navds-toggle-group__label")}>{label}</Label>
 	{/if}
 
 	<div
 		role="radiogroup"
-		class="navds-toggle-group navds-toggle-group--{size} navds-toggle-group--{variant}"
+		class={classes([
+			"navds-toggle-group",
+			`navds-toggle-group--${size}`,
+			`navds-toggle-group--${variant}`,
+		])}
 		tabindex="0"
 	>
 		{@render children()}

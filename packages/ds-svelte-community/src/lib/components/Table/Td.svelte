@@ -11,9 +11,13 @@
 <BodyShort
 	{...omit(restProps)}
 	as="td"
-	class={classes(restProps, "navds-table__data-cell", {
-		[`navds-table__data-cell--align-${align}`]: !!align,
-	})}
+	class={classes([
+		restProps.class,
+		"navds-table__data-cell",
+		{
+			[`navds-table__data-cell--align-${align}`]: !!align,
+		},
+	])}
 	size={ctx.size}
 >
 	{@render children?.()}

@@ -37,10 +37,16 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <div
 	{...omit(restProps, "class", "style")}
-	class={classes(restProps, "navds-skeleton", `navds-skeleton--${variant}`)}
-	class:navds-skeleton--has-children={!!children}
-	class:navds-skeleton--no-height={!height}
-	class:navds-skeleton--no-width={!width}
+	class={classes([
+		restProps.class,
+		"navds-skeleton",
+		`navds-skeleton--${variant}`,
+		{
+			"navds-skeleton--has-children": !!children,
+			"navds-skeleton--no-height": !height,
+			"navds-skeleton--no-width": !width,
+		},
+	])}
 	style={style(restProps, width, height)}
 	aria-hidden="true"
 >

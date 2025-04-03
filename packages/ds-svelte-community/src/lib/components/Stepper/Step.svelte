@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy } from "svelte";
-	import { omit } from "../helpers";
+	import { classes, omit } from "../helpers";
 	import Label from "../typography/Label/Label.svelte";
 	import CompletedIcon from "./CompletedIcon.svelte";
 	import { getStepperContext, type StepProps } from "./type.svelte";
@@ -32,16 +32,16 @@
 </script>
 
 <li
-	class="navds-stepper__item"
+	class={classes("navds-stepper__item")}
 	class:navds-stepper__item--behind={index < ctx.activeStep}
 	class:navds-stepper__item--non-interactive={!isInteractive}
 	class:navds-stepper__item--completed={completed}
 >
-	<span class="navds-stepper__line navds-stepper__line--1"></span>
+	<span class={classes(["navds-stepper__line", "navds-stepper__line--1"])}></span>
 	<svelte:element
 		this={as}
 		{...omit(restProps, "class")}
-		class="navds-stepper__step"
+		class={classes("navds-stepper__step")}
 		class:navds-stepper__step--active={index == ctx.activeStep}
 		class:navds-stepper__step--behind={index < ctx.activeStep}
 		class:navds-stepper__step--non-interactive={!isInteractive}
@@ -56,17 +56,17 @@
 		data-interactive={isInteractive}
 	>
 		{#if completed}
-			<span class="navds-stepper__circle navds-stepper__circle--success">
+			<span class={classes(["navds-stepper__circle", "navds-stepper__circle--success"])}>
 				<CompletedIcon />
 			</span>
 		{:else}
-			<Label class="navds-stepper__circle" as="span" aria-hidden="true">
+			<Label class={classes("navds-stepper__circle")} as="span" aria-hidden="true">
 				{index}
 			</Label>
 		{/if}
-		<Label as="span" class="navds-stepper__content">
+		<Label as="span" class={classes("navds-stepper__content")}>
 			{@render children()}
 		</Label>
 	</svelte:element>
-	<span class="navds-stepper__line navds-stepper__line--2"></span>
+	<span class={classes(["navds-stepper__line", "navds-stepper__line--2"])}></span>
 </li>

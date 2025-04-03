@@ -39,10 +39,14 @@
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-hgrid", {
-		"navds-hgrid-align": !!align,
-		"navds-hgrid-gap": !!gap,
-	})}
+	class={classes([
+		restProps.class,
+		"navds-hgrid",
+		{
+			"navds-hgrid-align": !!align,
+			"navds-hgrid-gap": !!gap,
+		},
+	])}
 	style={combineStyles(
 		restProps,
 		getResponsiveProps(prefix, `hgrid`, "gap", "spacing", gap),

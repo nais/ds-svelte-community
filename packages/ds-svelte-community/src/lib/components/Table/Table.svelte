@@ -35,8 +35,14 @@ The component names differ from `@navikt/ds-react` to align with the HTML standa
 
 <table
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-table", `navds-table--${size}`)}
-	class:navds-table--zebra-stripes={zebraStripes}
+	class={classes([
+		restProps.class,
+		"navds-table",
+		`navds-table--${size}`,
+		{
+			"navds-table--zebra-stripes": zebraStripes,
+		},
+	])}
 >
 	{@render children()}
 </table>

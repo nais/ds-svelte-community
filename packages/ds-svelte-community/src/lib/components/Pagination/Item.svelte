@@ -58,8 +58,12 @@
 	{icon}
 	{iconPosition}
 	{children}
-	class={classes(restProps, "navds-pagination__item", {
-		"navds-pagination__item--selected": selected,
-	})}
+	class={classes([
+		restProps.class,
+		"navds-pagination__item",
+		{
+			"navds-pagination__item--selected": selected,
+		},
+	])}
 	type="button"
 />

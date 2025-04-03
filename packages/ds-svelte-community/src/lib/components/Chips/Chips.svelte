@@ -16,11 +16,17 @@
 
 <ul
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-chips", `navds-chips--${size}`)}
-	class:navds-body-short={size === "medium"}
-	class:navds-body-short--small={size === "medium"}
-	class:navds-detail={size === "small"}
-	class:navds-detail--small={size === "small"}
+	class={classes([
+		restProps.class,
+		"navds-chips",
+		`navds-chips--${size}`,
+		{
+			"navds-body-short": size === "medium",
+			"navds-body-short--small": size === "medium",
+			"navds-detail": size === "small",
+			"navds-detail--small": size === "small",
+		},
+	])}
 >
 	{@render children()}
 </ul>

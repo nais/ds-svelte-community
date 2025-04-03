@@ -32,15 +32,21 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-confirmation-panel", "navds-form-field")}
-	class:navds-confirmation-panel--small={size === "small"}
-	class:navds-confirmation-panel--error={error != ""}
-	class:navds-confirmation-panel--checked={!!checked}
+	class={classes([
+		restProps.class,
+		"navds-confirmation-panel",
+		"navds-form-field",
+		{
+			"navds-confirmation-panel--small": size === "small",
+			"navds-confirmation-panel--error": error != "",
+			"navds-confirmation-panel--checked": !!checked,
+		},
+	])}
 	data-color-role="warning"
 >
-	<div class="navds-confirmation-panel__inner">
+	<div class={classes("navds-confirmation-panel__inner")}>
 		{#if children}
-			<BodyLong {size} class="navds-confirmation-panel__content" id={uid} as="div">
+			<BodyLong {size} class={classes("navds-confirmation-panel__content")} id={uid} as="div">
 				<!-- Description -->
 				{@render children()}
 			</BodyLong>
@@ -53,7 +59,7 @@
 			{/if}
 		</Checkbox>
 	</div>
-	<div class="navds-form-field__error" id={errorId} role="alert">
+	<div class={classes("navds-form-field__error")} id={errorId} role="alert">
 		{#if !!error}
 			<ErrorMessage {size}>{error}</ErrorMessage>
 		{/if}

@@ -77,8 +77,8 @@
 
 	<Button
 		type="button"
-		class={classes(restProps, "navds-copybutton")}
 		{...restProps}
+		class={classes([restProps.class, "navds-copybutton"])}
 		variant={variant === "action" ? "tertiary" : "tertiary-neutral"}
 		onclick={handleClick}
 		{iconPosition}
@@ -100,18 +100,18 @@
 	<button
 		{...omit(restProps, "class")}
 		type="button"
-		class={classes(
-			restProps,
+		class={classes([
+			restProps.class,
 			"navds-copybutton",
 			`navds-copybutton--${size}`,
 			`navds-copybutton--${variant}`,
-		)}
+		])}
 		class:navds-copybutton--icon-only={!text}
 		class:navds-copybutton--active={active}
 		onclick={handleClick}
 	>
-		<span class="navds-copybutton__content">
-			<span class="navds-copybutton__icon">
+		<span class={classes("navds-copybutton__content")}>
+			<span class={classes("navds-copybutton__icon")}>
 				{#if icon}
 					{@render icon(active)}
 				{:else if active}

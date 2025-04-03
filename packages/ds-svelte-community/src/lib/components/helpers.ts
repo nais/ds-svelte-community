@@ -1,21 +1,24 @@
+import clsx from "clsx";
 import type { Component, Snippet } from "svelte";
+import type { ClassValue } from "svelte/elements";
+import { GetTheme } from "./Theme/Theme.svelte";
 
-export function classes(
-	props: Record<string, unknown>,
-	...classes: (string | { [key: string]: boolean })[]
-): string {
-	const c = classes
-		.flatMap((x) => {
-			if (typeof x === "string") {
-				return x;
-			}
-			return Object.keys(x).filter((k) => x[k]);
-		})
-		.join(" ");
-	if (props.class) {
-		return `${props.class} ${c}`;
+export function classes(input: ClassValue): ClassValue {
+	const classes = clsx(input);
+	const theme = GetTheme();
+
+	if (!theme) {
+		return classes;
 	}
-	return c;
+
+	return (
+		classes
+			/* Replaces only if start of string  "navds- navds-"*/
+			.replace(/^navds-/g, "aksel-")
+			/* Replaces all " navds-" hits */
+			.replace(/\snavds-/g, " aksel-")
+			.trim()
+	);
 }
 
 export enum Focus {

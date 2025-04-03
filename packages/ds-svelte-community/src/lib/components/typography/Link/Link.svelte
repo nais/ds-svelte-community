@@ -17,9 +17,15 @@
 	<a
 		{...omit(restProps, "class", "href")}
 		{href}
-		class={classes(restProps, "navds-link", "navds-link--" + variant)}
-		class:navds-link--inline-text={inlineText}
-		class:navds-link--remove-underline={!underline}
+		class={classes([
+			restProps.class,
+			"navds-link",
+			"navds-link--" + variant,
+			{
+				"navds-link--inline-text": inlineText,
+				"navds-link--remove-underline": !underline,
+			},
+		])}
 	>
 		{@render children()}
 	</a>
@@ -27,9 +33,15 @@
 	<svelte:element
 		this={as}
 		{...omit({ ...restProps, href }, "class")}
-		class={classes(restProps, "navds-link", "navds-link--" + variant)}
-		class:navds-link--inline-text={inlineText}
-		class:navds-link--remove-underline={!underline}
+		class={classes([
+			restProps.class,
+			"navds-link",
+			"navds-link--" + variant,
+			{
+				"navds-link--inline-text": inlineText,
+				"navds-link--remove-underline": !underline,
+			},
+		])}
 	>
 		{@render children()}
 	</svelte:element>

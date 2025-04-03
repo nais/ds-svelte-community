@@ -22,15 +22,19 @@
 <BasePrimitive
 	{as}
 	{...omit(restProps, "class", "style")}
-	class={classes(restProps, "navds-stack", {
-		"navds-vstack": direction === "column",
-		"navds-hstack": direction === "row",
-		"navds-stack-gap": !!gap,
-		"navds-stack-align": !!align,
-		"navds-stack-justify": !!justify,
-		"navds-stack-direction": !!direction,
-		"navds-stack-wrap": wrap,
-	})}
+	class={classes([
+		restProps.class,
+		"navds-stack",
+		{
+			"navds-vstack": direction === "column",
+			"navds-hstack": direction === "row",
+			"navds-stack-gap": !!gap,
+			"navds-stack-align": !!align,
+			"navds-stack-justify": !!justify,
+			"navds-stack-direction": !!direction,
+			"navds-stack-wrap": wrap,
+		},
+	])}
 	style={combineStyles(
 		restProps,
 		getResponsiveProps(prefix, "stack", "gap", "spacing", gap),

@@ -22,9 +22,16 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-alert", `navds-alert--${variant}`, `navds-alert--${size}`)}
-	class:navds-alert--full-width={fullWidth}
-	class:navds-alert--inline={inline}
+	class={classes([
+		restProps.class,
+		"navds-alert",
+		`navds-alert--${variant}`,
+		`navds-alert--${size}`,
+		{
+			"navds-alert--full-width": fullWidth,
+			"navds-alert--inline": inline,
+		},
+	])}
 >
 	{iconTitleText}
 	{#if variant == "error"}

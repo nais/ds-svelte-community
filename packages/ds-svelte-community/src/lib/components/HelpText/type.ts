@@ -1,5 +1,5 @@
 import type { Snippet } from "svelte";
-import type { HTMLButtonAttributes } from "svelte/elements";
+import type { ClassValue, HTMLButtonAttributes } from "svelte/elements";
 import type { PopoverProps } from "../Popover/type";
 
 export interface HelpTextProps
@@ -12,7 +12,7 @@ export interface HelpTextProps
 	/**
 	 * Adds a class to the wrapper element
 	 */
-	wrapperClass?: string;
+	wrapperClass?: ClassValue;
 
 	/**
 	 * Help content

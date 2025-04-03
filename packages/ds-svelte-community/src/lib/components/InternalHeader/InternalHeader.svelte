@@ -22,11 +22,11 @@
 	<Theme
 		theme="dark"
 		{children}
-		class={classes(restProps, "navds-internalheader")}
+		class={classes([restProps.class, "navds-internalheader"])}
 		{...omit(restProps, "class")}
 	/>
 {:else}
-	<header data-theme="dark" class={classes(restProps, "navds-internalheader")}>
+	<header data-theme="dark" class={classes([restProps.class, "navds-internalheader"])}>
 		{@render children()}
 	</header>
 {/if}

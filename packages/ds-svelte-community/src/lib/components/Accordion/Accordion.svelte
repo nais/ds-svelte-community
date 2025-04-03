@@ -42,8 +42,14 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-accordion", `navds-accordion--${size}`)}
-	class:navds-accordion--indent={indent}
+	class={classes([
+		restProps.class,
+		"navds-accordion",
+		`navds-accordion--${size}`,
+		{
+			"navds-accordion--indent": indent,
+		},
+	])}
 >
 	{@render children()}
 </div>

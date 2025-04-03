@@ -14,10 +14,16 @@
 
 <svelte:element
 	this={as}
-	class={classes(restProps, "navds-error-message", "navds-label")}
-	class:navds-label--small={size === "small"}
-	class:navds-typo--spacing={!!spacing}
-	class:navds-error-message--show-icon={showIcon}
+	class={classes([
+		restProps.class,
+		"navds-error-message",
+		"navds-label",
+		{
+			"navds-label--small": size === "small",
+			"navds-typo--spacing": !!spacing,
+			"navds-error-message--show-icon": showIcon,
+		},
+	])}
 	{...restProps}
 >
 	{#if showIcon}

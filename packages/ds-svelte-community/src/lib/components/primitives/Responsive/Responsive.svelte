@@ -11,10 +11,14 @@
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-responsive", {
-		[`navds-responsive__above--${aboveProp}`]: !!aboveProp,
-		[`navds-responsive__below--${belowProp}`]: !!belowProp,
-	})}
+	class={classes([
+		restProps.class,
+		"navds-responsive",
+		{
+			[`navds-responsive__above--${aboveProp}`]: !!aboveProp,
+			[`navds-responsive__below--${belowProp}`]: !!belowProp,
+		},
+	])}
 >
 	{@render children()}
 </svelte:element>

@@ -1,12 +1,13 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
+	import type { ClassValue } from "svelte/elements";
 	import { classes } from "../helpers";
 
 	type MarkerProps = {
 		/**
 		 * The class of the marker.
 		 */
-		class: string;
+		class: ClassValue;
 		/**
 		 * The placement of the marker.
 		 */
@@ -22,7 +23,11 @@
 
 <div
 	aria-hidden="true"
-	class={classes(restProps, "navds-action-menu__marker", `navds-action-menu__marker--${placement}`)}
+	class={classes([
+		restProps.class,
+		"navds-action-menu__marker",
+		`navds-action-menu__marker--${placement}`,
+	])}
 >
 	{@render children()}
 </div>

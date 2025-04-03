@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { classes } from "../helpers";
+</script>
+
 <svg
 	width="12"
 	height="10"
@@ -7,7 +11,7 @@
 	focusable="false"
 	role="img"
 	aria-hidden="true"
-	class="navds-switch__checkmark"
+	class={classes("navds-switch__checkmark")}
 >
 	<path
 		fill-rule="evenodd"

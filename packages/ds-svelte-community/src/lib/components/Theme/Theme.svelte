@@ -69,7 +69,7 @@
 
 <svelte:element
 	this={as}
-	class={["navds-theme", restProps?.class, ctx.theme]}
+	class={["aksel-theme", restProps?.class, ctx.theme]}
 	data-background={containsBackground}
 >
 	{@render children()}

@@ -35,16 +35,26 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-accordion__item")}
-	class:navds-accordion__item--open={open}
-	class:navds-accordion__item--neutral={ctx?.variant === "neutral"}
+	class={classes([
+		restProps,
+		"navds-accordion__item",
+		{
+			"navds-accordion__item--open": open,
+			"navds-accordion__item--neutral": ctx?.variant === "neutral",
+		},
+	])}
 	data-expanded={open}
 >
-	<button class="navds-accordion__header" aria-expanded={open} type="button" onclick={handleClick}>
-		<span class="navds-accordion__icon-wrapper">
-			<ChevronDownIcon class="navds-accordion__header-chevron" aria-hidden="true" />
+	<button
+		class={classes("navds-accordion__header")}
+		aria-expanded={open}
+		type="button"
+		onclick={handleClick}
+	>
+		<span class={classes("navds-accordion__icon-wrapper")}>
+			<ChevronDownIcon class={classes("navds-accordion__header-chevron")} aria-hidden="true" />
 		</span>
-		<Heading size={headingSize} as="span" class="navds-accordion__header-content">
+		<Heading size={headingSize} as="span" class={classes("navds-accordion__header-content")}>
 			{#if typeof heading === "string"}
 				{heading}
 			{:else if heading}
@@ -57,10 +67,10 @@
 	<BodyLong
 		as="div"
 		aria-hidden={open ? undefined : true}
-		class="navds-accordion__content{open ? '' : ' navds-accordion__content--closed'}"
+		class={classes(["navds-accordion__content", { "navds-accordion__content--closed": !open }])}
 	>
 		{#if theme}
-			<div class="navds-accordion__content-inner">{@render children()}</div>
+			<div class={classes("navds-accordion__content-inner")}>{@render children()}</div>
 		{:else}
 			{@render children()}
 		{/if}

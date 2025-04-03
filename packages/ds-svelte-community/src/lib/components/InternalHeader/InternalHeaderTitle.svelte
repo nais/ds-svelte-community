@@ -19,9 +19,14 @@
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-internalheader__title", "navds-body-short", {
-		unstyled: as == "a" && !!restProps.href,
-	})}
+	class={classes([
+		restProps.class,
+		"navds-internalheader__title",
+		"navds-body-short",
+		{
+			unstyled: as == "a" && !!restProps.href,
+		},
+	])}
 >
 	<span>{@render children()}</span>
 </svelte:element>

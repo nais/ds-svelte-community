@@ -37,13 +37,17 @@
 <BasePrimitive
 	{as}
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-box", {
-		"navds-box-bg": !!background,
-		"navds-box-border-color": !!borderColor,
-		"navds-box-border-width": !!borderWidth,
-		"navds-box-border-radius": !!borderRadius,
-		"navds-box-shadow": !!shadow,
-	})}
+	class={classes([
+		restProps.class,
+		"navds-box",
+		{
+			"navds-box-bg": !!background,
+			"navds-box-border-color": !!borderColor,
+			"navds-box-border-width": !!borderWidth,
+			"navds-box-border-radius": !!borderRadius,
+			"navds-box-shadow": !!shadow,
+		},
+	])}
 	style={combineStyles(
 		restProps,
 		getResponsiveProps(prefix, "box", "border-radius", "border-radius", borderRadius, false, ["0"]),

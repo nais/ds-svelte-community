@@ -30,8 +30,13 @@
 	focusable="false"
 	role="img"
 	aria-labelledby={titleId}
-	class={classes(restProps, "navds-help-text__icon")}
-	class:navds-help-text__icon--filled={filled}
+	class={classes([
+		restProps.class,
+		"navds-help-text__icon",
+		{
+			"navds-help-text__icon--filled": filled,
+		},
+	])}
 >
 	{#if title}
 		<title id={titleId}>{title}</title>

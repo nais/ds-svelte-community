@@ -78,30 +78,42 @@
 </script>
 
 <div
-	class={classes(restProps, "navds-form-field", `navds-form-field--${size}`, "navds-search")}
-	class:navds-search--error={hasError}
-	class:navds-search--disabled={disabled}
+	class={classes([
+		restProps.class,
+		"navds-form-field",
+		`navds-form-field--${size}`,
+		"navds-search",
+		{
+			"navds-search--error": hasError,
+			"navds-search--disabled": disabled,
+		},
+	])}
 >
-	<Label for={baseID} {size} class={classes({}, "navds-form-field__label", srOnlyClass)}>
+	<Label for={baseID} {size} class={classes(["navds-form-field__label", srOnlyClass])}>
 		{label}
 	</Label>
 	{#if description}
-		<BodyShort as="div" class="navds-form-field__description {srOnlyClass}" id={baseID} {size}>
+		<BodyShort
+			as="div"
+			class={classes("navds-form-field__description {srOnlyClass}")}
+			id={baseID}
+			{size}
+		>
 			{description}
 		</BodyShort>
 	{/if}
-	<div class="navds-search__wrapper">
-		<div class="navds-search__wrapper-inner">
+	<div class={classes("navds-search__wrapper")}>
+		<div class={classes("navds-search__wrapper-inner")}>
 			{#if variant == "simple"}
 				{#if loading}
-					<span class="navds-search__search-icon" style="height:50%;">
+					<span class={classes("navds-search__search-icon")} style="height:50%;">
 						<Loader />
 					</span>
 				{:else}
 					<MagnifyingGlassIcon
 						title={searchIconText}
 						aria-hidden
-						class="navds-search__search-icon"
+						class={classes("navds-search__search-icon")}
 					/>
 				{/if}
 			{/if}
@@ -111,13 +123,19 @@
 				bind:value
 				id={baseID}
 				type="search"
-				class="navds-search__input navds-search__input--{variant} navds-text-field__input navds-body-short navds-body-short--{size}"
+				class={classes([
+					"navds-search__input",
+					`navds-search__input--${variant}`,
+					"navds-text-field__input",
+					"navds-body-short",
+					`navds-body-short--${size}`,
+				])}
 				onkeypress={handleInputKeypress}
 			/>
 			{#if value && clearButton}
 				{#if theme}
 					<Button
-						class="navds-search__button-clear"
+						class={classes("navds-search__button-clear")}
 						variant="tertiary-neutral"
 						size={size === "medium" ? "small" : "xsmall"}
 						title={clearButtonLabel}
@@ -129,8 +147,12 @@
 						{/snippet}
 					</Button>
 				{:else}
-					<button type="button" class="navds-search__button-clear" onclick={handleClearClick}>
-						<span class="navds-sr-only">
+					<button
+						type="button"
+						class={classes("navds-search__button-clear")}
+						onclick={handleClearClick}
+					>
+						<span class={classes("navds-sr-only")}>
 							{clearButtonLabel ? clearButtonLabel : "Empty"}
 						</span>
 						<XMarkIcon aria-hidden />
@@ -152,7 +174,11 @@
 			/>
 		{/if}
 	</div>
-	<div class="navds-form-field__error" aria-relevant="additions removals" aria-live="polite">
+	<div
+		class={classes("navds-form-field__error")}
+		aria-relevant="additions removals"
+		aria-live="polite"
+	>
 		<!-- {showErrorMsg && (
             <ErrorMessage size={size}>{props.error}</ErrorMessage>
           )} -->

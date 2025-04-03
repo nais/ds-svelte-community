@@ -5,6 +5,6 @@
 	let { children, ...restProps }: TableHeaderProps = $props();
 </script>
 
-<thead {...omit(restProps, "class")} class={classes(restProps, "navds-table__header")}>
+<thead {...omit(restProps, "class")} class={classes([restProps.class, "navds-table__header"])}>
 	{@render children()}
 </thead>

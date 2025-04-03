@@ -7,9 +7,14 @@
 
 <tr
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-table__row")}
-	class:navds-table__row--selected={selected}
-	class:navds-table__row--shade-on-hover={shadeOnHover}
+	class={classes([
+		restProps.class,
+		"navds-table__row",
+		{
+			"navds-table__row--selected": selected,
+			"navds-table__row--shade-on-hover": shadeOnHover,
+		},
+	])}
 >
 	{@render children()}
 </tr>

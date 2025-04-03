@@ -92,16 +92,21 @@
 			dialog.close();
 		}
 	}}
-	class={classes(restProps, { [`navds-modal--${width}`]: isKnownSize(width) })}
-	class:navds-modal={open}
-	class:navds-modal--autowidth={!width}
+	class={classes([
+		restProps.class,
+		{
+			[`navds-modal--${width}`]: isKnownSize(width),
+			"navds-modal": open,
+			"navds-modal--autowidth": !width,
+		},
+	])}
 	style={styles(width)}
 >
-	<div class="navds-modal__header">
+	<div class={classes("navds-modal__header")}>
 		{#if closeButton}
 			<Button
 				type="button"
-				class="navds-modal__button"
+				class={classes("navds-modal__button")}
 				size="small"
 				variant="tertiary-neutral"
 				onclick={() => (open = false)}
@@ -120,11 +125,11 @@
 			{/if}
 		{/if}
 	</div>
-	<div class="navds-modal__body">
+	<div class={classes("navds-modal__body")}>
 		{@render children()}
 	</div>
 	{#if footer}
-		<div class="navds-modal__footer">
+		<div class={classes("navds-modal__footer")}>
 			{@render footer()}
 		</div>
 	{/if}

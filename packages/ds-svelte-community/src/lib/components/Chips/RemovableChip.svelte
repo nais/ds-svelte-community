@@ -21,12 +21,12 @@
 <button
 	type="button"
 	{...omit(restProps, "class")}
-	class={classes(
-		restProps,
+	class={classes([
+		restProps.class,
 		"navds-chips__chip",
 		"navds-chips__removable",
 		`navds-chips__removable--${variant}`,
-	)}
+	])}
 	class:navds-chips--icon-right={true}
 	aria-label={`${value} ${removeLabel}`}
 	onclick={(e) => {
@@ -39,14 +39,14 @@
 		}
 	}}
 >
-	<span class="navds-chips__chip-text">
+	<span class={classes("navds-chips__chip-text")}>
 		{#if children}
 			{@render children()}
 		{:else}
 			{value}
 		{/if}
 	</span>
-	<span class="navds-chips__removable-icon">
+	<span class={classes("navds-chips__removable-icon")}>
 		<XMarkIcon aria-hidden />
 	</span>
 </button>

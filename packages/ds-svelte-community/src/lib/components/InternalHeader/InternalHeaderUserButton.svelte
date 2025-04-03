@@ -20,7 +20,7 @@
 
 <InternalHeaderButton
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-internalheader__user-button")}
+	class={classes([restProps.class, "navds-internalheader__user-button"])}
 >
 	<div>
 		<BodyShort size="small" as="div">
