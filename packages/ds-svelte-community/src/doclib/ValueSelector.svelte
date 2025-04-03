@@ -183,7 +183,7 @@
 						onchange(value);
 					}}
 				>
-					{#each options as option}
+					{#each options as option (option)}
 						<option value={toText(option)}>{toText(option)}</option>
 					{/each}
 				</Select>

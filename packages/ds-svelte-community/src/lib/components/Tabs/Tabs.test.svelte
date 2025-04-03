@@ -13,12 +13,12 @@
 
 <Tabs {value}>
 	<TabList>
-		{#each data as t}
+		{#each data as t (t.value)}
 			<Tab value={t.value}>{t.tab}</Tab>
 		{/each}
 	</TabList>
 
-	{#each data as t}
+	{#each data as t (t.value)}
 		<TabPanel value={t.value}>{t.content}</TabPanel>
 	{/each}
 </Tabs>

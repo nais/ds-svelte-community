@@ -165,7 +165,7 @@
 				</Tr>
 			</Thead>
 			<Tbody>
-				{#each data as { id, status }}
+				{#each data as { id, status } (id)}
 					<Tr shadeOnHover={false}>
 						<Th scope="row">{id}</Th>
 						<Td>{status}</Td>

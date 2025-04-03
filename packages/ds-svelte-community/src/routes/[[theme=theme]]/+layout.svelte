@@ -65,10 +65,10 @@
 			<div class="wrapper">
 				<div class="sidebar" class:show={showSidebar}>
 					<div class="section">
-						{#each Object.entries(data.paths) as [key, paths]}
+						{#each Object.entries(data.paths) as [key, paths] (key)}
 							<strong>{toTitle(key)}</strong>
 							<ul>
-								{#each paths as [component, experimental]}
+								{#each paths as [component, experimental] (component)}
 									{@const href = (
 										key == "pages" ? `/${component}/` : `/${key}/${component}/`
 									).replaceAll("//", "/")}

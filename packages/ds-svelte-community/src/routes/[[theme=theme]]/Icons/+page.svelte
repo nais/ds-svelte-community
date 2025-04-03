@@ -60,8 +60,8 @@
 
 <div class="controls">
 	<ToggleGroup bind:value={variant} variant="neutral">
-		<ToggleGroupItem value={"stroked"}>Stroke</ToggleGroupItem>
-		<ToggleGroupItem value={"filled"}>Fill</ToggleGroupItem>
+		<ToggleGroupItem value="stroked">Stroke</ToggleGroupItem>
+		<ToggleGroupItem value="filled">Fill</ToggleGroupItem>
 	</ToggleGroup>
 
 	<div class="search">

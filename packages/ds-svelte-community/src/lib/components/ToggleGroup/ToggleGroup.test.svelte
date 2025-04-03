@@ -13,7 +13,7 @@
 </script>
 
 <ToggleGroup {value}>
-	{#each items as item}
+	{#each items as item (item)}
 		<ToggleGroupItem value={item}>{item}</ToggleGroupItem>
 	{/each}
 </ToggleGroup>

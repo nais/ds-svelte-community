@@ -90,7 +90,7 @@
 					</tr>
 
 					{#if showProps}
-						{#each doc.props as prop}
+						{#each doc.props as prop (prop.name)}
 							<tr>
 								<td>
 									<strong>
@@ -155,7 +155,7 @@
 					</tr>
 
 					{#if showSnippets}
-						{#each snippets as snippet}
+						{#each snippets as snippet (snippet.name)}
 							<tr>
 								<td><strong>{snippet.name}</strong></td>
 								<td class="description"><Markdown content={snippet.description ?? ""} /></td>
@@ -182,7 +182,7 @@
 					</tr>
 
 					{#if showEvents}
-						{#each doc.events as event}
+						{#each doc.events as event (event.name)}
 							<tr>
 								<td><strong>{event.name}</strong></td>
 								<td class="description"><Markdown content={event.description ?? ""} /></td>
@@ -200,7 +200,7 @@
 	{#if doc.externalExtends.length > 0}
 		<p>
 			Properties included from:
-			{#each doc.externalExtends as ext, i}
+			{#each doc.externalExtends as ext, i (i)}
 				{i > 0 ? ", " : ""}
 				<code>{ext}</code>
 			{/each}

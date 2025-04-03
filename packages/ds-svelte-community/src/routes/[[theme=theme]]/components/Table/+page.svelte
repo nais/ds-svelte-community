@@ -68,14 +68,14 @@
 		<Table>
 			<Thead>
 				<Tr>
-					{#each Object.keys(data[0]) as key}
+					{#each Object.keys(data[0]) as key (key)}
 						<Th scope="col">{key[0].toUpperCase() + key.slice(1)}</Th>
 					{/each}
 				</Tr>
 			</Thead>
 
 			<Tbody>
-				{#each data as row}
+				{#each data as row (row.name)}
 					<Tr>
 						<Th scope="row">{row.name}</Th>
 						<Td>{row.phone}</Td>
@@ -112,7 +112,7 @@
 		>
 			<Thead>
 				<Tr>
-					{#each Object.keys(data[0]) as key}
+					{#each Object.keys(data[0]) as key (key)}
 						<Th scope="col" sortable={true} sortKey={key}>
 							{key[0].toUpperCase() + key.slice(1)}
 						</Th>
@@ -121,7 +121,7 @@
 			</Thead>
 
 			<Tbody>
-				{#each orderedData as row}
+				{#each orderedData as row (row.name)}
 					<Tr>
 						<Th scope="row">{row.name}</Th>
 						<Td>{row.phone}</Td>
@@ -143,7 +143,7 @@
 				</Tr>
 			</Thead>
 			<Tbody>
-				{#each data as { name, phone, expiry }}
+				{#each data as { name, phone, expiry } (name)}
 					<ExpandableRow expandOnRowClick={true} onopenchange={(open) => console.log(open)}>
 						{#snippet content()}
 							Content of <code>ExpandableRow</code>

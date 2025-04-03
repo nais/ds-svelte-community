@@ -1729,6 +1729,9 @@ export const Components: KnownComponents = {
 		LineGraphStackedIcon: {
 			path: "icons/LineGraphStackedIcon.svelte",
 		},
+		LineHeightIcon: {
+			path: "icons/LineHeightIcon.svelte",
+		},
 		LinkBrokenIcon: {
 			path: "icons/LinkBrokenIcon.svelte",
 		},
@@ -2251,6 +2254,12 @@ export const Components: KnownComponents = {
 		PrinterSmallTriangleIcon: {
 			path: "icons/PrinterSmallTriangleIcon.svelte",
 		},
+		Property1FillIcon: {
+			path: "icons/Property1FillIcon.svelte",
+		},
+		Property1StrokeIcon: {
+			path: "icons/Property1StrokeIcon.svelte",
+		},
 		PushPinFillIcon: {
 			path: "icons/PushPinFillIcon.svelte",
 		},
@@ -2544,6 +2553,12 @@ export const Components: KnownComponents = {
 		},
 		SortUpIcon: {
 			path: "icons/SortUpIcon.svelte",
+		},
+		SpaceHorizontalIcon: {
+			path: "icons/SpaceHorizontalIcon.svelte",
+		},
+		SpaceVerticalIcon: {
+			path: "icons/SpaceVerticalIcon.svelte",
 		},
 		SparkLargeIcon: {
 			path: "icons/SparkLargeIcon.svelte",

@@ -9,7 +9,7 @@
 </script>
 
 <CheckboxGroup {...wrapper}>
-	{#each items as item}
+	{#each items as item (item)}
 		<Checkbox {...item} />
 	{/each}
 </CheckboxGroup>

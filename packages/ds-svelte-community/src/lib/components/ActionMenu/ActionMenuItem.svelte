@@ -57,7 +57,7 @@
 
 	{#if keys && keys.length > 0}
 		<ActionMenuMarker placement="right" class="navds-action-menu__marker-shortcut">
-			{#each keys as key}
+			{#each keys as key (key)}
 				<span class="navds-action-menu__shortcut">{key}</span>
 			{/each}
 		</ActionMenuMarker>

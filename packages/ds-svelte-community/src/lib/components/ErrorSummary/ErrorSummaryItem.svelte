@@ -6,7 +6,7 @@
 </script>
 
 <li>
-	<a {...omit(restProps, "class")} class={"navds-error-summary__item navds-link"} {href}>
+	<a {...omit(restProps, "class")} class="navds-error-summary__item navds-link" {href}>
 		{@render children()}
 	</a>
 </li>
