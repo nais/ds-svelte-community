@@ -21,6 +21,7 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"generate-icons": "./hack/generate-icons.sh",
+		"prepare": "svelte-kit sync || echo ''",
 		"test": "bun run test:unit",
 		"test:unit": "bun test --conditions browser",
 		"test:unit:watch": "bun test --conditions browser --watch",

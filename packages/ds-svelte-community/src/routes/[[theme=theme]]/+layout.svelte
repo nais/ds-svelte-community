@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { base } from "$app/paths";
+	import { base, resolveRoute } from "$app/paths";
 	import { page } from "$app/state";
 	import { Box, Detail, Page, PageBlock } from "$lib";
 	import InternalHeader from "$lib/components/InternalHeader/InternalHeader.svelte";
@@ -38,9 +38,6 @@
 			return base + "/" + data.theme;
 		}
 		return base;
-	});
-	let compURL = $derived.by(() => {
-		return page.url.pathname.replace(`/${data.theme}/`, "").replace(/^\/+/, "");
 	});
 </script>
 
@@ -95,26 +92,31 @@
 					<Detail>
 						<!-- eslint-disable-next-line no-undef -->
 						Version: {__version__}
-						{#if data.theme != "dark"}
-							<br /><a
-								href="{base}/dark/{compURL}"
-								data-sveltekit-reload={!data.theme}
-								data-sveltekit-noscroll
-							>
-								Try dark darkside
-							</a>
-						{/if}
-						{#if !data.theme || data.theme == "dark"}
-							<br /><a
-								href="{base}/light/{compURL}"
-								data-sveltekit-reload={!data.theme}
-								data-sveltekit-noscroll
-							>
-								Try light darkside
-							</a>
-						{/if}
-						{#if data.theme}
-							<br /><a href="{base}/{compURL}" data-sveltekit-reload>Remove darkside</a>
+						{#if page.route.id}
+							{#if data.theme != "dark"}
+								<br /><a
+									href={resolveRoute(page.route.id, { ...page.params, theme: "dark" })}
+									data-sveltekit-reload={!data.theme}
+									data-sveltekit-noscroll
+								>
+									Try dark darkside
+								</a>
+							{/if}
+							{#if !data.theme || data.theme == "dark"}
+								<br /><a
+									href={resolveRoute(page.route.id, { ...page.params, theme: "light" })}
+									data-sveltekit-reload={!data.theme}
+									data-sveltekit-noscroll
+								>
+									Try light darkside
+								</a>
+							{/if}
+							{#if data.theme}
+								<br /><a
+									href={resolveRoute(page.route.id, { ...page.params, theme: undefined })}
+									data-sveltekit-reload>Remove darkside</a
+								>
+							{/if}
 						{/if}
 					</Detail>
 				</div>
