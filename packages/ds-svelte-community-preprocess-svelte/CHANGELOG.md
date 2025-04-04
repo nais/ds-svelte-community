@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community-preprocess-svelte
 
+## 1.0.0-next.5
+
+### Patch Changes
+
+- [#242](https://github.com/nais/ds-svelte-community/pull/242) [`fd4bb0d`](https://github.com/nais/ds-svelte-community/commit/fd4bb0d029805cfd6f184672901785210a17fecf) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade dependencies
+
 ## 1.0.0-next.4
 
 ### Patch Changes
