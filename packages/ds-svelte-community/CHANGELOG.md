@@ -1,5 +1,13 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.25
+
+### Patch Changes
+
+- [#242](https://github.com/nais/ds-svelte-community/pull/242) [`fd4bb0d`](https://github.com/nais/ds-svelte-community/commit/fd4bb0d029805cfd6f184672901785210a17fecf) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade dependencies
+
+- [#244](https://github.com/nais/ds-svelte-community/pull/244) [`d7b34e7`](https://github.com/nais/ds-svelte-community/commit/d7b34e743f1c87380b6420f74a54b6f186c8c0dc) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Update class handling, supporting darkside
+
 ## 1.0.0-next.24
 
 ### Patch Changes
