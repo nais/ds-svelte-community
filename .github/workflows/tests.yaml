@@ -1,7 +1,7 @@
 name: Test, lint and check commit
 on:
   push:
-    branches: "main"
+    branches: ["main"]
   pull_request:
     paths:
       - "**"
@@ -15,19 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install asdf
-        uses: asdf-vm/actions/setup@v3
-
-      - name: asdf cache
-        id: asdf-cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.asdf/
-          key: ${{ runner.os }}-${{ hashFiles('**/.tool-versions') }}
-
-      - name: Install CD tools from .tool-versions
-        if: steps.asdf-cache.outputs.cache-hit != 'true'
-        uses: asdf-vm/actions/install@v3
+      - uses: jdx/mise-action@v2
 
       - name: Install
         run: |-
