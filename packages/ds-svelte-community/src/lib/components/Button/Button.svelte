@@ -45,11 +45,18 @@
 	style={overrideWidth
 		? `width: ${overrideWidth}px;${style ? " " + style : ""}`
 		: style || undefined}
-	class={classes(restProps, "navds-button", `navds-button--${variant}`, `navds-button--${size}`)}
-	class:navds-button--loading={loading}
-	class:navds-button--disabled={disabled || overrideWidth > 0}
-	class:navds-button--icon-only={!!icon && !children}
-	class:unstyled={as === "a"}
+	class={classes([
+		restProps.class,
+		"navds-button",
+		`navds-button--${variant}`,
+		`navds-button--${size}`,
+		{
+			"navds-button--loading": loading,
+			"navds-button--disabled": disabled || overrideWidth > 0,
+			"navds-button--icon-only": !!icon && !children,
+			unstyled: as === "a",
+		},
+	])}
 	bind:this={internalRef}
 	role={as != "button" ? "button" : undefined}
 	disabled={disabled || overrideWidth > 0 ? true : undefined}
@@ -58,7 +65,7 @@
 		<Loader {size} />
 	{:else}
 		{#if icon && iconPosition == "left"}
-			<span class="navds-button__icon">
+			<span class={classes("navds-button__icon")}>
 				{#if isSnippet(icon)}
 					{@render icon()}
 				{:else}
@@ -72,7 +79,7 @@
 		{/if}
 
 		{#if icon && iconPosition == "right"}
-			<span class="navds-button__icon">
+			<span class={classes("navds-button__icon")}>
 				{#if isSnippet(icon)}
 					{@render icon()}
 				{:else}

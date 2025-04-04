@@ -69,15 +69,18 @@
 
 <nav
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-pagination", `navds-pagination--${size}`)}
+	class={classes([restProps.class, "navds-pagination", `navds-pagination--${size}`])}
 >
-	<ul class="navds-pagination__list">
+	<ul class={classes("navds-pagination__list")}>
 		<li>
 			<Item
-				class={classes({}, "navds-pagination__prev-next", {
-					"navds-pagination--invisible": page === 1,
-					"navds-pagination--prev-next--with-text": prevNextTexts,
-				})}
+				class={classes([
+					"navds-pagination__prev-next",
+					{
+						"navds-pagination--invisible": page === 1,
+						"navds-pagination--prev-next--with-text": prevNextTexts,
+					},
+				])}
 				disabled={page === 1}
 				data-page={page - 1}
 				page={page - 1}
@@ -95,7 +98,7 @@
 		{#each steps as step, i (i)}
 			{@const n = Number(step)}
 			{#if isNaN(n)}
-				<li class="navds-pagination__ellipsis">
+				<li class={classes("navds-pagination__ellipsis")}>
 					<BodyShort as="span" size={size === "xsmall" ? "small" : size}>...</BodyShort>
 				</li>
 			{:else}
@@ -114,10 +117,13 @@
 		{/each}
 		<li>
 			<Item
-				class={classes({}, "navds-pagination__prev-next", {
-					"navds-pagination--invisible": page === count,
-					"navds-pagination--prev-next--with-text": prevNextTexts,
-				})}
+				class={classes([
+					"navds-pagination__prev-next",
+					{
+						"navds-pagination--invisible": page === count,
+						"navds-pagination--prev-next--with-text": prevNextTexts,
+					},
+				])}
 				disabled={page === count}
 				data-page={page + 1}
 				page={page + 1}

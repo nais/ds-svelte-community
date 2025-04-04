@@ -22,12 +22,12 @@
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}
-	class={classes(
-		restProps,
+	class={classes([
+		restProps.class,
 		"navds-chips__chip",
 		"navds-chips__toggle",
 		`navds-chips__toggle--${variant}`,
-	)}
+	])}
 	class:unstyled={as == "a"}
 	class:navds-chips__toggle--with-checkmark={checkmark}
 	aria-pressed={selected}
@@ -44,7 +44,7 @@
 	{#if checkmark}
 		<svg
 			aria-hidden="true"
-			class="navds-chips__toggle-icon"
+			class={classes("navds-chips__toggle-icon")}
 			width="1.25em"
 			height="1.25em"
 			viewBox="0 0 20 20"
@@ -71,7 +71,7 @@
 		</svg>
 	{/if}
 
-	<span class="navds-chips__chip-text">
+	<span class={classes("navds-chips__chip-text")}>
 		{#if children}
 			{@render children()}
 		{:else}

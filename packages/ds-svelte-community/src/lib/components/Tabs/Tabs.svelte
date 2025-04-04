@@ -35,7 +35,7 @@
 
 <div
 	{...omit(restProps, "class", "dir")}
-	class={classes(restProps, "navds-tabs", `navds-tabs--${size}`)}
+	class={classes([restProps.class, "navds-tabs", `navds-tabs--${size}`])}
 	data-orientation="horizontal"
 >
 	{@render children()}

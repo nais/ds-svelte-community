@@ -22,13 +22,18 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-error-summary", `navds-error-summary--${size}`)}
+	class={classes([restProps.class, "navds-error-summary", `navds-error-summary--${size}`])}
 	tabIndex={-1}
 >
-	<Heading class="navds-error-summary__heading" as={headingTag} size="small" tabindex={-1}>
+	<Heading
+		class={classes("navds-error-summary__heading")}
+		as={headingTag}
+		size="small"
+		tabindex={-1}
+	>
 		{heading}
 	</Heading>
-	<BodyShort as="ul" {size} class="navds-error-summary__list">
+	<BodyShort as="ul" {size} class={classes("navds-error-summary__list")}>
 		{@render children()}
 	</BodyShort>
 </div>

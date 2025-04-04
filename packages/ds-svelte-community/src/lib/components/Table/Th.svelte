@@ -28,16 +28,21 @@
 
 <th
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-table__header-cell", "navds-label", {
-		[`navds-table__header-cell--align-${align}`]: !!align,
-	})}
-	class:navds-label--small={ctx.size == "small"}
+	class={classes([
+		restProps.class,
+		"navds-table__header-cell",
+		"navds-label",
+		{
+			[`navds-table__header-cell--align-${align}`]: !!align,
+			"navds-label--small": ctx.size == "small",
+		},
+	])}
 	aria-sort={sortable ? (ctx.sort?.orderBy === sortKey ? ctx.sort.direction : "none") : undefined}
 >
 	{#if sortable}
 		<button
 			type="button"
-			class="navds-table__sort-button"
+			class={classes("navds-table__sort-button")}
 			onclick={sortable && sortKey ? () => onclick() : undefined}
 		>
 			{@render children?.()}

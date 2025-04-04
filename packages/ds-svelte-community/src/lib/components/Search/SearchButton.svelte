@@ -42,7 +42,7 @@
 	{size}
 	{variant}
 	{loading}
-	class={classes(restProps, "navds-search__button-search")}
+	class={classes([restProps.class, "navds-search__button-search"])}
 	{disabled}
 >
 	{#snippet icon()}

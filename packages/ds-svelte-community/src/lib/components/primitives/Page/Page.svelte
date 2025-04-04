@@ -28,18 +28,15 @@
 <svelte:element
 	this={as}
 	{...omit(restProps, "class", "style")}
-	class={classes(restProps, "navds-page")}
+	class={classes([restProps.class, "navds-page"])}
 	style={`--__ac-page-background: var(--a-${background}) ${restProps.style || ""}`}
 >
 	<div
-		class={classes(
-			{},
-			{
-				"navds-page__content--fullheight": belowFold,
-				"navds-page__content--grow": !belowFold,
-				"navds-page__content--padding": contentBlockPadding === "end",
-			},
-		)}
+		class={classes({
+			"navds-page__content--fullheight": belowFold,
+			"navds-page__content--grow": !belowFold,
+			"navds-page__content--padding": contentBlockPadding === "end",
+		})}
 	>
 		{@render children()}
 	</div>

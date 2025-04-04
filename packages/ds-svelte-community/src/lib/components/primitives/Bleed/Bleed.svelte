@@ -27,8 +27,13 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-bleed")}
-	class:navds-bleed--padding={reflectivePadding}
+	class={classes([
+		restProps.class,
+		"navds-bleed",
+		{
+			"navds-bleed--padding": reflectivePadding,
+		},
+	])}
 	style={combineStyles(
 		restProps,
 		getResponsiveProps(prefix, "bleed", "margin-inline", "spacing", marginInline, true, [

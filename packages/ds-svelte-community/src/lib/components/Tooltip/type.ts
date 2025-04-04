@@ -1,4 +1,5 @@
 import type { Snippet } from "svelte";
+import type { ClassValue } from "svelte/elements";
 
 export const placements = ["top", "right", "bottom", "left"] as const;
 
@@ -36,6 +37,8 @@ export interface TooltipProps {
 	 * List of Keyboard-keys for shortcuts.
 	 */
 	keys?: string[];
+
+	class?: ClassValue;
 
 	/**
 	 * Content to which the tooltip will activate.

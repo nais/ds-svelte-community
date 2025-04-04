@@ -31,17 +31,17 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	{as}
 	{...omit(restProps, "size", "class")}
 	size={size == "medium" ? "medium" : "small"}
-	class={classes(
-		restProps,
+	class={classes([
+		restProps.class,
 		"navds-tag",
 		`navds-tag--${variant}`,
 		`navds-tag--${size}`,
 		`navds-tag--${filledVariant || moderateVariant || "outline"}`,
 		`navds-tag--${color}`,
-	)}
+	])}
 >
 	{#if icon}
-		<span class="navds-tag__icon--left">
+		<span class={classes("navds-tag__icon--left")}>
 			{#if isSnippet(icon)}
 				{@render icon()}
 			{:else}

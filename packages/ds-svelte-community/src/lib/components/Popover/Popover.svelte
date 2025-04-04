@@ -90,15 +90,20 @@
 <div
 	use:floatingContent
 	bind:this={popover}
-	class={classes(restProps, "navds-popover")}
-	class:navds-popover--hidden={!open || !anchorEl}
+	class={classes([
+		restProps.class,
+		"navds-popover",
+		{
+			"navds-popover--hidden": !open || !anchorEl,
+		},
+	])}
 	data-placement={placement}
 	{...omit(restProps, "class")}
 >
-	<div class="navds-popover__content {contentClass}">
+	<div class={classes(["navds-popover__content", contentClass])}>
 		{@render children()}
 	</div>
 	{#if !theme && arrow}
-		<div class="navds-popover__arrow" bind:this={$arrowRef}></div>
+		<div class={classes("navds-popover__arrow")} bind:this={$arrowRef}></div>
 	{/if}
 </div>

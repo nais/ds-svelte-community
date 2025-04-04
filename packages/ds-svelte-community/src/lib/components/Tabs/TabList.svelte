@@ -48,11 +48,11 @@
 	};
 </script>
 
-<div class="navds-tabs__tablist-wrapper">
+<div class={classes("navds-tabs__tablist-wrapper")}>
 	{#if showSteppers}
 		<!-- Is it OK to use aria-hidden when we have other keyboard actions? -->
 		<div
-			class="navds-tabs__scroll-button"
+			class={classes("navds-tabs__scroll-button")}
 			class:navds-tabs__scroll-button--hidden={!showStepperLeft}
 			aria-hidden="true"
 			onclick={() => {
@@ -68,7 +68,7 @@
 			updateSteppers();
 		}}
 		{...omit(restProps, "class", "role", "aria-orientation")}
-		class={classes(restProps, "navds-tabs__tablist")}
+		class={classes([restProps.class, "navds-tabs__tablist"])}
 		data-orientation="horizontal"
 		role="tablist"
 		aria-orientation="horizontal"
@@ -77,7 +77,7 @@
 	</div>
 	{#if showSteppers}
 		<div
-			class="navds-tabs__scroll-button"
+			class={classes("navds-tabs__scroll-button")}
 			class:navds-tabs__scroll-button--hidden={!showStepperRight}
 			aria-hidden="true"
 			onclick={() => {

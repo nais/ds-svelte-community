@@ -5,6 +5,7 @@
 <script lang="ts">
 	import ChevronRightIcon from "$lib/icons/ChevronRightIcon.svelte";
 	import { type Snippet } from "svelte";
+	import { classes } from "../helpers";
 	import ActionMenuMarker from "./ActionMenuMarker.svelte";
 	import { createFloatingActions, isPolyfilled } from "./floating_wrapper";
 
@@ -36,7 +37,10 @@
 	use:floatingRef
 	role="menuitem"
 	aria-haspopup="menu"
-	class="navds-action-menu__item navds-action-menu__sub-trigger"
+	class={[
+		"ds-svelte-action-menu__item",
+		classes("navds-action-menu__item navds-action-menu__sub-trigger"),
+	]}
 	style="user-select: none; anchor-name: --{id};"
 	data-state={open ? "open" : "closed"}
 	aria-expanded={open}
@@ -48,7 +52,7 @@
 		{@render trigger()}
 	{/if}
 
-	<ActionMenuMarker placement="right" class="navds-action-menu__marker-icon">
+	<ActionMenuMarker placement="right" class={classes("navds-action-menu__marker-icon")}>
 		<ChevronRightIcon />
 	</ActionMenuMarker>
 </button>
@@ -59,7 +63,7 @@
 	role="menu"
 	popover="auto"
 	dir="ltr"
-	class="navds-action-menu__content"
+	class={["ds-svelte-action-menu__content", classes("navds-action-menu__content")]}
 	style={isPolyfilled
 		? undefined
 		: `position-anchor: --${id}; --__ac-action-menu-content-transform-origin: var(--ac-floating-transform-origin); --__ac-action-menu-content-available-height: var(--ac-floating-available-height); `}
@@ -67,7 +71,7 @@
 		open = e.newState == "open";
 	}}
 >
-	<div class="navds-action-menu__content-inner">
+	<div class={classes("navds-action-menu__content-inner")}>
 		{@render children()}
 	</div>
 </div>
@@ -78,7 +82,7 @@
 		border: none;
 	}
 
-	.navds-action-menu__item {
+	.ds-svelte-action-menu__item {
 		width: 100%;
 		box-sizing: border-box;
 
@@ -89,7 +93,7 @@
 		}
 	}
 
-	.navds-action-menu__content {
+	.ds-svelte-action-menu__content {
 		margin: 0;
 		border: 0;
 		padding: 0;

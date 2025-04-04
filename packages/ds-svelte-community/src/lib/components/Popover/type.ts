@@ -1,5 +1,5 @@
 import type { Snippet } from "svelte";
-import type { HTMLAttributes } from "svelte/elements";
+import type { ClassValue, HTMLAttributes } from "svelte/elements";
 
 export const PopoverPlacement = [
 	"top",
@@ -56,7 +56,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Class to add to the popover content
 	 */
-	contentClass?: string;
+	contentClass?: ClassValue;
 
 	/**
 	 * Content

@@ -5,7 +5,7 @@
 	let { children, ...restProps }: BodyProps = $props();
 </script>
 
-<tbody {...omit(restProps, "class")} class={classes(restProps, "navds-table__body")}>
+<tbody {...omit(restProps, "class")} class={classes([restProps.class, "navds-table__body"])}>
 	<!-- Content -->
 	{@render children()}
 </tbody>

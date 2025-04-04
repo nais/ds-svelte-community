@@ -30,43 +30,50 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 </script>
 
 <div
-	class={classes(restProps, "navds-switch", `navds-switch--${size}`, `navds-switch--${position}`)}
-	class:navds-switch--disabled={disabled ?? loading}
-	class:navds-switch--loading={loading}
+	class={classes([
+		restProps.class,
+		"navds-switch",
+		`navds-switch--${size}`,
+		`navds-switch--${position}`,
+		{
+			"navds-switch--disabled": disabled ?? loading,
+			"navds-switch--loading": loading,
+		},
+	])}
 >
 	<input
 		disabled={disabled || loading}
 		bind:checked
 		type="checkbox"
-		class={classes(restProps, "navds-switch__input")}
+		class={classes([restProps.class, "navds-switch__input"])}
 		{id}
 		{...omit(restProps, "class")}
 	/>
-	<span class="navds-switch__track">
-		<span class="navds-switch__thumb">
+	<span class={classes("navds-switch__track")}>
+		<span class={classes("navds-switch__thumb")}>
 			{#if loading}
 				<Loader size="xsmall" aria-live="polite" variant={checked ? "interaction" : "inverted"} />
 			{/if}
 			<SelectedIcon />
 		</span>
 	</span>
-	<label for={id} class="navds-switch__label-wrapper">
+	<label for={id} class={classes("navds-switch__label-wrapper")}>
 		<div
-			class="navds-switch__content"
+			class={classes("navds-switch__content")}
 			class:navds-sr-only={hideLabel}
 			class:navds-switch--with-description={!!description && !hideLabel}
 		>
-			<BodyShort as="div" {size} class="navds-switch__label">
+			<BodyShort as="div" {size} class={classes("navds-switch__label")}>
 				{@render children()}
 			</BodyShort>
 
 			{#if description}
 				{#if size == "medium"}
-					<BodyShort as="div" size="small" class="navds-switch__description">
+					<BodyShort as="div" size="small" class={classes("navds-switch__description")}>
 						{description}
 					</BodyShort>
 				{:else}
-					<Detail as="div" class="navds-switch__description">
+					<Detail as="div" class={classes("navds-switch__description")}>
 						{description}
 					</Detail>
 				{/if}

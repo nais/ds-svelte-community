@@ -56,7 +56,7 @@
 
 <button
 	{...omit(restProps, "class", "data-state", "role", "aria-checked", "tabindex")}
-	class={classes(restProps, "navds-toggle-group__button")}
+	class={classes([restProps.class, "navds-toggle-group__button"])}
 	role="radio"
 	aria-checked={state === "on"}
 	tabindex={state == "on" ? 0 : -1}
@@ -65,7 +65,7 @@
 	onkeydown={keydown}
 	data-selected={state === "on"}
 >
-	<BodyShort as="span" class="navds-toggle-group__button-inner" size={ctx.size}>
+	<BodyShort as="span" class={classes("navds-toggle-group__button-inner")} size={ctx.size}>
 		{@render children()}
 	</BodyShort>
 </button>

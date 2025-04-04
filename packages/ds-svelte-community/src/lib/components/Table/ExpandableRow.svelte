@@ -63,11 +63,15 @@ Create an expandable row in a table. `content` will be shown when the row is exp
 </script>
 
 <Tr
-	class={classes(restProps, "navds-table__expandable-row", {
-		"navds-table__expandable-row--open": open,
-		"navds-table__expandable-row--expansion-disabled": expansionDisabled,
-		"navds-table__expandable-row--clickable": expandOnRowClick,
-	})}
+	class={classes([
+		restProps.class,
+		"navds-table__expandable-row",
+		{
+			"navds-table__expandable-row--open": open,
+			"navds-table__expandable-row--expansion-disabled": expansionDisabled,
+			"navds-table__expandable-row--clickable": expandOnRowClick,
+		},
+	])}
 	{...omit(restProps, "class")}
 	onclick={onclickMainRow}
 >
@@ -75,20 +79,23 @@ Create an expandable row in a table. `content` will be shown when the row is exp
 		{@render children()}
 	{/if}
 	<Td
-		class={classes({}, "navds-table__toggle-expand-cell", {
-			"navds-table__toggle-expand-cell--open": open,
-		})}
+		class={classes([
+			"navds-table__toggle-expand-cell",
+			{
+				"navds-table__toggle-expand-cell--open": open,
+			},
+		])}
 	>
 		{#if !expansionDisabled}
 			<button
-				class="navds-table__toggle-expand-button"
+				class={classes("navds-table__toggle-expand-button")}
 				type="button"
 				aria-controls={id}
 				aria-expanded={open}
 				onclick={toggleOpen}
 			>
 				<ChevronDownIcon
-					class="navds-table__expandable-icon"
+					class={classes("navds-table__expandable-icon")}
 					title={open ? showLessText : showMoreText}
 				/>
 			</button>
@@ -101,22 +108,23 @@ Create an expandable row in a table. `content` will be shown when the row is exp
 
 <tr
 	data-state={open ? "open" : "closed"}
-	class="navds-table__expanded-row"
+	class={classes("navds-table__expanded-row")}
 	aria-hidden={!open}
 	{id}
 >
-	<td colspan={colSpan} class="navds-table__expanded-row-cell">
+	<td colspan={colSpan} class={classes("navds-table__expanded-row-cell")}>
 		{#if open}
 			<div
-				class="navds-table__expanded-row-collapse"
+				class={classes("navds-table__expanded-row-collapse")}
 				transition:slide={{
 					duration: 150,
 				}}
 			>
 				<div
-					class={`navds-table__expanded-row-content navds-table__expanded-row-content--gutter-${
-						contentGutter ?? togglePlacement
-					}`}
+					class={classes([
+						"navds-table__expanded-row-content",
+						`navds-table__expanded-row-content--gutter-${contentGutter ?? togglePlacement}`,
+					])}
 				>
 					{#if typeof content === "string"}
 						{content}

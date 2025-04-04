@@ -36,36 +36,46 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 </script>
 
 <div
-	class={classes(restProps, "navds-form-field", `navds-form-field--${size}`)}
-	class:navds-form-field--disabled={disabled}
-	class:navds-select--error={hasError}
+	class={classes([
+		restProps.class,
+		"navds-form-field",
+		`navds-form-field--${size}`,
+		{
+			"navds-form-field--disabled": disabled,
+			"navds-select--error": hasError,
+		},
+	])}
 >
-	<Label for={id} {size} class="navds-form-field__label {srOnlyClass}">
+	<Label for={id} {size} class={classes(["navds-form-field__label", srOnlyClass])}>
 		{label}
 	</Label>
 
 	{#if description}
 		{#if size === "medium"}
-			<BodyLong class="navds-form-field__description {srOnlyClass}" size="small" as="div">
+			<BodyLong
+				class={classes(["navds-form-field__description", srOnlyClass])}
+				size="small"
+				as="div"
+			>
 				{@render description()}
 			</BodyLong>
 		{:else}
-			<Detail class="navds-form-field__description {srOnlyClass}" as="div">
+			<Detail class={classes(["navds-form-field__description", srOnlyClass])} as="div">
 				{@render description()}
 			</Detail>
 		{/if}
 	{/if}
 
-	<div class="navds-select__container" {style}>
+	<div class={classes("navds-select__container")} {style}>
 		<select
 			{...omit(restProps, "class")}
 			bind:value
-			class={classes(
-				restProps,
+			class={classes([
+				restProps.class,
 				"navds-select__input",
 				"navds-body-short",
 				`navds-body-short--${size ?? "medium"}`,
-			)}
+			])}
 			{id}
 			{disabled}
 			aria-invalid={hasError ? true : undefined}
@@ -73,11 +83,11 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		>
 			{@render children()}
 		</select>
-		<ChevronDownIcon class="navds-select__chevron" aria-hidden />
+		<ChevronDownIcon class={classes("navds-select__chevron")} aria-hidden />
 	</div>
 
 	<div
-		class="navds-form-field__error"
+		class={classes("navds-form-field__error")}
 		id={errorID}
 		aria-relevant="additions removals"
 		aria-live="polite"

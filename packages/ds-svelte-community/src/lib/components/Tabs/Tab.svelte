@@ -63,14 +63,16 @@
 	this={as}
 	bind:this={self}
 	{...omit(restProps, "class", "type", "role", "aria-selected", "tabindex")}
-	class={classes(
-		restProps,
+	class={classes([
+		restProps.class,
 		"navds-tabs__tab",
 		`navds-tabs__tab--${ctx.size}`,
 		`navds-tabs__tab-icon--${ctx.iconPosition}`,
-	)}
-	class:navds-tabs__tab--icon-only={icon && !children}
-	class:unstyled={as === "a"}
+		{
+			"navds-tabs__tab--icon-only": icon && !children,
+			unstyled: as === "a",
+		},
+	])}
 	data-state={ctx.value == value ? "active" : "inactive"}
 	type="button"
 	role="tab"
@@ -83,7 +85,7 @@
 	onfocus={handleFocus}
 	onblur={handleBlur}
 >
-	<BodyShort as="span" class="navds-tabs__tab-inner" size={ctx.size}>
+	<BodyShort as="span" class={classes("navds-tabs__tab-inner")} size={ctx.size}>
 		<span aria-hidden={!!children}>
 			{#if icon}
 				{@render icon()}

@@ -14,9 +14,14 @@
 <svelte:element
 	this={as}
 	{...restProps}
-	class={classes(restProps, "navds-label")}
-	class:navds-label--small={size == "small"}
-	class:navds-typo--spacing={spacing}
+	class={classes([
+		restProps.class,
+		"navds-label",
+		{
+			"navds-label--small": size == "small",
+			"navds-typo--spacing": spacing,
+		},
+	])}
 >
 	{@render children()}
 </svelte:element>

@@ -19,13 +19,18 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes(restProps, "navds-guide-panel")}
-	class:navds-guide-panel--poster={poster === true}
-	class:navds-guide-panel--not-poster={poster === false}
-	class:navds-guide-panel--responsive-poster={poster === undefined}
+	class={classes([
+		restProps.class,
+		"navds-guide-panel",
+		{
+			"navds-guide-panel--poster": poster === true,
+			"navds-guide-panel--not-poster": poster === false,
+			"navds-guide-panel--responsive-poster": poster === undefined,
+		},
+	])}
 	data-responsive={poster === undefined}
 >
-	<div class="navds-guide">
+	<div class={classes("navds-guide")}>
 		{#if illustration}
 			{@render illustration()}
 		{:else if theme}
@@ -34,7 +39,7 @@
 			<Illustration />
 		{/if}
 	</div>
-	<div class="navds-guide-panel__content">
+	<div class={classes("navds-guide-panel__content")}>
 		{#if theme}
 			<svg
 				viewBox="0 0 33 22"
@@ -42,7 +47,7 @@
 				height="22"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
-				class="navds-guide-panel__tail"
+				class={classes("navds-guide-panel__tail")}
 			>
 				<path d="M8.74229e-08 22L0 20L33 20V22L8.74229e-08 22Z" fill="var(--ax-bg-raised)" />
 				<path
@@ -56,7 +61,7 @@
 					fill="var(--ax-border-info)"
 				/>
 			</svg>
-			<div class="navds-guide-panel__content-inner">{@render children()}</div>
+			<div class={classes("navds-guide-panel__content-inner")}>{@render children()}</div>
 		{:else}
 			{@render children()}
 		{/if}

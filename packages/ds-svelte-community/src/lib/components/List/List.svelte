@@ -42,7 +42,7 @@
 	as="div"
 	{...omit(restProps, "class")}
 	{size}
-	class={classes(restProps, "navds-list", `navds-list--${size}`)}
+	class={classes([restProps.class, "navds-list", `navds-list--${size}`])}
 >
 	{#if title}
 		{#if typeof title == "string"}

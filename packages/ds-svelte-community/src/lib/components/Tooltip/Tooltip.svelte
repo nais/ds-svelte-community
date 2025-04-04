@@ -20,7 +20,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		delay = 150,
 		keys = [],
 		children,
-		...restProps
+		class: klass,
 	}: TooltipProps = $props();
 
 	const theme = GetTheme();
@@ -160,7 +160,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 			tabindex="-1"
 			role="tooltip"
 			id="r7"
-			class={classes(restProps, "navds-tooltip", "navds-detail", "navds-detail--small")}
+			class={classes([klass, "navds-tooltip", "navds-detail", "navds-detail--small"])}
 			data-side={placement}
 			data-state={open ? "open" : "closed"}
 			style="position: absolute;  visibility: visible; {tooltipStyles}"
@@ -170,16 +170,16 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 			{content}
 
 			{#if keys.length > 0}
-				<span class="navds-tooltip__keys">
+				<span class={classes("navds-tooltip__keys")}>
 					{#each keys as key (key)}
-						<Detail as="kbd" class="navds-tooltip__key">
+						<Detail as="kbd" class={classes("navds-tooltip__key")}>
 							{key}
 						</Detail>
 					{/each}
 				</span>
 			{/if}
 			{#if !theme && arrow}
-				<div class="navds-tooltip__arrow" style={arrowStyles}></div>
+				<div class={classes("navds-tooltip__arrow")} style={arrowStyles}></div>
 			{/if}
 		</div>
 	{/if}

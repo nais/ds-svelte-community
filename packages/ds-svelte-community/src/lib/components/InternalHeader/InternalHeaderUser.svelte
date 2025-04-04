@@ -16,7 +16,7 @@
 	let { name, description, ...restProps }: Props = $props();
 </script>
 
-<div {...omit(restProps, "class")} class={classes(restProps, "navds-internalheader__user")}>
+<div {...omit(restProps, "class")} class={classes([restProps.class, "navds-internalheader__user"])}>
 	<span>
 		<BodyShort size="small" as="div">
 			{name}

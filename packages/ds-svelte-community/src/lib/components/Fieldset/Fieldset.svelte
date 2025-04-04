@@ -29,11 +29,17 @@
 
 <fieldset
 	{...omit(restProps, "class", "aria-invalid", "aria-describedby")}
-	class={classes(restProps, "navds-fieldset", `navds-fieldset--${size}`)}
-	class:navds-fieldset--error={!!error}
+	class={classes([
+		restProps.class,
+		"navds-fieldset",
+		`navds-fieldset--${size}`,
+		{
+			"navds-fieldset--error": !!error,
+		},
+	])}
 	aria-describedby={description ? inputDescriptionId : undefined}
 >
-	<Label {size} as="legend" class={"navds-fieldset__legend" + srOnlyClass}>
+	<Label {size} as="legend" class={classes("navds-fieldset__legend" + srOnlyClass)}>
 		{#if typeof legend === "string"}
 			{legend}
 		{:else}
@@ -44,7 +50,7 @@
 	{#if description}
 		{#if size == "medium"}
 			<BodyShort
-				class={"navds-fieldset__description" + srOnlyClass}
+				class={classes("navds-fieldset__description" + srOnlyClass)}
 				{size}
 				id={inputDescriptionId}
 				as="div"
@@ -56,7 +62,11 @@
 				{/if}
 			</BodyShort>
 		{:else}
-			<Detail class={"navds-fieldset__description" + srOnlyClass} id={inputDescriptionId} as="div">
+			<Detail
+				class={classes("navds-fieldset__description" + srOnlyClass)}
+				id={inputDescriptionId}
+				as="div"
+			>
 				{#if typeof description === "string"}
 					{description}
 				{:else}
@@ -72,7 +82,7 @@
 		id={errorId}
 		aria-relevant="additions removals"
 		aria-live="polite"
-		class="navds-fieldset__error"
+		class={classes("navds-fieldset__error")}
 	>
 		{#if showErrorMsg}
 			<ErrorMessage {size} showIcon>{error}</ErrorMessage>

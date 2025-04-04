@@ -27,12 +27,12 @@
 	let open = $state(false);
 </script>
 
-<div class="navds-help-text {wrapperClass}">
+<div class={classes(["navds-help-text", wrapperClass])}>
 	<button
 		bind:this={btnEl}
 		{...omit(restProps, "class")}
 		onclick={() => (open = !open)}
-		class={classes(restProps, "navds-help-text__button")}
+		class={classes([restProps.class, "navds-help-text__button"])}
 		type="button"
 		aria-expanded={open}
 	>
@@ -41,8 +41,8 @@
 	</button>
 	<!-- onClose={() => setOpen(false)} -->
 	<Popover
-		class="navds-help-text__popover"
-		contentClass="navds-body-short"
+		class={classes("navds-help-text__popover")}
+		contentClass={classes("navds-body-short")}
 		bind:open
 		anchorEl={btnEl}
 		{placement}

@@ -33,11 +33,18 @@
 	this={as}
 	{...omit(disabled ? omit(restProps, "href", "class") : restProps, "class")}
 	style={overrideWidth ? `width: ${overrideWidth}px` : undefined}
-	class={classes(restProps, "navds-button", `navds-button--${variant}`, `navds-button--${size}`)}
-	class:navds-button--loading={loading}
-	class:navds-button--disabled={disabled || overrideWidth > 0}
-	class:navds-button--icon-only={(iconLeft || iconRight) && !children}
-	class:unstyled={as === "a"}
+	class={classes([
+		restProps.class,
+		"navds-button",
+		`navds-button--${variant}`,
+		`navds-button--${size}`,
+		{
+			"navds-button--loading": loading,
+			"navds-button--disabled": disabled || overrideWidth > 0,
+			"navds-button--icon-only": (iconLeft || iconRight) && !children,
+			unstyled: as === "a",
+		},
+	])}
 	bind:this={ref}
 	role={as != "button" ? "button" : undefined}
 	disabled={disabled || overrideWidth > 0 ? true : undefined}
@@ -46,7 +53,7 @@
 		loading
 	{:else}
 		{#if iconLeft}
-			<span class="navds-button__icon">{@render iconLeft()}</span>
+			<span class={classes("navds-button__icon")}>{@render iconLeft()}</span>
 		{/if}
 		{#if children}
 			<span class:medium={size == "medium"} class:small={size == "small"}>
@@ -55,7 +62,7 @@
 		{/if}
 
 		{#if iconRight}
-			<span class="navds-button__icon">
+			<span class={classes("navds-button__icon")}>
 				{@render iconRight()}
 			</span>
 		{/if}

@@ -11,7 +11,7 @@
 	{...omit(restProps, "class", "role", "tabindex", "hidden")}
 	role="tabpanel"
 	tabindex="0"
-	class={classes(restProps, "navds-tabs__tabpanel")}
+	class={classes([restProps.class, "navds-tabs__tabpanel"])}
 	hidden={ctx.value != value ? true : undefined}
 	id={ctx.idFor("panel", value)}
 	aria-labelledby={ctx.idFor("tab", value)}

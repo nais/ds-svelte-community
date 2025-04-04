@@ -24,8 +24,14 @@
 
 <svg
 	{...omit(restProps, "class")}
-	class={classes(restProps, `navds-loader navds-loader--${size}`, `navds-loader--${variant}`)}
-	class:navds-loader--transparent={transparent}
+	class={classes([
+		restProps.class,
+		`navds-loader navds-loader--${size}`,
+		`navds-loader--${variant}`,
+		{
+			"navds-loader--transparent": transparent,
+		},
+	])}
 	focusable="false"
 	viewBox="0 0 50 50"
 	preserveAspectRatio="xMidYMid"
@@ -33,7 +39,7 @@
 >
 	<title {id}>{title}</title>
 	<circle
-		class="navds-loader__background"
+		class={classes("navds-loader__background")}
 		xmlns="http://www.w3.org/2000/svg"
 		cx="25"
 		cy="25"
@@ -41,7 +47,7 @@
 		fill="none"
 	/>
 	<circle
-		class="navds-loader__foreground"
+		class={classes("navds-loader__foreground")}
 		cx="25"
 		cy="25"
 		r="20"

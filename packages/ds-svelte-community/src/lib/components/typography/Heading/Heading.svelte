@@ -15,8 +15,14 @@
 <svelte:element
 	this={as ? as : "h" + level}
 	{...restProps}
-	class={classes(restProps, "navds-heading", `navds-heading--${size}`)}
-	class:navds-typo--spacing={spacing}
+	class={classes([
+		restProps.class,
+		"navds-heading",
+		`navds-heading--${size}`,
+		{
+			"navds-typo--spacing": spacing,
+		},
+	])}
 >
 	{@render children()}
 </svelte:element>

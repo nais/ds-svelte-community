@@ -1,19 +1,11 @@
-export function classes(
-	props: SvelteRestProps,
-	...classes: (string | { [key: string]: boolean })[]
-): string {
-	const c = classes
-		.flatMap((x) => {
-			if (typeof x === "string") {
-				return x;
-			}
-			return Object.keys(x).filter((k) => x[k]);
-		})
-		.join(" ");
-	if (props.class) {
-		return `${props.class} ${c}`;
-	}
-	return c;
+export function classes(input: ClassValue): ClassValue {
+	const classes = clsx(input)
+		/* Replaces only if start of string  "navds- navds-"*/
+		.replace(/^navds-/g, "aksel-")
+		/* Replaces all " navds-" hits */
+		.replace(/\snavds-/g, " aksel-");
+
+	return classes.trim();
 }
 
 export enum Focus {

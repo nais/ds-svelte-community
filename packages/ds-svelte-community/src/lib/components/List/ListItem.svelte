@@ -9,13 +9,16 @@
 	const ctx = GetListContext();
 </script>
 
-<li {...omit(restProps, "class")} class={classes(restProps, "navds-list__item")}>
+<li {...omit(restProps, "class")} class={classes([restProps.class, "navds-list__item"])}>
 	{#if ctx && ctx.type === "ul"}
 		<div
-			class={classes({}, "navds-list__item-marker", {
-				"navds-list__item-marker--icon": !!icon,
-				"navds-list__item-marker--bullet": !icon,
-			})}
+			class={classes([
+				"navds-list__item-marker",
+				{
+					"navds-list__item-marker--icon": !!icon,
+					"navds-list__item-marker--bullet": !icon,
+				},
+			])}
 		>
 			{#if icon}
 				{#if isSnippet(icon)}

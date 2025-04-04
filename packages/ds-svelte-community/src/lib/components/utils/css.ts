@@ -143,7 +143,7 @@ export function getResponsiveProps<T extends string>(
 }
 
 export function combineStyles(
-	props: SvelteRestProps,
+	props: Record<string, unknown>,
 	...args: Record<string, string | number | null>[]
 ): string {
 	let styles = "";

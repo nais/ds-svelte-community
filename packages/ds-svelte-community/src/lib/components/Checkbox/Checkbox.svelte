@@ -56,15 +56,21 @@
 </script>
 
 <div
-	class={classes(restProps, "navds-checkbox", `navds-checkbox--${size}`)}
-	class:navds-checkbox--error={hasError}
-	class:navds-checkbox--disabled={disabled}
+	class={classes([
+		restProps.class,
+		"navds-checkbox",
+		`navds-checkbox--${size}`,
+		{
+			"navds-checkbox--error": hasError,
+			"navds-checkbox--disabled": disabled,
+		},
+	])}
 >
 	<input
 		{...omit(restProps, "class")}
 		{id}
 		type="checkbox"
-		class="navds-checkbox__input"
+		class={classes("navds-checkbox__input")}
 		aria-checked={indeterminate ? "mixed" : undefined}
 		aria-invalid={hasError ? "true" : undefined}
 		aria-labelledby={lblID}
@@ -85,8 +91,8 @@
 			}
 		}}
 	/>
-	<label for={id} class="navds-checkbox__label" id={lblID}>
-		<span class="navds-checkbox__icon">
+	<label for={id} class={classes("navds-checkbox__label")} id={lblID}>
+		<span class={classes("navds-checkbox__icon")}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="0.8125rem"
@@ -103,16 +109,16 @@
 				/>
 			</svg>
 		</span>
-		<span class="navds-checkbox__icon-indeterminate"></span>
+		<span class={classes("navds-checkbox__icon-indeterminate")}></span>
 		{#if children}
-			<span class="navds-checkbox__content" class:navds-sr-only={hideLabel}>
-				<BodyShort as="span" {size} class="navds-checkbox__label-text" aria-hidden>
+			<span class={classes("navds-checkbox__content")} class:navds-sr-only={hideLabel}>
+				<BodyShort as="span" {size} class={classes("navds-checkbox__label-text")} aria-hidden>
 					{@render children()}
 				</BodyShort>
 				{#if description}
 					<BodyShort
 						as="span"
-						class="navds-form-field__subdescription navds-checkbox__description"
+						class={classes("navds-form-field__subdescription navds-checkbox__description")}
 						{size}
 						aria-hidden
 					>

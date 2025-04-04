@@ -15,7 +15,12 @@ Part of a set of components for displaying text with consistent typography.
 <svelte:element
 	this={as}
 	{...withoutTypoData(restProps)}
-	class={classes(restProps, "navds-body-long", `navds-body-long--${size}`, typoClasses(restProps))}
+	class={classes([
+		restProps.class,
+		"navds-body-long",
+		`navds-body-long--${size}`,
+		typoClasses(restProps),
+	])}
 >
 	{@render children()}
 </svelte:element>

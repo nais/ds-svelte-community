@@ -86,9 +86,9 @@
 	{size}
 	{legend}
 	{description}
-	class={classes(restProps, "navds-checkbox-group", `navds-checkbox-group--${size}`)}
+	class={classes([restProps.class, "navds-checkbox-group", `navds-checkbox-group--${size}`])}
 >
-	<div class="navds-checkboxes">
+	<div class={classes("navds-checkboxes")}>
 		<!-- Content of the fieldset -->
 		{@render children()}
 	</div>
