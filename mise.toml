@@ -1,0 +1,6 @@
+[settings]
+pin = true
+
+[tools]
+bun = "1.2.8"
+node = "lts"
