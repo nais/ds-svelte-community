@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.28
+
+### Patch Changes
+
+- [#251](https://github.com/nais/ds-svelte-community/pull/251) [`c4e6efa`](https://github.com/nais/ds-svelte-community/commit/c4e6efae57730871fa6f282487f704b660975f76) Thanks [@thokra-nav](https://github.com/thokra-nav)! - cleanup package.json
+
 ## 1.0.0-next.27
 
 ### Patch Changes
