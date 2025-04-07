@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.27
+
+### Patch Changes
+
+- [#249](https://github.com/nais/ds-svelte-community/pull/249) [`6d0ebf0`](https://github.com/nais/ds-svelte-community/commit/6d0ebf0fdfafb56d197499816f1123400fa03bf3) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add export to experimental
+
 ## 1.0.0-next.26
 
 ### Patch Changes
