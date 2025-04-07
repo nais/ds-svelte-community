@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.26
+
+### Patch Changes
+
+- [#247](https://github.com/nais/ds-svelte-community/pull/247) [`90a9cd1`](https://github.com/nais/ds-svelte-community/commit/90a9cd1dd3b4715bde0f8b99f90b9b2bc1e4df39) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Fix some class names when using darkside
+
 ## 1.0.0-next.25
 
 ### Patch Changes
