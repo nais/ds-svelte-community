@@ -26,8 +26,8 @@
 		"navds-chips__chip",
 		"navds-chips__removable",
 		`navds-chips__removable--${variant}`,
+		"navds-chips--icon-right",
 	])}
-	class:navds-chips--icon-right={true}
 	aria-label={`${value} ${removeLabel}`}
 	onclick={(e) => {
 		e.preventDefault();

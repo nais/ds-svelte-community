@@ -2,7 +2,7 @@ a:not(.unstyled) {
 	color: var(--ax-text-accent);
 	display: inline-flex;
 	align-items: center;
-	gap: var(--ax-space-20);
+	gap: var(--ax-space-4);
 	text-decoration: underline;
 	text-underline-offset: 0.1em;
 	text-decoration-thickness: 0.05em;

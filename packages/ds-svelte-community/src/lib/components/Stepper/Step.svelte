@@ -32,21 +32,29 @@
 </script>
 
 <li
-	class={classes("navds-stepper__item")}
-	class:navds-stepper__item--behind={index < ctx.activeStep}
-	class:navds-stepper__item--non-interactive={!isInteractive}
-	class:navds-stepper__item--completed={completed}
+	class={classes([
+		"navds-stepper__item",
+		{
+			"navds-stepper__item--behind": index < ctx.activeStep,
+			"navds-stepper__item--non-interactive": !isInteractive,
+			"navds-stepper__item--completed": completed,
+		},
+	])}
 >
 	<span class={classes(["navds-stepper__line", "navds-stepper__line--1"])}></span>
 	<svelte:element
 		this={as}
 		{...omit(restProps, "class")}
-		class={classes("navds-stepper__step")}
-		class:navds-stepper__step--active={index == ctx.activeStep}
-		class:navds-stepper__step--behind={index < ctx.activeStep}
-		class:navds-stepper__step--non-interactive={!isInteractive}
-		class:navds-stepper__step--completed={completed}
-		class:unstyled={as == "a"}
+		class={classes([
+			"navds-stepper__step",
+			{
+				"navds-stepper__step--active": index == ctx.activeStep,
+				"navds-stepper__step--behind": index < ctx.activeStep,
+				"navds-stepper__step--non-interactive": !isInteractive,
+				"navds-stepper__step--completed": completed,
+				unstyled: as == "a",
+			},
+		])}
 		aria-current={index == ctx.activeStep ? "step" : undefined}
 		onclick={isInteractive ? handleClick : null}
 		role={isInteractive ? "button" : undefined}

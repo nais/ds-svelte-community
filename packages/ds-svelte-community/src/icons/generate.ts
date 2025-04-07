@@ -115,22 +115,6 @@ function templateSvelte(source: string, filename: string) {
 					svg_attributes += ` ${name}="${value[0].raw}"`;
 				}
 			});
-
-			// if (node.type === "Element" && node.name === "svg") {
-			//   node.children.forEach((child) => {
-			//     svg_children += source.slice(child.start, child.end);
-			//   });
-
-			//   node.attributes.forEach(({ name, value }) => {
-			//     if (name === "class") {
-			//       value[0].raw.split(" ").forEach((name: string) => {
-			//         svg_attributes += ` class:${name}={true}`;
-			//       });
-			//     } else {
-			//       svg_attributes += ` ${name}="${value[0].raw}"`;
-			//     }
-			//   });
-			// }
 		},
 	});
 

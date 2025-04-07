@@ -27,9 +27,11 @@
 		"navds-chips__chip",
 		"navds-chips__toggle",
 		`navds-chips__toggle--${variant}`,
+		{
+			unstyled: as == "a",
+			"navds-chips__toggle--with-checkmark": checkmark,
+		},
 	])}
-	class:unstyled={as == "a"}
-	class:navds-chips__toggle--with-checkmark={checkmark}
 	aria-pressed={selected}
 	data-pressed={selected}
 	onclick={as == "a"
