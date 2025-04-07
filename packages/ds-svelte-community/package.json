@@ -27,44 +27,6 @@
 		"test:unit:watch": "bun test --conditions browser --watch",
 		"sync": "svelte-kit sync"
 	},
-	"publishConfig": {
-		"types": "./dist/index.d.ts",
-		"exports": {
-			".": {
-				"types": "./dist/index.d.ts",
-				"svelte": "./dist/index.js",
-				"default": "./dist/index.js"
-			},
-			"./icons": {
-				"types": "./dist/icons/index.d.ts",
-				"import": "./dist/icons/index.js",
-				"svelte": "./dist/icons/index.js"
-			},
-			"./experimental": {
-				"types": "./dist/experimental.d.ts",
-				"import": "./dist/experimental.js",
-				"svelte": "./dist/experimental.js"
-			},
-			"./css": {
-				"default": "./dist/css/index.css"
-			},
-			"./*": {
-				"types": "./dist/*",
-				"import": "./dist/*",
-				"svelte": "./dist/*"
-			},
-			"typesVersions": {
-				">4.0": {
-					"index.d.ts": [
-						"./dist/index.d.ts"
-					],
-					"icons": [
-						"./dist/icons/index.d.ts"
-					]
-				}
-			}
-		}
-	},
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
@@ -76,6 +38,11 @@
 			"import": "./dist/icons/index.js",
 			"svelte": "./dist/icons/index.js"
 		},
+		"./experimental": {
+			"types": "./dist/experimental/index.d.ts",
+			"import": "./dist/experimental/index.js",
+			"svelte": "./dist/experimental/index.js"
+		},
 		"./css": {
 			"default": "./dist/css/index.css"
 		},
@@ -83,16 +50,6 @@
 			"types": "./dist/*",
 			"import": "./dist/*",
 			"svelte": "./dist/*"
-		}
-	},
-	"typesVersions": {
-		">4.0": {
-			"index.d.ts": [
-				"./dist/index.d.ts"
-			],
-			"icons": [
-				"./dist/icons/index.d.ts"
-			]
 		}
 	},
 	"files": [
@@ -113,7 +70,6 @@
 		"@navikt/aksel-icons": "^7.18.0",
 		"@navikt/ds-react": "^7.18.0",
 		"@navikt/ds-tailwind": "^7.18.0",
-		"@sveltejs/adapter-auto": "^6.0.0",
 		"@sveltejs/adapter-static": "^3.0.8",
 		"@sveltejs/kit": "^2.20.3",
 		"@sveltejs/package": "^2.3.10",

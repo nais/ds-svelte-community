@@ -17,7 +17,7 @@
     },
     "packages/ds-svelte-community": {
       "name": "@nais/ds-svelte-community",
-      "version": "1.0.0-next.24",
+      "version": "1.0.0-next.27",
       "dependencies": {
         "@navikt/ds-css": "^7.18.0",
         "@navikt/ds-tokens": "^7.18.0",
@@ -29,7 +29,6 @@
         "@navikt/aksel-icons": "^7.18.0",
         "@navikt/ds-react": "^7.18.0",
         "@navikt/ds-tailwind": "^7.18.0",
-        "@sveltejs/adapter-auto": "^6.0.0",
         "@sveltejs/adapter-static": "^3.0.8",
         "@sveltejs/kit": "^2.20.3",
         "@sveltejs/package": "^2.3.10",
@@ -76,7 +75,7 @@
     },
     "packages/ds-svelte-community-preprocess-svelte": {
       "name": "@nais/ds-svelte-community-preprocess-svelte",
-      "version": "1.0.0-next.4",
+      "version": "1.0.0-next.5",
       "dependencies": {
         "estree-walker": "^3.0.3",
         "prettier": "^3.5.3",
@@ -92,7 +91,7 @@
     },
     "packages/vite-plugin-svelte-docs": {
       "name": "@nais/vite-plugin-svelte-docs",
-      "version": "0.0.2-next.2",
+      "version": "0.0.2-next.3",
       "dependencies": {
         "svelte2tsx": "0.7.35",
         "vite": "^6.2.5",
@@ -356,8 +355,6 @@
     "@shikijs/vscode-textmate": ["@shikijs/vscode-textmate@10.0.2", "", {}, "sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg=="],
 
     "@sveltejs/acorn-typescript": ["@sveltejs/acorn-typescript@1.0.5", "", { "peerDependencies": { "acorn": "^8.9.0" } }, "sha512-IwQk4yfwLdibDlrXVE04jTZYlLnwsTT2PIOQQGNLWfjavGifnk1JD1LcZjZaBTRcxZu2FfPfNLOE04DSu9lqtQ=="],
-
-    "@sveltejs/adapter-auto": ["@sveltejs/adapter-auto@6.0.0", "", { "dependencies": { "import-meta-resolve": "^4.1.0" }, "peerDependencies": { "@sveltejs/kit": "^2.0.0" } }, "sha512-7mR2/G7vlXakaOj6QBSG9dwBfTgWjV+UnEMB5Z6Xu0ZbdXda6c0su1fNkg0ab0zlilSkloMA2NjCna02/DR7sA=="],
 
     "@sveltejs/adapter-static": ["@sveltejs/adapter-static@3.0.8", "", { "peerDependencies": { "@sveltejs/kit": "^2.0.0" } }, "sha512-YaDrquRpZwfcXbnlDsSrBQNCChVOT9MGuSg+dMAyfsAa1SmiAhrA5jUYUiIMC59G92kIbY/AaQOWcBdq+lh+zg=="],
 
