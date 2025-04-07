@@ -52,8 +52,12 @@
 	{#if showSteppers}
 		<!-- Is it OK to use aria-hidden when we have other keyboard actions? -->
 		<div
-			class={classes("navds-tabs__scroll-button")}
-			class:navds-tabs__scroll-button--hidden={!showStepperLeft}
+			class={classes([
+				"navds-tabs__scroll-button",
+				{
+					"navds-tabs__scroll-button--hidden": !showStepperLeft,
+				},
+			])}
 			aria-hidden="true"
 			onclick={() => {
 				scroll(false);
@@ -77,8 +81,12 @@
 	</div>
 	{#if showSteppers}
 		<div
-			class={classes("navds-tabs__scroll-button")}
-			class:navds-tabs__scroll-button--hidden={!showStepperRight}
+			class={classes([
+				"navds-tabs__scroll-button",
+				{
+					"navds-tabs__scroll-button--hidden": !showStepperRight,
+				},
+			])}
 			aria-hidden="true"
 			onclick={() => {
 				scroll(true);

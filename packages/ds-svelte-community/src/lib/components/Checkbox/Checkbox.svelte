@@ -111,7 +111,7 @@
 		</span>
 		<span class={classes("navds-checkbox__icon-indeterminate")}></span>
 		{#if children}
-			<span class={classes("navds-checkbox__content")} class:navds-sr-only={hideLabel}>
+			<span class={classes(["navds-checkbox__content", { "navds-sr-only": hideLabel }])}>
 				<BodyShort as="span" {size} class={classes("navds-checkbox__label-text")} aria-hidden>
 					{@render children()}
 				</BodyShort>

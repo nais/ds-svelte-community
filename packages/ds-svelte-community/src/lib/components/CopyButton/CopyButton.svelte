@@ -105,9 +105,11 @@
 			"navds-copybutton",
 			`navds-copybutton--${size}`,
 			`navds-copybutton--${variant}`,
+			{
+				"navds-copybutton--icon-only": !text,
+				"navds-copybutton--active": active,
+			},
 		])}
-		class:navds-copybutton--icon-only={!text}
-		class:navds-copybutton--active={active}
 		onclick={handleClick}
 	>
 		<span class={classes("navds-copybutton__content")}>

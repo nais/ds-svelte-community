@@ -59,9 +59,13 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	</span>
 	<label for={id} class={classes("navds-switch__label-wrapper")}>
 		<div
-			class={classes("navds-switch__content")}
-			class:navds-sr-only={hideLabel}
-			class:navds-switch--with-description={!!description && !hideLabel}
+			class={classes([
+				"navds-switch__content",
+				{
+					"navds-sr-only": hideLabel,
+					"navds-switch--with-description": !!description && !hideLabel,
+				},
+			])}
 		>
 			<BodyShort as="div" {size} class={classes("navds-switch__label")}>
 				{@render children()}
