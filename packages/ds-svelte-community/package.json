@@ -40,6 +40,11 @@
 				"import": "./dist/icons/index.js",
 				"svelte": "./dist/icons/index.js"
 			},
+			"./experimental": {
+				"types": "./dist/experimental.d.ts",
+				"import": "./dist/experimental.js",
+				"svelte": "./dist/experimental.js"
+			},
 			"./css": {
 				"default": "./dist/css/index.css"
 			},
