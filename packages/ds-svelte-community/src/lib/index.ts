@@ -31,3 +31,4 @@ export * from "./components/ToggleGroup";
 export * from "./components/Tooltip";
 export * from "./components/typography";
 export { default as Link } from "./components/typography/Link/Link.svelte";
+export * from "./components/ExpansionCard";
