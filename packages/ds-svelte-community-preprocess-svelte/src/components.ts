@@ -62,6 +62,12 @@ export const Components: KnownComponents = {
 		ExpandableRow: {
 			path: "components/Table/ExpandableRow.svelte",
 		},
+		ExpansionCard: {
+			path: "components/ExpansionCard/ExpansionCard.svelte",
+		},
+		ExpansionCardTitle: {
+			path: "components/ExpansionCard/ExpansionCardTitle.svelte",
+		},
 		Fieldset: {
 			path: "components/Fieldset/Fieldset.svelte",
 		},
