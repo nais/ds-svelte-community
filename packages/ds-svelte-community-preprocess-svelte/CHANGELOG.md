@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community-preprocess-svelte
 
+## 1.0.0-next.6
+
+### Patch Changes
+
+- [#255](https://github.com/nais/ds-svelte-community/pull/255) [`05a92d1`](https://github.com/nais/ds-svelte-community/commit/05a92d11f628c6e43e13c1cbbcf9ee4264c29ca6) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Introduce ExpansionCard
+
 ## 1.0.0-next.5
 
 ### Patch Changes
