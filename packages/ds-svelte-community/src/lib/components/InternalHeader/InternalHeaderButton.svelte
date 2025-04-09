@@ -28,3 +28,9 @@
 >
 	{@render children()}
 </svelte:element>
+
+<style>
+	a.unstyled {
+		text-decoration: none;
+	}
+</style>
