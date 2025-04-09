@@ -1,5 +1,11 @@
 # @nais/vite-plugin-svelte-docs
 
+## 0.0.2-next.4
+
+### Patch Changes
+
+- [#259](https://github.com/nais/ds-svelte-community/pull/259) [`3eabe6f`](https://github.com/nais/ds-svelte-community/commit/3eabe6f88cd89d588e476f79a750fdfc821613c4) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade deps. Fix context values in tabs"
+
 ## 0.0.2-next.3
 
 ### Patch Changes
