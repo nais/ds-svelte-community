@@ -8,18 +8,13 @@
 	import Spacer from "$lib/components/primitives/Stack/Spacer.svelte";
 	import Tag from "$lib/components/Tag/Tag.svelte";
 	import Theme from "$lib/components/Theme/Theme.svelte";
+	import darksideURL from "$lib/css/darkside.css?url";
+	import oldCSSURL from "$lib/css/index.css?url";
 	import type { Snippet } from "svelte";
 	import "../../doclib/styles.css";
 	import type { LayoutData } from "./$types";
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
-
-	// TODO: Do something smarter about this, maybe using <svelte:head>?
-	if (data.theme) {
-		import("../../lib/css/darkside.css");
-	} else {
-		import("../../lib/css/index.css");
-	}
 
 	function toTitle(str: string) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
@@ -40,6 +35,14 @@
 		return base;
 	});
 </script>
+
+<svelte:head>
+	{#if data.theme}
+		<link rel="stylesheet" href={darksideURL} />
+	{:else}
+		<link rel="stylesheet" href={oldCSSURL} />
+	{/if}
+</svelte:head>
 
 {#snippet pageSnippet()}
 	<Page background={data.theme ? undefined : "bg-subtle"}>

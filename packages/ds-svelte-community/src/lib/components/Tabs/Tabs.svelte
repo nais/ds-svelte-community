@@ -23,6 +23,11 @@
 
 	const id = $props.id();
 	const ctx = new TabContext(value, id);
+	ctx.value = value;
+	ctx.loop = loop;
+	ctx.iconPosition = iconPosition;
+	ctx.size = size;
+	ctx.selectionFollowsFocus = selectionFollowsFocus;
 	$effect(() => {
 		ctx.value = value;
 		ctx.loop = loop;

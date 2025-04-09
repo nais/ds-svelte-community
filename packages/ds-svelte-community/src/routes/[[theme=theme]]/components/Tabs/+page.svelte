@@ -14,7 +14,7 @@
 
 <Doc {doc} extraChildrenDoc={[tabListDoc, tabDoc, tabPanelDoc]} preview={{ width: "400px" }}>
 	<Story>
-		<Tabs bind:value={active}>
+		<Tabs bind:value={active} size="small">
 			<TabList>
 				<Tab value="log">
 					{#snippet icon()}<ClockDashedIcon aria-label="Log" />{/snippet}

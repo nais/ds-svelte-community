@@ -5,15 +5,15 @@
 	"version": "0.0.2-next.3",
 	"private": true,
 	"devDependencies": {
-		"@types/bun": "1.2.8",
-		"eslint": "^9.23.0",
+		"@types/bun": "1.2.9",
+		"eslint": "^9.24.0",
 		"eslint-config-prettier": "^10.1.1",
-		"eslint-plugin-svelte": "^3.5.0",
+		"eslint-plugin-svelte": "^3.5.1",
 		"prettier": "^3.5.3",
 		"prettier-plugin-svelte": "^3.3.3",
-		"svelte": "5.25.6",
+		"svelte": "5.25.9",
 		"tsconfig-resolver": "^3.0.1",
-		"typescript": "~5.8.2"
+		"typescript": "~5.8.3"
 	},
 	"scripts": {
 		"build": "tsc -p tsconfig.build.json",
