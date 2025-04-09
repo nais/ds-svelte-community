@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.30
+
+### Patch Changes
+
+- [#257](https://github.com/nais/ds-svelte-community/pull/257) [`143a6d7`](https://github.com/nais/ds-svelte-community/commit/143a6d73d8b60dcc6fc3cd743cd31f355719ec54) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Export Spacer. InternalHeaderButton links without underline
+
 ## 1.0.0-next.29
 
 ### Patch Changes
