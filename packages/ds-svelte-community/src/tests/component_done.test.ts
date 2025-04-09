@@ -66,7 +66,6 @@ describe("which components are implemented", () => {
 		"Radio",
 		"RadioGroup",
 		"ReadMore",
-		"Spacer",
 		"TableColumnHeader",
 		"Textarea",
 		"Timeline",

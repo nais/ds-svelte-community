@@ -11,8 +11,7 @@
 
 	import Doc from "$doclib/Doc.svelte";
 	import Story from "$doclib/Story.svelte";
-	import { Search } from "$lib";
-	import Spacer from "$lib/components/primitives/Stack/Spacer.svelte";
+	import { Search, Spacer } from "$lib";
 	import {
 		ActionMenu,
 		ActionMenuDivider,
@@ -123,6 +122,17 @@
 			</form>
 			<Spacer />
 			<InternalHeaderUser name="Ola Normann" description="D123456" />
+		</InternalHeader>
+	</Story>
+
+	<Story name="Menu links">
+		<InternalHeader>
+			<InternalHeaderTitle as="h1">My application</InternalHeaderTitle>
+			<InternalHeaderButton as="a" href="../Button">Button</InternalHeaderButton>
+			<InternalHeaderButton as="a" href="../Checkbox">Checkbox</InternalHeaderButton>
+			<Spacer />
+			<InternalHeaderButton as="a" href="../Switch">Switch</InternalHeaderButton>
+			<InternalHeaderButton as="a" href="../Table">Table</InternalHeaderButton>
 		</InternalHeader>
 	</Story>
 </Doc>

@@ -137,6 +137,9 @@ export const Components: KnownComponents = {
 		Skeleton: {
 			path: "components/Skeleton/Skeleton.svelte",
 		},
+		Spacer: {
+			path: "components/primitives/Stack/Spacer.svelte",
+		},
 		Stack: {
 			path: "components/primitives/Stack/Stack.svelte",
 		},
