@@ -4,13 +4,12 @@ import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
 import RadioGroup from "./RadioGroup.test.svelte";
 import React from "react";
-import type { ComponentProps } from "svelte";
 
 describe("RadioGroup", () => {
 	for (const size of ["small", "medium"] as const) {
 		for (const initOpen of [false, true] as const) {
 			it(`renders with HTML similar to ds-react, size: ${size}, open: ${initOpen}`, async () => {
-				const props: ComponentProps<RadioGroup> = {
+				const props = {
 					legend: "Legend text",
 					description: "Description text",
 					size,
