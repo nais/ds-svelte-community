@@ -5,8 +5,14 @@
 
 version: 2
 updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
   - package-ecosystem: "bun" # See documentation for possible values
-    directory: "/packages/ds-svelte-community" # Location of package manifests
+    directory: "/" # Location of package manifests
+    versioning-strategy: increase
     schedule:
       interval: "weekly"
     groups:
@@ -18,20 +24,3 @@ updates:
       aksel:
         patterns:
           - "@navikt/*"
-  - package-ecosystem: "bun" # See documentation for possible values
-    directory: "/packages/ds-svelte-community-preprocess-svelte" # Location of package manifests
-    schedule:
-      interval: "weekly"
-    groups:
-      other:
-        patterns:
-          - "*"
-
-  - package-ecosystem: github-actions
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    groups:
-      github-actions:
-        patterns:
-          - "*"
