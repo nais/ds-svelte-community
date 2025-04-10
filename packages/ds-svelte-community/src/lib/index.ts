@@ -33,3 +33,4 @@ export * from "./components/typography";
 export { default as Link } from "./components/typography/Link/Link.svelte";
 export * from "./components/ExpansionCard";
 export { default as Spacer } from "./components/primitives/Stack/Spacer.svelte";
+export { default as ReadMore } from "./components/ReadMore/ReadMore.svelte";
