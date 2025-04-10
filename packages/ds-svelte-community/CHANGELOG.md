@@ -1,5 +1,13 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.33
+
+### Patch Changes
+
+- [#270](https://github.com/nais/ds-svelte-community/pull/270) [`19c139e`](https://github.com/nais/ds-svelte-community/commit/19c139ea9696dd458bcc04e5d4d6fca0d10eacc2) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Allow using internal header in light mode
+
+- [#268](https://github.com/nais/ds-svelte-community/pull/268) [`daef512`](https://github.com/nais/ds-svelte-community/commit/daef512163314221b9b6e13e27a333fcfef774da) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add Radio and RadioGroup components
+
 ## 1.0.0-next.32
 
 ### Patch Changes
