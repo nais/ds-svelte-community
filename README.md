@@ -12,9 +12,9 @@ Check out the [Documentation](https://nais.io/ds-svelte-community) for examples 
 
 ## Development
 
-We use [Bun](https://bun.sh) and [asdf](https://asdf-vm.com) to manage dependencies and run scripts.
+We use [Bun](https://bun.sh) and [mise](https://mise.jdx.dev/) to manage dependencies and run scripts.
 
-Run `asdf install` to install the correct version of `bun`. (You might need to run `asdf plugin add bun` first.)
+Run `mise install` to install the correct version of `bun`.
 
 ### Packages
 
