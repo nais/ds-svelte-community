@@ -51,8 +51,6 @@ describe("which components are implemented", () => {
 		"Portal",
 		"ProgressBar",
 		"Provider",
-		"Radio",
-		"RadioGroup",
 		"TableColumnHeader",
 		"Textarea",
 		"Timeline",
