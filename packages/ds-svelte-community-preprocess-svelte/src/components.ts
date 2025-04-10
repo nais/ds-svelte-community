@@ -119,6 +119,12 @@ export const Components: KnownComponents = {
 		Popover: {
 			path: "components/Popover/Popover.svelte",
 		},
+		Radio: {
+			path: "components/Radio/Radio.svelte",
+		},
+		RadioGroup: {
+			path: "components/Radio/RadioGroup.svelte",
+		},
 		ReadMore: {
 			path: "components/ReadMore/ReadMore.svelte",
 		},

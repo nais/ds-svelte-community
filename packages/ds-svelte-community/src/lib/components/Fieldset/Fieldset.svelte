@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { classes, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
-	import Detail from "../typography/Detail/Detail.svelte";
 	import ErrorMessage from "../typography/ErrorMessage/ErrorMessage.svelte";
 	import Label from "../typography/Label/Label.svelte";
 	import { type FieldsetProps } from "./type";
@@ -48,32 +47,18 @@
 	</Label>
 
 	{#if description}
-		{#if size == "medium"}
-			<BodyShort
-				class={classes("navds-fieldset__description" + srOnlyClass)}
-				{size}
-				id={inputDescriptionId}
-				as="div"
-			>
-				{#if typeof description === "string"}
-					{description}
-				{:else}
-					{@render description()}
-				{/if}
-			</BodyShort>
-		{:else}
-			<Detail
-				class={classes("navds-fieldset__description" + srOnlyClass)}
-				id={inputDescriptionId}
-				as="div"
-			>
-				{#if typeof description === "string"}
-					{description}
-				{:else}
-					{@render description()}
-				{/if}
-			</Detail>
-		{/if}
+		<BodyShort
+			class={classes("navds-fieldset__description" + srOnlyClass)}
+			{size}
+			id={inputDescriptionId}
+			as="div"
+		>
+			{#if typeof description === "string"}
+				{description}
+			{:else}
+				{@render description()}
+			{/if}
+		</BodyShort>
 	{/if}
 
 	{@render children()}
