@@ -8,7 +8,8 @@ import {
 } from "svelte-floating-ui";
 import { flip, offset, shift, type VirtualElement } from "svelte-floating-ui/dom";
 
-export const isPolyfilled = document && !("anchorName" in document.documentElement.style);
+export const isPolyfilled =
+	typeof window !== "undefined" && !("anchorName" in document.documentElement.style);
 
 export const createFloatingActions: (
 	initOptions?: ComputeConfig,
