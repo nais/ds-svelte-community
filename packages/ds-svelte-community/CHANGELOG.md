@@ -1,5 +1,13 @@
 # @nais/ds-svelte-community
 
+## 1.0.0-next.32
+
+### Patch Changes
+
+- [#264](https://github.com/nais/ds-svelte-community/pull/264) [`5a5cc6e`](https://github.com/nais/ds-svelte-community/commit/5a5cc6e4f30d978ced3953ebc989c889cb634725) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add ReadMore
+
+- [#266](https://github.com/nais/ds-svelte-community/pull/266) [`056bcb8`](https://github.com/nais/ds-svelte-community/commit/056bcb8bc1d71c8f2713e8983c3cf9db31ca1309) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade dependencies
+
 ## 1.0.0-next.31
 
 ### Patch Changes
