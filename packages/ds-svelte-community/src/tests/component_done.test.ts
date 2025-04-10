@@ -1,4 +1,5 @@
 import * as allSvelte from "$lib";
+import * as allSvelteExperimental from "$lib/experimental";
 import * as allReact from "@navikt/ds-react";
 import { describe, expect, it } from "bun:test";
 
@@ -7,16 +8,8 @@ describe("which components are implemented", () => {
 	// These are listed to allow the test to pass, but we want to keep track of them.
 	// The test will fail if we have the component, but it's still listed here.
 	const missingComponents: string[] = [
-		"ActionMenu",
-		"ActionMenuCheckboxItem",
 		"ActionMenuContent",
-		"ActionMenuDivider",
-		"ActionMenuGroup",
-		"ActionMenuItem",
 		"ActionMenuLabel",
-		"ActionMenuRadioGroup",
-		"ActionMenuRadioItem",
-		"ActionMenuSub",
 		"ActionMenuSubContent",
 		"ActionMenuSubTrigger",
 		"ActionMenuTrigger",
@@ -47,11 +40,6 @@ describe("which components are implemented", () => {
 		"FormSummaryLabel",
 		"FormSummaryValue",
 		"Ingress",
-		"InternalHeader",
-		"InternalHeaderButton",
-		"InternalHeaderTitle",
-		"InternalHeaderUser",
-		"InternalHeaderUserButton",
 		"LinkPanel",
 		"LinkPanelDescription",
 		"LinkPanelTitle",
@@ -123,12 +111,14 @@ describe("which components are implemented", () => {
 		.filter((key) => !ignoredComponents.includes(key))
 		.filter((key) => !missingComponents.includes(key));
 
-	const targetSvelte = Object.keys(allSvelte).map((key) => {
-		if (alteredNames[key as never]) {
-			return alteredNames[key as never];
-		}
-		return key;
-	});
+	const targetSvelte = [...Object.keys(allSvelteExperimental), ...Object.keys(allSvelte)].map(
+		(key) => {
+			if (alteredNames[key as never]) {
+				return alteredNames[key as never];
+			}
+			return key;
+		},
+	);
 
 	it("should include expected components", () => {
 		const missing = targetReact.filter((key) => !targetSvelte.includes(key)).sort();

@@ -1,4 +1,3 @@
-import { browser } from "$app/environment";
 import {
 	createFloatingActions as cfa,
 	type ComputeConfig,
@@ -9,7 +8,7 @@ import {
 } from "svelte-floating-ui";
 import { flip, offset, shift, type VirtualElement } from "svelte-floating-ui/dom";
 
-export const isPolyfilled = browser && !("anchorName" in document.documentElement.style);
+export const isPolyfilled = document && !("anchorName" in document.documentElement.style);
 
 export const createFloatingActions: (
 	initOptions?: ComputeConfig,
