@@ -119,6 +119,9 @@ export const Components: KnownComponents = {
 		Popover: {
 			path: "components/Popover/Popover.svelte",
 		},
+		ReadMore: {
+			path: "components/ReadMore/ReadMore.svelte",
+		},
 		RemovableChip: {
 			path: "components/Chips/RemovableChip.svelte",
 		},
