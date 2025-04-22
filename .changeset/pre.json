@@ -6,5 +6,7 @@
     "@nais/ds-svelte-community-preprocess-svelte": "1.0.0",
     "@nais/vite-plugin-svelte-docs": "0.0.2"
   },
-  "changesets": []
+  "changesets": [
+    "fast-crabs-drive"
+  ]
 }
