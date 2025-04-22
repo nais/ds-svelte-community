@@ -65,7 +65,6 @@
 		"svelte-floating-ui": "^1.6.2"
 	},
 	"devDependencies": {
-		"@nais/ds-svelte-community-preprocess-svelte": "workspace:*",
 		"@nais/vite-plugin-svelte-docs": "workspace:*",
 		"@navikt/aksel-icons": "^7.19.0",
 		"@navikt/ds-react": "^7.19.0",
