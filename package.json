@@ -4,7 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"gar-login": "bun x google-artifactregistry-auth",
-		"build:libs": "bun run --filter @nais/ds-svelte-community-preprocess-svelte build && bun run --filter @nais/vite-plugin-svelte-docs build",
+		"build:libs": "bun run --filter @nais/vite-plugin-svelte-docs build",
 		"test": "bun run --filter './packages/**' test",
 		"lint": "bun run --filter './packages/**' lint",
 		"check": "bun run --filter './packages/**' check",
@@ -16,7 +16,7 @@
 		"packages/*"
 	],
 	"dependencies": {
-		"@changesets/cli": "^2.28.1",
+		"@changesets/cli": "^2.29.2",
 		"@types/eslint": "^9.6.1",
 		"ts-morph": "^25.0.1"
 	},

@@ -1,0 +1,21 @@
+{
+	"cssVariables.lookupFiles": [
+		"node_modules/@navikt/ds-tokens/dist/darkside/tokens.css",
+		"../../node_modules/@navikt/ds-tokens/dist/darkside/tokens.css",
+		"**/*.css"
+	],
+	"cssVariables.blacklistFolders": [
+		"**/.git",
+		"**/.svn",
+		"**/.hg",
+		"**/CVS",
+		"**/.DS_Store",
+		"**/bower_components",
+		"**/node_modules",
+		"**/tmp",
+		"**/dist",
+		"**/build",
+		"**/.svelte-kit",
+		"**/tests"
+	]
+}

@@ -23,7 +23,6 @@ The library is split into multiple packages in the `packages` directory. Each pa
 | Package                                 | Description                                                             |
 | --------------------------------------- | ----------------------------------------------------------------------- |
 | `ds-svelte-community`                   | The actual component library, including icons.                          |
-| `ds-svelte-community-preprocess-svelte` | A preprocessing step that optimizes usage of the component library.     |
 | `vite-plugin-svelte-docs`               | A Vite plugin that generates documentation JSON from Svelte components. |
 
 ## GitHub copilot in use

@@ -30,13 +30,6 @@ jobs:
           bun run lint
           bun run check
 
-      - name: Test and lint ds-svelte-community-preprocess-svelte
-        run: |-
-          cd packages/ds-svelte-community-preprocess-svelte
-          bun run test
-          bun run lint
-          bun run check
-
       - name: Test and lint vite-plugin-svelte-docs
         run: |-
           cd packages/vite-plugin-svelte-docs

@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@nais/ds-svelte-community": "1.0.0",
+    "@nais/ds-svelte-community-preprocess-svelte": "1.0.0",
+    "@nais/vite-plugin-svelte-docs": "0.0.2"
+  },
+  "changesets": []
+}
