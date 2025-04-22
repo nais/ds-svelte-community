@@ -6,7 +6,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 -->
 
 <script lang="ts">
-	import { classes, isSnippet, omit } from "../helpers";
+	import { isSnippet, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Detail from "../typography/Detail/Detail.svelte";
 	import type { TagProps } from "./type";
@@ -31,17 +31,17 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	{as}
 	{...omit(restProps, "size", "class")}
 	size={size == "medium" ? "medium" : "small"}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-tag",
-		`navds-tag--${variant}`,
-		`navds-tag--${size}`,
-		`navds-tag--${filledVariant || moderateVariant || "outline"}`,
-		`navds-tag--${color}`,
-	])}
+		"aksel-tag",
+		`aksel-tag--${variant}`,
+		`aksel-tag--${size}`,
+		`aksel-tag--${filledVariant || moderateVariant || "outline"}`,
+		`aksel-tag--${color}`,
+	]}
 >
 	{#if icon}
-		<span class={classes("navds-tag__icon--left")}>
+		<span class="aksel-tag__icon--left">
 			{#if isSnippet(icon)}
 				{@render icon()}
 			{:else}

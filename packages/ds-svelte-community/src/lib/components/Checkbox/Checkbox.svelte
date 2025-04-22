@@ -6,7 +6,7 @@
 -->
 
 <script lang="ts">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import { GetCheckboxGroupContext } from "./CheckboxGroup.svelte";
 	import type { CheckboxProps } from "./type";
@@ -56,21 +56,21 @@
 </script>
 
 <div
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-checkbox",
-		`navds-checkbox--${size}`,
+		"aksel-checkbox",
+		`aksel-checkbox--${size}`,
 		{
-			"navds-checkbox--error": hasError,
-			"navds-checkbox--disabled": disabled,
+			"aksel-checkbox--error": hasError,
+			"aksel-checkbox--disabled": disabled,
 		},
-	])}
+	]}
 >
 	<input
 		{...omit(restProps, "class")}
 		{id}
 		type="checkbox"
-		class={classes("navds-checkbox__input")}
+		class="aksel-checkbox__input"
 		aria-checked={indeterminate ? "mixed" : undefined}
 		aria-invalid={hasError ? "true" : undefined}
 		aria-labelledby={lblID}
@@ -91,8 +91,8 @@
 			}
 		}}
 	/>
-	<label for={id} class={classes("navds-checkbox__label")} id={lblID}>
-		<span class={classes("navds-checkbox__icon")}>
+	<label for={id} class="aksel-checkbox__label" id={lblID}>
+		<span class="aksel-checkbox__icon">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="0.8125rem"
@@ -109,16 +109,16 @@
 				/>
 			</svg>
 		</span>
-		<span class={classes("navds-checkbox__icon-indeterminate")}></span>
+		<span class="aksel-checkbox__icon-indeterminate"></span>
 		{#if children}
-			<span class={classes(["navds-checkbox__content", { "navds-sr-only": hideLabel }])}>
-				<BodyShort as="span" {size} class={classes("navds-checkbox__label-text")} aria-hidden>
+			<span class={["aksel-checkbox__content", { "aksel-sr-only": hideLabel }]}>
+				<BodyShort as="span" {size} class="aksel-checkbox__label-text" aria-hidden>
 					{@render children()}
 				</BodyShort>
 				{#if description}
 					<BodyShort
 						as="span"
-						class={classes("navds-form-field__subdescription navds-checkbox__description")}
+						class="aksel-form-field__subdescription aksel-checkbox__description"
 						{size}
 						aria-hidden
 					>

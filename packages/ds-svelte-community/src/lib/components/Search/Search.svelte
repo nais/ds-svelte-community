@@ -18,7 +18,7 @@
 	import MagnifyingGlassIcon from "$lib/icons/MagnifyingGlassIcon.svelte";
 	import XMarkIcon from "$lib/icons/XMarkIcon.svelte";
 	import Button from "../Button/Button.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { GetTheme } from "../Theme/Theme.svelte";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Label from "../typography/Label/Label.svelte";
@@ -49,8 +49,6 @@
 	const uid = $props.id();
 	const baseID = "search-" + uid;
 
-	let srOnlyClass = $derived(hideLabel ? "navds-sr-only" : "");
-
 	let input: HTMLInputElement | undefined;
 
 	function handleClearClick(event: MouseEvent) {
@@ -78,42 +76,42 @@
 </script>
 
 <div
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-form-field",
-		`navds-form-field--${size}`,
-		"navds-search",
+		"aksel-form-field",
+		`aksel-form-field--${size}`,
+		"aksel-search",
 		{
-			"navds-search--error": hasError,
-			"navds-search--disabled": disabled,
+			"aksel-search--error": hasError,
+			"aksel-search--disabled": disabled,
 		},
-	])}
+	]}
 >
-	<Label for={baseID} {size} class={classes(["navds-form-field__label", srOnlyClass])}>
+	<Label for={baseID} {size} class={["aksel-form-field__label", { "aksel-sr-only": hideLabel }]}>
 		{label}
 	</Label>
 	{#if description}
 		<BodyShort
 			as="div"
-			class={classes("navds-form-field__description {srOnlyClass}")}
+			class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]}
 			id={baseID}
 			{size}
 		>
 			{description}
 		</BodyShort>
 	{/if}
-	<div class={classes("navds-search__wrapper")}>
-		<div class={classes("navds-search__wrapper-inner")}>
+	<div class="aksel-search__wrapper">
+		<div class="aksel-search__wrapper-inner">
 			{#if variant == "simple"}
 				{#if loading}
-					<span class={classes("navds-search__search-icon")} style="height:50%;">
+					<span class="aksel-search__search-icon" style="height:50%;">
 						<Loader />
 					</span>
 				{:else}
 					<MagnifyingGlassIcon
 						title={searchIconText}
 						aria-hidden
-						class={classes("navds-search__search-icon")}
+						class="aksel-search__search-icon"
 					/>
 				{/if}
 			{/if}
@@ -123,19 +121,19 @@
 				bind:value
 				id={baseID}
 				type="search"
-				class={classes([
-					"navds-search__input",
-					`navds-search__input--${variant}`,
-					"navds-text-field__input",
-					"navds-body-short",
-					`navds-body-short--${size}`,
-				])}
+				class={[
+					"aksel-search__input",
+					`aksel-search__input--${variant}`,
+					"aksel-text-field__input",
+					"aksel-body-short",
+					`aksel-body-short--${size}`,
+				]}
 				onkeypress={handleInputKeypress}
 			/>
 			{#if value && clearButton}
 				{#if theme}
 					<Button
-						class={classes("navds-search__button-clear")}
+						class="aksel-search__button-clear"
 						variant="tertiary-neutral"
 						size={size === "medium" ? "small" : "xsmall"}
 						title={clearButtonLabel}
@@ -147,12 +145,8 @@
 						{/snippet}
 					</Button>
 				{:else}
-					<button
-						type="button"
-						class={classes("navds-search__button-clear")}
-						onclick={handleClearClick}
-					>
-						<span class={classes("navds-sr-only")}>
+					<button type="button" class="aksel-search__button-clear" onclick={handleClearClick}>
+						<span class="aksel-sr-only">
 							{clearButtonLabel ? clearButtonLabel : "Empty"}
 						</span>
 						<XMarkIcon aria-hidden />
@@ -174,11 +168,7 @@
 			/>
 		{/if}
 	</div>
-	<div
-		class={classes("navds-form-field__error")}
-		aria-relevant="additions removals"
-		aria-live="polite"
-	>
+	<div class="aksel-form-field__error" aria-relevant="additions removals" aria-live="polite">
 		<!-- {showErrorMsg && (
             <ErrorMessage size={size}>{props.error}</ErrorMessage>
           )} -->

@@ -6,10 +6,9 @@
 -->
 
 <script lang="ts">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { GetTheme } from "../Theme/Theme.svelte";
 	import GuidePanelDarksideIllustration from "./GuidePanelDarksideIllustration.svelte";
-	import Illustration from "./GuidePanelIllustration.svelte";
 	import type { GuidePanelProps } from "./type";
 
 	let { poster, illustration, children, ...restProps }: GuidePanelProps = $props();
@@ -19,27 +18,25 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-guide-panel",
+		"aksel-guide-panel",
 		{
-			"navds-guide-panel--poster": poster === true,
-			"navds-guide-panel--not-poster": poster === false,
-			"navds-guide-panel--responsive-poster": poster === undefined,
+			"aksel-guide-panel--poster": poster === true,
+			"aksel-guide-panel--not-poster": poster === false,
+			"aksel-guide-panel--responsive-poster": poster === undefined,
 		},
-	])}
+	]}
 	data-responsive={poster === undefined}
 >
-	<div class={classes("navds-guide")}>
+	<div class="aksel-guide">
 		{#if illustration}
 			{@render illustration()}
-		{:else if theme}
-			<GuidePanelDarksideIllustration />
 		{:else}
-			<Illustration />
+			<GuidePanelDarksideIllustration />
 		{/if}
 	</div>
-	<div class={classes("navds-guide-panel__content")}>
+	<div class="aksel-guide-panel__content">
 		{#if theme}
 			<svg
 				viewBox="0 0 33 22"
@@ -47,7 +44,7 @@
 				height="22"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
-				class={classes("navds-guide-panel__tail")}
+				class="aksel-guide-panel__tail"
 			>
 				<path d="M8.74229e-08 22L0 20L33 20V22L8.74229e-08 22Z" fill="var(--ax-bg-raised)" />
 				<path
@@ -61,7 +58,7 @@
 					fill="var(--ax-border-info)"
 				/>
 			</svg>
-			<div class={classes("navds-guide-panel__content-inner")}>{@render children()}</div>
+			<div class="aksel-guide-panel__content-inner">{@render children()}</div>
 		{:else}
 			{@render children()}
 		{/if}

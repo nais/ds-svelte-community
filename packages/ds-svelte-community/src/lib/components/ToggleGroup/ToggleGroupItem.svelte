@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { BodyShort } from "$lib";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { getToggleGroupContext, type ToggleGroupItemProps } from "./type.svelte";
 
 	let { value, children, ...restProps }: ToggleGroupItemProps = $props();
@@ -56,7 +56,7 @@
 
 <button
 	{...omit(restProps, "class", "data-state", "role", "aria-checked", "tabindex")}
-	class={classes([restProps.class, "navds-toggle-group__button"])}
+	class={[restProps.class, "aksel-toggle-group__button"]}
 	role="radio"
 	aria-checked={state === "on"}
 	tabindex={state == "on" ? 0 : -1}
@@ -65,7 +65,7 @@
 	onkeydown={keydown}
 	data-selected={state === "on"}
 >
-	<BodyShort as="span" class={classes("navds-toggle-group__button-inner")} size={ctx.size}>
+	<BodyShort as="span" class="aksel-toggle-group__button-inner" size={ctx.size}>
 		{@render children()}
 	</BodyShort>
 </button>

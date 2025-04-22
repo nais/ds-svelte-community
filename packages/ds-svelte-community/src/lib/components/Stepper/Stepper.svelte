@@ -7,7 +7,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <script lang="ts">
 	import { setContext } from "svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { StepperContext, contextKey, type StepperProps } from "./type.svelte";
 
 	let {
@@ -32,13 +32,13 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <ol
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-stepper",
+		"aksel-stepper",
 		{
-			"navds-stepper--horizontal": orientation === "horizontal",
+			"aksel-stepper--horizontal": orientation === "horizontal",
 		},
-	])}
+	]}
 	data-orientation={orientation}
 >
 	{@render children()}

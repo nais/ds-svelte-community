@@ -12,7 +12,6 @@ ActionMenu is a dropdown menu for actions and navigation. Often used to collect 
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
 	import { type Snippet } from "svelte";
 	import Button from "../Button/Button.svelte";
-	import { classes } from "../helpers";
 	import { createFloatingActions, isPolyfilled } from "./floating_wrapper";
 
 	interface Props {
@@ -54,7 +53,7 @@ ActionMenu is a dropdown menu for actions and navigation. Often used to collect 
 	let triggerProps = $derived({ popovertarget: id, style: `anchor-name: --${id};` });
 </script>
 
-<div class={classes("polyfill-wrapper")} use:floatingRef>
+<div class="polyfill-wrapper" use:floatingRef>
 	{#if typeof trigger === "string"}
 		<Button variant="secondary-neutral" iconPosition="right" {...triggerProps}>
 			{#snippet icon()}
@@ -77,7 +76,7 @@ ActionMenu is a dropdown menu for actions and navigation. Often used to collect 
 	aria-orientation="vertical"
 	dir="ltr"
 	{id}
-	class={["ds-svelte-action-menu__content", classes("navds-action-menu__content")]}
+	class="ds-svelte-action-menu__content aksel-action-menu__content"
 	style={isPolyfilled
 		? undefined
 		: `position-anchor: --${id}; --__ac-action-menu-content-transform-origin: var(--ac-floating-transform-origin); --__ac-action-menu-content-available-height: var(--ac-floating-available-height); pointer-events: auto;
@@ -95,7 +94,7 @@ ActionMenu is a dropdown menu for actions and navigation. Often used to collect 
 	tabindex="0"
 	data-index="0"
 >
-	<div class={classes("navds-action-menu__content-inner")}>
+	<div class="aksel-action-menu__content-inner">
 		{@render children()}
 	</div>
 </div>

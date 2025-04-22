@@ -6,7 +6,6 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 -->
 <script lang="ts">
 	import { Detail } from "$lib";
-	import { classes } from "../helpers";
 	import { GetTheme } from "../Theme/Theme.svelte";
 	import type { TooltipProps } from "./type";
 
@@ -160,7 +159,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 			tabindex="-1"
 			role="tooltip"
 			id="r7"
-			class={classes([klass, "navds-tooltip", "navds-detail", "navds-detail--small"])}
+			class={[klass, "aksel-tooltip", "aksel-detail", "aksel-detail--small"]}
 			data-side={placement}
 			data-state={open ? "open" : "closed"}
 			style="position: absolute;  visibility: visible; {tooltipStyles}"
@@ -170,23 +169,23 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 			{content}
 
 			{#if keys.length > 0}
-				<span class={classes("navds-tooltip__keys")}>
+				<span class="aksel-tooltip__keys">
 					{#each keys as key (key)}
-						<Detail as="kbd" class={classes("navds-tooltip__key")}>
+						<Detail as="kbd" class="aksel-tooltip__key">
 							{key}
 						</Detail>
 					{/each}
 				</span>
 			{/if}
 			{#if !theme && arrow}
-				<div class={classes("navds-tooltip__arrow")} style={arrowStyles}></div>
+				<div class="aksel-tooltip__arrow" style={arrowStyles}></div>
 			{/if}
 		</div>
 	{/if}
 </div>
 
 <style>
-	.navds-tooltip {
+	.aksel-tooltip {
 		white-space: nowrap;
 	}
 

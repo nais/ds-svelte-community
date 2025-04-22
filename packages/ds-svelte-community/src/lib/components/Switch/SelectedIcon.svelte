@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { classes } from "../helpers";
 </script>
 
 <svg
@@ -11,7 +10,7 @@
 	focusable="false"
 	role="img"
 	aria-hidden="true"
-	class={classes("navds-switch__checkmark")}
+	class="aksel-switch__checkmark"
 >
 	<path
 		fill-rule="evenodd"

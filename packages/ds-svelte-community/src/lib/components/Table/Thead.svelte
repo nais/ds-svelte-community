@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import type { TableHeaderProps } from "./type.svelte";
 
 	let { children, ...restProps }: TableHeaderProps = $props();
 </script>
 
-<thead {...omit(restProps, "class")} class={classes([restProps.class, "navds-table__header"])}>
+<thead {...omit(restProps, "class")} class={[restProps.class, "aksel-table__header"]}>
 	{@render children()}
 </thead>

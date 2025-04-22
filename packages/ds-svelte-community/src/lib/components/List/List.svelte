@@ -13,7 +13,7 @@
 </script>
 
 <script lang="ts">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { BodyLong, BodyShort, Heading } from "../typography";
 	import type { HeadingProps } from "../typography/Heading/type";
 	import { SetListContext } from "./context";
@@ -42,7 +42,7 @@
 	as="div"
 	{...omit(restProps, "class")}
 	{size}
-	class={classes([restProps.class, "navds-list", `navds-list--${size}`])}
+	class={[restProps.class, "aksel-list", `aksel-list--${size}`]}
 >
 	{#if title}
 		{#if typeof title == "string"}

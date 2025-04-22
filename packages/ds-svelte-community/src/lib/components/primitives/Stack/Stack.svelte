@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { classes, omit } from "$lib/components/helpers";
-	import { GetTheme } from "$lib/components/Theme/Theme.svelte";
+	import { omit } from "$lib/components/helpers";
 	import { combineStyles, getResponsiveProps, getResponsiveValue } from "$lib/components/utils/css";
 	import BasePrimitive from "../base/BasePrimitive.svelte";
 	import type { FullStackProps } from "./type";
@@ -14,32 +13,29 @@
 		as = "div",
 		...restProps
 	}: FullStackProps = $props();
-
-	const theme = GetTheme();
-	const prefix = theme ? "ax" : "a";
 </script>
 
 <BasePrimitive
 	{as}
 	{...omit(restProps, "class", "style")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-stack",
+		"aksel-stack",
 		{
-			"navds-vstack": direction === "column",
-			"navds-hstack": direction === "row",
-			"navds-stack-gap": !!gap,
-			"navds-stack-align": !!align,
-			"navds-stack-justify": !!justify,
-			"navds-stack-direction": !!direction,
-			"navds-stack-wrap": wrap,
+			"aksel-vstack": direction === "column",
+			"aksel-hstack": direction === "row",
+			"aksel-stack-gap": !!gap,
+			"aksel-stack-align": !!align,
+			"aksel-stack-justify": !!justify,
+			"aksel-stack-direction": !!direction,
+			"aksel-stack-wrap": wrap,
 		},
-	])}
+	]}
 	style={combineStyles(
 		restProps,
-		getResponsiveProps(prefix, "stack", "gap", "spacing", gap),
-		getResponsiveValue(prefix, "stack", "direction", direction),
-		getResponsiveValue(prefix, "stack", "align", align),
-		getResponsiveValue(prefix, "stack", "justify", justify),
+		getResponsiveProps("stack", "gap", "spacing", gap),
+		getResponsiveValue("stack", "direction", direction),
+		getResponsiveValue("stack", "align", align),
+		getResponsiveValue("stack", "justify", justify),
 	)}
 />

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { GetTheme } from "../Theme/Theme.svelte";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import Heading from "../typography/Heading/Heading.svelte";
@@ -35,26 +35,21 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps,
-		"navds-accordion__item",
+		"aksel-accordion__item",
 		{
-			"navds-accordion__item--open": open,
-			"navds-accordion__item--neutral": ctx?.variant === "neutral",
+			"aksel-accordion__item--open": open,
+			"aksel-accordion__item--neutral": ctx?.variant === "neutral",
 		},
-	])}
+	]}
 	data-expanded={open}
 >
-	<button
-		class={classes("navds-accordion__header")}
-		aria-expanded={open}
-		type="button"
-		onclick={handleClick}
-	>
-		<span class={classes("navds-accordion__icon-wrapper")}>
-			<ChevronDownIcon class={classes("navds-accordion__header-chevron")} aria-hidden="true" />
+	<button class="aksel-accordion__header" aria-expanded={open} type="button" onclick={handleClick}>
+		<span class="aksel-accordion__icon-wrapper">
+			<ChevronDownIcon class="aksel-accordion__header-chevron" aria-hidden="true" />
 		</span>
-		<Heading size={headingSize} as="span" class={classes("navds-accordion__header-content")}>
+		<Heading size={headingSize} as="span" class="aksel-accordion__header-content">
 			{#if typeof heading === "string"}
 				{heading}
 			{:else if heading}
@@ -67,10 +62,10 @@
 	<BodyLong
 		as="div"
 		aria-hidden={open ? undefined : true}
-		class={classes(["navds-accordion__content", { "navds-accordion__content--closed": !open }])}
+		class={["aksel-accordion__content", { "aksel-accordion__content--closed": !open }]}
 	>
 		{#if theme}
-			<div class={classes("navds-accordion__content-inner")}>{@render children()}</div>
+			<div class="aksel-accordion__content-inner">{@render children()}</div>
 		{:else}
 			{@render children()}
 		{/if}

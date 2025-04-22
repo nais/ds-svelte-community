@@ -9,7 +9,7 @@ The component names differ from `@navikt/ds-react` to align with the HTML standa
 
 <script lang="ts">
 	import { setContext } from "svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { TableContext, contextKey, type TableProps } from "./type.svelte";
 
 	let {
@@ -35,14 +35,14 @@ The component names differ from `@navikt/ds-react` to align with the HTML standa
 
 <table
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-table",
-		`navds-table--${size}`,
+		"aksel-table",
+		`aksel-table--${size}`,
 		{
-			"navds-table--zebra-stripes": zebraStripes,
+			"aksel-table--zebra-stripes": zebraStripes,
 		},
-	])}
+	]}
 >
 	{@render children()}
 </table>

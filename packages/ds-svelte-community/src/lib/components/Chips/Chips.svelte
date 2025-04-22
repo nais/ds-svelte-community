@@ -8,7 +8,7 @@
  -->
 
 <script lang="ts">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import type { ChipsProps } from "./type";
 
 	let { size = "medium", children, ...restProps }: ChipsProps = $props();
@@ -16,17 +16,17 @@
 
 <ul
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-chips",
-		`navds-chips--${size}`,
+		"aksel-chips",
+		`aksel-chips--${size}`,
 		{
-			"navds-body-short": size === "medium",
-			"navds-body-short--small": size === "medium",
-			"navds-detail": size === "small",
-			"navds-detail--small": size === "small",
+			"aksel-body-short": size === "medium",
+			"aksel-body-short--small": size === "medium",
+			"aksel-detail": size === "small",
+			"aksel-detail--small": size === "small",
 		},
-	])}
+	]}
 >
 	{@render children()}
 </ul>

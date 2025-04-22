@@ -13,7 +13,7 @@
 	import FilesIcon from "$lib/icons/FilesIcon.svelte";
 	import { onDestroy } from "svelte";
 	import Button from "../Button/Button.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { GetTheme } from "../Theme/Theme.svelte";
 	import { Label } from "../typography";
 	import type { CopyButtonProps } from "./type";
@@ -78,7 +78,7 @@
 	<Button
 		type="button"
 		{...restProps}
-		class={classes([restProps.class, "navds-copybutton"])}
+		class={[restProps.class, "aksel-copybutton"]}
 		variant={variant === "action" ? "tertiary" : "tertiary-neutral"}
 		onclick={handleClick}
 		{iconPosition}
@@ -100,20 +100,20 @@
 	<button
 		{...omit(restProps, "class")}
 		type="button"
-		class={classes([
+		class={[
 			restProps.class,
-			"navds-copybutton",
-			`navds-copybutton--${size}`,
-			`navds-copybutton--${variant}`,
+			"aksel-copybutton",
+			`aksel-copybutton--${size}`,
+			`aksel-copybutton--${variant}`,
 			{
-				"navds-copybutton--icon-only": !text,
-				"navds-copybutton--active": active,
+				"aksel-copybutton--icon-only": !text,
+				"aksel-copybutton--active": active,
 			},
-		])}
+		]}
 		onclick={handleClick}
 	>
-		<span class={classes("navds-copybutton__content")}>
-			<span class={classes("navds-copybutton__icon")}>
+		<span class="aksel-copybutton__content">
+			<span class="aksel-copybutton__icon">
 				{#if icon}
 					{@render icon(active)}
 				{:else if active}

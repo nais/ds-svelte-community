@@ -8,7 +8,7 @@
 
 <script lang="ts">
 	import { Checkbox } from "../Checkbox";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import ErrorMessage from "../typography/ErrorMessage/ErrorMessage.svelte";
 	import type { ConfirmationPanelProps } from "./type";
@@ -32,21 +32,21 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-confirmation-panel",
-		"navds-form-field",
+		"aksel-confirmation-panel",
+		"aksel-form-field",
 		{
-			"navds-confirmation-panel--small": size === "small",
-			"navds-confirmation-panel--error": error != "",
-			"navds-confirmation-panel--checked": !!checked,
+			"aksel-confirmation-panel--small": size === "small",
+			"aksel-confirmation-panel--error": error != "",
+			"aksel-confirmation-panel--checked": !!checked,
 		},
-	])}
+	]}
 	data-color-role="warning"
 >
-	<div class={classes("navds-confirmation-panel__inner")}>
+	<div class="aksel-confirmation-panel__inner">
 		{#if children}
-			<BodyLong {size} class={classes("navds-confirmation-panel__content")} id={uid} as="div">
+			<BodyLong {size} class="aksel-confirmation-panel__content" id={uid} as="div">
 				<!-- Description -->
 				{@render children()}
 			</BodyLong>
@@ -59,7 +59,7 @@
 			{/if}
 		</Checkbox>
 	</div>
-	<div class={classes("navds-form-field__error")} id={errorId} role="alert">
+	<div class="aksel-form-field__error" id={errorId} role="alert">
 		{#if !!error}
 			<ErrorMessage {size}>{error}</ErrorMessage>
 		{/if}

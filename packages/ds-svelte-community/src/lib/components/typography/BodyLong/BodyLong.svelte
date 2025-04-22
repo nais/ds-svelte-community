@@ -5,7 +5,6 @@ Part of a set of components for displaying text with consistent typography.
 -->
 
 <script lang="ts">
-	import { classes } from "../../helpers";
 	import { typoClasses, withoutTypoData } from "../typo_shared";
 	import type { BodyLongProps } from "./type";
 
@@ -15,12 +14,7 @@ Part of a set of components for displaying text with consistent typography.
 <svelte:element
 	this={as}
 	{...withoutTypoData(restProps)}
-	class={classes([
-		restProps.class,
-		"navds-body-long",
-		`navds-body-long--${size}`,
-		typoClasses(restProps),
-	])}
+	class={[restProps.class, "aksel-body-long", `aksel-body-long--${size}`, typoClasses(restProps)]}
 >
 	{@render children()}
 </svelte:element>

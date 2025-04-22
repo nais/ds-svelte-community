@@ -1,22 +1,14 @@
 import type { HTMLElements } from "$lib/components/utils/elements";
 import type {
-	BackgroundColorToken,
-	BorderColorToken,
 	ResponsiveProp,
-	ShadowToken,
 	SpaceDelimitedAttribute,
 	SpacingScale,
-	SurfaceColorToken,
 } from "$lib/components/utils/types";
 import { type BorderRadiusKeys } from "@navikt/ds-tokens/types";
 import type { Snippet } from "svelte";
 import type { HTMLAnchorAttributes, HTMLAttributes } from "svelte/elements";
 
 export interface BaseBoxProps extends HTMLAttributes<HTMLDivElement> {
-	/** Background color. Accepts a color token. */
-	background?: BackgroundColorToken | SurfaceColorToken;
-	/** Border color. Accepts a color token. */
-	borderColor?: BorderColorToken;
 	/** Border radius. Accepts a radius token, or an object of radius tokens for different breakpoints.
 	 * @example
 	 * borderRadius='full'
@@ -51,11 +43,6 @@ export interface BaseBoxProps extends HTMLAttributes<HTMLDivElement> {
 	 * paddingBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
 	 */
 	paddingBlock?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
-	/** Shadow on box. Accepts a shadow token.
-	 * @example
-	 * shadow='small'
-	 */
-	shadow?: ShadowToken;
 
 	/**
 	 * HTML element to render as.

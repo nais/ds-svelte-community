@@ -7,7 +7,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <script lang="ts">
 	import { BodyShort, Detail, ErrorMessage, Label } from "$lib";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import type { TextFieldProps } from "./type";
 
 	const uid = $props.id();
@@ -28,31 +28,21 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	}: TextFieldProps = $props();
 
 	const inputDescriptionId = `tf-desc-${id}`;
-
-	let srOnlyClass = $derived(hideLabel ? " navds-sr-only" : "");
-	let inputProps = $derived({
-		id,
-		"aria-invalid": (error ? "true" : undefined) as "true" | undefined,
-		"aria-describedby": inputDescriptionId,
-		class: classes(["navds-text-field__input", "navds-body-short navds-body-short--" + size]),
-		size: htmlSize,
-		...omit(restProps, "id", "class", "aria-invalid", "size"),
-	});
 </script>
 
 <div
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-form-field",
-		`navds-form-field--${size}`,
+		"aksel-form-field",
+		`aksel-form-field--${size}`,
 		{
-			"navds-text-field--error": !!error,
-			"navds-text-field--disabled": disabled,
-			"navds-form-field--disabled": disabled,
+			"aksel-text-field--error": !!error,
+			"aksel-text-field--disabled": disabled,
+			"aksel-form-field--disabled": disabled,
 		},
-	])}
+	]}
 >
-	<Label for={id} {size} class={classes("navds-form-field__label" + srOnlyClass)}>
+	<Label for={id} {size} class={["aksel-form-field__label", { "aksel-sr-only": hideLabel }]}>
 		{#if typeof label === "string"}
 			{label}
 		{:else}
@@ -63,7 +53,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	{#if description}
 		{#if size == "medium"}
 			<BodyShort
-				class={classes("navds-form-field__description" + srOnlyClass)}
+				class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]}
 				id={inputDescriptionId}
 				as="div"
 			>
@@ -75,7 +65,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 			</BodyShort>
 		{:else}
 			<Detail
-				class={classes("navds-form-field__description" + srOnlyClass)}
+				class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]}
 				id={inputDescriptionId}
 				as="div"
 			>
@@ -88,9 +78,18 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		{/if}
 	{/if}
 
-	<input {type} {...inputProps} bind:value />
+	<input
+		{type}
+		{id}
+		{...omit(restProps, "id", "class", "aria-invalid", "size")}
+		aria-invalid={error ? "true" : undefined}
+		aria-describedby={inputDescriptionId}
+		class={["aksel-text-field__input", "aksel-body-short", "aksel-body-short--" + size]}
+		size={htmlSize}
+		bind:value
+	/>
 	<div
-		class={classes("navds-form-field__error")}
+		class="aksel-form-field__error"
 		id={errorId}
 		aria-relevant="additions removals"
 		aria-live="polite"

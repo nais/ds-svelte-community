@@ -8,7 +8,7 @@
 <script lang="ts">
 	import ChevronLeftIcon from "$lib/icons/ChevronLeftIcon.svelte";
 	import ChevronRightIcon from "$lib/icons/ChevronRightIcon.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Item from "./Item.svelte";
 	import type { PaginationProps } from "./type";
@@ -69,18 +69,18 @@
 
 <nav
 	{...omit(restProps, "class")}
-	class={classes([restProps.class, "navds-pagination", `navds-pagination--${size}`])}
+	class={[restProps.class, "aksel-pagination", `aksel-pagination--${size}`]}
 >
-	<ul class={classes("navds-pagination__list")}>
+	<ul class="aksel-pagination__list">
 		<li>
 			<Item
-				class={classes([
-					"navds-pagination__prev-next",
+				class={[
+					"aksel-pagination__prev-next",
 					{
-						"navds-pagination--invisible": page === 1,
-						"navds-pagination--prev-next--with-text": prevNextTexts,
+						"aksel-pagination--invisible": page === 1,
+						"aksel-pagination--prev-next--with-text": prevNextTexts,
 					},
-				])}
+				]}
 				disabled={page === 1}
 				data-page={page - 1}
 				page={page - 1}
@@ -98,7 +98,7 @@
 		{#each steps as step, i (i)}
 			{@const n = Number(step)}
 			{#if isNaN(n)}
-				<li class={classes("navds-pagination__ellipsis")}>
+				<li class="aksel-pagination__ellipsis">
 					<BodyShort as="span" size={size === "xsmall" ? "small" : size}>...</BodyShort>
 				</li>
 			{:else}
@@ -117,13 +117,13 @@
 		{/each}
 		<li>
 			<Item
-				class={classes([
-					"navds-pagination__prev-next",
+				class={[
+					"aksel-pagination__prev-next",
 					{
-						"navds-pagination--invisible": page === count,
-						"navds-pagination--prev-next--with-text": prevNextTexts,
+						"aksel-pagination--invisible": page === count,
+						"aksel-pagination--prev-next--with-text": prevNextTexts,
 					},
-				])}
+				]}
 				disabled={page === count}
 				data-page={page + 1}
 				page={page + 1}
