@@ -16,7 +16,7 @@
 		"packages/*"
 	],
 	"dependencies": {
-		"@changesets/cli": "^2.28.1",
+		"@changesets/cli": "^2.29.2",
 		"@types/eslint": "^9.6.1",
 		"ts-morph": "^25.0.1"
 	},
