@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 2.0.0-next.0
+
+### Major Changes
+
+- [#277](https://github.com/nais/ds-svelte-community/pull/277) [`783c9fc`](https://github.com/nais/ds-svelte-community/commit/783c9fc815c40c127953ce408e4535de65bc6d47) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Remove ds-svelte-community-preprocess-svelte
+
 ## 1.0.0
 
 ### Major Changes
