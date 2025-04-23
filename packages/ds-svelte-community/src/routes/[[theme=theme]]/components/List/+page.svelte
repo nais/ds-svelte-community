@@ -22,7 +22,7 @@
 	</Story>
 
 	<Story name="With title">
-		<List title="List title">
+		<List>
 			<ListItem>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut nisl aliquam, congue odio
 				finibus, convallis tortor.
@@ -38,7 +38,7 @@
 	</Story>
 
 	<Story name="List item title">
-		<List title="List item title">
+		<List>
 			<ListItem title="Item 1">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut nisl aliquam, congue odio
 				finibus, convallis tortor.
@@ -54,7 +54,7 @@
 	</Story>
 
 	<Story name="List item icons">
-		<List title="List item title">
+		<List>
 			<ListItem title="Item 1" icon={ExclamationmarkTriangleIcon}>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut nisl aliquam, congue odio
 				finibus, convallis tortor.
