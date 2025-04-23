@@ -10,14 +10,11 @@ import type { BoxProps } from "./type";
 describe("Box", () => {
 	it("renders with HTML similar to ds-react", async () => {
 		const props: BoxProps = {
-			background: "surface-default",
 			padding: "6",
 			paddingInline: "4",
 			paddingBlock: "0 6",
 			borderRadius: "large",
-			shadow: "xsmall",
 			borderWidth: "4",
-			borderColor: "border-alt-3",
 			children: createRawSnippet(() => ({
 				render() {
 					return "<span>Box body</span>";

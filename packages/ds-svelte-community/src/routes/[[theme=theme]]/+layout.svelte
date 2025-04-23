@@ -45,7 +45,7 @@
 </svelte:head>
 
 {#snippet pageSnippet()}
-	<Page background={data.theme ? undefined : "bg-subtle"}>
+	<Page>
 		<InternalHeader>
 			<InternalHeaderTitle as="a" href={baseURL + "/"}>ds-svelte-community</InternalHeaderTitle>
 			<Spacer />
