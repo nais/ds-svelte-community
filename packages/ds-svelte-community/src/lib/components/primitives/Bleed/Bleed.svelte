@@ -18,6 +18,31 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		children,
 		...restProps
 	}: BleedProps = $props();
+
+	let style = $derived.by(() => {
+		const style = combineStyles(
+			restProps,
+			getResponsiveProps("bleed", "margin-inline", "spacing", marginInline, true, [
+				"0",
+				"full",
+				"px",
+			]),
+			getResponsiveProps("bleed", "margin-block", "spacing", marginBlock, true, ["0", "px"]),
+		);
+		if (!reflectivePadding) {
+			return style;
+		}
+
+		return combineStyles(
+			{ style },
+			getResponsiveProps("bleed", "padding-inline", "spacing", marginInline, false, [
+				"0",
+				"full",
+				"px",
+			]),
+			getResponsiveProps("bleed", "padding-block", "spacing", marginBlock, false, ["0", "px"]),
+		);
+	});
 </script>
 
 <svelte:element
@@ -30,23 +55,5 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 			"aksel-bleed--padding": reflectivePadding,
 		},
 	]}
-	style={combineStyles(
-		restProps,
-		getResponsiveProps("bleed", "margin-inline", "spacing", marginInline, true, [
-			"0",
-			"full",
-			"px",
-		]),
-		getResponsiveProps("bleed", "margin-block", "spacing", marginBlock, true, ["0", "px"]),
-		reflectivePadding
-			? getResponsiveProps("bleed", "padding-inline", "spacing", marginInline, false, [
-					"0",
-					"full",
-					"px",
-				])
-			: {},
-		reflectivePadding
-			? getResponsiveProps("bleed", "padding-block", "spacing", marginBlock, false, ["0", "px"])
-			: {},
-	)}>{@render children()}</svelte:element
+	{style}>{@render children()}</svelte:element
 >

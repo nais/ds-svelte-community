@@ -19,7 +19,6 @@
 	import XMarkIcon from "$lib/icons/XMarkIcon.svelte";
 	import Button from "../Button/Button.svelte";
 	import { omit } from "../helpers";
-	import { GetTheme } from "../Theme/Theme.svelte";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Label from "../typography/Label/Label.svelte";
 	import SearchButton from "./SearchButton.svelte";
@@ -41,8 +40,6 @@
 		onclear,
 		...restProps
 	}: SearchProps = $props();
-
-	const theme = GetTheme();
 
 	let hasError = false;
 
@@ -131,27 +128,18 @@
 				onkeypress={handleInputKeypress}
 			/>
 			{#if value && clearButton}
-				{#if theme}
-					<Button
-						class="aksel-search__button-clear"
-						variant="tertiary-neutral"
-						size={size === "medium" ? "small" : "xsmall"}
-						title={clearButtonLabel}
-						hidden={!showClearButton}
-						onclick={handleClearClick}
-					>
-						{#snippet icon()}
-							<XMarkIcon aria-hidden />
-						{/snippet}
-					</Button>
-				{:else}
-					<button type="button" class="aksel-search__button-clear" onclick={handleClearClick}>
-						<span class="aksel-sr-only">
-							{clearButtonLabel ? clearButtonLabel : "Empty"}
-						</span>
+				<Button
+					class="aksel-search__button-clear"
+					variant="tertiary-neutral"
+					size={size === "medium" ? "small" : "xsmall"}
+					title={clearButtonLabel}
+					hidden={!showClearButton}
+					onclick={handleClearClick}
+				>
+					{#snippet icon()}
 						<XMarkIcon aria-hidden />
-					</button>
-				{/if}
+					{/snippet}
+				</Button>
 			{/if}
 		</div>
 

@@ -1,3 +1,4 @@
+import { Theme } from "@navikt/ds-react";
 import type { RenderResult } from "@testing-library/svelte";
 import * as Diff from "diff";
 import * as prettier from "prettier";
@@ -237,11 +238,14 @@ async function doExpect<T extends Component>(
 		const error = console.error;
 		console.error = () => {};
 		container.innerHTML = ReactDOMServer.renderToString(
-			React.createElement(comp as FunctionComponent, props, ...children),
+			React.createElement(Theme, {
+				theme: "light",
+				children: React.createElement(comp as FunctionComponent, props, ...children),
+			}),
 		);
 		console.error = error;
 	}
-	const diff = await htmldiff(received as HTMLElement, container, opts);
+	const diff = await htmldiff(received as HTMLElement, container.firstChild as HTMLElement, opts);
 
 	return {
 		pass: diff === "",

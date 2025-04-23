@@ -8,18 +8,6 @@ export interface ListProps extends Omit<HTMLAttributes<HTMLDivElement>, "title">
 	 */
 	as?: "ul" | "ol";
 	/**
-	 * List heading title.
-	 */
-	title?: string | Snippet;
-	/**
-	 * List heading description.
-	 */
-	description?: string | Snippet;
-	/**
-	 * Allows setting a different HTML h-tag.
-	 */
-	headingTag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-	/**
 	 * Changes margin-block on list and font size on items.
 	 */
 	size?: "small" | "medium" | "large";

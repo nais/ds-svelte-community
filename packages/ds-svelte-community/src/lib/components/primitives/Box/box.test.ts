@@ -26,16 +26,6 @@ describe("Box", () => {
 			await bunmatch(render(Box, props), ReactBox, {
 				props,
 				children: [React.createElement("span", {}, "Box body")],
-				opts: {
-					alterAttrValue(name, value) {
-						// TODO: This is to support darkside styles
-						if (name === "style") {
-							const reg = /--__ax[^;]+;/g;
-							return value.replaceAll(reg, "");
-						}
-						return value;
-					},
-				},
 			}),
 		).toBeTrue();
 	});
