@@ -8,8 +8,7 @@
 	import Spacer from "$lib/components/primitives/Stack/Spacer.svelte";
 	import Tag from "$lib/components/Tag/Tag.svelte";
 	import Theme from "$lib/components/Theme/Theme.svelte";
-	import darksideURL from "$lib/css/darkside.css?url";
-	import oldCSSURL from "$lib/css/index.css?url";
+	import "$lib/css/index.css";
 	import type { Snippet } from "svelte";
 	import "../../doclib/styles.css";
 	import type { LayoutData } from "./$types";
@@ -36,15 +35,7 @@
 	});
 </script>
 
-<svelte:head>
-	{#if data.theme}
-		<link rel="stylesheet" href={darksideURL} />
-	{:else}
-		<link rel="stylesheet" href={oldCSSURL} />
-	{/if}
-</svelte:head>
-
-{#snippet pageSnippet()}
+<Theme theme={data.theme as "dark" | "light"}>
 	<Page>
 		<InternalHeader>
 			<InternalHeaderTitle as="a" href={baseURL + "/"}>ds-svelte-community</InternalHeaderTitle>
@@ -102,23 +93,17 @@
 									data-sveltekit-reload={!data.theme}
 									data-sveltekit-noscroll
 								>
-									Try dark darkside
+									Enable dark mode
 								</a>
 							{/if}
-							{#if !data.theme || data.theme == "dark"}
+							{#if data.theme == "dark"}
 								<br /><a
-									href={resolveRoute(page.route.id, { ...page.params, theme: "light" })}
+									href={resolveRoute(page.route.id, { ...page.params, theme: undefined })}
 									data-sveltekit-reload={!data.theme}
 									data-sveltekit-noscroll
 								>
-									Try light darkside
+									Disable dark mode
 								</a>
-							{/if}
-							{#if data.theme}
-								<br /><a
-									href={resolveRoute(page.route.id, { ...page.params, theme: undefined })}
-									data-sveltekit-reload>Remove darkside</a
-								>
 							{/if}
 						{/if}
 					</Detail>
@@ -129,15 +114,7 @@
 			</div>
 		</PageBlock>
 	</Page>
-{/snippet}
-
-{#if data.theme}
-	<Theme theme={data.theme as "dark" | "light"}>
-		{@render pageSnippet()}
-	</Theme>
-{:else}
-	{@render pageSnippet()}
-{/if}
+</Theme>
 
 <style>
 	.wrapper {
