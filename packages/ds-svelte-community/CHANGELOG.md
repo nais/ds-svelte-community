@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.1
+
+### Patch Changes
+
+- [#280](https://github.com/nais/ds-svelte-community/pull/280) [`6a8645f`](https://github.com/nais/ds-svelte-community/commit/6a8645f76b207d5401f6f42ea9ba73d7706d677b) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Fix search clear button being submit with darkside
+
 ## 1.0.0
 
 ### Major Changes
