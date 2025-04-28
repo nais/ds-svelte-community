@@ -141,6 +141,7 @@
 						title={clearButtonLabel}
 						hidden={!showClearButton}
 						onclick={handleClearClick}
+						type="button"
 					>
 						{#snippet icon()}
 							<XMarkIcon aria-hidden />
