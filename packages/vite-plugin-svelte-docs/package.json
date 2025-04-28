@@ -27,7 +27,7 @@
 	},
 	"dependencies": {
 		"svelte2tsx": "0.7.36",
-		"vite": "^6.3.2"
+		"vite": "^6.3.3"
 	},
 	"publishConfig": {
 		"types": "./dist/index.d.ts",
