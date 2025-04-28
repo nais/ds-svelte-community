@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    branches: ["v1"]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    permissions:
+      contents: "write"
+      id-token: "write"
+      pull-requests: "write"
+
+    outputs:
+      actual_release: ${{ steps.prerelease.outputs.ACTUAL_RELEASE }}
+      published: ${{ steps.changesets.outputs.published }}
+
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: jdx/mise-action@v2
+
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2" # ratchet:google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "${{ secrets.NAIS_IO_WORKLOAD_IDENTITY_PROVIDER }}"
+          service_account: "gh-ds-svelte-community@nais-io.iam.gserviceaccount.com"
+          token_format: "access_token"
+
+      - run: bun install
+      - run: bun run gar-login && bun run build:libs
+
+      - name: Create Release Pull Request
+        uses: changesets/action@v1
+        id: changesets
+        with:
+          createGithubReleases: true
+          publish: bun run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Check if pre-release"
+        id: "prerelease"
+        # Use jq to check if the @nais/ds-svelte-community package is a pre-release
+        run: |
+          # export ACTUAL_RELEASE=$(echo "${{ steps.changesets.outputs.publishedPackages }}" | jq '.[] | select(.name == "@nais/ds-svelte-community") | .version | contains("-next.") | not')
+          export ACTUAL_RELEASE=true
+          echo "ACTUAL_RELEASE=$ACTUAL_RELEASE" >> $GITHUB_OUTPUT
