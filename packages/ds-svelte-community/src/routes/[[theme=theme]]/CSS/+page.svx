@@ -23,12 +23,10 @@ If you want to use Tailwind, follow the [official guide to configure SvelteKit w
 
 Although, you might not need to add `@tailwind base;` and `@tailwind components;` to your `.css` file.
 
-## Darkside
+## Theming
 
-To preview darkside, import `@nais/ds-svelte-community/css/darkside.css` instead of `@nais/ds-svelte-community/css`.
-
-Add `navds-theme` as a class to your `body` element, and optionally the `dark` class.
-
+You can use the `Theme` component to set the theme for your page.
+The default theme is `light`, but you can set it to `dark`.
 Wrap the entire page in a `<Theme>` component.
 
 ```svelte

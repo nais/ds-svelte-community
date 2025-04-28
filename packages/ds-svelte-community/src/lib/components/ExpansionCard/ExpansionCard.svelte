@@ -7,7 +7,6 @@
 
 <script lang="ts">
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
-	import { classes } from "../helpers";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import ExpansionCardTitle from "./ExpansionCardTitle.svelte";
 	import type { ExpansionCardProps } from "./type";
@@ -34,18 +33,18 @@
 
 <section
 	{...restProps}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-expansioncard",
-		`navds-expansioncard--${size}`,
+		"aksel-expansioncard",
+		`aksel-expansioncard--${size}`,
 		{
-			"navds-expansioncard--open": open,
-			"navds-expansioncard--no-animation": startedOpened,
+			"aksel-expansioncard--open": open,
+			"aksel-expansioncard--no-animation": startedOpened,
 		},
-	])}
+	]}
 >
-	<div class={classes("navds-expansioncard__header")} data-open={open}>
-		<div class={classes("navds-expansioncard__header-content")}>
+	<div class="aksel-expansioncard__header" data-open={open}>
+		<div class="aksel-expansioncard__header-content">
 			{#if typeof header === "string"}
 				<ExpansionCardTitle>{header}</ExpansionCardTitle>
 			{:else}
@@ -53,7 +52,7 @@
 			{/if}
 
 			{#if description}
-				<BodyLong as="p" class={classes("navds-link-panel__description")} {size}>
+				<BodyLong as="p" class="aksel-link-panel__description" {size}>
 					{#if typeof description === "string"}
 						{description}
 					{:else}
@@ -64,31 +63,28 @@
 		</div>
 
 		<button
-			class={classes("navds-expansioncard__header-button")}
+			class="aksel-expansioncard__header-button"
 			onclick={toggleOpen}
 			type="button"
 			aria-expanded={open}
 		>
-			<ChevronDownIcon
-				class={classes("navds-expansioncard__header-chevron")}
-				title={showMoreTitle}
-			/>
+			<ChevronDownIcon class="aksel-expansioncard__header-chevron" title={showMoreTitle} />
 		</button>
 	</div>
 
 	<BodyLong
 		as="div"
-		class={classes([
-			"navds-expansioncard__content",
+		class={[
+			"aksel-expansioncard__content",
 			{
-				"navds-expansioncard__content--closed": !open,
+				"aksel-expansioncard__content--closed": !open,
 			},
-		])}
+		]}
 		aria-hidden={!open}
 		{size}
 		data-open={open}
 	>
-		<div class={classes("navds-expansioncard__content-inner")}>
+		<div class="aksel-expansioncard__content-inner">
 			{@render children()}
 		</div>
 	</BodyLong>

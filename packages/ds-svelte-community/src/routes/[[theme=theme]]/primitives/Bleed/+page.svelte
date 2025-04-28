@@ -12,7 +12,7 @@
 	<Story locked>
 		<DemoWrapper>
 			<Bleed marginInline="10">
-				<Box padding="3" class="p" background="surface-alt-3-subtle">
+				<Box padding="3" class="p">
 					<HStack justify="center">marginInline</HStack>
 				</Box>
 			</Bleed>
@@ -23,28 +23,28 @@
 		<VStack gap="4">
 			<DemoWrapper>
 				<Bleed marginInline="10 0">
-					<Box padding="3" class="p" background="surface-alt-3-subtle">
+					<Box padding="3" class="p">
 						<HStack justify="center">marginInline start</HStack>
 					</Box>
 				</Bleed>
 			</DemoWrapper>
 			<DemoWrapper>
 				<Bleed marginInline="0 10">
-					<Box padding="3" class="p" background="surface-alt-3-subtle">
+					<Box padding="3" class="p">
 						<HStack justify="center">marginInline end</HStack>
 					</Box>
 				</Bleed>
 			</DemoWrapper>
 			<DemoWrapper>
 				<Bleed marginBlock="10 0">
-					<Box padding="3" class="p" background="surface-alt-3-subtle">
+					<Box padding="3" class="p">
 						<HStack justify="center">marginBlock start</HStack>
 					</Box>
 				</Bleed>
 			</DemoWrapper>
 			<DemoWrapper>
 				<Bleed marginBlock="0 10">
-					<Box padding="3" class="p" background="surface-alt-3-subtle">
+					<Box padding="3" class="p">
 						<HStack justify="center">marginBlock end</HStack>
 					</Box>
 				</Bleed>
@@ -55,7 +55,7 @@
 	<Story name="Responsive" locked>
 		<DemoWrapper>
 			<Bleed marginInline={{ xs: "8", md: "12", lg: "16" }}>
-				<Box padding="3" class="p" background="surface-alt-3-subtle">
+				<Box padding="3" class="p">
 					<HStack justify="center">
 						<BodyLong>xs: 8, md: 12, lg: 16</BodyLong>
 					</HStack>
@@ -67,12 +67,10 @@
 	<Story name="Reflective padding" locked>
 		<DemoWrapper>
 			<Bleed marginInline="10" reflectivePadding>
-				<Box class="p" background="surface-alt-3-subtle">
-					reflectivePadding lar innhold forbli der det ville vært uten Bleed
-				</Box>
+				<Box class="p">reflectivePadding lar innhold forbli der det ville vært uten Bleed</Box>
 			</Bleed>
 			<Bleed marginInline="10">
-				<Box class="p" background="surface-alt-3-subtle">Uten reflectivePadding</Box>
+				<Box class="p">Uten reflectivePadding</Box>
 			</Bleed>
 		</DemoWrapper>
 	</Story>
@@ -80,7 +78,7 @@
 	<Story name="Full" locked>
 		<DemoWrapper>
 			<Bleed marginInline="full">
-				<Box padding="3" class="p" background="surface-alt-3-subtle">
+				<Box padding="3" class="p">
 					<HStack justify="center">Full</HStack>
 				</Box>
 			</Bleed>
@@ -91,12 +89,7 @@
 		<VStack gap="6" align="start">
 			<HStack gap="2" align="center">
 				With
-				<Box
-					paddingBlock="1"
-					paddingInline="2"
-					background="surface-alt-3-subtle"
-					borderRadius="full"
-				>
+				<Box paddingBlock="1" paddingInline="2" borderRadius="full">
 					<Bleed marginBlock="px 0">
 						<MagnifyingGlassIcon aria-hidden style="font-size: 1.25rem" />
 					</Bleed>
@@ -105,12 +98,7 @@
 
 			<HStack gap="2" align="center">
 				Without
-				<Box
-					paddingBlock="1"
-					paddingInline="2"
-					background="surface-alt-3-subtle"
-					borderRadius="full"
-				>
+				<Box paddingBlock="1" paddingInline="2" borderRadius="full">
 					<MagnifyingGlassIcon aria-hidden style="font-size: 1.25rem" />
 				</Box>
 			</HStack>

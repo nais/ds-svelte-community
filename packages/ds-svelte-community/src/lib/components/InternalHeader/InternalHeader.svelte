@@ -5,7 +5,7 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 	import type { HTMLAttributes } from "svelte/elements";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import Theme, { GetTheme } from "../Theme/Theme.svelte";
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -23,11 +23,11 @@
 	<Theme
 		theme="dark"
 		{children}
-		class={classes([restProps.class, "navds-internalheader"])}
+		class={[restProps.class, "aksel-internalheader"]}
 		{...omit(restProps, "class")}
 	/>
 {:else}
-	<header class={classes([restProps.class, "navds-internalheader"])}>
+	<header class={[restProps.class, "aksel-internalheader"]}>
 		{@render children()}
 	</header>
 {/if}

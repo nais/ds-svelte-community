@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	import type { HTMLAttributes } from "svelte/elements";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { Detail } from "../typography";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 
@@ -16,7 +16,7 @@
 	let { name, description, ...restProps }: Props = $props();
 </script>
 
-<div {...omit(restProps, "class")} class={classes([restProps.class, "navds-internalheader__user"])}>
+<div {...omit(restProps, "class")} class={[restProps.class, "aksel-internalheader__user"]}>
 	<span>
 		<BodyShort size="small" as="div">
 			{name}

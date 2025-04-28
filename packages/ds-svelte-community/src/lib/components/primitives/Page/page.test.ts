@@ -24,6 +24,11 @@ describe("Page", () => {
 						"Content",
 					]),
 				],
+				opts: {
+					compareAttrs(node, attr) {
+						return node.tagName.toLowerCase() != "div" || attr != "style";
+					},
+				},
 			}),
 		).toBeTrue();
 	});

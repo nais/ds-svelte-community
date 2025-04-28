@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { classes } from "../helpers";
-
 	type Props = {
 		/**
 		 * The title of the icon
@@ -30,13 +28,13 @@
 	focusable="false"
 	role="img"
 	aria-labelledby={titleId}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-help-text__icon",
+		"aksel-help-text__icon",
 		{
-			"navds-help-text__icon--filled": filled,
+			"aksel-help-text__icon--filled": filled,
 		},
-	])}
+	]}
 >
 	{#if title}
 		<title id={titleId}>{title}</title>

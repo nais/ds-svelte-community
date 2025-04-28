@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classes, omit } from "$lib/components/helpers";
+	import { omit } from "$lib/components/helpers";
 	import type { ResponsiveProps } from "./type";
 
 	let { as = "div", above, below, variant, children, ...restProps }: ResponsiveProps = $props();
@@ -11,14 +11,14 @@
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-responsive",
+		"aksel-responsive",
 		{
-			[`navds-responsive__above--${aboveProp}`]: !!aboveProp,
-			[`navds-responsive__below--${belowProp}`]: !!belowProp,
+			[`aksel-responsive__above--${aboveProp}`]: !!aboveProp,
+			[`aksel-responsive__below--${belowProp}`]: !!belowProp,
 		},
-	])}
+	]}
 >
 	{@render children()}
 </svelte:element>

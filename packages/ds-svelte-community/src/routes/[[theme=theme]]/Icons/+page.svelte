@@ -126,8 +126,8 @@
 
 <style>
 	.icon {
-		background: var(--a-surface-default);
-		border-radius: var(--a-border-radius-medium);
+		background: var(--ax-bg-meta-purple-soft);
+		border-radius: var(--ax-border-radius-medium);
 		aspect-ratio: 1;
 		display: flex;
 		flex-direction: column;
@@ -174,6 +174,7 @@
 		gap: 1rem;
 		flex: 1;
 		place-items: center;
+		align-content: start;
 	}
 
 	.wrapper {

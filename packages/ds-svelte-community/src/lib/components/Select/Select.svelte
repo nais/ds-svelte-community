@@ -7,7 +7,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <script lang="ts">
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import Detail from "../typography/Detail/Detail.svelte";
 	import ErrorMessage from "../typography/ErrorMessage/ErrorMessage.svelte";
@@ -30,52 +30,51 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	const baseID = $props.id();
 	const id = "select-" + baseID;
 	const errorID = "select-error-" + baseID;
-	let srOnlyClass = hideLabel ? "navds-sr-only" : "";
 
 	let hasError = $derived(!!error);
 </script>
 
 <div
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-form-field",
-		`navds-form-field--${size}`,
+		"aksel-form-field",
+		`aksel-form-field--${size}`,
 		{
-			"navds-form-field--disabled": disabled,
-			"navds-select--error": hasError,
+			"aksel-form-field--disabled": disabled,
+			"aksel-select--error": hasError,
 		},
-	])}
+	]}
 >
-	<Label for={id} {size} class={classes(["navds-form-field__label", srOnlyClass])}>
+	<Label for={id} {size} class={["aksel-form-field__label", { "aksel-sr-only": hideLabel }]}>
 		{label}
 	</Label>
 
 	{#if description}
 		{#if size === "medium"}
 			<BodyLong
-				class={classes(["navds-form-field__description", srOnlyClass])}
+				class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]}
 				size="small"
 				as="div"
 			>
 				{@render description()}
 			</BodyLong>
 		{:else}
-			<Detail class={classes(["navds-form-field__description", srOnlyClass])} as="div">
+			<Detail class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]} as="div">
 				{@render description()}
 			</Detail>
 		{/if}
 	{/if}
 
-	<div class={classes("navds-select__container")} {style}>
+	<div class="aksel-select__container" {style}>
 		<select
 			{...omit(restProps, "class")}
 			bind:value
-			class={classes([
+			class={[
 				restProps.class,
-				"navds-select__input",
-				"navds-body-short",
-				`navds-body-short--${size ?? "medium"}`,
-			])}
+				"aksel-select__input",
+				"aksel-body-short",
+				`aksel-body-short--${size ?? "medium"}`,
+			]}
 			{id}
 			{disabled}
 			aria-invalid={hasError ? true : undefined}
@@ -83,11 +82,11 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		>
 			{@render children()}
 		</select>
-		<ChevronDownIcon class={classes("navds-select__chevron")} aria-hidden />
+		<ChevronDownIcon class="aksel-select__chevron" aria-hidden />
 	</div>
 
 	<div
-		class={classes("navds-form-field__error")}
+		class="aksel-form-field__error"
 		id={errorID}
 		aria-relevant="additions removals"
 		aria-live="polite"

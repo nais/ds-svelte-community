@@ -12,7 +12,7 @@
 	import { default as WarningFilledIcon } from "$lib/icons/ExclamationmarkTriangleFillIcon.svelte";
 	import { default as InformationFilledIcon } from "$lib/icons/InformationSquareFillIcon.svelte";
 	import { default as ErrorFilledIcon } from "$lib/icons/XMarkOctagonFillIcon.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import type { AlertProps } from "./type";
 
@@ -33,56 +33,53 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-alert",
-		`navds-alert--${variant}`,
-		`navds-alert--${size}`,
+		"aksel-alert",
+		`aksel-alert--${variant}`,
+		`aksel-alert--${size}`,
 		{
-			"navds-alert--full-width": fullWidth,
-			"navds-alert--inline": inline,
-			"navds-alert--close-button": closeButton,
+			"aksel-alert--full-width": fullWidth,
+			"aksel-alert--inline": inline,
+			"aksel-alert--close-button": closeButton,
 		},
-	])}
+	]}
 >
 	{#if variant == "error"}
-		<ErrorFilledIcon
-			class={classes("navds-alert__icon")}
-			title={iconTitleText ? iconTitleText : "Error"}
-		/>
+		<ErrorFilledIcon class="aksel-alert__icon" title={iconTitleText ? iconTitleText : "Error"} />
 	{:else if variant == "warning"}
 		<WarningFilledIcon
-			class={classes("navds-alert__icon")}
+			class="aksel-alert__icon"
 			title={iconTitleText ? iconTitleText : "Warning"}
 		/>
 	{:else if variant == "info"}
 		<InformationFilledIcon
-			class={classes("navds-alert__icon")}
+			class="aksel-alert__icon"
 			title={iconTitleText ? iconTitleText : "Information"}
 		/>
 	{:else if variant == "success"}
 		<SuccessFilledIcon
-			class={classes("navds-alert__icon")}
+			class="aksel-alert__icon"
 			title={iconTitleText ? iconTitleText : "Success"}
 		/>
 	{/if}
 	<BodyLong
 		as="div"
 		{size}
-		class={classes([
-			"navds-alert__wrapper",
+		class={[
+			"aksel-alert__wrapper",
 			{
-				"navds-alert__wrapper--maxwidth": contentMaxWidth,
+				"aksel-alert__wrapper--maxwidth": contentMaxWidth,
 			},
-		])}
+		]}
 	>
 		{@render children()}
 	</BodyLong>
 
 	{#if closeButton && !inline}
-		<div class={classes("navds-alert__button-wrapper")}>
+		<div class="aksel-alert__button-wrapper">
 			<Button
-				class={classes("navds-alert__button")}
+				class="aksel-alert__button"
 				size="small"
 				variant="tertiary-neutral"
 				type="button"

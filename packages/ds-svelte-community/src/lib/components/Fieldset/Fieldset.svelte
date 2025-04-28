@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import ErrorMessage from "../typography/ErrorMessage/ErrorMessage.svelte";
 	import Label from "../typography/Label/Label.svelte";
@@ -20,7 +20,6 @@
 		...restProps
 	}: FieldsetProps = $props();
 
-	const srOnlyClass = hideLegend ? " navds-sr-only" : "";
 	const inputDescriptionId = `fs-desc-${id}`;
 
 	const showErrorMsg = $derived(!disabled && !!error);
@@ -28,17 +27,17 @@
 
 <fieldset
 	{...omit(restProps, "class", "aria-invalid", "aria-describedby")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-fieldset",
-		`navds-fieldset--${size}`,
+		"aksel-fieldset",
+		`aksel-fieldset--${size}`,
 		{
-			"navds-fieldset--error": !!error,
+			"aksel-fieldset--error": !!error,
 		},
-	])}
+	]}
 	aria-describedby={description ? inputDescriptionId : undefined}
 >
-	<Label {size} as="legend" class={classes("navds-fieldset__legend" + srOnlyClass)}>
+	<Label {size} as="legend" class={["aksel-fieldset__legend", { "aksel-sr-only": hideLegend }]}>
 		{#if typeof legend === "string"}
 			{legend}
 		{:else}
@@ -48,7 +47,7 @@
 
 	{#if description}
 		<BodyShort
-			class={classes("navds-fieldset__description" + srOnlyClass)}
+			class={["aksel-fieldset__description", { "aksel-sr-only": hideLegend }]}
 			{size}
 			id={inputDescriptionId}
 			as="div"
@@ -67,7 +66,7 @@
 		id={errorId}
 		aria-relevant="additions removals"
 		aria-live="polite"
-		class={classes("navds-fieldset__error")}
+		class="aksel-fieldset__error"
 	>
 		{#if showErrorMsg}
 			<ErrorMessage {size} showIcon>{error}</ErrorMessage>

@@ -1,14 +1,10 @@
 <script lang="ts">
-	import { classes, omit } from "$lib/components/helpers";
-	import { GetTheme } from "$lib/components/Theme/Theme.svelte";
+	import { omit } from "$lib/components/helpers";
 	import { combineStyles, getResponsiveProps, getResponsiveValue } from "$lib/components/utils/css";
 	import type { ResponsiveProp } from "$lib/components/utils/types";
 	import type { HGridProps } from "./type";
 
 	let { columns, gap, align, as = "div", children, ...restProps }: HGridProps = $props();
-
-	const theme = GetTheme();
-	const prefix = theme ? "ax" : "a";
 
 	function formatGrid(props?: ResponsiveProp<number | string>): ResponsiveProp<number | string> {
 		if (!props) {
@@ -39,21 +35,20 @@
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-hgrid",
+		"aksel-hgrid",
 		{
-			"navds-hgrid-align": !!align,
-			"navds-hgrid-gap": !!gap,
+			"aksel-hgrid-align": !!align,
+			"aksel-hgrid-gap": !!gap,
 		},
-	])}
+	]}
 	style={combineStyles(
 		restProps,
-		getResponsiveProps(prefix, `hgrid`, "gap", "spacing", gap),
-		getResponsiveValue(prefix, `hgrid`, "columns", formatGrid(columns)),
+		getResponsiveProps(`hgrid`, "gap", "spacing", gap),
+		getResponsiveValue(`hgrid`, "columns", formatGrid(columns)),
 	)}
-	style:--__ac-hgrid-align={prefix == "a" ? align : undefined}
-	style:--__axc-hgrid-align={prefix == "ax" ? align : undefined}
+	style:--__axc-hgrid-align={align}
 >
 	{@render children()}
 </svelte:element>

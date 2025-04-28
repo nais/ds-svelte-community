@@ -7,7 +7,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <script lang="ts">
 	import Loader from "../Loader/Loader.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Detail from "../typography/Detail/Detail.svelte";
 	import SelectedIcon from "./SelectedIcon.svelte";
@@ -30,54 +30,54 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 </script>
 
 <div
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-switch",
-		`navds-switch--${size}`,
-		`navds-switch--${position}`,
+		"aksel-switch",
+		`aksel-switch--${size}`,
+		`aksel-switch--${position}`,
 		{
-			"navds-switch--disabled": disabled ?? loading,
-			"navds-switch--loading": loading,
+			"aksel-switch--disabled": disabled ?? loading,
+			"aksel-switch--loading": loading,
 		},
-	])}
+	]}
 >
 	<input
 		disabled={disabled || loading}
 		bind:checked
 		type="checkbox"
-		class={classes([restProps.class, "navds-switch__input"])}
+		class={[restProps.class, "aksel-switch__input"]}
 		{id}
 		{...omit(restProps, "class")}
 	/>
-	<span class={classes("navds-switch__track")}>
-		<span class={classes("navds-switch__thumb")}>
+	<span class="aksel-switch__track">
+		<span class="aksel-switch__thumb">
 			{#if loading}
 				<Loader size="xsmall" aria-live="polite" variant={checked ? "interaction" : "inverted"} />
 			{/if}
 			<SelectedIcon />
 		</span>
 	</span>
-	<label for={id} class={classes("navds-switch__label-wrapper")}>
+	<label for={id} class="aksel-switch__label-wrapper">
 		<div
-			class={classes([
-				"navds-switch__content",
+			class={[
+				"aksel-switch__content",
 				{
-					"navds-sr-only": hideLabel,
-					"navds-switch--with-description": !!description && !hideLabel,
+					"aksel-sr-only": hideLabel,
+					"aksel-switch--with-description": !!description && !hideLabel,
 				},
-			])}
+			]}
 		>
-			<BodyShort as="div" {size} class={classes("navds-switch__label")}>
+			<BodyShort as="div" {size} class="aksel-switch__label">
 				{@render children()}
 			</BodyShort>
 
 			{#if description}
 				{#if size == "medium"}
-					<BodyShort as="div" size="small" class={classes("navds-switch__description")}>
+					<BodyShort as="div" size="small" class="aksel-switch__description">
 						{description}
 					</BodyShort>
 				{:else}
-					<Detail as="div" class={classes("navds-switch__description")}>
+					<Detail as="div" class="aksel-switch__description">
 						{description}
 					</Detail>
 				{/if}

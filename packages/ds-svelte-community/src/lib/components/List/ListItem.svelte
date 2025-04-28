@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classes, isSnippet, omit } from "../helpers";
+	import { isSnippet, omit } from "../helpers";
 	import { BodyLong } from "../typography";
 	import { GetListContext } from "./context";
 	import type { ListItemProps } from "./types";
@@ -9,16 +9,16 @@
 	const ctx = GetListContext();
 </script>
 
-<li {...omit(restProps, "class")} class={classes([restProps.class, "navds-list__item"])}>
+<li {...omit(restProps, "class")} class={[restProps.class, "aksel-list__item"]}>
 	{#if ctx && ctx.type === "ul"}
 		<div
-			class={classes([
-				"navds-list__item-marker",
+			class={[
+				"aksel-list__item-marker",
 				{
-					"navds-list__item-marker--icon": !!icon,
-					"navds-list__item-marker--bullet": !icon,
+					"aksel-list__item-marker--icon": !!icon,
+					"aksel-list__item-marker--bullet": !icon,
 				},
-			])}
+			]}
 		>
 			{#if icon}
 				{#if isSnippet(icon)}

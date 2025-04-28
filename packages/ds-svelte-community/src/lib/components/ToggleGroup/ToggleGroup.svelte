@@ -8,7 +8,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 <script lang="ts">
 	import { Label } from "$lib";
 	import { setContext } from "svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { contextKey, ToggleGroupContext, type ToggleGroupProps } from "./type.svelte";
 
 	let {
@@ -44,21 +44,14 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	});
 </script>
 
-<div
-	{...omit(restProps, "class")}
-	class={classes([restProps.class, "navds-toggle-group__wrapper"])}
->
+<div {...omit(restProps, "class")} class={[restProps.class, "aksel-toggle-group__wrapper"]}>
 	{#if label}
-		<Label {size} class={classes("navds-toggle-group__label")}>{label}</Label>
+		<Label {size} class="aksel-toggle-group__label">{label}</Label>
 	{/if}
 
 	<div
 		role="radiogroup"
-		class={classes([
-			"navds-toggle-group",
-			`navds-toggle-group--${size}`,
-			`navds-toggle-group--${variant}`,
-		])}
+		class={["aksel-toggle-group", `aksel-toggle-group--${size}`, `aksel-toggle-group--${variant}`]}
 		tabindex="0"
 	>
 		{@render children()}

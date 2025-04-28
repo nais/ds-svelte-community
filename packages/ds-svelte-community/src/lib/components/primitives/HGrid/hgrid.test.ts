@@ -21,16 +21,6 @@ describe("HGrid", () => {
 					React.createElement("div", { key: "1" }),
 					React.createElement("div", { key: "2" }),
 				],
-				opts: {
-					alterAttrValue(name, value) {
-						// TODO: This is to support darkside styles
-						if (name === "style") {
-							const reg = /--__ax[^;]+;/g;
-							return value.replaceAll(reg, "");
-						}
-						return value;
-					},
-				},
 			}),
 		).toBeTrue();
 	});

@@ -6,7 +6,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 -->
 
 <script lang="ts">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import type { SkeletonProps } from "./type";
 
 	let { variant, height, width, children, ...restProps }: SkeletonProps = $props();
@@ -37,16 +37,16 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <div
 	{...omit(restProps, "class", "style")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-skeleton",
-		`navds-skeleton--${variant}`,
+		"aksel-skeleton",
+		`aksel-skeleton--${variant}`,
 		{
-			"navds-skeleton--has-children": !!children,
-			"navds-skeleton--no-height": !height,
-			"navds-skeleton--no-width": !width,
+			"aksel-skeleton--has-children": !!children,
+			"aksel-skeleton--no-height": !height,
+			"aksel-skeleton--no-width": !width,
 		},
-	])}
+	]}
 	style={style(restProps, width, height)}
 	aria-hidden="true"
 >

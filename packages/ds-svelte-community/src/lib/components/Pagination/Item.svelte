@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 	import Button from "../Button/Button.svelte";
-	import { classes, omit } from "../helpers";
-	import { GetTheme } from "../Theme/Theme.svelte";
+	import { omit } from "../helpers";
 
 	let {
 		selected = false,
@@ -44,13 +43,11 @@
 
 		[key: string]: unknown;
 	} = $props();
-
-	const theme = GetTheme();
 </script>
 
 <Button
 	{...omit(restProps, "class")}
-	variant={theme ? "tertiary-neutral" : "tertiary"}
+	variant="tertiary-neutral"
 	aria-current={selected}
 	data-selected={selected}
 	{disabled}
@@ -58,12 +55,12 @@
 	{icon}
 	{iconPosition}
 	{children}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-pagination__item",
+		"aksel-pagination__item",
 		{
-			"navds-pagination__item--selected": selected,
+			"aksel-pagination__item--selected": selected,
 		},
-	])}
+	]}
 	type="button"
 />

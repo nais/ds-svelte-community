@@ -8,7 +8,7 @@
 <script lang="ts">
 	import Popover from "../Popover/Popover.svelte";
 	import { GetTheme } from "../Theme/Theme.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import HelpTextIcon from "./HelpTextIcon.svelte";
 	import type { HelpTextProps } from "./type";
 
@@ -27,12 +27,12 @@
 	let open = $state(false);
 </script>
 
-<div class={classes(["navds-help-text", wrapperClass])}>
+<div class={["aksel-help-text", wrapperClass]}>
 	<button
 		bind:this={btnEl}
 		{...omit(restProps, "class")}
 		onclick={() => (open = !open)}
-		class={classes([restProps.class, "navds-help-text__button"])}
+		class={[restProps.class, "aksel-help-text__button"]}
 		type="button"
 		aria-expanded={open}
 	>
@@ -41,8 +41,8 @@
 	</button>
 	<!-- onClose={() => setOpen(false)} -->
 	<Popover
-		class={classes("navds-help-text__popover")}
-		contentClass={classes("navds-body-short")}
+		class="aksel-help-text__popover"
+		contentClass="aksel-body-short"
 		bind:open
 		anchorEl={btnEl}
 		{placement}

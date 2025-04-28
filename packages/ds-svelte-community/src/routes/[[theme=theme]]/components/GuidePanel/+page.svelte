@@ -1,6 +1,5 @@
 <script lang="ts">
 	import doc from "$lib/components/GuidePanel/GuidePanel.svelte?doc";
-	import illustrationDoc from "$lib/components/GuidePanel/GuidePanelIllustration.svelte?doc";
 
 	import Doc from "$doclib/Doc.svelte";
 	import Story from "$doclib/Story.svelte";
@@ -8,7 +7,7 @@
 	import { SunIcon } from "$lib/icons";
 </script>
 
-<Doc {doc} preview={{ width: "60%" }} extraChildrenDoc={[illustrationDoc]}>
+<Doc {doc} preview={{ width: "60%" }}>
 	<Story>
 		<GuidePanel>
 			Sit sint eu dolore reprehenderit exercitation labore aute anim sit adipisicing proident.

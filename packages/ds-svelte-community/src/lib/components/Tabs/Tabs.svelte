@@ -8,7 +8,7 @@
 -->
 <script lang="ts">
 	import { setContext } from "svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { TabContext, contextKey, type TabsProps } from "./type.svelte";
 
 	let {
@@ -40,7 +40,7 @@
 
 <div
 	{...omit(restProps, "class", "dir")}
-	class={classes([restProps.class, "navds-tabs", `navds-tabs--${size}`])}
+	class={[restProps.class, "aksel-tabs", `aksel-tabs--${size}`]}
 	data-orientation="horizontal"
 >
 	{@render children()}

@@ -5,7 +5,7 @@
 <script lang="ts">
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
 	import type { HTMLAttributes } from "svelte/elements";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { Detail } from "../typography";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import InternalHeaderButton from "./InternalHeaderButton.svelte";
@@ -20,7 +20,7 @@
 
 <InternalHeaderButton
 	{...omit(restProps, "class")}
-	class={classes([restProps.class, "navds-internalheader__user-button"])}
+	class={[restProps.class, "aksel-internalheader__user-button"]}
 >
 	<div>
 		<BodyShort size="small" as="div">

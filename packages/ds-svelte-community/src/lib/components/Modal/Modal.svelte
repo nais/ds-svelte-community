@@ -13,7 +13,7 @@
 	import { onMount } from "svelte";
 	import { writable } from "svelte/store";
 	import Button from "../Button/Button.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import Heading from "../typography/Heading/Heading.svelte";
 	import { sizes, type ModalProps } from "./type";
 
@@ -92,21 +92,21 @@
 			dialog.close();
 		}
 	}}
-	class={classes([
+	class={[
 		restProps.class,
 		{
-			[`navds-modal--${width}`]: isKnownSize(width),
-			"navds-modal": open,
-			"navds-modal--autowidth": !width,
+			[`aksel-modal--${width}`]: isKnownSize(width),
+			"aksel-modal": open,
+			"aksel-modal--autowidth": !width,
 		},
-	])}
+	]}
 	style={styles(width)}
 >
-	<div class={classes("navds-modal__header")}>
+	<div class="aksel-modal__header">
 		{#if closeButton}
 			<Button
 				type="button"
-				class={classes("navds-modal__button")}
+				class="aksel-modal__button"
 				size="small"
 				variant="tertiary-neutral"
 				onclick={() => (open = false)}
@@ -125,11 +125,11 @@
 			{/if}
 		{/if}
 	</div>
-	<div class={classes("navds-modal__body")}>
+	<div class="aksel-modal__body">
 		{@render children()}
 	</div>
 	{#if footer}
-		<div class={classes("navds-modal__footer")}>
+		<div class="aksel-modal__footer">
 			{@render footer()}
 		</div>
 	{/if}
