@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { classes, omit } from "$lib/components/helpers";
-	import { GetTheme } from "$lib/components/Theme/Theme.svelte";
+	import { omit } from "$lib/components/helpers";
 	import { combineStyles, getResponsiveProps, getResponsiveValue } from "$lib/components/utils/css";
 	import type { BasePrimitiveProps } from "./type";
 
@@ -31,76 +30,76 @@
 		flexGrow,
 		flexShrink,
 		children,
+		gridColumn,
 		...restProps
 	}: BasePrimitiveProps = $props();
-
-	const theme = GetTheme();
-	const prefix = theme ? "ax" : "a";
 </script>
 
 <svelte:element
 	this={as}
 	{...omit(restProps, "class", "style")}
-	class={classes([
+	class={[
 		restProps.class,
 		{
-			"navds-r-p": !!padding,
-			"navds-r-pi": !!paddingInline,
-			"navds-r-pb": !!paddingBlock,
-			"navds-r-m": !!margin,
-			"navds-r-mi": !!marginInline,
-			"navds-r-mb": !!marginBlock,
-			"navds-r-w": !!width,
-			"navds-r-minw": !!minWidth,
-			"navds-r-maxw": !!maxWidth,
-			"navds-r-h": !!height,
-			"navds-r-minh": !!minHeight,
-			"navds-r-maxh": !!maxHeight,
-			"navds-r-position": !!position,
-			"navds-r-inset": !!inset,
-			"navds-r-top": !!top,
-			"navds-r-right": !!right,
-			"navds-r-bottom": !!bottom,
-			"navds-r-left": !!left,
-			"navds-r-overflow": !!overflow,
-			"navds-r-overflowx": !!overflowX,
-			"navds-r-overflowy": !!overflowY,
-			"navds-r-flex-basis": !!flexBasis,
-			"navds-r-flex-grow": !!flexGrow,
-			"navds-r-flex-shrink": !!flexShrink,
+			"aksel-r-p": !!padding,
+			"aksel-r-pi": !!paddingInline,
+			"aksel-r-pb": !!paddingBlock,
+			"aksel-r-m": !!margin,
+			"aksel-r-mi": !!marginInline,
+			"aksel-r-mb": !!marginBlock,
+			"aksel-r-w": !!width,
+			"aksel-r-minw": !!minWidth,
+			"aksel-r-maxw": !!maxWidth,
+			"aksel-r-h": !!height,
+			"aksel-r-minh": !!minHeight,
+			"aksel-r-maxh": !!maxHeight,
+			"aksel-r-position": !!position,
+			"aksel-r-inset": !!inset,
+			"aksel-r-top": !!top,
+			"aksel-r-right": !!right,
+			"aksel-r-bottom": !!bottom,
+			"aksel-r-left": !!left,
+			"aksel-r-overflow": !!overflow,
+			"aksel-r-overflowx": !!overflowX,
+			"aksel-r-overflowy": !!overflowY,
+			"aksel-r-flex-basis": !!flexBasis,
+			"aksel-r-flex-grow": !!flexGrow,
+			"aksel-r-flex-shrink": !!flexShrink,
 		},
-	])}
+	]}
 	style={combineStyles(
 		restProps,
 		/* Padding */
-		getResponsiveProps(prefix, "r", "p", "spacing", padding),
-		getResponsiveProps(prefix, "r", "pi", "spacing", paddingInline),
-		getResponsiveProps(prefix, "r", "pb", "spacing", paddingBlock),
+		getResponsiveProps("r", "p", "spacing", padding),
+		getResponsiveProps("r", "pi", "spacing", paddingInline),
+		getResponsiveProps("r", "pb", "spacing", paddingBlock),
 		/* Margin */
-		getResponsiveProps(prefix, "r", "m", "spacing", margin),
-		getResponsiveProps(prefix, "r", "mi", "spacing", marginInline),
-		getResponsiveProps(prefix, "r", "mb", "spacing", marginBlock),
+		getResponsiveProps("r", "m", "spacing", margin),
+		getResponsiveProps("r", "mi", "spacing", marginInline),
+		getResponsiveProps("r", "mb", "spacing", marginBlock),
 		/* Width & height */
-		getResponsiveValue(prefix, "r", "w", width),
-		getResponsiveValue(prefix, "r", "minw", minWidth),
-		getResponsiveValue(prefix, "r", "maxw", maxWidth),
-		getResponsiveValue(prefix, "r", "h", height),
-		getResponsiveValue(prefix, "r", "minh", minHeight),
-		getResponsiveValue(prefix, "r", "maxh", maxHeight),
+		getResponsiveValue("r", "w", width),
+		getResponsiveValue("r", "minw", minWidth),
+		getResponsiveValue("r", "maxw", maxWidth),
+		getResponsiveValue("r", "h", height),
+		getResponsiveValue("r", "minh", minHeight),
+		getResponsiveValue("r", "maxh", maxHeight),
 		/* Positon & inset */
-		getResponsiveValue(prefix, "r", "position", position),
-		getResponsiveProps(prefix, "r", "inset", "spacing", inset),
-		getResponsiveProps(prefix, "r", "top", "spacing", top),
-		getResponsiveProps(prefix, "r", "right", "spacing", right),
-		getResponsiveProps(prefix, "r", "bottom", "spacing", bottom),
-		getResponsiveProps(prefix, "r", "left", "spacing", left),
+		getResponsiveValue("r", "position", position),
+		getResponsiveProps("r", "inset", "spacing", inset),
+		getResponsiveProps("r", "top", "spacing", top),
+		getResponsiveProps("r", "right", "spacing", right),
+		getResponsiveProps("r", "bottom", "spacing", bottom),
+		getResponsiveProps("r", "left", "spacing", left),
 		/* Overflow */
-		getResponsiveValue(prefix, "r", "overflow", overflow),
-		getResponsiveValue(prefix, "r", "overflowx", overflowX),
-		getResponsiveValue(prefix, "r", "overflowy", overflowY),
+		getResponsiveValue("r", "overflow", overflow),
+		getResponsiveValue("r", "overflowx", overflowX),
+		getResponsiveValue("r", "overflowy", overflowY),
 		/* Flex */
-		getResponsiveValue(prefix, "r", "flex-basis", flexBasis),
-		getResponsiveValue(prefix, "r", "flex-grow", flexGrow),
-		getResponsiveValue(prefix, "r", "flex-shrink", flexShrink),
+		getResponsiveValue("r", "flex-basis", flexBasis),
+		getResponsiveValue("r", "flex-grow", flexGrow),
+		getResponsiveValue("r", "flex-shrink", flexShrink),
+		/* Grid */
+		getResponsiveValue("r", "grid-column", gridColumn),
 	)}>{@render children?.()}</svelte:element
 >

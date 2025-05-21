@@ -8,16 +8,8 @@ import Box from "./Box.svelte";
 import type { BoxProps } from "./type";
 
 describe("Box", () => {
-	it("renders with HTML similar to ds-react", async () => {
+	it("renders with HTML similar to ds-react with default values", async () => {
 		const props: BoxProps = {
-			background: "surface-default",
-			padding: "6",
-			paddingInline: "4",
-			paddingBlock: "0 6",
-			borderRadius: "large",
-			shadow: "xsmall",
-			borderWidth: "4",
-			borderColor: "border-alt-3",
 			children: createRawSnippet(() => ({
 				render() {
 					return "<span>Box body</span>";
@@ -26,19 +18,34 @@ describe("Box", () => {
 		};
 
 		expect(
-			await bunmatch(render(Box, props), ReactBox, {
+			await bunmatch(render(Box, props), ReactBox.New, {
 				props,
 				children: [React.createElement("span", {}, "Box body")],
-				opts: {
-					alterAttrValue(name, value) {
-						// TODO: This is to support darkside styles
-						if (name === "style") {
-							const reg = /--__ax[^;]+;/g;
-							return value.replaceAll(reg, "");
-						}
-						return value;
-					},
+			}),
+		).toBeTrue();
+	});
+
+	it("renders with HTML similar to ds-react", async () => {
+		const props: BoxProps = {
+			padding: "6",
+			paddingInline: "4",
+			paddingBlock: "0 6",
+			borderRadius: "8",
+			borderWidth: "4",
+			background: "accent-moderate",
+			borderColor: "accent",
+			as: "div",
+			children: createRawSnippet(() => ({
+				render() {
+					return "<span>Box body</span>";
 				},
+			})),
+		};
+
+		expect(
+			await bunmatch(render(Box, props), ReactBox.New, {
+				props,
+				children: [React.createElement("span", {}, "Box body")],
 			}),
 		).toBeTrue();
 	});

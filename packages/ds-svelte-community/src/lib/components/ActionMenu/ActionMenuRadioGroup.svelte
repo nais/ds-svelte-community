@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
-	import { classes } from "../helpers";
 	import { ActionMenuRadioGroupContext, setRadioGroupContext } from "./context.svelte";
 
 	interface Props {
@@ -30,7 +29,7 @@
 </script>
 
 <div role="group">
-	<div class={classes("navds-action-menu__label")}>
+	<div class="aksel-action-menu__label">
 		{label}
 	</div>
 

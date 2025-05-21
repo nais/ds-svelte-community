@@ -2,7 +2,6 @@ import type { LegacySpacingKeys, SpaceKeys } from "@navikt/ds-tokens/types";
 import type { ResponsiveProp } from "./types";
 
 export function getResponsiveValue<T = string>(
-	prefix: string,
 	componentName: string,
 	componentProp: string,
 	responsiveProp?: ResponsiveProp<T>,
@@ -13,13 +12,13 @@ export function getResponsiveValue<T = string>(
 
 	if (typeof responsiveProp === "string") {
 		return {
-			[`--__${prefix}c-${componentName}-${componentProp}-xs`]: responsiveProp,
+			[`--__axc-${componentName}-${componentProp}-xs`]: responsiveProp,
 		};
 	}
 
 	return Object.fromEntries(
 		Object.entries(responsiveProp).map(([breakpointAlias, responsiveValue]) => [
-			`--__${prefix}c-${componentName}-${componentProp}-${breakpointAlias}`,
+			`--__axc-${componentName}-${componentProp}-${breakpointAlias}`,
 			responsiveValue,
 		]),
 	);
@@ -55,10 +54,9 @@ const legacySpacingTokenLookup: Record<`--ax-spacing-${LegacySpacingKeys}`, `--a
 const translateTokenStringToCSS = (
 	specialLayout: string,
 	tokenString: string,
-	tokenSubgroup: "spacing" | "border-radius",
+	tokenSubgroup: "spacing" | "radius",
 	tokenExceptions: string[],
 	invert: boolean,
-	prefix: string,
 ) => {
 	return tokenString
 		.split(" ")
@@ -75,17 +73,16 @@ const translateTokenStringToCSS = (
 			}
 
 			// Handle exceptions and space tokens
-			let output = `var(--${prefix}-${tokenSubgroup}-${propValue})`;
+			let output = `var(--ax-${tokenSubgroup}-${propValue})`;
 
 			if (tokenExceptions.includes(propValue)) {
 				output = propValue === "px" ? "1px" : propValue;
 			} else if (tokenSubgroup === "spacing" && propValue.startsWith("space")) {
 				/* Use new "space-x" tokens */
-				output = `var(--${prefix}-${propValue})`;
+				output = `var(--ax-${propValue})`;
 			} else if (tokenSubgroup === "spacing") {
 				/* Translate old "spacing" tokens to new "space" tokens */
-				const spacingTokenName =
-					`--${prefix}-spacing-${propValue}` as `--ax-spacing-${LegacySpacingKeys}`;
+				const spacingTokenName = `--ax-spacing-${propValue}` as `--ax-spacing-${LegacySpacingKeys}`;
 				output = `var(${legacySpacingTokenLookup[spacingTokenName] ?? spacingTokenName})`;
 			}
 
@@ -102,10 +99,9 @@ const translateTokenStringToCSS = (
 };
 
 export function getResponsiveProps<T extends string>(
-	prefix: string,
 	componentName: string,
 	componentProp: string,
-	tokenSubgroup: "spacing" | "border-radius",
+	tokenSubgroup: "spacing" | "radius",
 	responsiveProp?: ResponsiveProp<T>,
 	invert = false,
 	tokenExceptions: string[] = [],
@@ -116,27 +112,25 @@ export function getResponsiveProps<T extends string>(
 
 	if (typeof responsiveProp === "string") {
 		return {
-			[`--__${prefix}c-${componentName}-${componentProp}-xs`]: translateTokenStringToCSS(
+			[`--__axc-${componentName}-${componentProp}-xs`]: translateTokenStringToCSS(
 				componentProp,
 				responsiveProp,
 				tokenSubgroup,
 				tokenExceptions,
 				invert,
-				prefix,
 			),
 		};
 	}
 
 	const styleProps: Record<string, string> = {};
 	Object.entries(responsiveProp).forEach(([breakpointAlias, aliasOrScale]) => {
-		styleProps[`--__${prefix}c-${componentName}-${componentProp}-${breakpointAlias}`] =
+		styleProps[`--__axc-${componentName}-${componentProp}-${breakpointAlias}`] =
 			translateTokenStringToCSS(
 				componentProp,
 				aliasOrScale,
 				tokenSubgroup,
 				tokenExceptions,
 				invert,
-				prefix,
 			);
 	});
 	return styleProps;
@@ -144,22 +138,25 @@ export function getResponsiveProps<T extends string>(
 
 export function combineStyles(
 	props: Record<string, unknown>,
-	...args: Record<string, string | number | null>[]
-): string {
+	...args: Record<string, string | number | null | undefined>[]
+): string | undefined {
 	let styles = "";
 	if (props.style) {
 		styles += props.style;
 	}
 
-	return (
+	const ret =
 		styles +
 		args
 			.map((x) =>
 				Object.entries(x)
-					.filter(([, value]) => value !== null)
+					.filter(([, value]) => !!value)
 					.map(([key, value]) => `${key}: ${value};`)
 					.join(""),
 			)
-			.join("")
-	);
+			.join("");
+	if (ret == "") {
+		return undefined;
+	}
+	return ret;
 }

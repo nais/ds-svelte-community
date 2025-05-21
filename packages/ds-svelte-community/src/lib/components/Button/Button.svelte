@@ -9,7 +9,7 @@
 
 <script lang="ts">
 	import Loader from "../Loader/Loader.svelte";
-	import { classes, isSnippet, omit } from "../helpers";
+	import { isSnippet, omit } from "../helpers";
 	import Label from "../typography/Label/Label.svelte";
 	import type { ButtonProps } from "./type";
 
@@ -45,18 +45,18 @@
 	style={overrideWidth
 		? `width: ${overrideWidth}px;${style ? " " + style : ""}`
 		: style || undefined}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-button",
-		`navds-button--${variant}`,
-		`navds-button--${size}`,
+		"aksel-button",
+		`aksel-button--${variant}`,
+		`aksel-button--${size}`,
 		{
-			"navds-button--loading": loading,
-			"navds-button--disabled": disabled || overrideWidth > 0,
-			"navds-button--icon-only": !!icon && !children,
+			"aksel-button--loading": loading,
+			"aksel-button--disabled": disabled || overrideWidth > 0,
+			"aksel-button--icon-only": !!icon && !children,
 			unstyled: as === "a",
 		},
-	])}
+	]}
 	bind:this={internalRef}
 	role={as != "button" ? "button" : undefined}
 	disabled={disabled || overrideWidth > 0 ? true : undefined}
@@ -65,7 +65,7 @@
 		<Loader {size} />
 	{:else}
 		{#if icon && iconPosition == "left"}
-			<span class={classes("navds-button__icon")}>
+			<span class="aksel-button__icon">
 				{#if isSnippet(icon)}
 					{@render icon()}
 				{:else}
@@ -79,7 +79,7 @@
 		{/if}
 
 		{#if icon && iconPosition == "right"}
-			<span class={classes("navds-button__icon")}>
+			<span class="aksel-button__icon">
 				{#if isSnippet(icon)}
 					{@render icon()}
 				{:else}

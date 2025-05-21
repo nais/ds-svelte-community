@@ -2,7 +2,7 @@
 	import { ArrowDownIcon } from "$lib/icons";
 	import ArrowsUpDownIcon from "$lib/icons/ArrowsUpDownIcon.svelte";
 	import ArrowUpIcon from "$lib/icons/ArrowUpIcon.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { getTableContext, type TableHeaderCellProps } from "./type.svelte";
 
 	let {
@@ -28,21 +28,21 @@
 
 <th
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-table__header-cell",
-		"navds-label",
+		"aksel-table__header-cell",
+		"aksel-label",
 		{
-			[`navds-table__header-cell--align-${align}`]: !!align,
-			"navds-label--small": ctx.size == "small",
+			[`aksel-table__header-cell--align-${align}`]: !!align,
+			"aksel-label--small": ctx.size == "small",
 		},
-	])}
+	]}
 	aria-sort={sortable ? (ctx.sort?.orderBy === sortKey ? ctx.sort.direction : "none") : undefined}
 >
 	{#if sortable}
 		<button
 			type="button"
-			class={classes("navds-table__sort-button")}
+			class="aksel-table__sort-button"
 			onclick={sortable && sortKey ? () => onclick() : undefined}
 		>
 			{@render children?.()}

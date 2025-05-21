@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { classes } from "../../helpers";
 	import type { ErrorMessageProps } from "./type";
 
 	let {
@@ -14,16 +13,16 @@
 
 <svelte:element
 	this={as}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-error-message",
-		"navds-label",
+		"aksel-error-message",
+		"aksel-label",
 		{
-			"navds-label--small": size === "small",
-			"navds-typo--spacing": !!spacing,
-			"navds-error-message--show-icon": showIcon,
+			"aksel-label--small": size === "small",
+			"aksel-typo--spacing": !!spacing,
+			"aksel-error-message--show-icon": showIcon,
 		},
-	])}
+	]}
 	{...restProps}
 >
 	{#if showIcon}

@@ -46,7 +46,7 @@ export const load: LayoutServerLoad = async ({ params }) => {
 
 	return {
 		paths,
-		theme: params.theme,
+		theme: params.theme ?? "light",
 	};
 };
 

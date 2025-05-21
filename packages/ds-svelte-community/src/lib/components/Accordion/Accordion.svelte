@@ -19,7 +19,7 @@
 
 <script lang="ts">
 	import { setContext } from "svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 
 	let {
 		variant,
@@ -42,14 +42,14 @@
 
 <div
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-accordion",
-		`navds-accordion--${size}`,
+		"aksel-accordion",
+		`aksel-accordion--${size}`,
 		{
-			"navds-accordion--indent": indent,
+			"aksel-accordion--indent": indent,
 		},
-	])}
+	]}
 >
 	{@render children()}
 </div>

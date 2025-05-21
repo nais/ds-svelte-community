@@ -1,5 +1,5 @@
 <script lang="ts" generics="T = unknown">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import { GetRadioGroupContext } from "./RadioGroup.svelte";
 	import type { RadioProps } from "./type";
@@ -16,16 +16,16 @@
 </script>
 
 <div
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-radio",
-		`navds-radio--${ctx.size}`,
+		"aksel-radio",
+		`aksel-radio--${ctx.size}`,
 		{
-			// "navds-radio--error": hasError,
-			// "navds-radio--disabled": ctx.disabled,
-			// "navds-radio--readonly": ctx.readOnly,
+			// "aksel-radio--error": hasError,
+			// "aksel-radio--disabled": ctx.disabled,
+			// "aksel-radio--readonly": ctx.readOnly,
 		},
-	])}
+	]}
 >
 	<!-- {...omit(inputProps, "aria-invalid")} -->
 	<input
@@ -35,13 +35,13 @@
 		type="radio"
 		{value}
 		checked={ctx.value == value}
-		class={classes("navds-radio__input")}
+		class="aksel-radio__input"
 		onchange={() => {
 			ctx.onchange(value as never);
 		}}
 	/>
-	<label for={radioID} class={classes("navds-radio__label")}>
-		<span class={classes("navds-radio__content")}>
+	<label for={radioID} class="aksel-radio__label">
+		<span class="aksel-radio__content">
 			<BodyShort as="span" size={ctx.size} aria-hidden>
 				{@render children()}
 			</BodyShort>
@@ -49,7 +49,7 @@
 				<BodyShort
 					as="span"
 					size={ctx.size}
-					class={classes("navds-form-field__subdescription navds-radio__description")}
+					class="aksel-form-field__subdescription aksel-radio__description"
 					aria-hidden
 				>
 					{description}

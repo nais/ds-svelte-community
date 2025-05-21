@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import { getTableContext, type TableDataCellProps } from "./type.svelte";
 
@@ -11,13 +11,13 @@
 <BodyShort
 	{...omit(restProps)}
 	as="td"
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-table__data-cell",
+		"aksel-table__data-cell",
 		{
-			[`navds-table__data-cell--align-${align}`]: !!align,
+			[`aksel-table__data-cell--align-${align}`]: !!align,
 		},
-	])}
+	]}
 	size={ctx.size}
 >
 	{@render children?.()}

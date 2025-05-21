@@ -5,7 +5,7 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 
 	interface Props extends HTMLAnchorAttributes {
 		children: Snippet;
@@ -18,13 +18,13 @@
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-internalheader__button",
+		"aksel-internalheader__button",
 		{
 			unstyled: as == "a" && !!restProps.href,
 		},
-	])}
+	]}
 >
 	{@render children()}
 </svelte:element>

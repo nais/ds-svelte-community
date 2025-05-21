@@ -2,7 +2,6 @@
 	import MagnifyingGlassIcon from "$lib/icons/MagnifyingGlassIcon.svelte";
 	import type { HTMLButtonAttributes } from "svelte/elements";
 	import Button from "../Button/Button.svelte";
-	import { classes } from "../helpers";
 
 	interface Props extends HTMLButtonAttributes {
 		/**
@@ -42,7 +41,7 @@
 	{size}
 	{variant}
 	{loading}
-	class={classes([restProps.class, "navds-search__button-search"])}
+	class={[restProps.class, "aksel-search__button-search"]}
 	{disabled}
 >
 	{#snippet icon()}

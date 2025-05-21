@@ -7,7 +7,7 @@
 -->
 
 <script lang="ts">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import type { LoaderProps } from "./type";
 
 	let {
@@ -24,14 +24,14 @@
 
 <svg
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		`navds-loader navds-loader--${size}`,
-		`navds-loader--${variant}`,
+		`aksel-loader aksel-loader--${size}`,
+		`aksel-loader--${variant}`,
 		{
-			"navds-loader--transparent": transparent,
+			"aksel-loader--transparent": transparent,
 		},
-	])}
+	]}
 	focusable="false"
 	viewBox="0 0 50 50"
 	preserveAspectRatio="xMidYMid"
@@ -39,7 +39,7 @@
 >
 	<title {id}>{title}</title>
 	<circle
-		class={classes("navds-loader__background")}
+		class="aksel-loader__background"
 		xmlns="http://www.w3.org/2000/svg"
 		cx="25"
 		cy="25"
@@ -47,7 +47,7 @@
 		fill="none"
 	/>
 	<circle
-		class={classes("navds-loader__foreground")}
+		class="aksel-loader__foreground"
 		cx="25"
 		cy="25"
 		r="20"

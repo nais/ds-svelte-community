@@ -5,7 +5,7 @@
 
 <script lang="ts">
 	import XMarkIcon from "$lib/icons/XMarkIcon.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import type { RemovableChipProps } from "./type";
 
 	let {
@@ -21,13 +21,13 @@
 <button
 	type="button"
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-chips__chip",
-		"navds-chips__removable",
-		`navds-chips__removable--${variant}`,
-		"navds-chips--icon-right",
-	])}
+		"aksel-chips__chip",
+		"aksel-chips__removable",
+		`aksel-chips__removable--${variant}`,
+		"aksel-chips--icon-right",
+	]}
 	aria-label={`${value} ${removeLabel}`}
 	onclick={(e) => {
 		e.preventDefault();
@@ -39,14 +39,14 @@
 		}
 	}}
 >
-	<span class={classes("navds-chips__chip-text")}>
+	<span class="aksel-chips__chip-text">
 		{#if children}
 			{@render children()}
 		{:else}
 			{value}
 		{/if}
 	</span>
-	<span class={classes("navds-chips__removable-icon")}>
+	<span class="aksel-chips__removable-icon">
 		<XMarkIcon aria-hidden />
 	</span>
 </button>

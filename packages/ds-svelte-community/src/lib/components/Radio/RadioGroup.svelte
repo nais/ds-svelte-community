@@ -37,7 +37,7 @@
 
 <script lang="ts" generics="T = unknown">
 	import Fieldset from "../Fieldset/Fieldset.svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import type { RadioGroupProps } from "./type";
 
 	let {
@@ -71,9 +71,9 @@
 
 <Fieldset
 	{...omit(restProps, "class")}
-	class={classes([restProps.class, "navds-radio-group", `navds-radio-group--${size}`])}
+	class={[restProps.class, "aksel-radio-group", `aksel-radio-group--${size}`]}
 	{legend}
 	{size}
 >
-	<div class={classes("navds-radio-buttons")}>{@render children()}</div>
+	<div class="aksel-radio-buttons">{@render children()}</div>
 </Fieldset>

@@ -2,7 +2,7 @@
 	import ChevronLeftIcon from "$lib/icons/ChevronLeftIcon.svelte";
 	import ChevronRightIcon from "$lib/icons/ChevronRightIcon.svelte";
 	import { onMount } from "svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import type { TabListProps } from "./type.svelte";
 
 	let { children, ...restProps }: TabListProps = $props();
@@ -48,16 +48,16 @@
 	};
 </script>
 
-<div class={classes("navds-tabs__tablist-wrapper")}>
+<div class="aksel-tabs__tablist-wrapper">
 	{#if showSteppers}
 		<!-- Is it OK to use aria-hidden when we have other keyboard actions? -->
 		<div
-			class={classes([
-				"navds-tabs__scroll-button",
+			class={[
+				"aksel-tabs__scroll-button",
 				{
-					"navds-tabs__scroll-button--hidden": !showStepperLeft,
+					"aksel-tabs__scroll-button--hidden": !showStepperLeft,
 				},
-			])}
+			]}
 			aria-hidden="true"
 			onclick={() => {
 				scroll(false);
@@ -72,7 +72,7 @@
 			updateSteppers();
 		}}
 		{...omit(restProps, "class", "role", "aria-orientation")}
-		class={classes([restProps.class, "navds-tabs__tablist"])}
+		class={[restProps.class, "aksel-tabs__tablist"]}
 		data-orientation="horizontal"
 		role="tablist"
 		aria-orientation="horizontal"
@@ -81,12 +81,12 @@
 	</div>
 	{#if showSteppers}
 		<div
-			class={classes([
-				"navds-tabs__scroll-button",
+			class={[
+				"aksel-tabs__scroll-button",
 				{
-					"navds-tabs__scroll-button--hidden": !showStepperRight,
+					"aksel-tabs__scroll-button--hidden": !showStepperRight,
 				},
-			])}
+			]}
 			aria-hidden="true"
 			onclick={() => {
 				scroll(true);

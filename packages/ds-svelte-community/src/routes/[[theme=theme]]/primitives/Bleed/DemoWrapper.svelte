@@ -9,8 +9,8 @@
 	} = $props();
 </script>
 
-<Box background="surface-alt-3" padding="5" borderRadius="large">
-	<Box background="surface-subtle" padding="5" borderRadius="medium">
+<Box padding="5" borderRadius="8">
+	<Box padding="5" borderRadius="4">
 		{@render children()}
 	</Box>
 </Box>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import type { ExpansionCardTitleProps } from "./type";
 
 	let { as = "h3", size = "medium", children, ...restProps }: ExpansionCardTitleProps = $props();
@@ -8,13 +8,13 @@
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-expansioncard__title",
-		`navds-expansioncard__title--${size}`,
-		"navds-heading",
-		`navds-heading--${size}`,
-	])}
+		"aksel-expansioncard__title",
+		`aksel-expansioncard__title--${size}`,
+		"aksel-heading",
+		`aksel-heading--${size}`,
+	]}
 >
 	{@render children()}
 </svelte:element>
