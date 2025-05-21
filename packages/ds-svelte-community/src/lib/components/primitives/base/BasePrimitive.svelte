@@ -30,6 +30,7 @@
 		flexGrow,
 		flexShrink,
 		children,
+		gridColumn,
 		...restProps
 	}: BasePrimitiveProps = $props();
 </script>
@@ -98,5 +99,7 @@
 		getResponsiveValue("r", "flex-basis", flexBasis),
 		getResponsiveValue("r", "flex-grow", flexGrow),
 		getResponsiveValue("r", "flex-shrink", flexShrink),
+		/* Grid */
+		getResponsiveValue("r", "grid-column", gridColumn),
 	)}>{@render children?.()}</svelte:element
 >

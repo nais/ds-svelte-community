@@ -54,7 +54,7 @@ const legacySpacingTokenLookup: Record<`--ax-spacing-${LegacySpacingKeys}`, `--a
 const translateTokenStringToCSS = (
 	specialLayout: string,
 	tokenString: string,
-	tokenSubgroup: "spacing" | "border-radius",
+	tokenSubgroup: "spacing" | "radius",
 	tokenExceptions: string[],
 	invert: boolean,
 ) => {
@@ -101,7 +101,7 @@ const translateTokenStringToCSS = (
 export function getResponsiveProps<T extends string>(
 	componentName: string,
 	componentProp: string,
-	tokenSubgroup: "spacing" | "border-radius",
+	tokenSubgroup: "spacing" | "radius",
 	responsiveProp?: ResponsiveProp<T>,
 	invert = false,
 	tokenExceptions: string[] = [],
@@ -138,22 +138,25 @@ export function getResponsiveProps<T extends string>(
 
 export function combineStyles(
 	props: Record<string, unknown>,
-	...args: Record<string, string | number | null>[]
-): string {
+	...args: Record<string, string | number | null | undefined>[]
+): string | undefined {
 	let styles = "";
 	if (props.style) {
 		styles += props.style;
 	}
 
-	return (
+	const ret =
 		styles +
 		args
 			.map((x) =>
 				Object.entries(x)
-					.filter(([, value]) => value !== null)
+					.filter(([, value]) => !!value)
 					.map(([key, value]) => `${key}: ${value};`)
 					.join(""),
 			)
-			.join("")
-	);
+			.join("");
+	if (ret == "") {
+		return undefined;
+	}
+	return ret;
 }

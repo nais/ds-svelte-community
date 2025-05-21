@@ -13,13 +13,13 @@
 
 	<Story name="Background" locked>
 		<VStack gap="4">
-			<Box padding="4">
+			<Box padding="4" background="info-moderate">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, ipsum!
 			</Box>
-			<Box padding="4">
+			<Box padding="4" background="default">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, ipsum!
 			</Box>
-			<Box padding="4">
+			<Box padding="4" background="raised">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, ipsum!
 			</Box>
 		</VStack>
@@ -27,39 +27,39 @@
 
 	<Story name="Padding" locked>
 		<VStack gap="4">
-			<Box padding="4">
-				<Box padding="2">Static padding</Box>
+			<Box padding="4" background="neutral-strong">
+				<Box padding="2" background="neutral-moderate">Static padding</Box>
 			</Box>
-			<Box padding={{ xs: "2", md: "6" }}>
-				<Box padding="2">Dynamic padding</Box>
+			<Box padding={{ xs: "2", md: "6" }} background="neutral-strong">
+				<Box padding="2" background="neutral-moderate">Dynamic padding</Box>
 			</Box>
 		</VStack>
 	</Story>
 
 	<Story name="Padding inline" locked>
 		<VStack gap="4">
-			<Box paddingInline="4">
-				<Box padding="2">Padding inline</Box>
+			<Box paddingInline="4" background="neutral-strong">
+				<Box padding="2" background="neutral-moderate">Padding inline</Box>
 			</Box>
-			<Box paddingInline="4 16">
-				<Box padding="2">Different inlineStart and inlineEnd</Box>
+			<Box paddingInline="4 16" background="neutral-strong">
+				<Box padding="2" background="neutral-moderate">Different inlineStart and inlineEnd</Box>
 			</Box>
-			<Box paddingInline={{ xs: "4", md: "6 16" }}>
-				<Box padding="2">Dynamic paddingInline</Box>
+			<Box paddingInline={{ xs: "4", md: "6 16" }} background="neutral-strong">
+				<Box padding="2" background="neutral-moderate">Dynamic paddingInline</Box>
 			</Box>
 		</VStack>
 	</Story>
 
 	<Story name="Padding block" locked>
 		<VStack gap="4">
-			<Box paddingBlock="4">
-				<Box padding="2">Padding block</Box>
+			<Box paddingBlock="4" background="neutral-strong">
+				<Box padding="2" background="neutral-moderate">Padding block</Box>
 			</Box>
-			<Box paddingBlock="4 16">
-				<Box padding="2">Different blockStart og blockEnd</Box>
+			<Box paddingBlock="4 16" background="neutral-strong">
+				<Box padding="2" background="neutral-moderate">Different blockStart og blockEnd</Box>
 			</Box>
-			<Box paddingBlock={{ xs: "4", md: "6 16" }}>
-				<Box padding="2">Dynamic paddingBlock</Box>
+			<Box paddingBlock={{ xs: "4", md: "6 16" }} background="neutral-strong">
+				<Box padding="2" background="neutral-moderate">Dynamic paddingBlock</Box>
 			</Box>
 		</VStack>
 	</Story>
@@ -81,23 +81,20 @@
 
 	<Story name="Border radius" locked>
 		<VStack gap="4">
-			<Box padding="4" borderWidth="2" borderRadius="xlarge">border-radius</Box>
-			<Box padding="4" borderWidth="2" borderRadius="xlarge xlarge 0 0">Flexible border-radius</Box>
-			<Box padding="4" borderWidth="2" borderRadius={{ md: "large" }}>Dynamic border-radius</Box>
+			<Box padding="4" borderWidth="2" borderRadius="12">border-radius</Box>
+			<Box padding="4" borderWidth="2" borderRadius="12 12 0 0">Flexible border-radius</Box>
+			<Box padding="4" borderWidth="2" borderRadius={{ md: "8" }}>Dynamic border-radius</Box>
 		</VStack>
 	</Story>
 
 	<Story name="Shadow" locked>
 		<VStack gap="8">
-			<Box padding="4" borderRadius="large">xsmall</Box>
-			<Box padding="4" borderRadius="large">small</Box>
-			<Box padding="4" borderRadius="large">medium</Box>
-			<Box padding="4" borderRadius="large">large</Box>
+			<Box padding="4" borderRadius="8" shadow="dialog" background="neutral-moderate">dialog</Box>
 		</VStack>
 	</Story>
 
 	<Story name="Panel" locked>
-		<Box padding="6">
+		<Box padding="6" background="raised" borderRadius="12" borderColor="neutral" borderWidth="1">
 			<BodyLong spacing>
 				If you are fully or partially unemployed or laid off, you may be entitled to financial
 				support from NAV.

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { dev } from "$app/environment";
 	import { page } from "$app/stores";
 	import { Chips, ToggleChip } from "$lib";
 	import Alert from "$lib/components/Alert/Alert.svelte";
@@ -40,14 +39,7 @@
 		extraDescription?: Snippet;
 	} = $props();
 
-	let tab = $state("Default");
-	if (dev) {
-		tab = $page.url.searchParams.get("tab") || "Default";
-	}
-
-	$effect(() => {
-		tab = $page.url.searchParams.get("tab") || "Default";
-	});
+	let tab = $derived($page.url.searchParams.get("tab") || "Default");
 
 	const story = $derived(stories?.find((s) => s.name === tab));
 	const storyProps = () => {
@@ -58,11 +50,7 @@
 		return ret;
 	};
 
-	let values: Record<string, unknown> = $state(storyProps());
-
-	$effect(() => {
-		values = storyProps();
-	});
+	let values: Record<string, unknown> = $derived(storyProps());
 </script>
 
 <svelte:head>

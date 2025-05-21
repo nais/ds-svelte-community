@@ -12,31 +12,47 @@
 	import BasePrimitive from "../base/BasePrimitive.svelte";
 	import type { BoxProps } from "./type";
 
-	let { borderRadius, borderWidth, as = "div", children, ...restProps }: BoxProps = $props();
+	let {
+		borderRadius,
+		borderWidth,
+		background,
+		borderColor,
+		shadow,
+		as = "div",
+		children,
+		...restProps
+	}: BoxProps = $props();
+
+	const styles = $derived(
+		combineStyles(restProps, {
+			"--__axc-box-background": background ? `var(--ax-bg-${background})` : undefined,
+			"--__axc-box-shadow": shadow ? `var(--ax-shadow-${shadow})` : undefined,
+			"--__axc-box-border-color": borderColor ? `var(--ax-border-${borderColor})` : undefined,
+			"--__axc-box-border-width": borderWidth
+				? borderWidth
+						.split(" ")
+						.map((x) => `${x}px`)
+						.join(" ")
+				: undefined,
+			...getResponsiveProps("box", "radius", "radius", borderRadius, false, ["0"]),
+		}),
+	);
 </script>
 
 <BasePrimitive
 	{as}
-	{...omit(restProps, "class")}
+	{...omit(restProps, "class", "style")}
 	class={[
 		restProps.class,
 		"aksel-box",
 		{
 			"aksel-box-border-width": !!borderWidth,
-			"aksel-box-border-radius": !!borderRadius,
+			"aksel-box-bg": !!background,
+			"aksel-box-border-color": !!borderColor,
+			"aksel-box-radius": !!borderRadius,
+			"aksel-box-shadow": !!shadow,
 		},
 	]}
-	style={combineStyles(
-		restProps,
-		getResponsiveProps("box", "border-radius", "border-radius", borderRadius, false, ["0"]),
-		{
-			[`--__axc-box-border-width`]: borderWidth
-				? borderWidth
-						.split(" ")
-						.map((x) => `${x}px`)
-						.join(" ")
-				: null,
-		},
-	)}
+	style={styles ? styles : undefined}
 	{children}
 />
