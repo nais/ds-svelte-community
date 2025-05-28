@@ -4,7 +4,7 @@
  -->
 
 <script lang="ts">
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import type { ToggleChipProps } from "./type";
 
 	let {
@@ -22,16 +22,16 @@
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-chips__chip",
-		"navds-chips__toggle",
-		`navds-chips__toggle--${variant}`,
+		"aksel-chips__chip",
+		"aksel-chips__toggle",
+		`aksel-chips__toggle--${variant}`,
 		{
 			unstyled: as == "a",
-			"navds-chips__toggle--with-checkmark": checkmark,
+			"aksel-chips__toggle--with-checkmark": checkmark,
 		},
-	])}
+	]}
 	aria-pressed={selected}
 	data-pressed={selected}
 	onclick={as == "a"
@@ -46,7 +46,7 @@
 	{#if checkmark}
 		<svg
 			aria-hidden="true"
-			class={classes("navds-chips__toggle-icon")}
+			class="aksel-chips__toggle-icon"
 			width="1.25em"
 			height="1.25em"
 			viewBox="0 0 20 20"
@@ -73,7 +73,7 @@
 		</svg>
 	{/if}
 
-	<span class={classes("navds-chips__chip-text")}>
+	<span class="aksel-chips__chip-text">
 		{#if children}
 			{@render children()}
 		{:else}

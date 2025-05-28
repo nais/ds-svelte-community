@@ -45,7 +45,7 @@
 
 <script lang="ts">
 	import { hasContext, setContext } from "svelte";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 
 	const uid = $props.id();
 
@@ -86,9 +86,9 @@
 	{size}
 	{legend}
 	{description}
-	class={classes([restProps.class, "navds-checkbox-group", `navds-checkbox-group--${size}`])}
+	class={[restProps.class, "aksel-checkbox-group", `aksel-checkbox-group--${size}`]}
 >
-	<div class={classes("navds-checkboxes")}>
+	<div class="aksel-checkboxes">
 		<!-- Content of the fieldset -->
 		{@render children()}
 	</div>

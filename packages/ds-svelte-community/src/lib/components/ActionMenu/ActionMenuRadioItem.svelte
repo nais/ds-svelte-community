@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
-	import { classes } from "../helpers";
 	import { GetTheme } from "../Theme/Theme.svelte";
 	import { getRadioGroupContext } from "./context.svelte";
 
@@ -32,10 +31,7 @@
 	role="menuitemradio"
 	tabindex="0"
 	aria-checked={checked}
-	class={[
-		"ds-svelte-action-menu__item",
-		classes("navds-action-menu__item navds-action-menu__item--has-icon"),
-	]}
+	class="ds-svelte-action-menu__item aksel-action-menu__item aksel-action-menu__item--has-icon"
 	style="border: none;"
 	data-state={state}
 	onclick={() => {
@@ -44,20 +40,17 @@
 	}}
 >
 	{@render children()}
-	<div
-		aria-hidden="true"
-		class={classes("navds-action-menu__marker navds-action-menu__marker--left")}
-	>
-		<div class={classes("navds-action-menu__indicator")} data-state={state} aria-hidden="true">
+	<div aria-hidden="true" class="aksel-action-menu__marker aksel-action-menu__marker--left">
+		<div class="aksel-action-menu__indicator" data-state={state} aria-hidden="true">
 			<svg
 				width="1em"
 				height="1em"
 				viewBox="0 0 24 24"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
-				class={classes("navds-action-menu__indicator-icon")}
+				class="aksel-action-menu__indicator-icon"
 				aria-hidden="true"
-				><g class={classes("navds-action-menu__indicator-icon--unchecked")}
+				><g class="aksel-action-menu__indicator-icon--unchecked"
 					><rect
 						width="24"
 						height="24"
@@ -74,7 +67,7 @@
 					></rect></g
 				>
 				{#if theme}
-					<g class={classes("navds-action-menu__indicator-icon--checked")}>
+					<g class="aksel-action-menu__indicator-icon--checked">
 						<rect width="24" height="24" rx="12" fill="var(--ax-bg-accent-strong-pressed)" />
 						<rect
 							x="8"
@@ -86,7 +79,7 @@
 						/>
 					</g>
 				{:else}
-					<g class={classes("navds-action-menu__indicator-icon--checked")}
+					<g class="aksel-action-menu__indicator-icon--checked"
 						><rect
 							x="1"
 							y="1"

@@ -4,7 +4,7 @@
 -->
 <script lang="ts">
 	import { onMount } from "svelte";
-	import { Focus, classes, focusable, omit } from "../helpers";
+	import { Focus, focusable, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import { getTabsContext, type TabProps } from "./type.svelte";
 
@@ -63,16 +63,16 @@
 	this={as}
 	bind:this={self}
 	{...omit(restProps, "class", "type", "role", "aria-selected", "tabindex")}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-tabs__tab",
-		`navds-tabs__tab--${ctx.size}`,
-		`navds-tabs__tab-icon--${ctx.iconPosition}`,
+		"aksel-tabs__tab",
+		`aksel-tabs__tab--${ctx.size}`,
+		`aksel-tabs__tab-icon--${ctx.iconPosition}`,
 		{
-			"navds-tabs__tab--icon-only": icon && !children,
+			"aksel-tabs__tab--icon-only": icon && !children,
 			unstyled: as === "a",
 		},
-	])}
+	]}
 	data-state={ctx.value == value ? "active" : "inactive"}
 	type="button"
 	role="tab"
@@ -85,7 +85,7 @@
 	onfocus={handleFocus}
 	onblur={handleBlur}
 >
-	<BodyShort as="span" class={classes("navds-tabs__tab-inner")} size={ctx.size}>
+	<BodyShort as="span" class="aksel-tabs__tab-inner" size={ctx.size}>
 		<span aria-hidden={!!children}>
 			{#if icon}
 				{@render icon()}

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { classes } from "../../helpers";
 	import type { LabelProps } from "./type";
 
 	let {
@@ -14,14 +13,14 @@
 <svelte:element
 	this={as}
 	{...restProps}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-label",
+		"aksel-label",
 		{
-			"navds-label--small": size == "small",
-			"navds-typo--spacing": spacing,
+			"aksel-label--small": size == "small",
+			"aksel-typo--spacing": spacing,
 		},
-	])}
+	]}
 >
 	{@render children()}
 </svelte:element>

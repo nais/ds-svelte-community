@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
 	import type { ClassValue } from "svelte/elements";
-	import { classes } from "../helpers";
 
 	type MarkerProps = {
 		/**
@@ -23,11 +22,7 @@
 
 <div
 	aria-hidden="true"
-	class={classes([
-		restProps.class,
-		"navds-action-menu__marker",
-		`navds-action-menu__marker--${placement}`,
-	])}
+	class={[restProps.class, "aksel-action-menu__marker", `aksel-action-menu__marker--${placement}`]}
 >
 	{@render children()}
 </div>

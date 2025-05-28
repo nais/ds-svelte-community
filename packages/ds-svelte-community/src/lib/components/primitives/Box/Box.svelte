@@ -7,61 +7,52 @@
 -->
 
 <script lang="ts">
-	import { classes, omit } from "$lib/components/helpers";
-	import { GetTheme } from "$lib/components/Theme/Theme.svelte";
+	import { omit } from "$lib/components/helpers";
 	import { combineStyles, getResponsiveProps } from "$lib/components/utils/css";
 	import BasePrimitive from "../base/BasePrimitive.svelte";
 	import type { BoxProps } from "./type";
 
 	let {
-		background,
-		borderColor,
 		borderRadius,
 		borderWidth,
+		background,
+		borderColor,
 		shadow,
 		as = "div",
 		children,
 		...restProps
 	}: BoxProps = $props();
 
-	const theme = GetTheme();
-	if (process.env.NODE_ENV !== "production" && theme && (background || borderColor || shadow)) {
-		console.warn(
-			`<Box /> with properties 'background', 'borderColor' or 'shadow' cannot be used with darkmode-support.`,
-		);
-	}
-
-	const prefix = theme ? "ax" : "a";
-</script>
-
-<BasePrimitive
-	{as}
-	{...omit(restProps, "class")}
-	class={classes([
-		restProps.class,
-		"navds-box",
-		{
-			"navds-box-bg": !!background,
-			"navds-box-border-color": !!borderColor,
-			"navds-box-border-width": !!borderWidth,
-			"navds-box-border-radius": !!borderRadius,
-			"navds-box-shadow": !!shadow,
-		},
-	])}
-	style={combineStyles(
-		restProps,
-		getResponsiveProps(prefix, "box", "border-radius", "border-radius", borderRadius, false, ["0"]),
-		{
-			[`--__${prefix}c-box-background`]: background ? `var(--a-${background})` : null,
-			[`--__${prefix}c-box-border-color`]: borderColor ? `var(--a-${borderColor})` : null,
-			[`--__${prefix}c-box-shadow`]: shadow ? `var(--a-shadow-${shadow})` : null,
-			[`--__${prefix}c-box-border-width`]: borderWidth
+	const styles = $derived(
+		combineStyles(restProps, {
+			"--__axc-box-background": background ? `var(--ax-bg-${background})` : undefined,
+			"--__axc-box-shadow": shadow ? `var(--ax-shadow-${shadow})` : undefined,
+			"--__axc-box-border-color": borderColor ? `var(--ax-border-${borderColor})` : undefined,
+			"--__axc-box-border-width": borderWidth
 				? borderWidth
 						.split(" ")
 						.map((x) => `${x}px`)
 						.join(" ")
-				: null,
+				: undefined,
+			...getResponsiveProps("box", "radius", "radius", borderRadius, false, ["0"]),
+		}),
+	);
+</script>
+
+<BasePrimitive
+	{as}
+	{...omit(restProps, "class", "style")}
+	class={[
+		restProps.class,
+		"aksel-box",
+		{
+			"aksel-box-border-width": !!borderWidth,
+			"aksel-box-bg": !!background,
+			"aksel-box-border-color": !!borderColor,
+			"aksel-box-radius": !!borderRadius,
+			"aksel-box-shadow": !!shadow,
 		},
-	)}
+	]}
+	style={styles ? styles : undefined}
 	{children}
 />

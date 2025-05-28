@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { classes } from "../../helpers";
 	import type { HeadingProps } from "./type";
 
 	let {
@@ -15,14 +14,14 @@
 <svelte:element
 	this={as ? as : "h" + level}
 	{...restProps}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-heading",
-		`navds-heading--${size}`,
+		"aksel-heading",
+		`aksel-heading--${size}`,
 		{
-			"navds-typo--spacing": spacing,
+			"aksel-typo--spacing": spacing,
 		},
-	])}
+	]}
 >
 	{@render children()}
 </svelte:element>

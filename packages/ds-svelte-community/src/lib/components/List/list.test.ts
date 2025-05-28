@@ -18,14 +18,7 @@ describe("List", () => {
 					React.createElement(ReactList.Item, { children: "Item 3" }),
 				],
 				opts: {
-					ignoreElementFromA(tag) {
-						return tag.tagName.toLowerCase() == "title";
-					},
 					compareAttrs(node, attr) {
-						const tagName = node.tagName.toLowerCase();
-						if (tagName == "svg" && ["aria-labelledby", "aria-label"].includes(attr)) {
-							return false;
-						}
 						// Known unique attributes
 						if (["id"].includes(attr)) {
 							return false;
@@ -49,14 +42,7 @@ describe("List", () => {
 					React.createElement(ReactList.Item, { children: "Item 3" }),
 				],
 				opts: {
-					ignoreElementFromA(tag) {
-						return tag.tagName.toLowerCase() == "title";
-					},
 					compareAttrs(node, attr) {
-						const tagName = node.tagName.toLowerCase();
-						if (tagName == "svg" && ["aria-labelledby", "aria-label"].includes(attr)) {
-							return false;
-						}
 						// Known unique attributes
 						if (["id"].includes(attr)) {
 							return false;
@@ -76,7 +62,6 @@ describe("List", () => {
 			list: {
 				as: "ul",
 				size: "medium",
-				title: "list title",
 			},
 			items: {
 				title: "Item title",
@@ -105,22 +90,6 @@ describe("List", () => {
 						icon: React.createElement(ReactCircleIcon, { "aria-hidden": "true" }),
 					}),
 				],
-				opts: {
-					// ignoreElementFromA(tag) {
-					// 	return tag.tagName.toLowerCase() == "title";
-					// },
-					// compareAttrs(node, attr) {
-					// 	const tagName = node.tagName.toLowerCase();
-					// 	if (tagName == "svg" && ["aria-labelledby", "aria-label"].includes(attr)) {
-					// 		return false;
-					// 	}
-					// 	// Known unique attributes
-					// 	if (["id"].includes(attr)) {
-					// 		return false;
-					// 	}
-					// 	return true;
-					// },
-				},
 			}),
 		).toBeTrue();
 	});

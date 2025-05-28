@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classes, omit } from "../../helpers";
+	import { omit } from "../../helpers";
 	import type { LinkProps } from "./type";
 
 	let {
@@ -17,15 +17,15 @@
 	<a
 		{...omit(restProps, "class", "href")}
 		{href}
-		class={classes([
+		class={[
 			restProps.class,
-			"navds-link",
-			"navds-link--" + variant,
+			"aksel-link",
+			"aksel-link--" + variant,
 			{
-				"navds-link--inline-text": inlineText,
-				"navds-link--remove-underline": !underline,
+				"aksel-link--inline-text": inlineText,
+				"aksel-link--remove-underline": !underline,
 			},
-		])}
+		]}
 	>
 		{@render children()}
 	</a>
@@ -33,15 +33,15 @@
 	<svelte:element
 		this={as}
 		{...omit({ ...restProps, href }, "class")}
-		class={classes([
+		class={[
 			restProps.class,
-			"navds-link",
-			"navds-link--" + variant,
+			"aksel-link",
+			"aksel-link--" + variant,
 			{
-				"navds-link--inline-text": inlineText,
-				"navds-link--remove-underline": !underline,
+				"aksel-link--inline-text": inlineText,
+				"aksel-link--remove-underline": !underline,
 			},
-		])}
+		]}
 	>
 		{@render children()}
 	</svelte:element>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { classes, omit } from "$lib/components/helpers";
+	import { omit } from "$lib/components/helpers";
 	import type { PageBlockProps } from "./type";
 
 	let {
@@ -13,15 +13,15 @@
 
 <svelte:element
 	this={as}
-	{...omit(restProps, "class", "style")}
-	class={classes([
+	{...omit(restProps, "class")}
+	class={[
 		restProps.class,
-		"navds-pageblock",
+		"aksel-pageblock",
 		{
-			[`navds-pageblock--${width}`]: !!width,
-			"navds-pageblock--gutters": !!gutters,
+			[`aksel-pageblock--${width}`]: !!width,
+			"aksel-pageblock--gutters": !!gutters,
 		},
-	])}
+	]}
 >
 	{@render children()}
 </svelte:element>

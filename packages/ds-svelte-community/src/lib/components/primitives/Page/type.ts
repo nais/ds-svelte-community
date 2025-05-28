@@ -1,5 +1,4 @@
 import type { HTMLElements } from "$lib/components/utils/elements";
-import type { BackgroundColorToken } from "$lib/components/utils/types";
 import type { Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 export const widths = ["text", "md", "lg", "xl", "2xl"] as const;
@@ -9,10 +8,6 @@ export interface PageProps extends HTMLAttributes<HTMLElement> {
 	 * Overrides html-tag
 	 */
 	as?: "div" | "body";
-	/**
-	 * Background color. Accepts a color token.
-	 */
-	background?: BackgroundColorToken;
 	/**
 	 * Places footer below page-fold
 	 */

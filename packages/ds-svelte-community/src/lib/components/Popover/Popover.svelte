@@ -13,7 +13,7 @@
 	import { arrow as arrowMW, createFloatingActions } from "svelte-floating-ui";
 
 	import { writable } from "svelte/store";
-	import { classes, omit } from "../helpers";
+	import { omit } from "../helpers";
 	import { GetTheme } from "../Theme/Theme.svelte";
 	import type { PopoverProps } from "./type";
 
@@ -90,20 +90,20 @@
 <div
 	use:floatingContent
 	bind:this={popover}
-	class={classes([
+	class={[
 		restProps.class,
-		"navds-popover",
+		"aksel-popover",
 		{
-			"navds-popover--hidden": !open || !anchorEl,
+			"aksel-popover--hidden": !open || !anchorEl,
 		},
-	])}
+	]}
 	data-placement={placement}
 	{...omit(restProps, "class")}
 >
-	<div class={classes(["navds-popover__content", contentClass])}>
+	<div class={["aksel-popover__content", contentClass]}>
 		{@render children()}
 	</div>
 	{#if !theme && arrow}
-		<div class={classes("navds-popover__arrow")} bind:this={$arrowRef}></div>
+		<div class="aksel-popover__arrow" bind:this={$arrowRef}></div>
 	{/if}
 </div>
