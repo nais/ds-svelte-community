@@ -24,26 +24,10 @@ describe("Alert", () => {
 				closeButton: close,
 			};
 
-			const iconTexts: Record<(typeof variants)[number], string> = {
-				error: "Feil",
-				warning: "Advarsel",
-				info: "Informasjon",
-				success: "Suksess",
-			};
-
-			const closeMsg: Record<(typeof variants)[number], string> = {
-				warning: "Lukk varsel",
-				error: "Lukk varsel",
-				info: "Lukk melding",
-				success: "Lukk melding",
-			};
-
 			expect(
 				await bunmatch(
 					render(Alert, {
 						...props,
-						iconTitleText: iconTexts[variant as unknown as (typeof variants)[number]],
-						closeButtonIconText: closeMsg[variant as unknown as (typeof variants)[number]],
 					}),
 					ReactAlert,
 					{
@@ -75,7 +59,6 @@ describe("Alert", () => {
 			await bunmatch(
 				render(Alert, {
 					...props,
-					iconTitleText: "Informasjon",
 				}),
 				ReactAlert,
 				{

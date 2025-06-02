@@ -26,7 +26,7 @@
 			{#if toggle}
 				<ToggleChip selected={value == selected} {value}>{value}</ToggleChip>
 			{:else}
-				<RemovableChip removeLabel="slett" {variant} {value}>{value}</RemovableChip>
+				<RemovableChip {variant} {value}>{value}</RemovableChip>
 			{/if}
 		</li>
 	{/each}

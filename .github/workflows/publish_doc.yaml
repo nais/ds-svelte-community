@@ -11,6 +11,9 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   # Build docs
   build_doc:
+    permissions:
+      contents: read
+
     runs-on: ubuntu-latest
     # Only run if @nais/ds-svelte-community is published and version does not contain "-next."
     # It's done with some suboptimal string matching, but it works for now.

@@ -6,6 +6,9 @@ on:
     paths:
       - "**"
 
+permissions:
+  contents: read
+
 jobs:
   unit_test:
     name: Test

@@ -19,7 +19,6 @@ describe("Modal", () => {
 	it("renders with HTML similar to ds-react", async () => {
 		const props: ModalProps = {
 			open: true,
-			closeIconText: "Lukk",
 			children: textSnippet("ModalContent"),
 			footer: textSnippet("ModalFooter"),
 			header: textSnippet("ModalHeader"),

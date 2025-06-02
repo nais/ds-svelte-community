@@ -26,15 +26,7 @@
 		...restProps
 	}: ButtonProps = $props();
 
-	let internalRef: HTMLElement | undefined = $state(undefined);
-
-	$effect(() => {
-		ref = internalRef;
-	});
-
-	let overrideWidth = $derived.by(() => {
-		return internalRef && loading ? internalRef.getBoundingClientRect().width : 0;
-	});
+	let overrideWidth = $derived(ref && loading ? ref.getBoundingClientRect().width : 0);
 
 	let style = $derived(typeof restProps.style == "string" ? restProps.style : null);
 </script>
@@ -52,17 +44,21 @@
 		`aksel-button--${size}`,
 		{
 			"aksel-button--loading": loading,
-			"aksel-button--disabled": disabled || overrideWidth > 0,
+			"aksel-button--disabled": disabled || overrideWidth > 0 || loading,
 			"aksel-button--icon-only": !!icon && !children,
 			unstyled: as === "a",
 		},
 	]}
-	bind:this={internalRef}
+	bind:this={ref}
 	role={as != "button" ? "button" : undefined}
-	disabled={disabled || overrideWidth > 0 ? true : undefined}
+	disabled={disabled || overrideWidth > 0 || loading ? true : undefined}
 >
-	{#if overrideWidth}
+	{#if overrideWidth || loading}
 		<Loader {size} />
+
+		{#if children}
+			<Label as="span" size={size === "medium" ? "medium" : "small"} {children} />
+		{/if}
 	{:else}
 		{#if icon && iconPosition == "left"}
 			<span class="aksel-button__icon">

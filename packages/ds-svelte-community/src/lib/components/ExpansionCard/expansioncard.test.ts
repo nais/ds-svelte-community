@@ -2,10 +2,10 @@ import { bunmatch } from "$testlib/bunmatch";
 import { ExpansionCard as ReactExpansionCard } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte";
 import { afterEach, describe, expect, it } from "bun:test";
+import React from "react";
+import { createRawSnippet } from "svelte";
 import ExpansionCard from "./ExpansionCard.svelte";
 import type { ExpansionCardProps } from "./type";
-import { createRawSnippet } from "svelte";
-import React from "react";
 
 describe("ExpansionCard", () => {
 	for (const size of ["small", "medium"] as const) {
@@ -13,7 +13,6 @@ describe("ExpansionCard", () => {
 			it(`renders with HTML similar to ds-react, size: ${size}, open: ${initOpen}`, async () => {
 				const props: ExpansionCardProps = {
 					header: "Header text",
-					showMoreTitle: "Vis mer",
 					open: initOpen,
 					size,
 					children: createRawSnippet(() => {

@@ -25,10 +25,20 @@
 		iconTitleText = "",
 		children,
 		closeButton = false,
-		closeButtonIconText = "Close message",
+		closeButtonIconText = "_default",
 		onclose = () => {},
 		...restProps
 	}: AlertProps = $props();
+
+	const closeButtonText = $derived.by(() => {
+		if (closeButtonIconText !== "_default") {
+			return closeButtonIconText;
+		}
+		if (["error", "warning"].includes(variant)) {
+			return "Close alert";
+		}
+		return "Close message";
+	});
 </script>
 
 <div
@@ -86,7 +96,7 @@
 				onclick={onclose}
 			>
 				{#snippet icon()}
-					<XMarkIcon title={closeButtonIconText} />
+					<XMarkIcon title={closeButtonText} />
 				{/snippet}
 			</Button>
 		</div>
