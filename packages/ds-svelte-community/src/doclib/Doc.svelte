@@ -44,7 +44,7 @@
 
 	const story = $derived(stories?.find((s) => s.name === tab));
 
-	const values: SvelteMap<string, unknown> = new SvelteMap();
+	let values: SvelteMap<string, unknown> = new SvelteMap();
 </script>
 
 <svelte:head>
