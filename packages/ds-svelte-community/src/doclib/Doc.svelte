@@ -43,13 +43,6 @@
 	let tab = $derived($page.url.searchParams.get("tab") || "Default");
 
 	const story = $derived(stories?.find((s) => s.name === tab));
-	const storyProps = () => {
-		const ret: SvelteMap<string, unknown> = new SvelteMap();
-		story?.props.forEach((p) => {
-			ret.set(p.key, p.value);
-		});
-		return ret;
-	};
 
 	let values: SvelteMap<string, unknown> = new SvelteMap();
 </script>
