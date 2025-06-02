@@ -44,7 +44,7 @@
 
 	const story = $derived(stories?.find((s) => s.name === tab));
 
-	let values: SvelteMap<string, unknown> = new SvelteMap();
+	const values: SvelteMap<string, unknown> = new SvelteMap();
 </script>
 
 <svelte:head>
@@ -110,7 +110,7 @@
 	{#if !story || story.locked}
 		<Properties {doc} />
 	{:else}
-		<Properties {doc} bind:values />
+		<Properties {doc} {values} />
 	{/if}
 {/key}
 
