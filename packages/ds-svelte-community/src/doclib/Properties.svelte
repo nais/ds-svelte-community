@@ -1,20 +1,18 @@
 <script lang="ts">
 	import { ArrowUndoIcon, ChevronDownIcon, ChevronRightIcon } from "$lib/icons";
 	import type { Doc, DocSlots } from "@nais/vite-plugin-svelte-docs";
+	import type { SvelteMap } from "svelte/reactivity";
 	import Markdown from "./Markdown.svelte";
 	import TypeRenderer from "./TypeRenderer.svelte";
 	import ValueSelector from "./ValueSelector.svelte";
 
-	let { doc, values = $bindable(undefined) }: { doc: Doc; values?: Record<string, unknown> } =
-		$props();
+	let { doc, values = undefined }: { doc: Doc; values?: SvelteMap<string, unknown> } = $props();
 
 	let showProps = $state(true);
 	let showEvents = $state(true);
 	let showSnippets = $state(true);
 
 	let isV5 = $derived(doc.slots.filter((s) => s.snippet).length > 0);
-
-	let valueSelectorProps = $derived($state.snapshot(values));
 
 	let snippets = $derived.by((): DocSlots[] => {
 		return [
@@ -58,11 +56,9 @@
 							{#if values}
 								<button
 									title="Reset all values"
-									disabled={Object.keys(values).length == 0}
+									disabled={values.size == 0}
 									onclick={() => {
-										Object.keys(values).forEach((key) => {
-											delete values[key];
-										});
+										values.clear();
 									}}
 								>
 									<ArrowUndoIcon />
@@ -117,14 +113,14 @@
 									{/if}
 								</td>
 								<td>
-									{#if values && valueSelectorProps}
+									{#if values}
 										<ValueSelector
 											init={prop.default}
 											type={prop.type}
-											value={valueSelectorProps[prop.name]}
-											forceEditable={values[prop.name] !== undefined}
+											value={values.get(prop.name)}
+											forceEditable={values.get(prop.name) !== undefined}
 											onchange={(v) => {
-												values[prop.name] = v;
+												values.set(prop.name, v);
 											}}
 										/>
 										<!-- {JSON.stringify(values[prop.name])} -->

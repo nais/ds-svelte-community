@@ -7,6 +7,7 @@
 	import Heading from "$lib/components/typography/Heading/Heading.svelte";
 	import type { Doc } from "@nais/vite-plugin-svelte-docs";
 	import { type Snippet } from "svelte";
+	import { SvelteMap } from "svelte/reactivity";
 	import Markdown from "./Markdown.svelte";
 	import Properties from "./Properties.svelte";
 	import Renderer, { type ComponentOptions } from "./Renderer.svelte";
@@ -43,14 +44,14 @@
 
 	const story = $derived(stories?.find((s) => s.name === tab));
 	const storyProps = () => {
-		const ret: Record<string, unknown> = {};
+		const ret: SvelteMap<string, unknown> = new SvelteMap();
 		story?.props.forEach((p) => {
-			ret[p.key] = p.value;
+			ret.set(p.key, p.value);
 		});
 		return ret;
 	};
 
-	let values: Record<string, unknown> = $derived(storyProps());
+	let values: SvelteMap<string, unknown> = new SvelteMap();
 </script>
 
 <svelte:head>

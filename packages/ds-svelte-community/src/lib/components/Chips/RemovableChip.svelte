@@ -10,7 +10,7 @@
 
 	let {
 		variant = "action",
-		removeLabel = "remove",
+		removeLabel = "delete",
 		children,
 		value,
 		ondelete,

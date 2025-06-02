@@ -9,6 +9,7 @@
 
 <script lang="ts">
 	import { CopyButton } from "$lib";
+	import type { SvelteMap } from "svelte/reactivity";
 	import Highlight from "./Highlight.svelte";
 	import type { StorySnippet } from "./Story.svelte";
 
@@ -25,7 +26,7 @@
 		source,
 		values,
 	}: {
-		values: { [key: string]: unknown };
+		values: SvelteMap<string, unknown>;
 		componentOptions?: ComponentOptions;
 		children: StorySnippet;
 		source?: string;
@@ -41,16 +42,18 @@
 			return "";
 		}
 		return source.replace(/(\s*\{docProps\}\s*)/g, (p1) => {
-			if (Object.keys(values).length === 0) {
+			if (values.size === 0) {
 				return p1.indexOf("\n") >= 0 ? "\n" : "";
 			}
 
 			return (
 				"\n" +
-				Object.keys(values)
+				values
+					.keys()
+					.toArray()
 					.sort()
 					.map((key) => {
-						const value = values[key];
+						const value = values.get(key);
 						if (typeof value === "string") {
 							if (value.indexOf(`"`) === 0) {
 								return `	${key}=${value}`;
@@ -78,9 +81,9 @@
 		return JSON.parse(t);
 	};
 
-	const dejsonify = (obj: Record<string, unknown>) => {
+	const dejsonify = (obj: SvelteMap<string, unknown>) => {
 		const ret: Record<string, unknown> = {};
-		Object.entries(obj).forEach(([key, value]) => {
+		obj.entries().forEach(([key, value]) => {
 			if (typeof value === "string") {
 				try {
 					ret[key] = fromText(value);

@@ -12,7 +12,7 @@
 
 	let {
 		size = "medium",
-		title = "waiting...",
+		title = "Waiting…",
 		transparent = false,
 		variant = "neutral",
 		...restProps

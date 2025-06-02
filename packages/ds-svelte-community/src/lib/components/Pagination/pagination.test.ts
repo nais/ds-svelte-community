@@ -14,8 +14,6 @@ describe("Pagination", () => {
 		};
 		const svelteProps = {
 			...props,
-			nextText: "Neste",
-			prevText: "Forrige",
 		};
 		expect(
 			await bunmatch(render(Pagination, svelteProps), ReactPagination, {

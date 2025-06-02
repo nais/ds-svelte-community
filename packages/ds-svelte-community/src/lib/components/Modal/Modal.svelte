@@ -22,7 +22,7 @@
 		closeButton = true,
 		isModal = true,
 		width = undefined,
-		closeIconText = "Close modal",
+		closeIconText = "Close",
 		header,
 		children,
 		footer,

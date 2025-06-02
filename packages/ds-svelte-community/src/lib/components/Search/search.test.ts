@@ -11,7 +11,6 @@ describe("Search", () => {
 		const props: SearchProps = {
 			label: "Label fragment",
 			value: "Value",
-			searchIconText: "Søk",
 		};
 		expect(
 			await bunmatch(render(Search, props), ReactSearch, {

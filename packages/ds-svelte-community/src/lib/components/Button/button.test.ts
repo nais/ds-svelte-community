@@ -1,12 +1,13 @@
 import Button from "$lib/components/Button/Button.test.svelte";
 import type { ButtonProps } from "$lib/components/Button/type";
 import { bunmatch } from "$testlib/bunmatch";
+import { IgnoreKnownUnique } from "$testlib/stdopts";
 import { Button as ReactButton } from "@navikt/ds-react";
 import { cleanup, render } from "@testing-library/svelte" with { type: "browser" };
 import { afterEach, describe, expect, it } from "bun:test";
 
 describe("Button", () => {
-	it.only("renders a button with a label", () => {
+	it("renders a button with a label", () => {
 		const r = render(Button, {});
 		expect(r.container.innerHTML).toContain("Click me!");
 	});
@@ -34,7 +35,15 @@ describe("Button", () => {
 			loading: true,
 		};
 		expect(
-			await bunmatch(render(Button, { props }), ReactButton, { props, children: ["Click me!"] }),
+			await bunmatch(render(Button, { props }), ReactButton, {
+				props,
+				children: ["Click me!"],
+				opts: {
+					compareAttrs(node, attr) {
+						return IgnoreKnownUnique.compareAttrs!(node, attr);
+					},
+				},
+			}),
 		).toBeTrue();
 	});
 
@@ -71,6 +80,9 @@ describe("Button", () => {
 							return "";
 						}
 						return value;
+					},
+					compareAttrs(node, attr) {
+						return IgnoreKnownUnique.compareAttrs!(node, attr);
 					},
 				},
 			}),
