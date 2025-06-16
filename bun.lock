@@ -19,15 +19,15 @@
       "name": "@nais/ds-svelte-community",
       "version": "1.0.0",
       "dependencies": {
-        "@navikt/ds-css": "^7.22.0",
-        "@navikt/ds-tokens": "^7.22.0",
+        "@navikt/ds-css": "^7.23.0",
+        "@navikt/ds-tokens": "^7.23.0",
         "clsx": "^2.1.1",
       },
       "devDependencies": {
         "@nais/vite-plugin-svelte-docs": "workspace:*",
-        "@navikt/aksel-icons": "^7.22.0",
-        "@navikt/ds-react": "^7.22.0",
-        "@navikt/ds-tailwind": "^7.22.0",
+        "@navikt/aksel-icons": "^7.23.0",
+        "@navikt/ds-react": "^7.23.0",
+        "@navikt/ds-tailwind": "^7.23.0",
         "@sveltejs/adapter-static": "^3.0.8",
         "@sveltejs/kit": "^2.21.1",
         "@sveltejs/package": "^2.3.11",
@@ -266,15 +266,15 @@
 
     "@nais/vite-plugin-svelte-docs": ["@nais/vite-plugin-svelte-docs@workspace:packages/vite-plugin-svelte-docs"],
 
-    "@navikt/aksel-icons": ["@navikt/aksel-icons@7.22.0", "", {}, "sha512-1hCTk4/zKjYD0pfvrHYOqQmP0r+8XyRG8tenSSVAtnOlyEYvWfUdQwczfGv0VbjYp/UPaSQbkWhpj5z48KF3SA=="],
+    "@navikt/aksel-icons": ["@navikt/aksel-icons@7.23.0", "", {}, "sha512-rcWCOtOvmVt2jw89kbMJ/QfaT/om7T4+JKqmmiCBtcJy+++rPa4mhblmqgmfc6dqqgxWPe9m/7QKQNu9bsq3tw=="],
 
-    "@navikt/ds-css": ["@navikt/ds-css@7.22.0", "", {}, "sha512-DI2/iyY/pZmuYjVi5TuQWvBXRKCph4PPcHzkuUDJb52q8WRcG6x29ZMOe3+ipIOu70m+veXARv2wl5pE0k8HrA=="],
+    "@navikt/ds-css": ["@navikt/ds-css@7.23.0", "", {}, "sha512-b40W2ZJ46AVImFswWexIGZM6i97REtF9xukWYUYsnpaAr4UYUMZi+hdVCB2ulXw9cw58Oe56gtls715Xajdqbg=="],
 
-    "@navikt/ds-react": ["@navikt/ds-react@7.22.0", "", { "dependencies": { "@floating-ui/react": "0.27.8", "@floating-ui/react-dom": "^2.0.9", "@navikt/aksel-icons": "^7.22.0", "@navikt/ds-tokens": "^7.22.0", "clsx": "^2.1.0", "date-fns": "^4.0.0", "react-day-picker": "9.6.1" }, "peerDependencies": { "@types/react": ">=17.0.30", "react": ">=17.0.0 || >19.0.0-rc" }, "optionalPeers": ["@types/react"] }, "sha512-4fhSc5nxRy5ZgL46k1okqgkVwAnglyIiK1ucsPFI3znHCO9zOYyeYmc2HaE/X+fw8XF3AoSksJzISpL0bgVuAQ=="],
+    "@navikt/ds-react": ["@navikt/ds-react@7.23.0", "", { "dependencies": { "@floating-ui/react": "0.27.8", "@floating-ui/react-dom": "^2.0.9", "@navikt/aksel-icons": "^7.23.0", "@navikt/ds-tokens": "^7.23.0", "clsx": "^2.1.0", "date-fns": "^4.0.0", "react-day-picker": "9.7.0" }, "peerDependencies": { "@types/react": ">=17.0.30", "react": ">=17.0.0 || >19.0.0-rc" }, "optionalPeers": ["@types/react"] }, "sha512-4ymfxKex8btssqj01Hx9QsebVQrMFWEH09J48SdQfqfvN2m2RRUyQVCFVMpy5yU2m98uFdLHIr37D4xZgxZKZA=="],
 
-    "@navikt/ds-tailwind": ["@navikt/ds-tailwind@7.22.0", "", {}, "sha512-qhDCcn9AcxKPSNrjgFqLkjbvTAEFj9sPMqGoF/AhkiDtbdHQeUlT8QV99CKNlX6cZnUN6VpZ4ikvJaZNmH5pwQ=="],
+    "@navikt/ds-tailwind": ["@navikt/ds-tailwind@7.23.0", "", {}, "sha512-zzXg1bRerIvgMuHg9V8InV4hc+QMvF7etkWFlIdo8c9J+FKC8knsRthwhU7yeBiYA2BwrE5d8s40mnJa2+wXog=="],
 
-    "@navikt/ds-tokens": ["@navikt/ds-tokens@7.22.0", "", {}, "sha512-FiE3bzpKg2U0ESAre5I2WDMFaN/xcpBDyViecjiNZZeJfTqRbSiKQpLADzZlhZj3tbcwz4aughCBVkZScNG0sQ=="],
+    "@navikt/ds-tokens": ["@navikt/ds-tokens@7.23.0", "", {}, "sha512-6xpVonWoieB8DA8XZAaIa5+pJ4/fqP7xXHY+lRFMqvo7pxnDMH8gUkXbdvLZYcfjlZUEq2rbDgPSYJQ8OXHp6Q=="],
 
     "@nodelib/fs.scandir": ["@nodelib/fs.scandir@2.1.5", "", { "dependencies": { "@nodelib/fs.stat": "2.0.5", "run-parallel": "^1.1.9" } }, "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="],
 
@@ -936,7 +936,7 @@
 
     "react": ["react@19.1.0", "", {}, "sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg=="],
 
-    "react-day-picker": ["react-day-picker@9.6.1", "", { "dependencies": { "@date-fns/tz": "^1.2.0", "date-fns": "^4.1.0", "date-fns-jalali": "^4.1.0-0" }, "peerDependencies": { "react": ">=16.8.0" } }, "sha512-PiRT/l6yk+fLpSmyMFUHIep8dbKAlilJGfDB0N2krXFhnxbitZf/t+ePDLk8kou/lYUVWAfIIxBJjFuvrNy7Hw=="],
+    "react-day-picker": ["react-day-picker@9.7.0", "", { "dependencies": { "@date-fns/tz": "1.2.0", "date-fns": "4.1.0", "date-fns-jalali": "4.1.0-0" }, "peerDependencies": { "react": ">=16.8.0" } }, "sha512-urlK4C9XJZVpQ81tmVgd2O7lZ0VQldZeHzNejbwLWZSkzHH498KnArT0EHNfKBOWwKc935iMLGZdxXPRISzUxQ=="],
 
     "react-dom": ["react-dom@19.1.0", "", { "dependencies": { "scheduler": "^0.26.0" }, "peerDependencies": { "react": "^19.1.0" } }, "sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g=="],
 
