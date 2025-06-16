@@ -5,13 +5,13 @@
 	"version": "0.0.2",
 	"private": true,
 	"devDependencies": {
-		"@types/bun": "1.2.14",
-		"eslint": "^9.27.0",
+		"@types/bun": "1.2.16",
+		"eslint": "^9.29.0",
 		"eslint-config-prettier": "^10.1.5",
-		"eslint-plugin-svelte": "^3.9.0",
+		"eslint-plugin-svelte": "^3.9.2",
 		"prettier": "^3.5.3",
 		"prettier-plugin-svelte": "^3.4.0",
-		"svelte": "5.33.4",
+		"svelte": "5.34.3",
 		"tsconfig-resolver": "^3.0.1",
 		"typescript": "~5.8.3"
 	},
