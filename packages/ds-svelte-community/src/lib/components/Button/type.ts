@@ -1,18 +1,6 @@
 import type { Component, Snippet } from "svelte";
 import type { HTMLAnchorAttributes, HTMLButtonAttributes } from "svelte/elements";
 
-export const variants = [
-	"primary",
-	"primary-neutral",
-	"secondary",
-	"secondary-neutral",
-	"tertiary",
-	"tertiary-neutral",
-	"danger",
-] as const;
-
-export const sizes = ["medium", "small", "xsmall"] as const;
-
 interface BaseProps {
 	/**
 	 * Replaces button content with a Loader component, keeps width.
@@ -29,12 +17,19 @@ interface BaseProps {
 	/**
 	 * Changes padding, height, and font-size.
 	 */
-	size?: (typeof sizes)[number];
+	size?: "medium" | "small" | "xsmall";
 
 	/**
 	 * Changes design and interaction-visuals.
 	 */
-	variant?: (typeof variants)[number];
+	variant?:
+		| "primary"
+		| "primary-neutral"
+		| "secondary"
+		| "secondary-neutral"
+		| "tertiary"
+		| "tertiary-neutral"
+		| "danger";
 
 	/**
 	 * Content of the button

@@ -1,6 +1,12 @@
 <script lang="ts" module>
+	import type { AkselColorRole } from "@navikt/ds-tokens/types";
 	import { getContext, setContext, untrack, type Snippet } from "svelte";
 	import type { HTMLElements } from "../utils/elements";
+
+	/* eslint-disable @typescript-eslint/no-empty-object-type */
+	export interface CustomAkselColor {}
+
+	export type AkselColor = AkselColorRole | keyof CustomAkselColor;
 
 	const contextKey = Symbol("theme_context");
 

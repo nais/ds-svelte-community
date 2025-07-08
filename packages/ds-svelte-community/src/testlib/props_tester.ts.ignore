@@ -1,0 +1,159 @@
+import { describe, expect, it } from "bun:test";
+import fs from "fs";
+import path from "path";
+import { svelte2tsx } from "svelte2tsx"; // Import the JS API
+import { DiagnosticCategory, ModuleKind, Project, ScriptTarget } from "ts-morph";
+
+// --- Configuration ---
+const reactComponentPath = path.resolve(__dirname, "./src/MyReactComponent.tsx");
+const svelteComponentPath = path.resolve(__dirname, "./src/MySvelteComponent.svelte");
+
+// The conventional name svelte2tsx uses for the inferred props type.
+// Double-check this by looking at svelte2tsx output if tests fail.
+const svelteGeneratedPropsTypeName = "$$Props";
+
+// --- Test Suite ---
+describe("Component Prop Compatibility (svelte2tsx + ts-morph)", () => {
+	it("Svelte component props should be assignable to React component props", async () => {
+		// 1. Read Svelte Component Code
+		let svelteCode: string;
+		try {
+			svelteCode = fs.readFileSync(svelteComponentPath, "utf8");
+		} catch (err) {
+			console.error(`Failed to read Svelte component at: ${svelteComponentPath}`, err);
+			throw err; // Fail the test explicitly
+		}
+
+		// 2. Convert Svelte to TSX using svelte2tsx
+		let tsxOutput: { code: string; map: any }; // Adjust type based on svelte2tsx version if needed
+		try {
+			// You might need to pass specific options depending on your Svelte setup (e.g., svelte version, typescript version)
+			tsxOutput = svelte2tsx(svelteCode, {
+				filename: svelteComponentPath, // Provide filename for better error messages/source maps
+				// Ensure typescript is enabled if your script block uses it
+				// isTsFile: true, // Generally auto-detected from lang="ts"
+				// mode: 'ts', // Or 'tsx' - usually inferred
+			});
+			console.log(`Successfully ran svelte2tsx on ${svelteComponentPath}`);
+		} catch (err) {
+			console.error(`svelte2tsx failed for ${svelteComponentPath}`, err);
+			throw err; // Fail the test explicitly
+		}
+
+		const generatedTsxCode = tsxOutput.code;
+		// Optional: Log generated code for debugging
+		// console.log("--- Generated TSX ---");
+		// console.log(generatedTsxCode);
+		// console.log("---------------------");
+
+		// 3. Initialize ts-morph Project
+		const project = new Project({
+			compilerOptions: {
+				target: ScriptTarget.ESNext,
+				module: ModuleKind.ESNext,
+				jsx: 4, // Use '4' (React 17+ JSX Transform) or '2' (React.createElement) based on your setup/svelte2tsx output
+				moduleResolution: 2, // 'NodeNext' or 'Node16' (or 100) recommended for modern TS, '1' (Classic) otherwise.
+				esModuleInterop: true,
+				strict: true,
+				skipLibCheck: true, // Often useful in tests
+				// Might need allowJs: true if svelte2tsx output includes JS parts
+				// baseUrl: "./", // Define if using path aliases
+				// paths: { ... }
+			},
+			skipAddingFilesFromTsConfig: true,
+			// useInMemoryFileSystem: true, // Good for tests to avoid disk writes
+		});
+
+		// 4. Add Source Files to Project
+		// Add the original React component
+		const reactSourceFile = project.addSourceFileAtPath(reactComponentPath);
+
+		// Add the generated TSX code *in memory*
+		const generatedSvelteSourceFile = project.createSourceFile(
+			"./generatedSvelte.tsx", // Use a .tsx extension
+			generatedTsxCode,
+			{ overwrite: true },
+		);
+
+		// 5. Create Temporary Check File Code
+		// Generate code that imports both prop types and asserts compatibility.
+		// Use relative paths suitable for the in-memory structure.
+		const reactImportPath = `./${path.relative(path.dirname(generatedSvelteSourceFile.getFilePath()), reactSourceFile.getFilePath()).replace(/\\/g, "/").replace(".tsx", "")}`;
+		const svelteImportPath = `./${path.basename(generatedSvelteSourceFile.getFilePath(), ".tsx")}`;
+
+		const checkCode = `
+        import type { MyReactComponentProps } from '${reactImportPath}';
+        // Import the inferred props type by its conventional name from the generated file
+        import type { ${svelteGeneratedPropsTypeName} } from '${svelteImportPath}';
+
+        // Helper type for assertion
+        type Assert<T, U extends T> = void;
+
+        // The actual check
+        type SvelteSatisfiesReact = Assert<MyReactComponentProps, ${svelteGeneratedPropsTypeName}>;
+
+        // Optional reverse check (uncomment if needed)
+        // type ReactSatisfiesSvelte = Assert<${svelteGeneratedPropsTypeName}, MyReactComponentProps>;
+      `;
+
+		// console.log("--- Check Code ---");
+		// console.log(checkCode);
+		// console.log("------------------");
+
+		const checkFile = project.createSourceFile("./tempTypeCheck.ts", checkCode, {
+			overwrite: true,
+		});
+
+		// 6. Get Diagnostics
+		// Check the entire project to ensure imports resolve correctly between the files
+		const diagnostics = project.getPreEmitDiagnostics();
+
+		// 7. Analyze Diagnostics
+		const errors = diagnostics.filter((d) => d.getCategory() === DiagnosticCategory.Error);
+
+		// Filter errors specifically originating from our assertion check file
+		const checkFileErrors = errors.filter((d) =>
+			d.getSourceFile()?.getFilePath().endsWith("tempTypeCheck.ts"),
+		);
+
+		// Optional: Log errors for debugging
+		if (checkFileErrors.length > 0) {
+			console.error("Type Compatibility Errors Found in Check File:");
+			checkFileErrors.forEach((err) => {
+				const sf = err.getSourceFile();
+				const pos =
+					sf && err.getLineNumber()
+						? `(${path.basename(sf.getFilePath())}:${err.getLineNumber()}:${err.getStart()})`
+						: "";
+				const message =
+					typeof err.getMessageText() === "string"
+						? err.getMessageText()
+						: JSON.stringify(err.getMessageText());
+				console.error(`- ${message} ${pos} [Code: ${err.getCode()}]`);
+			});
+			// Log all errors if check file specific ones not found but errors exist
+			if (errors.length > 0 && checkFileErrors.length === 0) {
+				console.warn(
+					"Errors found in project, but not in tempTypeCheck.ts. Check generated TSX or imports:",
+				);
+				errors.forEach((err) => {
+					const sf = err.getSourceFile();
+					const pos =
+						sf && err.getLineNumber()
+							? `(${path.basename(sf?.getFilePath())}:${err.getLineNumber()}:${err.getStart()})`
+							: "";
+					const message =
+						typeof err.getMessageText() === "string"
+							? err.getMessageText()
+							: JSON.stringify(err.getMessageText());
+					console.error(
+						`- [${sf ? path.basename(sf.getFilePath()) : "unknown"}] ${message} ${pos} [Code: ${err.getCode()}]`,
+					);
+				});
+			}
+		}
+
+		// 8. Assert based on errors
+		expect(checkFileErrors).toHaveLength(0); // Test fails if any type errors were found in the check file
+	});
+});

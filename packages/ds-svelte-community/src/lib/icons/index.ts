@@ -806,6 +806,8 @@ export { default as SplitVerticalIcon } from "./SplitVerticalIcon.svelte";
 export { default as SpoonFillIcon } from "./SpoonFillIcon.svelte";
 export { default as SpoonIcon } from "./SpoonIcon.svelte";
 export { default as SquareFillIcon } from "./SquareFillIcon.svelte";
+export { default as SquareGridFillIcon } from "./SquareGridFillIcon.svelte";
+export { default as SquareGridIcon } from "./SquareGridIcon.svelte";
 export { default as SquareIcon } from "./SquareIcon.svelte";
 export { default as SquarerootIcon } from "./SquarerootIcon.svelte";
 export { default as StaircaseIcon } from "./StaircaseIcon.svelte";

@@ -13,11 +13,27 @@
 	import { default as InformationFilledIcon } from "$lib/icons/InformationSquareFillIcon.svelte";
 	import { default as ErrorFilledIcon } from "$lib/icons/XMarkOctagonFillIcon.svelte";
 	import { omit } from "../helpers";
+	import type { AkselColor } from "../Theme/Theme.svelte";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import type { AlertProps } from "./type";
 
+	function variantToRole(variant: AlertProps["variant"]): AkselColor {
+		switch (variant) {
+			case "warning":
+				return "warning";
+			case "error":
+				return "danger";
+			case "info":
+				return "info";
+			case "success":
+				return "success";
+			default:
+				return "info";
+		}
+	}
+
 	let {
-		variant = "info",
+		variant,
 		size = "medium",
 		fullWidth = false,
 		contentMaxWidth = true,
@@ -39,10 +55,13 @@
 		}
 		return "Close message";
 	});
+	// TODO: I18n
 </script>
 
 <div
 	{...omit(restProps, "class")}
+	data-color={variantToRole(variant)}
+	data-variant={variant}
 	class={[
 		restProps.class,
 		"aksel-alert",
