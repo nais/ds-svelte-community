@@ -8,32 +8,32 @@
 
 	export type AkselColor = AkselColorRole | keyof CustomAkselColor;
 
-	const contextKey = Symbol("theme_context");
+	export const themeContextKey = Symbol("theme_context");
 
-	class ThemeContext {
-		#value?: string = $state();
+	export class ThemeContext {
+		#value?: "dark" | "light" = $state();
 
-		constructor(value: string) {
+		constructor(value: "dark" | "light") {
 			this.#value = value;
 		}
 
-		get theme(): string | undefined {
+		get theme(): "dark" | "light" | undefined {
 			return this.#value;
 		}
 
-		set theme(value: string) {
+		set theme(value: "dark" | "light") {
 			this.#value = value;
 		}
 	}
 
-	function newContext(value: string) {
+	export function newContext(value: "dark" | "light") {
 		const ctx = new ThemeContext(value);
-		setContext(contextKey, ctx);
+		setContext(themeContextKey, ctx);
 		return ctx;
 	}
 
 	export function GetTheme(): ThemeContext | undefined {
-		return getContext(contextKey);
+		return getContext(themeContextKey);
 	}
 </script>
 

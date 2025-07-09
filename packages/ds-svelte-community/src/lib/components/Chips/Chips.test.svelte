@@ -11,13 +11,7 @@
 		selected?: string;
 	}
 
-	let {
-		values,
-		toggle = false,
-		size = "medium",
-		variant = "action",
-		selected = "",
-	}: Props_1 = $props();
+	let { values, toggle, size, variant, selected }: Props_1 = $props();
 </script>
 
 <Chips {size}>

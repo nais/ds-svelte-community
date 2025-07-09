@@ -1,24 +1,11 @@
-import { bunmatch } from "$testlib/bunmatch";
 import { Checkbox as ReactCheckbox, CheckboxGroup as ReactCheckboxGroup } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+
+import { render, someRandomText, someRandomTextSnippet } from "$testlib/render";
+import { describe, expect, it } from "bun:test";
 import React from "react";
-import { createRawSnippet, type Snippet } from "svelte";
 import Checkbox from "./CheckboxGroup.test.svelte";
 import { type CheckboxGroupProps, type CheckboxProps } from "./type";
 
-const snippetText = (v: string): Snippet => {
-	return createRawSnippet(() => ({
-		render: () => `<span>${v}</span>`,
-	}));
-};
-
-/*
-Unsure why, but this has some unknown issue:
-TypeError: component is not an Object. (evaluating 'FILENAME in component')
-      at [ADD_OWNER] (/home/thomas/Development/nais/ds-svelte-community/node_modules/svelte/src/internal/client/dev/ownership.js:255:16)
-✗ CheckboxGroup > renders CheckboxGroup similar to ds-react with descriptions
-*/
 describe("CheckboxGroup", () => {
 	it("renders CheckboxGroup similar to ds-react", async () => {
 		const props: Omit<CheckboxGroupProps, "children"> = {
@@ -27,20 +14,21 @@ describe("CheckboxGroup", () => {
 		};
 
 		const items: { value: string; content: string }[] = [
-			{ value: "val1", content: "Checkbox content 1" },
-			{ value: "val2", content: "Checkbox content 2" },
-			{ value: "val3", content: "Checkbox content 3" },
-			{ value: "val4", content: "Checkbox content 4" },
+			{ value: "val1", content: someRandomText },
+			{ value: "val2", content: someRandomText },
+			{ value: "val3", content: someRandomText },
+			{ value: "val4", content: someRandomText },
 		];
 
 		const svelteItems: CheckboxProps[] = items.map((v) => {
 			return {
 				value: v.value,
-				children: snippetText(v.content),
+				children: someRandomTextSnippet,
 			};
 		});
-		expect(
-			await bunmatch(render(Checkbox, { wrapper: props, items: svelteItems }), ReactCheckboxGroup, {
+		expect(render(Checkbox, { wrapper: props, items: svelteItems })).toMimicReact(
+			ReactCheckboxGroup,
+			{
 				props: {
 					legend: props.legend!,
 					defaultValue: props.value,
@@ -48,45 +36,15 @@ describe("CheckboxGroup", () => {
 				children: items.map((v, i) => {
 					return React.createElement(ReactCheckbox, {
 						value: v.value,
-						children: React.createElement("span", {}, v.content),
+						children: v.content,
 						key: i,
 					});
 				}),
 				opts: {
-					ignoreElementFromA(tag) {
-						// Because of limitations on slots, we have to remove one extra div created by svelte
-						// when there's no description
-						if (
-							tag.tagName.toLowerCase() == "div" &&
-							tag.classList.contains("navds-fieldset__description")
-						) {
-							return true;
-						}
-						return false;
-					},
-					compareAttrs(node, attr) {
-						const tag = node.tagName.toLowerCase();
-						if (tag == "path" && attr == "d") {
-							return false;
-						}
-						// For an unknown reason, `checked` is not set on the input element
-						if (tag == "input" && attr == "checked") {
-							return false;
-						}
-						// We have different IDs, so we ignore id and for attributes
-						if (
-							attr == "id" ||
-							attr == "for" ||
-							attr == "aria-describedby" ||
-							attr == "aria-labelledby"
-						) {
-							return false;
-						}
-						return true;
-					},
+					compareAttrs: ignoreKnownUnique,
 				},
-			}),
-		).toBeTrue();
+			},
+		);
 	});
 
 	// TODO(thokra): Check sizes etc.
@@ -98,19 +56,20 @@ describe("CheckboxGroup", () => {
 		};
 
 		const items: { value: string; description?: string; content: string }[] = [
-			{ value: "val1", description: "Desc", content: "Checkbox content 1" },
-			{ value: "val4", content: "Checkbox content 4" },
+			{ value: "val1", description: "Desc", content: someRandomText },
+			{ value: "val4", content: someRandomText },
 		];
 
 		const svelteItems: CheckboxProps[] = items.map((v) => {
 			return {
 				value: v.value,
 				description: v.description,
-				children: snippetText(v.content),
+				children: someRandomTextSnippet,
 			};
 		});
-		expect(
-			await bunmatch(render(Checkbox, { wrapper: props, items: svelteItems }), ReactCheckboxGroup, {
+		expect(render(Checkbox, { wrapper: props, items: svelteItems })).toMimicReact(
+			ReactCheckboxGroup,
+			{
 				props: {
 					legend: props.legend!,
 					description: props.description!,
@@ -120,35 +79,34 @@ describe("CheckboxGroup", () => {
 					return React.createElement(ReactCheckbox, {
 						value: v.value,
 						description: v.description,
-						children: React.createElement("span", {}, v.content),
+						children: v.content,
 						key: i,
 					});
 				}),
 				opts: {
-					compareAttrs(node, attr) {
-						const tag = node.tagName.toLowerCase();
-						if (tag == "path" && attr == "d") {
-							return false;
-						}
-						// For an unknown reason, `checked` is not set on the input element
-						if (tag == "input" && attr == "checked") {
-							return false;
-						}
-						// We have different IDs, so we ignore id and for attributes
-						if (
-							attr == "id" ||
-							attr == "for" ||
-							attr == "aria-describedby" ||
-							attr == "aria-labelledby"
-						) {
-							return false;
-						}
-						return true;
-					},
+					compareAttrs: ignoreKnownUnique,
 				},
-			}),
-		).toBeTrue();
+			},
+		);
 	});
-
-	afterEach(cleanup);
 });
+
+function ignoreKnownUnique(node: HTMLElement, attr: string) {
+	const tag = node.tagName.toLowerCase();
+	if (tag == "input" && ["aria-labelledby", "id"].includes(attr)) {
+		return false;
+	}
+	if (tag == "label" && ["for", "id"].includes(attr)) {
+		return false;
+	}
+	if (tag == "span" && attr == "id") {
+		return false;
+	}
+	if (tag == "div" && attr == "id") {
+		return false;
+	}
+	if (tag == "input" && attr == "checked") {
+		return false;
+	}
+	return true;
+}

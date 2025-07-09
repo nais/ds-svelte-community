@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Chips as ReactChips } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import Chips from "./Chips.test.svelte";
 
@@ -10,27 +9,13 @@ describe("Chips", () => {
 		const props = {
 			values: ["val1", "val2", "val3"],
 		};
-		expect(
-			await bunmatch(render(Chips, props), ReactChips, {
-				children: props.values.map((v) => {
-					return React.createElement(ReactChips.Removable, null, v);
-				}),
-				opts: {
-					compareAttrs(node, attr) {
-						const tag = node.tagName.toLowerCase();
-						if (tag == "path" && attr == "d") {
-							return false;
-						}
-						return true;
-					},
-				},
+		expect(render(Chips, props)).toMimicReact(ReactChips, {
+			children: props.values.map((v) => {
+				return React.createElement(ReactChips.Removable, null, v);
 			}),
-		).toBeTrue();
+		});
 	});
 
-	// TODO(thokra): For some reason the children doesn't work as expected
-	// in svelte. This issue is only during the test it seems.
-	// We therefore ignore the text span in the comparison.
 	it("renders Chips Toggle similar to ds-react", async () => {
 		const props = {
 			values: ["value1", "value2", "value3"],
@@ -38,37 +23,14 @@ describe("Chips", () => {
 			selected: "value2",
 		};
 
-		expect(
-			await bunmatch(render(Chips, props), ReactChips, {
-				children: props.values.map((v) => {
-					return React.createElement(
-						ReactChips.Toggle,
-						{ selected: v == props.selected } as never,
-						v,
-					);
-				}),
-				opts: {
-					ignoreElementFromA(tag) {
-						if (
-							tag.tagName.toLowerCase() == "span" &&
-							tag.classList.contains("navds-chips__chip-text")
-						) {
-							return true;
-						}
-						return false;
-					},
-					ignoreElementFromB(tag) {
-						if (
-							tag.tagName.toLowerCase() == "span" &&
-							tag.classList.contains("navds-chips__chip-text")
-						) {
-							return true;
-						}
-						return false;
-					},
-				},
+		expect(render(Chips, props)).toMimicReact(ReactChips, {
+			children: props.values.map((v) => {
+				return React.createElement(
+					ReactChips.Toggle,
+					{ selected: v == props.selected } as never,
+					v,
+				);
 			}),
-		).toBeTrue();
+		});
 	});
-	afterEach(cleanup);
 });
