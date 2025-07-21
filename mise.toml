@@ -2,5 +2,5 @@
 pin = true
 
 [tools]
-bun = "1.2.18"
+bun = "1.2.19"
 node = "lts"
