@@ -7,7 +7,7 @@ import prettierHTML from "prettier/parser-html";
 import type { FunctionComponent, ReactNode } from "react";
 import React from "react";
 import * as ReactDOMServer from "react-dom/server";
-import type { RenderResult } from "./render";
+import { themes, type RenderOutput, type RenderResult, type RenderTheme } from "./render";
 import { testInChrome } from "./testChrome";
 
 export type ReactComponent = unknown;
@@ -53,13 +53,13 @@ const defaultOpts: DiffOptions = {
 	after: 5,
 };
 
-export async function htmldiff(
-	svelteResult: RenderResult,
+async function singleDiff(
+	svelteResult: RenderOutput,
 	b: HTMLElement,
 	opts: DiffOptions,
-): Promise<string> {
+	theme: RenderTheme,
+) {
 	opts = { ...defaultOpts, ...opts };
-
 	const bOrig = b.innerHTML;
 
 	const container = document.createElement("div");
@@ -68,7 +68,7 @@ export async function htmldiff(
 	const aclean = cleanTree(container, opts, opts.ignoreElementFromA);
 	const bclean = cleanTree(b, opts, opts.ignoreElementFromB);
 
-	const result = ["Differences: (left: a, right: b)"];
+	const result = ["Differences: (left: a, right: b) (theme: " + theme + ")"];
 
 	const diffResult = await prettyDiff(
 		aclean.innerHTML,
@@ -79,7 +79,7 @@ export async function htmldiff(
 
 	if (!diffResult) {
 		if (process.env.CI && process.env.CI === "true" && !opts.visual?.skip) {
-			const screenshots = await testInChrome(svelteResult, bOrig, opts.visual);
+			const screenshots = await testInChrome(svelteResult, bOrig, theme, opts.visual);
 			if (screenshots && typeof screenshots === "string") {
 				result.push("Visual differences found, see screenshots:");
 				result.push(`Svelte: ${screenshots}`);
@@ -92,6 +92,28 @@ export async function htmldiff(
 	}
 	result.push(diffResult);
 	return result.join("\n");
+}
+
+export async function htmldiff(
+	svelteResult: RenderResult,
+	reactResult: { [key in RenderTheme]?: HTMLElement },
+	opts: DiffOptions,
+): Promise<string> {
+	for (const theme of Object.keys(svelteResult)) {
+		const t = theme as RenderTheme;
+		if (!svelteResult[t]) {
+			return "Missing output for theme: " + t;
+		}
+		if (!reactResult[t]) {
+			return "Missing output for theme: " + t;
+		}
+		const result = await singleDiff(svelteResult[t], reactResult[t], opts, t);
+		if (result) {
+			return result;
+		}
+	}
+
+	return "";
 }
 
 const Node = {
@@ -244,6 +266,24 @@ async function doExpect(
 	pass: boolean;
 	message: () => string;
 }> {
+	const reactComponents: { [key in RenderTheme]?: HTMLElement } = {};
+	for (const theme of themes) {
+		reactComponents[theme] = renderReact(comp, props, theme, ...children);
+	}
+	const diff = await htmldiff(received, reactComponents, opts);
+
+	return {
+		pass: diff === "",
+		message: () => diff,
+	};
+}
+
+function renderReact(
+	comp: ReactComponent,
+	props: object | null,
+	theme: "dark" | "light",
+	...children: ReactNode[]
+) {
 	const container = document.createElement("div");
 	{
 		// Hack to remove ugly errors from react
@@ -253,19 +293,14 @@ async function doExpect(
 			React.createElement(Provider, {
 				locale: en,
 				children: React.createElement(Theme, {
-					theme: "light",
+					theme: theme,
 					children: React.createElement(comp as FunctionComponent, props, ...children),
 				}),
 			}),
 		);
 		console.error = error;
 	}
-	const diff = await htmldiff(received, container.firstChild as HTMLElement, opts);
-
-	return {
-		pass: diff === "",
-		message: () => diff,
-	};
+	return container.firstChild as HTMLElement;
 }
 
 export type Options = {

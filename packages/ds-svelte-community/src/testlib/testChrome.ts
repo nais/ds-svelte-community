@@ -8,7 +8,7 @@ import { join } from "node:path";
 import { Browser, Builder, type WebDriver } from "selenium-webdriver";
 import { Options } from "selenium-webdriver/chrome";
 import { build } from "vite";
-import type { RenderResult } from "./render";
+import type { RenderOutput, RenderTheme } from "./render";
 
 export const testPages = await mkdtemp(join(tmpdir(), "ds-svelte-test-"));
 let testCase = 0;
@@ -16,8 +16,9 @@ let testCase = 0;
 let driver: WebDriver | undefined = undefined;
 
 export async function testInChrome(
-	svelteComponent: RenderResult,
+	svelteComponent: RenderOutput,
 	reactComponent: string,
+	theme: RenderTheme,
 	opts: looksSame.LooksSameOptions = {},
 ) {
 	if (!driver) {
@@ -35,8 +36,8 @@ export async function testInChrome(
 
 	const css = await cssMap();
 
-	await Bun.file(join(testDir, "svelte.html")).write(htmlBody(css.svelte, svelteComponent));
-	await Bun.file(join(testDir, "react.html")).write(htmlBody(css.react, reactComponent));
+	await Bun.file(join(testDir, "svelte.html")).write(htmlBody(css.svelte, svelteComponent, theme));
+	await Bun.file(join(testDir, "react.html")).write(htmlBody(css.react, reactComponent, theme));
 
 	await driver.get(`file://${join(testDir, "svelte.html")}`);
 	const svelteScreenshot = await driver.takeScreenshot();
@@ -99,7 +100,7 @@ async function compileCSS(file: string) {
 	return await Bun.file(join(out, "index.css")).text();
 }
 
-function htmlBody(css: string, content: string | RenderResult) {
+function htmlBody(css: string, content: string | RenderOutput, theme: RenderTheme) {
 	if (typeof content === "object") {
 		content = content.body;
 	}
@@ -111,8 +112,8 @@ function htmlBody(css: string, content: string | RenderResult) {
 		<title>Test</title>
 		<style>${css}</style>
 	</head>
-	<body>
-		<div id="testWrapper">${content}</div>
+	<body style="background: var(--ax-bg-default)">
+		<div id="testWrapper" class="aksel-theme ${theme}" data-background="true">${content}</div>
 	</body>
 </html>`;
 }

@@ -9,7 +9,7 @@
 
 <script lang="ts">
 	import Loader from "../Loader/Loader.svelte";
-	import type { AkselColor } from "../Theme/Theme.svelte";
+	import { type AkselColor } from "../Theme/Theme.svelte";
 	import { isSnippet, omit } from "../helpers";
 	import Label from "../typography/Label/Label.svelte";
 	import type { ButtonProps } from "./type";
@@ -63,6 +63,8 @@
 	let overrideWidth = $derived(ref && loading ? ref.getBoundingClientRect().width : 0);
 
 	let style = $derived(typeof restProps.style == "string" ? restProps.style : null);
+
+	// const themeCtx = GetTheme();
 </script>
 
 <svelte:element
