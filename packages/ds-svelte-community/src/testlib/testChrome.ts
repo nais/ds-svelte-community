@@ -5,8 +5,8 @@ import looksSame from "looks-same";
 import { mkdir, mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { Browser, Builder, logging, type WebDriver } from "selenium-webdriver";
-import { Options, ServiceBuilder } from "selenium-webdriver/chrome";
+import { Browser, Builder, type WebDriver } from "selenium-webdriver";
+import { Options } from "selenium-webdriver/chrome";
 import { build } from "vite";
 import type { RenderOutput, RenderTheme } from "./render";
 
@@ -21,25 +21,16 @@ export async function testInChrome(
 	theme: RenderTheme,
 	opts: looksSame.LooksSameOptions = {},
 ) {
-	console.log("TEST IN CHROME");
 	if (!driver) {
-		logging.installConsoleHandler();
-		logging.getLogger(logging.Type.CLIENT).setLevel(logging.Level.ALL);
-		logging.getLogger(logging.Type.DRIVER).setLevel(logging.Level.ALL);
-		console.log("Starting Selenium WebDriver...");
 		const builder = new Builder();
 		const chromeOptions = new Options();
 		chromeOptions.addArguments("--headless");
 		chromeOptions.addArguments("--disable-infobars");
 		chromeOptions.addArguments("--disable-gpu");
-		chromeOptions.addArguments("--no-sandbox");
 		chromeOptions.addArguments("--disable-dev-shm-usage");
 		chromeOptions.addArguments("--lang=en-GB");
-		builder
-			.setChromeOptions(chromeOptions)
-			.setChromeService(new ServiceBuilder().enableVerboseLogging().setStdio("inherit"));
+		builder.setChromeOptions(chromeOptions);
 		driver = await builder.forBrowser(Browser.CHROME).build();
-		console.log("Selenium WebDriver started.");
 	}
 
 	testCase++;
