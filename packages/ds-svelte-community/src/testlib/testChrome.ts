@@ -21,12 +21,15 @@ export async function testInChrome(
 	theme: RenderTheme,
 	opts: looksSame.LooksSameOptions = {},
 ) {
+	console.log("TEST IN CHROME");
 	if (!driver) {
+		console.log("Starting Selenium WebDriver...");
 		const builder = new Builder();
 		const chromeOptions = new Options();
 		chromeOptions.addArguments("--headless");
 		builder.setChromeOptions(chromeOptions);
 		driver = await builder.forBrowser(Browser.CHROME).build();
+		console.log("Selenium WebDriver started.");
 	}
 
 	testCase++;
