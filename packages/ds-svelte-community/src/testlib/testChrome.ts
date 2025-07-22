@@ -5,7 +5,7 @@ import looksSame from "looks-same";
 import { mkdir, mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { Browser, Builder, type WebDriver } from "selenium-webdriver";
+import { Browser, Builder, logging, type WebDriver } from "selenium-webdriver";
 import { Options } from "selenium-webdriver/chrome";
 import { build } from "vite";
 import type { RenderOutput, RenderTheme } from "./render";
@@ -23,6 +23,7 @@ export async function testInChrome(
 ) {
 	console.log("TEST IN CHROME");
 	if (!driver) {
+		logging.getLogger("webdriver").setLevel(logging.Level.ALL);
 		console.log("Starting Selenium WebDriver...");
 		const builder = new Builder();
 		const chromeOptions = new Options();
