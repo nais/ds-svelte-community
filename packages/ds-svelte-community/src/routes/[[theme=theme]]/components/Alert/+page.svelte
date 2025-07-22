@@ -8,10 +8,10 @@
 
 <Doc {doc} preview={{ width: "80%" }}>
 	<Story>
-		<Alert>Id elit esse enim reprehenderit enim nisi veniam nostrud.</Alert>
+		<Alert variant="info">Id elit esse enim reprehenderit enim nisi veniam nostrud.</Alert>
 	</Story>
 	<Story name="With a title">
-		<Alert>
+		<Alert variant="success">
 			<Heading spacing size="small" level="3">Aliquip duis est in commodo pariatur</Heading>
 			<BodyLong>
 				Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui laboris ex. Labore ex
