@@ -1,13 +1,18 @@
 import type { HTMLElements } from "$lib/components/utils/elements";
 import type {
+	BorderRadiusScale,
 	ResponsiveProp,
 	SpaceDelimitedAttribute,
 	SpacingScale,
 } from "$lib/components/utils/types";
 import type {
+	AkselColoredBorderToken,
+	AkselColoredStatelessBackgroundToken,
+	AkselRootBackgroundToken,
+	AkselRootBorderToken,
+	AkselShadowToken,
 	BorderColorKeys,
 	BorderColorWithRoleKeys,
-	ShadowKeys,
 	StaticBgKeys,
 	StaticDefaultBgKeys,
 } from "@navikt/ds-tokens/types";
@@ -22,14 +27,14 @@ export interface BaseBoxProps extends HTMLAttributes<HTMLDivElement>, BasePrimit
 	 * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
 	 * @see {@link StaticDefaultBgKeys} and {@link StaticBgKeys}
 	 */
-	background?: StaticDefaultBgKeys | StaticBgKeys;
+	background?: AkselRootBackgroundToken | AkselColoredStatelessBackgroundToken;
 
 	/**
 	 * CSS `border-color` property.
 	 * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
 	 * @see {@link BorderColorKeys} and {@link BorderColorWithRoleKeys}
 	 */
-	borderColor?: Exclude<BorderColorKeys, "focus"> | BorderColorWithRoleKeys;
+	borderColor?: Exclude<AkselRootBorderToken, "focus"> | AkselColoredBorderToken;
 
 	/**
 	 * CSS `border-radius` property.
@@ -41,7 +46,7 @@ export interface BaseBoxProps extends HTMLAttributes<HTMLDivElement>, BasePrimit
 	 * borderRadius={{xs: '2 12', sm: '0', md: '12', lg: 'full'}}
 	 * @see {@link BorderRadiusKeys}
 	 */
-	borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiusKeys | "0">>;
+	borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiusScale | "0">>;
 
 	/**
 	 * CSS `border-width` property. If this is not set there will be no border.
@@ -54,9 +59,9 @@ export interface BaseBoxProps extends HTMLAttributes<HTMLDivElement>, BasePrimit
 	/** Shadow on box. Accepts a shadow token.
 	 * @example
 	 * shadow='small'
-	 * @see {@link ShadowKeys}
+	 * @see {@link AkselShadowToken}
 	 */
-	shadow?: ShadowKeys;
+	shadow?: AkselShadowToken;
 
 	/** Spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
 	 * @example
