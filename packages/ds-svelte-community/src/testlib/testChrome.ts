@@ -30,6 +30,11 @@ export async function testInChrome(
 		const builder = new Builder();
 		const chromeOptions = new Options();
 		chromeOptions.addArguments("--headless");
+		chromeOptions.addArguments("--disable-infobars");
+		chromeOptions.addArguments("--disable-gpu");
+		chromeOptions.addArguments("--no-sandbox");
+		chromeOptions.addArguments("--disable-dev-shm-usage");
+		chromeOptions.addArguments("--lang=en-GB");
 		builder
 			.setChromeOptions(chromeOptions)
 			.setChromeService(new ServiceBuilder().enableVerboseLogging().setStdio("inherit"));
