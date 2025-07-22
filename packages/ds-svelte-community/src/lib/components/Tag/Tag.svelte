@@ -7,6 +7,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <script lang="ts">
 	import { isSnippet, omit } from "../helpers";
+	import type { AkselColor } from "../Theme/Theme.svelte";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Detail from "../typography/Detail/Detail.svelte";
 	import type { TagProps } from "./type";
@@ -17,6 +18,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		as = "span",
 		children,
 		icon,
+		"data-color": color,
 		...restProps
 	}: TagProps = $props();
 
@@ -24,21 +26,53 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 	let filledVariant = $derived(variant?.endsWith("-filled") && "strong");
 	let moderateVariant = $derived(variant?.endsWith("-moderate") && "moderate");
-	let color = $derived(variant?.replace("-filled", "").replace("-moderate", ""));
+
+	function variantToColor(variant: TagProps["variant"]): AkselColor {
+		switch (variant) {
+			case "warning":
+			case "warning-filled":
+			case "warning-moderate":
+				return "warning";
+			case "error":
+			case "error-filled":
+			case "error-moderate":
+				return "danger";
+			case "info":
+			case "info-filled":
+			case "info-moderate":
+			case "alt3":
+			case "alt3-filled":
+			case "alt3-moderate":
+				return "info";
+			case "success":
+			case "success-filled":
+			case "success-moderate":
+				return "success";
+			case "neutral":
+			case "neutral-filled":
+			case "neutral-moderate":
+				return "neutral";
+			case "alt1":
+			case "alt1-filled":
+			case "alt1-moderate":
+				return "meta-purple";
+			case "alt2":
+			case "alt2-filled":
+			case "alt2-moderate":
+				return "meta-lime";
+			default:
+				return "neutral";
+		}
+	}
 </script>
 
 <Component
 	{as}
 	{...omit(restProps, "size", "class")}
 	size={size == "medium" ? "medium" : "small"}
-	class={[
-		restProps.class,
-		"aksel-tag",
-		`aksel-tag--${variant}`,
-		`aksel-tag--${size}`,
-		`aksel-tag--${filledVariant || moderateVariant || "outline"}`,
-		`aksel-tag--${color}`,
-	]}
+	data-color={color ?? variantToColor(variant)}
+	data-variant={filledVariant || moderateVariant || "outline"}
+	class={[restProps.class, "aksel-tag", `aksel-tag--${variant}`, `aksel-tag--${size}`]}
 >
 	{#if icon}
 		<span class="aksel-tag__icon--left">

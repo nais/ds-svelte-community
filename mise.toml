@@ -3,4 +3,5 @@ pin = true
 
 [tools]
 bun = "1.2.19"
+chromedriver = "138.0.7204.157"
 node = "lts"

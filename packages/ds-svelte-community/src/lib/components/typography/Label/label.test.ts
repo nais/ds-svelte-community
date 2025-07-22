@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Label as ReactLabel } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import Label from "./Label.svelte";
@@ -22,16 +21,12 @@ describe("Label", () => {
 							},
 						})),
 					};
-					expect(
-						await bunmatch(render(Label, props), ReactLabel, {
-							props,
-							children: [React.createElement("span", {}, "Label content")],
-						}),
-					).toBeTrue();
+					expect(render(Label, props)).toMimicReact(ReactLabel, {
+						props,
+						children: [React.createElement("span", {}, "Label content")],
+					});
 				});
 			});
 		});
 	});
-
-	afterEach(cleanup);
 });

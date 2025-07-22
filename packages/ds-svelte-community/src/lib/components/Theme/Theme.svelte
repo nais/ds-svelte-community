@@ -28,8 +28,7 @@
 
 	export function newContext(value: "dark" | "light") {
 		const ctx = new ThemeContext(value);
-		setContext(themeContextKey, ctx);
-		return ctx;
+		return setContext(themeContextKey, ctx);
 	}
 
 	export function GetTheme(): ThemeContext | undefined {

@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { BodyLong as ReactBodyLong } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import BodyLong from "./BodyLong.svelte";
@@ -22,16 +21,12 @@ describe("BodyLong", () => {
 							},
 						})),
 					};
-					expect(
-						await bunmatch(render(BodyLong, props), ReactBodyLong, {
-							props,
-							children: [React.createElement("span", {}, "Body long content")],
-						}),
-					).toBeTrue();
+					expect(render(BodyLong, props)).toMimicReact(ReactBodyLong, {
+						props,
+						children: [React.createElement("span", {}, "Body long content")],
+					});
 				});
 			});
 		});
 	});
-
-	afterEach(cleanup);
 });

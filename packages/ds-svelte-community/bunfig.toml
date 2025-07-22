@@ -1,4 +1,5 @@
 telemetry = false
+preload = ["./src/testlib/bun_setup.ts"]
 
 [test]
 preload = ["./src/testlib/bun_setup.ts", "./src/testlib/test_helper.ts"]

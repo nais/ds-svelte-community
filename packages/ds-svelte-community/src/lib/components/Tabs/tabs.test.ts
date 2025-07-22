@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Tabs as ReactTabs } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import Tabs, { type TabsTestProps } from "./Tabs.test.svelte";
 
@@ -15,51 +14,44 @@ describe("Tabs", () => {
 				{ value: "val3", tab: "tab3", content: "content3" },
 			],
 		};
-		expect(
-			await bunmatch(render(Tabs, props), ReactTabs, {
-				props: {
-					defaultValue: props.value,
-				},
-				children: [
-					React.createElement(ReactTabs.List, {} as never, [
-						props.data.map((tab) => {
-							return React.createElement(ReactTabs.Tab, {
-								value: tab.value,
-								label: tab.tab,
-							} as never);
-						}),
-					]),
-
-					...props.data.map((tab) => {
-						return React.createElement(ReactTabs.Panel, { value: tab.value } as never, tab.content);
+		expect(render(Tabs, props)).toMimicReact(ReactTabs, {
+			props: {
+				defaultValue: props.value,
+			},
+			children: [
+				React.createElement(ReactTabs.List, {} as never, [
+					props.data.map((tab) => {
+						return React.createElement(ReactTabs.Tab, {
+							value: tab.value,
+							label: tab.tab,
+						} as never);
 					}),
-				],
-				opts: {
-					alterAttrValue(name, value) {
-						if (name == "hidden" && value == "true") {
-							return "";
-						}
-						if (name == "class") {
-							value = value.replaceAll(/(^|\s)s(velte)?-\w+/g, "");
-						}
+				]),
 
-						return value;
-					},
-					compareAttrs(node, attr) {
-						// Remove radix attributes
-						if (["data-orientation", "data-state", "data-radix-collection-item"].includes(attr)) {
-							return false;
-						}
-						// Remove known unique attributes
-						if (["aria-controls", "aria-labelledby", "id"].includes(attr)) {
-							return false;
-						}
-						return true;
-					},
+				...props.data.map((tab) => {
+					return React.createElement(ReactTabs.Panel, { value: tab.value } as never, tab.content);
+				}),
+			],
+			opts: {
+				alterAttrValue(name, value) {
+					if (name == "class") {
+						value = value.replaceAll(/(^|\s)s(velte)?-\w+/g, "");
+					}
+
+					return value;
 				},
-			}),
-		).toBeTrue();
+				compareAttrs(node, attr) {
+					// Remove radix attributes
+					if (["data-orientation", "data-state", "data-radix-collection-item"].includes(attr)) {
+						return false;
+					}
+					// Remove known unique attributes
+					if (["aria-controls", "aria-labelledby", "id"].includes(attr)) {
+						return false;
+					}
+					return true;
+				},
+			},
+		});
 	});
-
-	afterEach(cleanup);
 });

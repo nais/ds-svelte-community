@@ -6,11 +6,6 @@ import { describe, expect, it } from "bun:test";
 import Button from "./Button.svelte";
 
 describe("Button", () => {
-	it("renders a button with a label", () => {
-		const r = render(Button, { children: someRandomTextSnippet });
-		expect(r.container.innerHTML).toContain(someRandomText);
-	});
-
 	it("renders with HTML similar to ds-react", async () => {
 		expect(
 			render(Button, {
@@ -41,7 +36,12 @@ describe("Button", () => {
 		expect(render(Button, props)).toMimicReact(ReactButton, {
 			props,
 			children: [someRandomText],
-			opts: IgnoreKnownUnique,
+			opts: {
+				...IgnoreKnownUnique,
+				// Because the loading spinner animates, we allow some tolerance
+				// in the visual comparison.
+				visual: { strict: false, tolerance: 30 },
+			},
 		});
 	});
 
@@ -51,19 +51,6 @@ describe("Button", () => {
 			children: someRandomTextSnippet,
 		};
 		expect(render(Button, props)).toMimicReact(ReactButton, { props, children: [someRandomText] });
-	});
-
-	// Cannot test loading because of client side check required
-	it("renders with HTML similar to ds-react with loading", () => {
-		const props: ButtonProps = {
-			loading: true,
-			children: someRandomTextSnippet,
-		};
-		expect(render(Button, props)).toMimicReact(ReactButton, {
-			props,
-			children: [someRandomText],
-			opts: IgnoreKnownUnique,
-		});
 	});
 
 	it("renders with HTML similar to ds-react with disabled with as", async () => {

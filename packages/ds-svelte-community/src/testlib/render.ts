@@ -1,23 +1,21 @@
 import { ThemeContext, themeContextKey } from "$lib/components/Theme/Theme.svelte";
-import { mount, type Component, type ComponentProps, type Snippet } from "svelte";
+import { SvelteComponent, type Component, type ComponentProps, type Snippet } from "svelte";
+import { render as svelteRender } from "svelte/server";
 import { someRandomTextSnippet } from "./TextSnippet.svelte";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function render<TComponent extends Component<any>>(
-	component: TComponent,
-	props?: ComponentProps<TComponent>,
-) {
-	const div = document.createElement("div");
+export type RenderResult = ReturnType<typeof render>;
 
-	mount(component, {
-		target: div,
-		props,
-		intro: false,
+export function render<
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	TComponent extends SvelteComponent<any> | Component<any>,
+	Props extends ComponentProps<TComponent> = ComponentProps<TComponent>,
+>(component: TComponent, props?: Props) {
+	const rendered = svelteRender(component as never, {
+		props: props as never,
 		context: new Map([[themeContextKey, new ThemeContext("light")]]),
 	});
-	return {
-		container: div,
-	};
+
+	return rendered;
 }
 
 const convertedSnippet = someRandomTextSnippet as Snippet;

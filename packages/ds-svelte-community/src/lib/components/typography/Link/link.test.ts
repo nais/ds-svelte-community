@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Link as ReactLink } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import Link from "./Link.svelte";
@@ -25,17 +24,13 @@ describe("Link", () => {
 								},
 							})),
 						};
-						expect(
-							await bunmatch(render(Link, props), ReactLink, {
-								props,
-								children: [React.createElement("span", {}, "Link content")],
-							}),
-						).toBeTrue();
+						expect(render(Link, props)).toMimicReact(ReactLink, {
+							props,
+							children: [React.createElement("span", {}, "Link content")],
+						});
 					});
 				});
 			});
 		});
 	});
-
-	afterEach(cleanup);
 });

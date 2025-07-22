@@ -23,8 +23,8 @@
 		"generate-icons": "./hack/generate-icons.sh",
 		"prepare": "svelte-kit sync || echo ''",
 		"test": "bun run test:unit",
-		"test:unit": "bun test --conditions browser",
-		"test:unit:watch": "bun test --conditions browser --watch",
+		"test:unit": "bun test",
+		"test:unit:watch": "bun test --watch",
 		"sync": "svelte-kit sync"
 	},
 	"exports": {
@@ -85,6 +85,7 @@
 		"estree-walker": "^3.0.3",
 		"global-jsdom": "^26.0.0",
 		"jsdom": "^26.1.0",
+		"looks-same": "^9.0.1",
 		"marked": "^16.1.1",
 		"mdsvex": "^0.12.6",
 		"prettier": "^3.6.2",
@@ -95,6 +96,7 @@
 		"rehype-autolink-headings": "^7.1.0",
 		"rehype-slug": "^6.0.0",
 		"resize-observer-polyfill": "^1.5.1",
+		"selenium-webdriver": "^4.34.0",
 		"shiki": "^3.8.1",
 		"svelte": "5.36.12",
 		"svelte-check": "^4.3.0",
@@ -103,11 +105,12 @@
 		"tailwindcss": "^4.1.11",
 		"typescript": "5.8.3",
 		"typescript-eslint": "^8.37.0",
-		"vite": "^7.0.5"
+		"vite": "^6.3.5"
 	},
 	"dependencies": {
 		"@navikt/ds-css": "^7.25.1",
 		"@navikt/ds-tokens": "^7.25.1",
+		"@types/selenium-webdriver": "^4.1.28",
 		"clsx": "^2.1.1"
 	},
 	"svelte": "./dist/index.js",

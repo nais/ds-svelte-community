@@ -102,7 +102,7 @@
 			},
 		]}
 	>
-		{@render children()}
+		{@render children?.()}
 	</BodyLong>
 
 	{#if closeButton && !inline}

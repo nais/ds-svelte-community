@@ -9,16 +9,17 @@
 		size?: ChipsProps["size"];
 		variant?: RemovableChipProps["variant"];
 		selected?: string;
+		as?: "a";
 	}
 
-	let { values, toggle, size, variant, selected }: Props_1 = $props();
+	let { values, toggle, size, variant, selected, as }: Props_1 = $props();
 </script>
 
 <Chips {size}>
 	{#each values as value (value)}
 		<li>
 			{#if toggle}
-				<ToggleChip selected={value == selected} {value}>{value}</ToggleChip>
+				<ToggleChip selected={value == selected} {value} {as}>{value}</ToggleChip>
 			{:else}
 				<RemovableChip {variant} {value}>{value}</RemovableChip>
 			{/if}

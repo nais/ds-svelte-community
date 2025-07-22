@@ -20,7 +20,11 @@ describe("ErrorSummary", () => {
 					children: ["Textfield requires valid email"],
 				} as never),
 			],
-			opts: {},
+			opts: {
+				visual: {
+					strict: false,
+				},
+			},
 		});
 	});
 });

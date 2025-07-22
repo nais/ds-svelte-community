@@ -67,11 +67,6 @@
 	ctx.values = value;
 	ctx.groupControlled = value !== undefined;
 	ctx.hasError = !!error;
-	$effect(() => {
-		ctx.groupControlled = value !== undefined;
-		ctx.values = value;
-		ctx.hasError = !!error;
-	});
 
 	setContext(contextKey, ctx);
 </script>

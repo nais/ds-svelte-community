@@ -19,7 +19,7 @@
 	{...restProps}
 >
 	<g clip-path="url(#clip0_1387_21067)">
-		<rect width="80" height="80" rx="40" fill="var(--ax-bg-info-moderate)" />
+		<rect width="80" height="80" rx="40" fill="var(--ax-bg-moderate)" />
 
 		<path
 			fill-rule="evenodd"

@@ -38,6 +38,7 @@
 		searchIconText = "Search",
 		button,
 		onclear,
+		"data-color": dataColor,
 		...restProps
 	}: SearchProps = $props();
 
@@ -83,6 +84,7 @@
 			"aksel-search--disabled": disabled,
 		},
 	]}
+	data-color={dataColor}
 >
 	<Label for={baseID} {size} class={["aksel-form-field__label", { "aksel-sr-only": hideLabel }]}>
 		{label}
@@ -130,7 +132,8 @@
 			{#if value && clearButton}
 				<Button
 					class="aksel-search__button-clear"
-					variant="tertiary-neutral"
+					variant="tertiary"
+					data-color="neutral"
 					size={size === "medium" ? "small" : "xsmall"}
 					title={clearButtonLabel}
 					hidden={!showClearButton}
@@ -154,6 +157,7 @@
 				{size}
 				{loading}
 				{searchIconText}
+				data-color={dataColor}
 			/>
 		{/if}
 	</div>

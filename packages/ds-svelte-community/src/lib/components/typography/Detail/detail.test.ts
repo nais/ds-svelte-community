@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Detail as ReactDetail } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import Detail from "./Detail.svelte";
@@ -22,16 +21,12 @@ describe("Detail", () => {
 							},
 						})),
 					};
-					expect(
-						await bunmatch(render(Detail, props), ReactDetail, {
-							props,
-							children: [React.createElement("span", {}, "Detail content")],
-						}),
-					).toBeTrue();
+					expect(render(Detail, props)).toMimicReact(ReactDetail, {
+						props,
+						children: [React.createElement("span", {}, "Detail content")],
+					});
 				});
 			});
 		});
 	});
-
-	afterEach(cleanup);
 });

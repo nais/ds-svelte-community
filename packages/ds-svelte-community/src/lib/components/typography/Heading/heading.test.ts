@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Heading as ReactHeading } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import Heading from "./Heading.svelte";
@@ -24,17 +23,13 @@ describe("Heading", () => {
 								},
 							})),
 						};
-						expect(
-							await bunmatch(render(Heading, props), ReactHeading, {
-								props,
-								children: [React.createElement("span", {}, "Heading content")],
-							}),
-						).toBeTrue();
+						expect(render(Heading, props)).toMimicReact(ReactHeading, {
+							props,
+							children: [React.createElement("span", {}, "Heading content")],
+						});
 					});
 				});
 			});
 		});
 	});
-
-	afterEach(cleanup);
 });

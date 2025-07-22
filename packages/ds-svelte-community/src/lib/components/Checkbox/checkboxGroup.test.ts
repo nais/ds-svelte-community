@@ -89,6 +89,50 @@ describe("CheckboxGroup", () => {
 			},
 		);
 	});
+
+	it(`renders CheckboxGroup similar to ds-react without selected items`, async () => {
+		const props: Omit<CheckboxGroupProps, "children"> = {
+			legend: "Checkbox legend",
+			description: "Checkbox description",
+			value: [],
+		};
+
+		const items: { value: string; description?: string; content: string }[] = [
+			{ value: "val1", description: "Desc", content: someRandomText },
+			{ value: "val4", content: someRandomText },
+			{ value: "val4", content: someRandomText },
+			{ value: "val4", content: someRandomText },
+		];
+
+		const svelteItems: CheckboxProps[] = items.map((v) => {
+			return {
+				value: v.value,
+				description: v.description,
+				children: someRandomTextSnippet,
+			};
+		});
+		expect(render(Checkbox, { wrapper: props, items: svelteItems })).toMimicReact(
+			ReactCheckboxGroup,
+			{
+				props: {
+					legend: props.legend!,
+					description: props.description!,
+					defaultValue: props.value,
+				},
+				children: items.map((v, i) => {
+					return React.createElement(ReactCheckbox, {
+						value: v.value,
+						description: v.description,
+						children: v.content,
+						key: i,
+					});
+				}),
+				opts: {
+					compareAttrs: ignoreKnownUnique,
+				},
+			},
+		);
+	});
 });
 
 function ignoreKnownUnique(node: HTMLElement, attr: string) {
@@ -106,6 +150,9 @@ function ignoreKnownUnique(node: HTMLElement, attr: string) {
 		return false;
 	}
 	if (tag == "input" && attr == "checked") {
+		return false;
+	}
+	if (tag == "fieldset" && attr == "id") {
 		return false;
 	}
 	return true;

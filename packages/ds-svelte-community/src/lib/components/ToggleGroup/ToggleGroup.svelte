@@ -15,7 +15,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		size = "medium",
 		value = $bindable(),
 		label = "",
-		variant = "action",
+		variant,
 		children,
 		onchange,
 		...restProps
@@ -51,7 +51,11 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 	<div
 		role="radiogroup"
-		class={["aksel-toggle-group", `aksel-toggle-group--${size}`, `aksel-toggle-group--${variant}`]}
+		class={[
+			"aksel-toggle-group",
+			`aksel-toggle-group--${size}`,
+			{ [`aksel-toggle-group--${variant}`]: variant !== undefined },
+		]}
 		tabindex="0"
 	>
 		{@render children()}

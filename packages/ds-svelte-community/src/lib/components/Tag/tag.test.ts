@@ -11,7 +11,7 @@ describe("Tag", () => {
 				variant,
 			};
 
-			expect(render(Tag, props).container).toMimicReact(ReactTag, {
+			expect(render(Tag, props)).toMimicReact(ReactTag, {
 				props,
 				children: ["Tag content"],
 			});

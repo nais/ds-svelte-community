@@ -27,6 +27,9 @@ describe("Alert", () => {
 				props,
 				children: ["SomeRandomText"],
 				opts: {
+					visual: {
+						strict: false,
+					},
 					compareAttrs(node, attr) {
 						if (node.tagName.toLowerCase() == "path" && attr == "d") {
 							return false;

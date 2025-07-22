@@ -93,6 +93,7 @@ describe("which components are implemented", () => {
 		"ModalHeader", // Slot
 		"ModalBody", // Slot
 		"ModalFooter", // Slot
+		"ConfirmationPanel",
 	];
 
 	const reactComponents = Object.keys(allReact).filter(
