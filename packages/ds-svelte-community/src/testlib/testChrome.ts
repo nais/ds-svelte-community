@@ -6,7 +6,7 @@ import { mkdir, mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { Browser, Builder, logging, type WebDriver } from "selenium-webdriver";
-import { Options } from "selenium-webdriver/chrome";
+import { Options, ServiceBuilder } from "selenium-webdriver/chrome";
 import { build } from "vite";
 import type { RenderOutput, RenderTheme } from "./render";
 
@@ -23,12 +23,16 @@ export async function testInChrome(
 ) {
 	console.log("TEST IN CHROME");
 	if (!driver) {
-		logging.getLogger("webdriver").setLevel(logging.Level.ALL);
+		logging.installConsoleHandler();
+		logging.getLogger(logging.Type.CLIENT).setLevel(logging.Level.ALL);
+		logging.getLogger(logging.Type.DRIVER).setLevel(logging.Level.ALL);
 		console.log("Starting Selenium WebDriver...");
 		const builder = new Builder();
 		const chromeOptions = new Options();
 		chromeOptions.addArguments("--headless");
-		builder.setChromeOptions(chromeOptions);
+		builder
+			.setChromeOptions(chromeOptions)
+			.setChromeService(new ServiceBuilder().enableVerboseLogging().setStdio("inherit"));
 		driver = await builder.forBrowser(Browser.CHROME).build();
 		console.log("Selenium WebDriver started.");
 	}
