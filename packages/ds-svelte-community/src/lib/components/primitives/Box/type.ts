@@ -11,12 +11,7 @@ import type {
 	AkselRootBackgroundToken,
 	AkselRootBorderToken,
 	AkselShadowToken,
-	BorderColorKeys,
-	BorderColorWithRoleKeys,
-	StaticBgKeys,
-	StaticDefaultBgKeys,
 } from "@navikt/ds-tokens/types";
-import { type BorderRadiusKeys } from "@navikt/ds-tokens/types";
 import type { Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 import type { BasePrimitiveProps } from "../base/type";
