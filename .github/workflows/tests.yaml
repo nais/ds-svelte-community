@@ -27,6 +27,8 @@ jobs:
           bun run sync
 
       - name: Test and lint ds-svelte-community
+        env:
+          VISUAL_TESTS: "true"
         run: |-
           cd packages/ds-svelte-community
           bun run test --bail --timeout 30000

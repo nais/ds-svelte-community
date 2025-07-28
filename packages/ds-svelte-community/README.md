@@ -9,8 +9,11 @@ Once you've created a project and installed dependencies with `bun install`, sta
 
 ```bash
 bun run dev # or
-bun run test
+VISUAL_TESTS=true bun run test
 ```
+
+`VISUAL_TESTS` will enable visual testing, which compares the visual appearance of the React and Svelte components.
+This is useful to ensure that the Svelte components visually match the React components.
 
 Everything inside `src/lib` is part of the library, everything inside `src/routes` can be used as a showcase or preview app.
 

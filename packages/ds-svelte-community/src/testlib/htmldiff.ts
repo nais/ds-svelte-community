@@ -78,7 +78,7 @@ async function singleDiff(
 	);
 
 	if (!diffResult) {
-		if (process.env.CI && process.env.CI === "true" && !opts.visual?.skip) {
+		if (process.env.VISUAL_TESTS && process.env.VISUAL_TESTS === "true" && !opts.visual?.skip) {
 			const screenshots = await testInChrome(svelteResult, bOrig, theme, opts.visual);
 			if (screenshots && typeof screenshots === "string") {
 				result.push("Visual differences found, see screenshots:");
