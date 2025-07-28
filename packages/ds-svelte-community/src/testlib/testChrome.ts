@@ -116,8 +116,8 @@ function htmlBody(css: string, content: string | RenderOutput, theme: RenderThem
 		<title>Test</title>
 		<style>${css}</style>
 	</head>
-	<body style="background: var(--ax-bg-default)">
-		<div id="testWrapper" class="aksel-theme ${theme}" data-background="true">${content}</div>
+	<body style="background: var(--ax-bg-default); height: 100vh; margin: 0;">
+		<div id="testWrapper" class="aksel-theme ${theme}" style="height: 100vh;" data-background="true">${content}</div>
 	</body>
 </html>`;
 }
