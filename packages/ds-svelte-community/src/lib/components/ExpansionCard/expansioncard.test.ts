@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { ExpansionCard as ReactExpansionCard } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import ExpansionCard from "./ExpansionCard.svelte";
@@ -23,42 +22,41 @@ describe("ExpansionCard", () => {
 						};
 					}),
 				};
-				expect(
-					await bunmatch(render(ExpansionCard, props), ReactExpansionCard, {
-						props: {
-							defaultOpen: initOpen,
-							size,
+				expect(render(ExpansionCard, props)).toMimicReact(ReactExpansionCard, {
+					props: {
+						defaultOpen: initOpen,
+						size,
+					},
+					children: [
+						React.createElement(ReactExpansionCard.Header, {
+							children: [
+								React.createElement(ReactExpansionCard.Title, {
+									children: ["Header text"],
+								} as never),
+							],
+						}),
+						React.createElement(ReactExpansionCard.Content, {
+							children: [
+								React.createElement("span", {
+									children: ["This is my content"],
+								}),
+							],
+						}),
+					],
+					opts: {
+						compareAttrs(node, attr) {
+							// Remove attrs known to be unique
+							if (["id", "aria-labelledby"].includes(attr)) {
+								return false;
+							}
+							return true;
 						},
-						children: [
-							React.createElement(ReactExpansionCard.Header, {
-								children: [
-									React.createElement(ReactExpansionCard.Title, {
-										children: ["Header text"],
-									} as never),
-								],
-							}),
-							React.createElement(ReactExpansionCard.Content, {
-								children: [
-									React.createElement("span", {
-										children: ["This is my content"],
-									}),
-								],
-							}),
-						],
-						opts: {
-							compareAttrs(node, attr) {
-								// Remove attrs known to be unique
-								if (["id", "aria-labelledby"].includes(attr)) {
-									return false;
-								}
-								return true;
-							},
+						visual: {
+							strict: false,
 						},
-					}),
-				).toBeTrue();
+					},
+				});
 			});
 		}
 	}
-
-	afterEach(cleanup);
 });

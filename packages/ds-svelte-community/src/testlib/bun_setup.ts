@@ -18,6 +18,9 @@ await plugin({
 				return {
 					// Use the preprocessor of your choice.
 					contents: compile(before, {
+						generate: "server",
+						filename: path,
+						runes: true,
 						warningFilter: () => {
 							return true;
 						},
@@ -49,23 +52,17 @@ await plugin({
 			try {
 				contents = compileModule(content, {
 					filename: path,
-					dev: true,
-					generate: "client",
+					generate: "server",
 				}).js.code;
 			} catch (e) {
 				console.log("Error in svelte ts loader", path);
 				// console.log(content);
 				throw e;
 			}
-			try {
-				return {
-					contents,
-					loader: "js",
-				};
-			} catch (e) {
-				console.log("Error in svelte ts loader", path);
-				throw e;
-			}
+			return {
+				contents,
+				loader: "js",
+			};
 		};
 
 		builder.onLoad({ filter: /\.svelte$/ }, renderSvelte);

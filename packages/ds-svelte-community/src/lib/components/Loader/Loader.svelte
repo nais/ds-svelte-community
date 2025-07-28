@@ -8,6 +8,7 @@
 
 <script lang="ts">
 	import { omit } from "../helpers";
+	import type { AkselColor } from "../Theme/Theme.svelte";
 	import type { LoaderProps } from "./type";
 
 	let {
@@ -15,11 +16,26 @@
 		title = "Waiting…",
 		transparent = false,
 		variant = "neutral",
+		"data-color": color,
 		...restProps
 	}: LoaderProps = $props();
 
 	const uid = $props.id();
 	const id = "ldr" + uid;
+
+	function variantToColor(variant: LoaderProps["variant"]): AkselColor | undefined {
+		switch (variant) {
+			case "neutral":
+				return "neutral";
+			case "inverted":
+				return "neutral";
+			/* We assume "interaction" is the main app color in this instance */
+			case "interaction":
+				return undefined;
+			default:
+				return "neutral";
+		}
+	}
 </script>
 
 <svg
@@ -36,6 +52,8 @@
 	viewBox="0 0 50 50"
 	preserveAspectRatio="xMidYMid"
 	aria-labelledby={id}
+	data-color={color ?? variantToColor(variant)}
+	data-variant={variant}
 >
 	<title {id}>{title}</title>
 	<circle

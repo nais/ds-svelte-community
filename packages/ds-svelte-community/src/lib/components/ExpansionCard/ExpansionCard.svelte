@@ -19,6 +19,7 @@
 		description,
 		ontoggle,
 		showMoreTitle = "Show more",
+		"data-color": color = "neutral",
 		...restProps
 	}: ExpansionCardProps = $props();
 
@@ -42,6 +43,7 @@
 			"aksel-expansioncard--no-animation": startedOpened,
 		},
 	]}
+	data-color={color}
 >
 	<div class="aksel-expansioncard__header" data-open={open}>
 		<div class="aksel-expansioncard__header-content">

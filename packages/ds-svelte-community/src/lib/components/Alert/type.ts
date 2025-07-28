@@ -8,12 +8,12 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Changes colors and icon usage when changed
 	 */
-	variant?: (typeof variants)[number];
+	variant: "error" | "warning" | "info" | "success";
 
 	/**
 	 * Changes padding and font-sizes
 	 */
-	size?: (typeof sizes)[number];
+	size?: "medium" | "small";
 
 	/**
 	 * Removes border-radius
@@ -58,4 +58,9 @@ export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
 	 * **Requires closeButton to be true**.
 	 */
 	onclose?: () => void;
+
+	/**
+	 * Overriding Alert color is not supported.
+	 */
+	"data-color"?: never;
 }

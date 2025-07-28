@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Fieldset as ReactFieldset } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import Fieldset from "./Fieldset.test.svelte";
 import type { FieldsetProps } from "./type";
 
@@ -10,26 +9,22 @@ describe("Fieldset", () => {
 		const props: Omit<Omit<FieldsetProps, "children">, "legend"> = {
 			error: "error",
 		};
-		expect(
-			await bunmatch(render(Fieldset, props), ReactFieldset, {
-				props: {
-					...props,
-					legend: "Legend",
-					description: "Description",
+		expect(render(Fieldset, props)).toMimicReact(ReactFieldset, {
+			props: {
+				...props,
+				legend: "Legend",
+				description: "Description",
+			},
+			children: ["Fieldset body"],
+			opts: {
+				compareAttrs(node, attr) {
+					// Remove attrs known to be unique
+					if (["id", "aria-describedby"].includes(attr)) {
+						return false;
+					}
+					return true;
 				},
-				children: ["Fieldset body"],
-				opts: {
-					compareAttrs(node, attr) {
-						// Remove attrs known to be unique
-						if (["id", "aria-describedby"].includes(attr)) {
-							return false;
-						}
-						return true;
-					},
-				},
-			}),
-		).toBeTrue();
+			},
+		});
 	});
-
-	afterEach(cleanup);
 });

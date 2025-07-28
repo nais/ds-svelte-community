@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Loader as ReactLoader } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import Loader from "./Loader.svelte";
 import type { LoaderProps } from "./type";
 
@@ -10,28 +9,27 @@ describe("Loader", () => {
 		const props: LoaderProps = {
 			title: "Loading",
 		};
-		expect(
-			await bunmatch(render(Loader, props), ReactLoader, {
-				props: {
-					...props,
+		expect(render(Loader, props)).toMimicReact(ReactLoader, {
+			props: {
+				...props,
+			},
+			opts: {
+				visual: {
+					skip: true,
 				},
-				opts: {
-					compareAttrs(node, attr) {
-						const tagName = node.tagName.toLowerCase();
-						// Title ids are unique
-						if (tagName == "svg" && ["aria-labelledby"].includes(attr)) {
-							return false;
-						}
+				compareAttrs(node, attr) {
+					const tagName = node.tagName.toLowerCase();
+					// Title ids are unique
+					if (tagName == "svg" && ["aria-labelledby"].includes(attr)) {
+						return false;
+					}
 
-						if (tagName == "title" && attr == "id") {
-							return false;
-						}
-						return true;
-					},
+					if (tagName == "title" && attr == "id") {
+						return false;
+					}
+					return true;
 				},
-			}),
-		).toBeTrue();
+			},
+		});
 	});
-
-	afterEach(cleanup);
 });

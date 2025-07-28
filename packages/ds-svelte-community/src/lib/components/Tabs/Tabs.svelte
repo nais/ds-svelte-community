@@ -35,7 +35,7 @@
 		ctx.size = size;
 		ctx.selectionFollowsFocus = selectionFollowsFocus;
 	});
-	setContext<TabContext>(contextKey, ctx);
+	setContext(contextKey, ctx);
 </script>
 
 <div

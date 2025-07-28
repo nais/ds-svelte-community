@@ -17,7 +17,7 @@ a:not(.unstyled) {
 		outline-offset: 2px;
 	}
 
-	&.navds-link--inline-text {
+	&.aksel-link--inline-text {
 		display: inline;
 
 		& > svg {
@@ -29,7 +29,7 @@ a:not(.unstyled) {
 		}
 	}
 
-	&.navds-link--remove-underline {
+	&.aksel-link--remove-underline {
 		text-decoration: none;
 
 		&:hover {
@@ -40,12 +40,5 @@ a:not(.unstyled) {
 	& svg {
 		color: inherit;
 		flex-shrink: 0;
-	}
-}
-
-.navds-alert:not(.navds-alert--inline),
-.navds-confirmation-panel {
-	& a:not(.unstyled) {
-		color: var(--ax-text-default);
 	}
 }

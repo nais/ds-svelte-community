@@ -1,33 +1,38 @@
 <script lang="ts" module>
+	import type { AkselColorRole } from "@navikt/ds-tokens/types";
 	import { getContext, setContext, untrack, type Snippet } from "svelte";
 	import type { HTMLElements } from "../utils/elements";
 
-	const contextKey = Symbol("theme_context");
+	/* eslint-disable @typescript-eslint/no-empty-object-type */
+	export interface CustomAkselColor {}
 
-	class ThemeContext {
-		#value?: string = $state();
+	export type AkselColor = AkselColorRole | keyof CustomAkselColor;
 
-		constructor(value: string) {
+	export const themeContextKey = Symbol("theme_context");
+
+	export class ThemeContext {
+		#value?: "dark" | "light" = $state();
+
+		constructor(value: "dark" | "light") {
 			this.#value = value;
 		}
 
-		get theme(): string | undefined {
+		get theme(): "dark" | "light" | undefined {
 			return this.#value;
 		}
 
-		set theme(value: string) {
+		set theme(value: "dark" | "light") {
 			this.#value = value;
 		}
 	}
 
-	function newContext(value: string) {
+	export function newContext(value: "dark" | "light") {
 		const ctx = new ThemeContext(value);
-		setContext(contextKey, ctx);
-		return ctx;
+		return setContext(themeContextKey, ctx);
 	}
 
 	export function GetTheme(): ThemeContext | undefined {
-		return getContext(contextKey);
+		return getContext(themeContextKey);
 	}
 </script>
 

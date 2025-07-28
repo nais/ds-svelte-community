@@ -1,6 +1,6 @@
+import { render } from "$testlib/render";
 import { Accordion as ReactAccordion } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import Accordion, { type TestProps } from "./Accordion.test.svelte";
 
@@ -48,7 +48,5 @@ describe("Accordion", () => {
 				},
 			},
 		});
-
-		afterEach(cleanup);
 	});
 });

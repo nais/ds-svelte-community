@@ -25,7 +25,12 @@
 	class={[restProps.class, "aksel-error-summary", `aksel-error-summary--${size}`]}
 	tabIndex={-1}
 >
-	<Heading class="aksel-error-summary__heading" as={headingTag} size="small" tabindex={-1}>
+	<Heading
+		class="aksel-error-summary__heading"
+		as={headingTag}
+		size={size === "medium" ? "small" : "xsmall"}
+		tabindex={-1}
+	>
 		{heading}
 	</Heading>
 	<BodyShort as="ul" {size} class="aksel-error-summary__list">

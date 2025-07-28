@@ -9,6 +9,7 @@
 
 <script lang="ts">
 	import Loader from "../Loader/Loader.svelte";
+	import { type AkselColor } from "../Theme/Theme.svelte";
 	import { isSnippet, omit } from "../helpers";
 	import Label from "../typography/Label/Label.svelte";
 	import type { ButtonProps } from "./type";
@@ -23,17 +24,54 @@
 		icon,
 		ref = $bindable(),
 		iconPosition = "left",
+		"data-color": color,
 		...restProps
 	}: ButtonProps = $props();
+
+	function variantToColor(variant: ButtonProps["variant"]): AkselColor | undefined {
+		switch (variant) {
+			case "primary-neutral":
+			case "secondary-neutral":
+			case "tertiary-neutral":
+				return "neutral";
+			case "danger":
+				return "danger";
+			default:
+				return undefined;
+		}
+	}
+
+	function variantToSimplifiedVariant(
+		variant: ButtonProps["variant"],
+	): "primary" | "secondary" | "tertiary" {
+		switch (variant) {
+			case "primary":
+			case "primary-neutral":
+			case "danger":
+				return "primary";
+			case "secondary":
+			case "secondary-neutral":
+				return "secondary";
+			case "tertiary":
+			case "tertiary-neutral":
+				return "tertiary";
+			default:
+				return "primary";
+		}
+	}
 
 	let overrideWidth = $derived(ref && loading ? ref.getBoundingClientRect().width : 0);
 
 	let style = $derived(typeof restProps.style == "string" ? restProps.style : null);
+
+	// const themeCtx = GetTheme();
 </script>
 
 <svelte:element
 	this={as}
 	{...omit(disabled ? omit(restProps, "href", "class") : restProps, "class")}
+	data-color={color ?? variantToColor(variant)}
+	data-variant={variantToSimplifiedVariant(variant)}
 	style={overrideWidth
 		? `width: ${overrideWidth}px;${style ? " " + style : ""}`
 		: style || undefined}

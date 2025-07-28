@@ -1,27 +1,16 @@
 import type { SVGAttributes } from "svelte/elements";
-
-export const sizes = [
-	"3xlarge",
-	"2xlarge",
-	"xlarge",
-	"large",
-	"medium",
-	"small",
-	"xsmall",
-] as const;
-
-export const variants = ["neutral", "interaction", "inverted"] as const;
+import type { AkselColor } from "../Theme/Theme.svelte";
 
 export interface LoaderProps extends SVGAttributes<SVGElement> {
 	/**
 	 * Changes Loader width/height
 	 * 64px | 40px | 32px | 24px | 20px | 16px
 	 */
-	size?: (typeof sizes)[number];
+	size?: "3xlarge" | "2xlarge" | "xlarge" | "large" | "medium" | "small" | "xsmall";
 	/**
 	 * Colored variants for Loader
 	 */
-	variant?: (typeof variants)[number];
+	variant?: "neutral" | "interaction" | "inverted";
 	/**
 	 * Title prop on svg
 	 */
@@ -30,4 +19,8 @@ export interface LoaderProps extends SVGAttributes<SVGElement> {
 	 * Sets svg-background to transparent
 	 */
 	transparent?: boolean;
+	/**
+	 * Overrides loader-color
+	 */
+	"data-color"?: AkselColor;
 }

@@ -40,6 +40,7 @@
 			"aksel-stepper__item--completed": completed,
 		},
 	]}
+	data-color={isInteractive ? undefined : "neutral"}
 >
 	<span class={["aksel-stepper__line", "aksel-stepper__line--1"]}></span>
 	<svelte:element

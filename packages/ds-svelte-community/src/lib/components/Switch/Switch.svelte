@@ -6,7 +6,6 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 -->
 
 <script lang="ts">
-	import Loader from "../Loader/Loader.svelte";
 	import { omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Detail from "../typography/Detail/Detail.svelte";
@@ -51,10 +50,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	/>
 	<span class="aksel-switch__track">
 		<span class="aksel-switch__thumb">
-			{#if loading}
-				<Loader size="xsmall" aria-live="polite" variant={checked ? "interaction" : "inverted"} />
-			{/if}
-			<SelectedIcon />
+			<SelectedIcon {loading} {size} {checked} />
 		</span>
 	</span>
 	<label for={id} class="aksel-switch__label-wrapper">

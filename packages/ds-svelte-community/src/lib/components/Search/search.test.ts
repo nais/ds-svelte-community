@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Search as ReactSearch } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import { omit } from "../helpers";
 import Search from "./Search.svelte";
 import type { SearchProps } from "./type";
@@ -12,28 +11,24 @@ describe("Search", () => {
 			label: "Label fragment",
 			value: "Value",
 		};
-		expect(
-			await bunmatch(render(Search, props), ReactSearch, {
-				props: {
-					...omit(props, "searchIconText"),
-					clearButtonLabel: "Clear",
+		expect(render(Search, props)).toMimicReact(ReactSearch, {
+			props: {
+				...omit(props, "searchIconText"),
+				clearButtonLabel: "Clear",
+			},
+			opts: {
+				compareAttrs(node, attr) {
+					const tagName = node.tagName.toLowerCase();
+					if (tagName == "svg" && ["aria-labelledby"].includes(attr)) {
+						return false;
+					}
+					// Known unique attributes
+					if (["id", "for"].includes(attr)) {
+						return false;
+					}
+					return true;
 				},
-				opts: {
-					compareAttrs(node, attr) {
-						const tagName = node.tagName.toLowerCase();
-						if (tagName == "svg" && ["aria-labelledby"].includes(attr)) {
-							return false;
-						}
-						// Known unique attributes
-						if (["id", "for", "value"].includes(attr)) {
-							return false;
-						}
-						return true;
-					},
-				},
-			}),
-		).toBeTrue();
+			},
+		});
 	});
-
-	afterEach(cleanup);
 });

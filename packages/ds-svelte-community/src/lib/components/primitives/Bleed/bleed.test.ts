@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Bleed as ReactBleed } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import Bleed from "./Bleed.svelte";
@@ -20,13 +19,9 @@ describe("Bleed", () => {
 			})),
 		};
 
-		expect(
-			await bunmatch(render(Bleed, props), ReactBleed, {
-				props,
-				children: [React.createElement("span", {}, "Bleed body")],
-			}),
-		).toBeTrue();
+		expect(render(Bleed, props)).toMimicReact(ReactBleed, {
+			props,
+			children: [React.createElement("span", {}, "Bleed body")],
+		});
 	});
-
-	afterEach(cleanup);
 });

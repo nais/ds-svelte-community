@@ -79,7 +79,7 @@
 	aria-controls={ctx.idFor("panel", value)}
 	id={ctx.idFor("tab", value)}
 	aria-selected={`${ctx.value == value}`}
-	tabindex={ctx.activeTab == self ? 0 : -1}
+	tabindex={self !== undefined && ctx.activeTab == self ? 0 : -1}
 	onclick={() => as != "a" && ctx.activate(value)}
 	onkeydown={handleKeydown}
 	onfocus={handleFocus}

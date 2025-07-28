@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Skeleton as ReactSkeleton } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import Skeleton from "./Skeleton.svelte";
 import { variants, type SkeletonProps } from "./type";
 
@@ -11,13 +10,9 @@ describe("Skeleton", () => {
 			const props: SkeletonProps = {
 				variant,
 			};
-			expect(
-				await bunmatch(render(Skeleton, props), ReactSkeleton, {
-					props,
-				}),
-			).toBeTrue();
+			expect(render(Skeleton, props)).toMimicReact(ReactSkeleton, {
+				props,
+			});
 		});
 	});
-
-	afterEach(cleanup);
 });

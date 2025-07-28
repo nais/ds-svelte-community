@@ -40,6 +40,13 @@ describe("which components are implemented", () => {
 		"FormSummaryLabel",
 		"FormSummaryValue",
 		"Ingress",
+		"LinkCard",
+		"LinkCardAnchor",
+		"LinkCardDescription",
+		"LinkCardFooter",
+		"LinkCardIcon",
+		"LinkCardImage",
+		"LinkCardTitle",
 		"LinkPanel",
 		"LinkPanelDescription",
 		"LinkPanelTitle",
@@ -86,6 +93,7 @@ describe("which components are implemented", () => {
 		"ModalHeader", // Slot
 		"ModalBody", // Slot
 		"ModalFooter", // Slot
+		"ConfirmationPanel",
 	];
 
 	const reactComponents = Object.keys(allReact).filter(

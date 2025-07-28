@@ -13,7 +13,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	const uid = $props.id();
 
 	let {
-		value = $bindable(""),
+		value = $bindable(),
 		id = "tf-" + uid,
 		hideLabel = false,
 		type = "text",

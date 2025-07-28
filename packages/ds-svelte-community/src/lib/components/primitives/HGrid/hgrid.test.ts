@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { HGrid as ReactHGrid } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import HGrid from "./HGrid.test.svelte";
 import type { HGridProps } from "./type";
@@ -14,16 +13,12 @@ describe("HGrid", () => {
 			align: "end",
 		};
 
-		expect(
-			await bunmatch(render(HGrid, props), ReactHGrid, {
-				props,
-				children: [
-					React.createElement("div", { key: "1" }),
-					React.createElement("div", { key: "2" }),
-				],
-			}),
-		).toBeTrue();
+		expect(render(HGrid, props)).toMimicReact(ReactHGrid, {
+			props,
+			children: [
+				React.createElement("div", { key: "1" }),
+				React.createElement("div", { key: "2" }),
+			],
+		});
 	});
-
-	afterEach(cleanup);
 });

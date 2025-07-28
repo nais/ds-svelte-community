@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { ErrorMessage as ReactErrorMessage } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import ErrorMessage from "./ErrorMessage.svelte";
@@ -22,16 +21,12 @@ describe("ErrorMessage", () => {
 							},
 						})),
 					};
-					expect(
-						await bunmatch(render(ErrorMessage, props), ReactErrorMessage, {
-							props,
-							children: [React.createElement("span", {}, "ErrorMessage content")],
-						}),
-					).toBeTrue();
+					expect(render(ErrorMessage, props)).toMimicReact(ReactErrorMessage, {
+						props,
+						children: [React.createElement("span", {}, "ErrorMessage content")],
+					});
 				});
 			});
 		});
 	});
-
-	afterEach(cleanup);
 });

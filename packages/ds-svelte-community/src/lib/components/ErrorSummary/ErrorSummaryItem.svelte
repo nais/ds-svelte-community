@@ -8,7 +8,7 @@
 <li>
 	<a
 		{...omit(restProps, "class")}
-		class={[restProps.class, "aksel-error-summary__item", "aksel-link"]}
+		class={[restProps.class, "aksel-error-summary__item", "aksel-link", "unstyled"]}
 		{href}
 	>
 		{@render children()}

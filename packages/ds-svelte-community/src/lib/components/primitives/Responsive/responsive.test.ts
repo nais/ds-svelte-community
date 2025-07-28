@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Hide as ReactHide, Show as ReactShow } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import Hide from "./Hide.svelte";
@@ -21,12 +20,10 @@ describe("Responsive", () => {
 				})),
 			};
 
-			expect(
-				await bunmatch(render(Show, props), ReactShow, {
-					props,
-					children: [React.createElement("span", {}, "body")],
-				}),
-			).toBeTrue();
+			expect(render(Show, props)).toMimicReact(ReactShow, {
+				props,
+				children: [React.createElement("span", {}, "body")],
+			});
 		});
 	});
 
@@ -42,14 +39,10 @@ describe("Responsive", () => {
 				})),
 			};
 
-			expect(
-				await bunmatch(render(Hide, props), ReactHide, {
-					props,
-					children: [React.createElement("span", {}, "body")],
-				}),
-			).toBeTrue();
+			expect(render(Hide, props)).toMimicReact(ReactHide, {
+				props,
+				children: [React.createElement("span", {}, "body")],
+			});
 		});
 	});
-
-	afterEach(cleanup);
 });

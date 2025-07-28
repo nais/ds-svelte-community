@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Tag as ReactTag } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import Tag from "./Tag.test.svelte";
 import { variants, type TagProps } from "./type";
 
@@ -11,23 +10,11 @@ describe("Tag", () => {
 			const props: Omit<TagProps, "children"> = {
 				variant,
 			};
-			expect(
-				await bunmatch(render(Tag, props), ReactTag, {
-					props,
-					children: ["Tag content"],
-					opts: {
-						// compareAttrs(node, attr) {
-						// 	// Remove attrs known to be unique
-						// 	if (["id", "aria-describedby", "for"].includes(attr)) {
-						// 		return false;
-						// 	}
-						// 	return true;
-						// },
-					},
-				}),
-			).toBeTrue();
+
+			expect(render(Tag, props)).toMimicReact(ReactTag, {
+				props,
+				children: ["Tag content"],
+			});
 		});
 	});
-
-	afterEach(cleanup);
 });

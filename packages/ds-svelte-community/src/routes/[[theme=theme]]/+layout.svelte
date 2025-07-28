@@ -175,12 +175,12 @@
 				border-bottom-left-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
 
 				&:hover {
-					background-color: var(--ax-bg-neutral, var(--a-grayalpha-100));
-					color: var(--ax-text-default, var(--a-grayalpha-900));
+					background-color: var(--ax-bg-meta-purple-strong-hover);
+					color: var(--ax-text-meta-purple-contrast);
 				}
 
 				&:active {
-					background-color: var(--ax-bg-meta-purple-hover, var(--a-surface-alt-1-subtle));
+					background-color: var(--ax-bg-meta-purple-strong-pressed, var(--a-surface-alt-1-subtle));
 				}
 
 				&.active {

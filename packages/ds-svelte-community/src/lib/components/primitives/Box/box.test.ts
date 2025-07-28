@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Box as ReactBox } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import Box from "./Box.svelte";
@@ -17,12 +16,10 @@ describe("Box", () => {
 			})),
 		};
 
-		expect(
-			await bunmatch(render(Box, props), ReactBox.New, {
-				props,
-				children: [React.createElement("span", {}, "Box body")],
-			}),
-		).toBeTrue();
+		expect(render(Box, props)).toMimicReact(ReactBox.New, {
+			props,
+			children: [React.createElement("span", {}, "Box body")],
+		});
 	});
 
 	it("renders with HTML similar to ds-react", async () => {
@@ -42,13 +39,9 @@ describe("Box", () => {
 			})),
 		};
 
-		expect(
-			await bunmatch(render(Box, props), ReactBox.New, {
-				props,
-				children: [React.createElement("span", {}, "Box body")],
-			}),
-		).toBeTrue();
+		expect(render(Box, props)).toMimicReact(ReactBox.New, {
+			props,
+			children: [React.createElement("span", {}, "Box body")],
+		});
 	});
-
-	afterEach(cleanup);
 });

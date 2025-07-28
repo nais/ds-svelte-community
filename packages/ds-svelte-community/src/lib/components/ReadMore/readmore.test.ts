@@ -1,11 +1,10 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { ReadMore as ReactReadMore } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
+import React from "react";
+import { createRawSnippet } from "svelte";
 import ReadMore from "./ReadMore.svelte";
 import type { ReadMoreProps } from "./type";
-import { createRawSnippet } from "svelte";
-import React from "react";
 
 describe("ReadMore", () => {
 	for (const size of ["small", "medium"] as const) {
@@ -23,32 +22,31 @@ describe("ReadMore", () => {
 						};
 					}),
 				};
-				expect(
-					await bunmatch(render(ReadMore, props), ReactReadMore, {
-						props: {
-							defaultOpen: initOpen,
-							header: "Header text",
-							size,
+				expect(render(ReadMore, props)).toMimicReact(ReactReadMore, {
+					props: {
+						defaultOpen: initOpen,
+						header: "Header text",
+						size,
+					},
+					children: [
+						React.createElement("span", {
+							children: ["This is my content"],
+						}),
+					],
+					opts: {
+						compareAttrs(node, attr) {
+							// Remove attrs known to be unique
+							if (["id", "aria-labelledby"].includes(attr)) {
+								return false;
+							}
+							return true;
 						},
-						children: [
-							React.createElement("span", {
-								children: ["This is my content"],
-							}),
-						],
-						opts: {
-							compareAttrs(node, attr) {
-								// Remove attrs known to be unique
-								if (["id", "aria-labelledby"].includes(attr)) {
-									return false;
-								}
-								return true;
-							},
+						visual: {
+							strict: false,
 						},
-					}),
-				).toBeTrue();
+					},
+				});
 			});
 		}
 	}
-
-	afterEach(cleanup);
 });

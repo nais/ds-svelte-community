@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Pagination as ReactPagination } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import Pagination from "./Pagination.test.svelte";
 import type { PaginationProps } from "./type";
 
@@ -15,24 +14,20 @@ describe("Pagination", () => {
 		const svelteProps = {
 			...props,
 		};
-		expect(
-			await bunmatch(render(Pagination, svelteProps), ReactPagination, {
-				props,
-				opts: {
-					compareAttrs(node, attr) {
-						const tagName = node.tagName.toLowerCase();
-						if (tagName == "svg" && ["aria-labelledby"].includes(attr)) {
-							return false;
-						}
-						if (tagName == "title" && ["id"].includes(attr)) {
-							return false;
-						}
-						return true;
-					},
+		expect(render(Pagination, svelteProps)).toMimicReact(ReactPagination, {
+			props,
+			opts: {
+				compareAttrs(node, attr) {
+					const tagName = node.tagName.toLowerCase();
+					if (tagName == "svg" && ["aria-labelledby"].includes(attr)) {
+						return false;
+					}
+					if (tagName == "title" && ["id"].includes(attr)) {
+						return false;
+					}
+					return true;
 				},
-			}),
-		).toBeTrue();
+			},
+		});
 	});
-
-	afterEach(cleanup);
 });

@@ -13,14 +13,11 @@
 		errorId = "fserr-" + uid,
 		size = "medium",
 		disabled = false,
-		id = "fs-" + uid,
 		legend,
 		children,
 		description,
 		...restProps
 	}: FieldsetProps = $props();
-
-	const inputDescriptionId = `fs-desc-${id}`;
 
 	const showErrorMsg = $derived(!disabled && !!error);
 </script>
@@ -35,7 +32,6 @@
 			"aksel-fieldset--error": !!error,
 		},
 	]}
-	aria-describedby={description ? inputDescriptionId : undefined}
 >
 	<Label {size} as="legend" class={["aksel-fieldset__legend", { "aksel-sr-only": hideLegend }]}>
 		{#if typeof legend === "string"}
@@ -49,7 +45,6 @@
 		<BodyShort
 			class={["aksel-fieldset__description", { "aksel-sr-only": hideLegend }]}
 			{size}
-			id={inputDescriptionId}
 			as="div"
 		>
 			{#if typeof description === "string"}

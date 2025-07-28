@@ -1,4 +1,4 @@
-import type { LegacySpacingKeys, SpaceKeys } from "@navikt/ds-tokens/types";
+import type { AkselLegacySpacingToken, AkselSpaceToken } from "@navikt/ds-tokens/types";
 import type { ResponsiveProp } from "./types";
 
 export function getResponsiveValue<T = string>(
@@ -27,7 +27,10 @@ export function getResponsiveValue<T = string>(
 /**
  * Temporary lookup for mapping legacy spacing tokens to new space tokens.
  */
-const legacySpacingTokenLookup: Record<`--ax-spacing-${LegacySpacingKeys}`, `--ax-${SpaceKeys}`> = {
+const legacySpacingTokenLookup: Record<
+	`--ax-spacing-${AkselLegacySpacingToken}`,
+	`--ax-${AkselSpaceToken}`
+> = {
 	"--ax-spacing-32": "--ax-space-128",
 	"--ax-spacing-24": "--ax-space-96",
 	"--ax-spacing-20": "--ax-space-80",
@@ -82,7 +85,8 @@ const translateTokenStringToCSS = (
 				output = `var(--ax-${propValue})`;
 			} else if (tokenSubgroup === "spacing") {
 				/* Translate old "spacing" tokens to new "space" tokens */
-				const spacingTokenName = `--ax-spacing-${propValue}` as `--ax-spacing-${LegacySpacingKeys}`;
+				const spacingTokenName =
+					`--ax-spacing-${propValue}` as `--ax-spacing-${AkselLegacySpacingToken}`;
 				output = `var(${legacySpacingTokenLookup[spacingTokenName] ?? spacingTokenName})`;
 			}
 

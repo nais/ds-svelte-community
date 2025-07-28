@@ -1,7 +1,6 @@
-import { bunmatch } from "$testlib/bunmatch";
+import { render } from "$testlib/render";
 import { Switch as ReactSwitch } from "@navikt/ds-react";
-import { cleanup, render } from "@testing-library/svelte";
-import { afterEach, describe, expect, it } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import React from "react";
 import { createRawSnippet } from "svelte";
 import { omit } from "../helpers";
@@ -19,28 +18,24 @@ describe("Switch", () => {
 					},
 				})),
 			};
-			expect(
-				await bunmatch(render(Switch, props), ReactSwitch, {
-					props: omit(props),
-					children: [React.createElement("span", {}, "Label")],
-					opts: {
-						compareAttrs(node, attr) {
-							// For some reason the checked attribute isn't set on the input element
-							if (node.tagName.toLowerCase() == "input" && attr == "checked") {
-								return false;
-							}
+			expect(render(Switch, props)).toMimicReact(ReactSwitch, {
+				props: omit(props),
+				children: [React.createElement("span", {}, "Label")],
+				opts: {
+					compareAttrs(node, attr) {
+						// For some reason the checked attribute isn't set on the input element
+						if (node.tagName.toLowerCase() == "input" && attr == "checked") {
+							return false;
+						}
 
-							// Remove attrs known to be unique
-							if (["id", "for"].includes(attr)) {
-								return false;
-							}
-							return true;
-						},
+						// Remove attrs known to be unique
+						if (["id", "for"].includes(attr)) {
+							return false;
+						}
+						return true;
 					},
-				}),
-			).toBeTrue();
+				},
+			});
 		});
 	});
-
-	afterEach(cleanup);
 });
