@@ -18,7 +18,10 @@ const config = {
 	preprocess: [
 		vitePreprocess(),
 		mdsvex({
-			layout: __dirname + "/src/routes/layout.svx.svelte",
+			layout: {
+				layout: __dirname + "/src/routes/layout.svx.svelte",
+				_: __dirname + "/src/routes/layout.svx.svelte",
+			},
 			rehypePlugins: [
 				rehypeSlug,
 				[
@@ -50,17 +53,6 @@ const config = {
 				},
 			},
 		}),
-		// Can we just remove this thing?
-		// optimizeImports({
-		// 	componentsImportPrefix: {
-		// 		match: "$lib",
-		// 		prefix: "$lib/",
-		// 	},
-		// 	iconImportPrefix: {
-		// 		match: "$lib/icons",
-		// 		prefix: "$lib/",
-		// 	},
-		// }),
 	],
 
 	kit: {

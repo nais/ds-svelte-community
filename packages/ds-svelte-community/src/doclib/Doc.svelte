@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from "$app/stores";
+	import { page } from "$app/state";
 	import { Chips, ToggleChip } from "$lib";
 	import Alert from "$lib/components/Alert/Alert.svelte";
 	import Box from "$lib/components/primitives/Box/Box.svelte";
@@ -40,7 +40,10 @@
 		extraDescription?: Snippet;
 	} = $props();
 
-	let tab = $derived($page.url.searchParams.get("tab") || "Default");
+	let tab = $derived("Default");
+	$effect.pre(() => {
+		tab = page.url.searchParams.get("tab") || "Default";
+	});
 
 	const story = $derived(stories?.find((s) => s.name === tab));
 

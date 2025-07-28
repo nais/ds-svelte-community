@@ -2,6 +2,10 @@
 title: CSS
 ---
 
+<svelte:head>
+	<title>CSS &bullet; ds-svelte-community</title>
+</svelte:head>
+
 # CSS
 
 You should add the following import to your root `+layout.svelte` file:
