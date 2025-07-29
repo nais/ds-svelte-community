@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { base, resolveRoute } from "$app/paths";
+	import { base, resolve } from "$app/paths";
 	import { page } from "$app/state";
 	import { Box, Detail, Page, PageBlock } from "$lib";
 	import InternalHeader from "$lib/components/InternalHeader/InternalHeader.svelte";
@@ -89,7 +89,10 @@
 						{#if page.route.id}
 							{#if data.theme != "dark"}
 								<br /><a
-									href={resolveRoute(page.route.id, { ...page.params, theme: "dark" })}
+									href={resolve(page.route.id as "/[[theme=theme]]", {
+										...page.params,
+										theme: "dark",
+									})}
 									data-sveltekit-reload={!data.theme}
 									data-sveltekit-noscroll
 								>
@@ -98,7 +101,10 @@
 							{/if}
 							{#if data.theme == "dark"}
 								<br /><a
-									href={resolveRoute(page.route.id, { ...page.params, theme: undefined })}
+									href={resolve(page.route.id as "/[[theme=theme]]", {
+										...page.params,
+										theme: undefined,
+									})}
 									data-sveltekit-reload={!data.theme}
 									data-sveltekit-noscroll
 								>
