@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { base, resolve } from "$app/paths";
 	import { page } from "$app/state";
+	import { ThemeStore } from "$doclib/theme.svelte";
 	import { Box, Detail, Page, PageBlock } from "$lib";
 	import InternalHeader from "$lib/components/InternalHeader/InternalHeader.svelte";
 	import InternalHeaderButton from "$lib/components/InternalHeader/InternalHeaderButton.svelte";
@@ -9,11 +9,12 @@
 	import Tag from "$lib/components/Tag/Tag.svelte";
 	import Theme from "$lib/components/Theme/Theme.svelte";
 	import "$lib/css/index.css";
-	import type { Snippet } from "svelte";
-	import "../../doclib/styles.css";
-	import type { LayoutData } from "./$types";
+	import MoonIcon from "$lib/icons/MoonIcon.svelte";
+	import SunIcon from "$lib/icons/SunIcon.svelte";
+	import "../doclib/styles.css";
+	import type { LayoutProps } from "./$types";
 
-	let { data, children }: { data: LayoutData; children: Snippet } = $props();
+	let { data, children }: LayoutProps = $props();
 
 	function toTitle(str: string) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
@@ -26,21 +27,29 @@
 		const testID = a.replace(/\/+$/, "");
 		return id === testID || (id == "/" && testID == "");
 	}
-
-	let baseURL = $derived.by(() => {
-		if (data.theme) {
-			return base + "/" + data.theme;
-		}
-		return base;
-	});
 </script>
 
-<Theme theme={data.theme as "dark" | "light"}>
+<Theme theme={ThemeStore.current}>
 	<Page>
 		<InternalHeader>
-			<InternalHeaderTitle as="a" href={baseURL + "/"}>ds-svelte-community</InternalHeaderTitle>
+			<InternalHeaderTitle as="a" href="/">ds-svelte-community</InternalHeaderTitle>
 			<Spacer />
 			<InternalHeaderButton as="a" href="https://docs.nais.io">Nais Docs</InternalHeaderButton>
+			<InternalHeaderButton data-color="neutral" data-variant="tertiary">
+				<span class="aksel-button__icon">
+					{#if ThemeStore.current == "dark"}
+						<SunIcon
+							aria-label="Switch to light mode"
+							onclick={() => (ThemeStore.current = "light")}
+						/>
+					{:else}
+						<MoonIcon
+							aria-label="Switch to dark mode"
+							onclick={() => (ThemeStore.current = "dark")}
+						/>
+					{/if}
+				</span>
+			</InternalHeaderButton>
 			<div class="mobile">
 				<InternalHeaderButton
 					onclick={() => {
@@ -68,7 +77,7 @@
 										<a
 											class="unstyled"
 											class:active={compare(page.route.id, href)}
-											href={baseURL + href}
+											{href}
 											data-sveltekit-preload-data="tap"
 										>
 											{component ? component : "Home"}
@@ -86,32 +95,32 @@
 					<Detail>
 						<!-- eslint-disable-next-line no-undef -->
 						Version: {__version__}
-						{#if page.route.id}
-							{#if data.theme != "dark"}
+						<!-- {#if page.route.id}
+							{#if theme != "dark"}
 								<br /><a
 									href={resolve(page.route.id as "/[[theme=theme]]", {
 										...page.params,
 										theme: "dark",
 									})}
-									data-sveltekit-reload={!data.theme}
+									data-sveltekit-reload={!theme}
 									data-sveltekit-noscroll
 								>
 									Enable dark mode
 								</a>
 							{/if}
-							{#if data.theme == "dark"}
+							{#if theme == "dark"}
 								<br /><a
 									href={resolve(page.route.id as "/[[theme=theme]]", {
 										...page.params,
 										theme: undefined,
 									})}
-									data-sveltekit-reload={!data.theme}
+									data-sveltekit-reload={!theme}
 									data-sveltekit-noscroll
 								>
 									Disable dark mode
 								</a>
 							{/if}
-						{/if}
+						{/if} -->
 					</Detail>
 				</div>
 				<Box style="flex-grow: 1;" paddingInline="3">
