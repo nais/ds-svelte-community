@@ -6,7 +6,7 @@
 
 	import Doc from "$doclib/Doc.svelte";
 	import Story from "$doclib/Story.svelte";
-	import { Tab, TabList, TabPanel, Tabs } from "$lib";
+	import { Tabs } from "$lib";
 	import { ClockDashedIcon, EnvelopeOpenIcon, PaperplaneIcon } from "$lib/icons";
 
 	let active = $state("inbox");
@@ -15,30 +15,30 @@
 <Doc {doc} extraChildrenDoc={[tabListDoc, tabDoc, tabPanelDoc]} preview={{ width: "400px" }}>
 	<Story>
 		<Tabs bind:value={active} size="small">
-			<TabList>
-				<Tab value="log">
+			<Tabs.List>
+				<Tabs.Tab value="log">
 					{#snippet icon()}<ClockDashedIcon aria-label="Log" />{/snippet}
 					Log
-				</Tab>
-				<Tab value="inbox">
+				</Tabs.Tab>
+				<Tabs.Tab value="inbox">
 					{#snippet icon()}<EnvelopeOpenIcon aria-label="Inbox" />{/snippet}
 					Inbox
-				</Tab>
-				<Tab value="sent">
+				</Tabs.Tab>
+				<Tabs.Tab value="sent">
 					{#snippet icon()}<PaperplaneIcon aria-label="Sent" />{/snippet}
 					Sent
-				</Tab>
-			</TabList>
+				</Tabs.Tab>
+			</Tabs.List>
 
-			<TabPanel value="log">
+			<Tabs.Panel value="log">
 				<div class="examplePanelWrapper examplePanel1">Log content</div>
-			</TabPanel>
-			<TabPanel value="inbox">
+			</Tabs.Panel>
+			<Tabs.Panel value="inbox">
 				<div class="examplePanelWrapper examplePanel2">Inbox content</div>
-			</TabPanel>
-			<TabPanel value="sent">
+			</Tabs.Panel>
+			<Tabs.Panel value="sent">
 				<div class="examplePanelWrapper examplePanel3">Sent content</div>
-			</TabPanel>
+			</Tabs.Panel>
 		</Tabs>
 	</Story>
 </Doc>

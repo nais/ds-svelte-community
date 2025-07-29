@@ -1,4 +1,8 @@
-export { default as Tab } from "./Tab.svelte";
-export { default as TabList } from "./TabList.svelte";
-export { default as TabPanel } from "./TabPanel.svelte";
-export { default as Tabs } from "./Tabs.svelte";
+import Tab from "./Tab.svelte";
+import TabList from "./TabList.svelte";
+import TabPanel from "./TabPanel.svelte";
+import { default as BaseTabs } from "./Tabs.svelte";
+
+const Tabs = /* @__PURE__ */ Object.assign(BaseTabs, { Tab, List: TabList, Panel: TabPanel });
+
+export { Tab, TabList, TabPanel, Tabs };
