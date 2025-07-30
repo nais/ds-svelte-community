@@ -6,7 +6,7 @@
 	import Tag from "$lib/components/Tag/Tag.svelte";
 	import Heading from "$lib/components/typography/Heading/Heading.svelte";
 	import type { Doc } from "@nais/vite-plugin-svelte-docs";
-	import { type Snippet } from "svelte";
+	import { type ComponentProps, type Snippet } from "svelte";
 	import { SvelteMap } from "svelte/reactivity";
 	import Markdown from "./Markdown.svelte";
 	import Properties from "./Properties.svelte";
@@ -19,6 +19,7 @@
 		snippet: StorySnippet;
 		locked: boolean;
 		lockedProps: string[];
+		preview?: ComponentProps<typeof Renderer>["preview"];
 		props: { key: string; value: string }[];
 	};
 
@@ -83,11 +84,15 @@
 		{/each}
 	</Chips>
 </div>
-
 {#if !story}
 	<Alert variant="warning">No story found for tab "{tab}"</Alert>
 {:else}
-	<Renderer children={story.snippet} source={atob(story.source)} {values} {preview} />
+	<Renderer
+		children={story.snippet}
+		source={atob(story.source)}
+		{values}
+		preview={{ ...preview, ...story.preview }}
+	/>
 {/if}
 
 {#snippet experimental(experimental: boolean | undefined)}

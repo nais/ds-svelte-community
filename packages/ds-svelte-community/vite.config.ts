@@ -10,7 +10,7 @@ export default defineConfig({
 		tailwindcss() as never, // Unsure why this is necessary
 		storyProcess(),
 		sveltekit() as never, // Unsure why this is necessary
-		docProcess(path.resolve("..", "..", "node_modules", "svelte2tsx", "index.js")) as never,
+		docProcess(path.resolve("..", "..", "node_modules", "svelte2tsx", "index.js")),
 	],
 	define: {
 		__version__: JSON.stringify(process.env.npm_package_version),

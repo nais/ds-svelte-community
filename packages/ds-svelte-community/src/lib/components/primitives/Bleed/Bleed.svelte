@@ -2,6 +2,8 @@
 @component
 Simple primitive to add negative margin that lets content slide out of the parent's container.
 
+This component does not support the `asChild` prop. This might limit the use of this component in some cases.
+
 Read more about this component in the [Aksel documentation](https://aksel.nav.no/komponenter/primitives/bleed).
 -->
 

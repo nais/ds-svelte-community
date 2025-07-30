@@ -19,21 +19,21 @@ import type { BasePrimitiveProps } from "../base/type";
 export interface BaseBoxProps extends HTMLAttributes<HTMLDivElement>, BasePrimitiveProps {
 	/**
 	 * CSS `background-color` property.
-	 * Accepts a [background/surface color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#afff774dad80).
+	 * Accepts a [background color token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#backgroundColor).
 	 * @see {@link StaticDefaultBgKeys} and {@link StaticBgKeys}
 	 */
 	background?: AkselRootBackgroundToken | AkselColoredStatelessBackgroundToken;
 
 	/**
 	 * CSS `border-color` property.
-	 * Accepts a [border color token](https://aksel.nav.no/grunnleggende/styling/design-tokens#adb1767e2f87).
+	 * Accepts a [border color token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#borderColor).
 	 * @see {@link BorderColorKeys} and {@link BorderColorWithRoleKeys}
 	 */
 	borderColor?: Exclude<AkselRootBorderToken, "focus"> | AkselColoredBorderToken;
 
 	/**
 	 * CSS `border-radius` property.
-	 * Accepts a [radius token](https://aksel.nav.no/grunnleggende/styling/design-tokens#6d79c5605d31)
+	 * Accepts a [radius token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#radius)
 	 * or an object of radius tokens for different breakpoints.
 	 * @example
 	 * borderRadius='full'

@@ -5,7 +5,7 @@ import type { Snippet } from "svelte";
 export interface BasePrimitiveProps {
 	/**
 	 * Padding around children.
-	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#space)
 	 * or an object of spacing tokens for different breakpoints.
 	 * @example
 	 * padding='space-16'
@@ -14,7 +14,7 @@ export interface BasePrimitiveProps {
 	padding?: ResponsiveProp<SpacingScale>;
 	/**
 	 * Horizontal padding around children.
-	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#space)
 	 * or an object of spacing tokens for different breakpoints.
 	 * @example
 	 * paddingInline='space-16'
@@ -24,7 +24,7 @@ export interface BasePrimitiveProps {
 	paddingInline?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
 	/**
 	 * Vertical padding around children.
-	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#space)
 	 * or an object of spacing tokens for different breakpoints.
 	 * @example
 	 * paddingBlock='space-16'
@@ -34,7 +34,7 @@ export interface BasePrimitiveProps {
 	paddingBlock?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
 	/**
 	 * Margin around element.
-	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#space)
 	 * or an object of spacing tokens for different breakpoints.
 	 * @example
 	 * margin='space-16'
@@ -43,7 +43,7 @@ export interface BasePrimitiveProps {
 	margin?: ResponsiveProp<SpacingScale>;
 	/**
 	 * Horizontal margin around element.
-	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#space)
 	 * or an object of spacing tokens for different breakpoints.
 	 * @example
 	 * marginInline='space-16'
@@ -59,7 +59,7 @@ export interface BasePrimitiveProps {
 	>;
 	/**
 	 * Vertical margin around element.
-	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#space)
 	 * or an object of spacing tokens for different breakpoints.
 	 * @example
 	 * marginBlock='space-16'
@@ -103,7 +103,7 @@ export interface BasePrimitiveProps {
 	position?: ResponsiveProp<"static" | "relative" | "absolute" | "fixed" | "sticky">;
 	/**
 	 * CSS `inset`.
-	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#space)
 	 * or an object of spacing tokens for different breakpoints.
 	 * @example
 	 * inset='space-16'
@@ -113,7 +113,7 @@ export interface BasePrimitiveProps {
 	inset?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
 	/**
 	 * CSS `top`
-	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#space)
 	 * or an object of spacing tokens for different breakpoints.
 	 * @example
 	 * top='space-16'
@@ -122,7 +122,7 @@ export interface BasePrimitiveProps {
 	top?: ResponsiveProp<SpacingScale>;
 	/**
 	 * CSS `right`
-	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#space)
 	 * or an object of spacing tokens for different breakpoints.
 	 * @example
 	 * right='space-16'
@@ -131,7 +131,7 @@ export interface BasePrimitiveProps {
 	right?: ResponsiveProp<SpacingScale>;
 	/**
 	 * CSS `bottom`
-	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#space)
 	 * or an object of spacing tokens for different breakpoints.
 	 * @example
 	 * bottom='space-16'
@@ -140,7 +140,7 @@ export interface BasePrimitiveProps {
 	bottom?: ResponsiveProp<SpacingScale>;
 	/**
 	 * CSS `left`
-	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/styling/design-tokens#0cc9fb32f213)
+	 * Accepts a [spacing token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#space)
 	 * or an object of spacing tokens for different breakpoints.
 	 * @example
 	 * left='space-16'

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import RadioDoc from "$lib/components/Radio/Radio.svelte?doc";
 	import doc from "$lib/components/Radio/RadioGroup.svelte?doc";
 
 	import Doc from "$doclib/Doc.svelte";
@@ -14,6 +15,7 @@
 	preview={{
 		width: "400px",
 	}}
+	extraChildrenDoc={[RadioDoc]}
 >
 	<Story>
 		<RadioGroup legend="Choose your experience" bind:value>
