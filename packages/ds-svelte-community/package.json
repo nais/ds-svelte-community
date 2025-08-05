@@ -46,6 +46,9 @@
 		"./css": {
 			"default": "./dist/css/index.css"
 		},
+		"./css/darkside": {
+			"default": "./dist/css/darkside.css"
+		},
 		"./*": {
 			"types": "./dist/*",
 			"import": "./dist/*",
