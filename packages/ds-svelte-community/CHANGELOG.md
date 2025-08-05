@@ -1,5 +1,13 @@
 # @nais/ds-svelte-community
 
+## 1.0.2
+
+### Patch Changes
+
+- [#308](https://github.com/nais/ds-svelte-community/pull/308) [`e42beab`](https://github.com/nais/ds-svelte-community/commit/e42beab3fd1b14f4cedda61d16fbdbd20a3688d8) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Allow Vite 7
+
+- [#306](https://github.com/nais/ds-svelte-community/pull/306) [`e9244dd`](https://github.com/nais/ds-svelte-community/commit/e9244dd7a0b6daf94d3d9e2c80c7f9ae13ebd58f) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Export darkside css as well
+
 ## 1.0.1
 
 ### Patch Changes
