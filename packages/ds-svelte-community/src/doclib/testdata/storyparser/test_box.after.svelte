@@ -21,6 +21,7 @@
 			locked: false,
 			props: [],
 			lockedProps: ["checked"],
+			preview: undefined,
 		},
 	]}
 	{doc}

@@ -137,7 +137,7 @@ describe("CheckboxGroup", () => {
 
 function ignoreKnownUnique(node: HTMLElement, attr: string) {
 	const tag = node.tagName.toLowerCase();
-	if (tag == "input" && ["aria-labelledby", "id"].includes(attr)) {
+	if (["input", "fieldset"].includes(tag) && ["aria-labelledby", "id"].includes(attr)) {
 		return false;
 	}
 	if (tag == "label" && ["for", "id"].includes(attr)) {
@@ -152,7 +152,7 @@ function ignoreKnownUnique(node: HTMLElement, attr: string) {
 	if (tag == "input" && attr == "checked") {
 		return false;
 	}
-	if (tag == "fieldset" && attr == "id") {
+	if (tag == "legend" && attr == "id") {
 		return false;
 	}
 	return true;

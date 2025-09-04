@@ -18,20 +18,20 @@ describe("storyparser", async () => {
 
 		it(path, async () => {
 			const parser = new StoryParser("@otherLib", LogLevel.all);
-			let ret = await parser.parse(before, path);
+			const ret = await parser.parse(before, path);
 			if (!ret) {
 				throw new Error("No return value");
 			}
 
 			// Because we do not remove the imported Story, but it's no longer used, just remove the line from ret
-			ret = ret.replace(/^\s+import Story from .+\n/gm, "");
+			ret.code = ret.code.replace(/^\s+import Story from .+\n/gm, "");
 
 			let addedOrRemoved = 0;
 			const lines: string[] = [];
 
 			const green = (input: string) => "\x1b[32m" + input + "\x1b[0m";
 			const red = (input: string) => "\x1b[31m" + input + "\x1b[0m";
-			Diff.diffLines(await format(ret), await format(after)).forEach((part) => {
+			Diff.diffLines(await format(ret.code), await format(after)).forEach((part) => {
 				if (part.added) {
 					addedOrRemoved++;
 					lines.push(`${green("+")} ${green(part.value)}`);

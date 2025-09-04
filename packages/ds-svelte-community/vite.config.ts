@@ -7,10 +7,10 @@ import storyProcess from "./src/doclib/preprocessor";
 
 export default defineConfig({
 	plugins: [
-		tailwindcss() as never, // Unsure why this is necessary
+		tailwindcss(),
 		storyProcess(),
-		sveltekit() as never, // Unsure why this is necessary
-		docProcess(path.resolve("..", "..", "node_modules", "svelte2tsx", "index.js")),
+		sveltekit(),
+		docProcess(path.resolve("..", "..", "node_modules", "svelte2tsx", "index.js")) as never,
 	],
 	define: {
 		__version__: JSON.stringify(process.env.npm_package_version),
