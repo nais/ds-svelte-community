@@ -42,7 +42,7 @@
 	/>
 	<label for={radioID} class="aksel-radio__label">
 		<span class="aksel-radio__content">
-			<BodyShort as="span" size={ctx.size} aria-hidden>
+			<BodyShort as="span" size={ctx.size}>
 				{@render children()}
 			</BodyShort>
 			{#if description}
@@ -50,7 +50,6 @@
 					as="span"
 					size={ctx.size}
 					class="aksel-form-field__subdescription aksel-radio__description"
-					aria-hidden
 				>
 					{description}
 				</BodyShort>

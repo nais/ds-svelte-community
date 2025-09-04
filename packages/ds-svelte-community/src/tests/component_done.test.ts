@@ -56,6 +56,8 @@ describe("which components are implemented", () => {
 		"Panel",
 		"PopoverContent",
 		"Portal",
+		"Process",
+		"ProcessEvent",
 		"ProgressBar",
 		"Provider",
 		"TableColumnHeader",

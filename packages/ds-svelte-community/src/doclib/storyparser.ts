@@ -1,16 +1,19 @@
 import MagicString from "magic-string";
-import { parse } from "svelte/compiler";
+import type { ComponentProps } from "svelte";
+import { parse, type AST } from "svelte/compiler";
 import { Project } from "ts-morph";
 import { walk } from "zimmerframe";
 import { format, removeAttrs } from "./printer";
-import {
-	type LegacyElementLike,
-	type LegacyInlineComponent,
-	type LegacyThenBlock,
-	type SnippetBlock,
-} from "./svelte_legacy_types";
+import type Renderer from "./Renderer.svelte";
+import { type SnippetBlock } from "./svelte_legacy_types";
 
-type CompiledStory = { name?: string; source: string; snippet: string; locked: boolean };
+type CompiledStory = {
+	name?: string;
+	source: string;
+	snippet: string;
+	locked: boolean;
+	preview?: ComponentProps<typeof Renderer>["preview"];
+};
 
 export enum LogLevel {
 	none,
@@ -30,24 +33,20 @@ export class StoryParser {
 		this.logLevel = logLevel;
 	}
 
-	async parse(code: string, id: string) {
+	async compile(code: string, id: string) {
 		const ast = parse(code, {
 			filename: id,
-			modern: false,
+			modern: true,
 		});
-
-		if (!("html" in ast)) {
-			return null;
-		}
 
 		this.code = code;
 		this.magicString = new MagicString(code);
 
-		const stories: LegacyInlineComponent[] = [];
-		let doc: LegacyInlineComponent;
-		walk(ast.html, null, {
-			InlineComponent(node, { next }) {
-				if (node.name == "Story" && node.children.length > 0) {
+		const stories: AST.Component[] = [];
+		let doc: AST.Component;
+		walk(ast.fragment as AST.SvelteNode, null, {
+			Component(node, { next }) {
+				if (node.name == "Story" && node.fragment.nodes.length > 0) {
 					stories.push(node);
 				}
 				if (node.name == "Doc") {
@@ -61,7 +60,7 @@ export class StoryParser {
 			return null;
 		}
 
-		const ts = code.slice(ast.instance!.content.start, ast.instance!.content.end);
+		const ts = code.slice(ast.instance!.start, ast.instance!.end);
 		const compiled: CompiledStory[] = [];
 		const attrStories: string[] = [];
 		let index = 0;
@@ -81,12 +80,22 @@ export class StoryParser {
 
 			const snippetName = `docSnippet${index++}`;
 			attrStories.push(
-				`{name: "${storyName}", source: "${btoa(ret.source)}", snippet: ${snippetName}, locked: ${ret.locked}, props: ${JSON.stringify(ret.props)}, lockedProps: ${JSON.stringify(ret.lockedProps)}}`,
+				`{name: "${storyName}", source: "${btoa(ret.source)}", snippet: ${snippetName}, locked: ${ret.locked}, props: ${JSON.stringify(ret.props)}, lockedProps: ${JSON.stringify(ret.lockedProps)}, preview: ${JSON.stringify(ret.preview)}}`,
 			);
 
 			const snippet = `{#snippet ${snippetName}({docProps}: { docProps: { [key: string]: unknown } })}\n${ret.snippet}\n{/snippet}\n`;
 			this.magicString.prependLeft(doc!.start, snippet);
 		}
+		return { doc: doc!, compiled, attrStories };
+	}
+
+	async parse(code: string, id: string) {
+		const res = await this.compile(code, id);
+		if (!res) {
+			return res;
+		}
+
+		const { doc, attrStories } = res;
 
 		// compiled.forEach((story, i) => {
 		// 	const snippetName = `docSnippet${i}`;
@@ -116,10 +125,10 @@ export class StoryParser {
 		const attrStr = " stories={[" + attrStories.join(", ") + "]}";
 		this.magicString.appendRight(doc!.start + ("<" + doc!.name).length, attrStr);
 
-		// console.log("---");
-		// console.log(s.toString());
-
-		return this.magicString.toString();
+		return {
+			code: this.magicString.toString(),
+			map: this.magicString.generateMap({ hires: true }),
+		};
 	}
 
 	private log(...args: unknown[]) {
@@ -140,7 +149,7 @@ export class StoryParser {
 		}
 	}
 
-	private async parseStory(story: LegacyInlineComponent, script: string) {
+	private async parseStory(story: AST.Component, script: string) {
 		const { source, snippet } = await this.formatStory(script, story);
 
 		if (source === "") {
@@ -192,10 +201,11 @@ export class StoryParser {
 			locked,
 			props: res.props,
 			lockedProps: res.lockedProps,
+			preview: this.parsePreview(story),
 		};
 	}
 
-	private async formatStory(script: string, story: LegacyInlineComponent) {
+	private async formatStory(script: string, story: AST.Component) {
 		const proj = new Project({
 			compilerOptions: {
 				lib: ["esnext"],
@@ -209,12 +219,12 @@ export class StoryParser {
 		const split = "export default 1457387;";
 		sourceFile.insertText(sourceFile.getEnd(), "\n\n" + split + "\n\n");
 
-		walk<LegacyElementLike, null>(story, null, {
-			MustacheTag: (node, { next }) => {
+		walk(story.fragment as AST.SvelteNode, null, {
+			ExpressionTag: (node, { next }) => {
 				sourceFile.insertText(sourceFile.getEnd(), this.code.slice(node.start, node.end) + "\n");
 				next();
 			},
-			InlineComponent: (node, { next }) => {
+			Component: (node, { next }) => {
 				if (node.name === "Story") {
 					next();
 					return;
@@ -233,14 +243,12 @@ export class StoryParser {
 
 		const ts = sourceFile.getText().split(split)[0].replaceAll("$lib", this.libReplacement);
 
-		//@ts-expect-error we know it's there
-		const contentStart = story.children[0].start;
-		//@ts-expect-error we know it's there
-		const contentEnd = story.children[story.children.length - 1].end;
+		const contentStart = story.fragment.nodes[0].start;
+		const contentEnd = story.fragment.nodes.at(-1)!.end;
 		const snippet = this.code.slice(contentStart, contentEnd);
 		let contentSnippet = snippet;
-		story.children.forEach((child) => {
-			if ((child.type as string) !== "SnippetBlock") {
+		story.fragment.nodes.forEach((child) => {
+			if (child.type !== "SnippetBlock") {
 				return;
 			}
 			const snippetBlock = child as unknown as SnippetBlock;
@@ -253,7 +261,7 @@ export class StoryParser {
 			);
 		});
 
-		const content = `<script lang="ts">${ts}</script>\n\n${contentSnippet}`;
+		const content = `${ts}\n\n${contentSnippet}`;
 
 		return {
 			source: await format(content),
@@ -270,17 +278,12 @@ export class StoryParser {
 		| false {
 		const ast = parse(snippet, {
 			filename: "docSnippet.svelte",
-			modern: false,
+			modern: true,
 		});
 
-		if (ast.html.type !== "Fragment") {
-			this.log("Not a fragment", ast.html.type);
-			return false;
-		}
-
-		const frag = ast.html as unknown as LegacyThenBlock;
-		let comp: LegacyInlineComponent | undefined = undefined;
-		for (const node of frag.children) {
+		const frag = ast.fragment;
+		let comp: AST.Component | undefined = undefined;
+		for (const node of frag.nodes) {
 			switch (node.type) {
 				case "Text": {
 					if (node.data.trim() === "") {
@@ -289,7 +292,7 @@ export class StoryParser {
 					this.warn("Unexpected text node", node.data);
 					return false;
 				}
-				case "InlineComponent": {
+				case "Component": {
 					if (comp !== undefined) {
 						return false;
 					}
@@ -317,7 +320,7 @@ export class StoryParser {
 
 		for (const attr of comp.attributes) {
 			if (attr.type !== "Attribute") {
-				if (attr.type === "Binding") {
+				if (attr.type === "BindDirective") {
 					lockedProps.push(attr.name);
 					continue;
 				}
@@ -348,5 +351,63 @@ export class StoryParser {
 		}
 
 		return { propsIndex, props, lockedProps };
+	}
+
+	parsePreview(story: AST.Component): ComponentProps<typeof Renderer>["preview"] {
+		const preview = story.attributes.find((a) => a.type === "Attribute" && a.name === "preview");
+		if (!preview) {
+			return undefined;
+		}
+
+		if (preview.type !== "Attribute") {
+			this.warn("Preview attribute is not an Attribute", preview);
+			return undefined;
+		}
+
+		if (typeof preview.value === "boolean") {
+			this.warn("Preview attribute is a boolean, expected an object", preview);
+			return undefined;
+		}
+
+		if (Array.isArray(preview.value)) {
+			this.warn("Preview attribute is an array, expected an object", preview);
+			return undefined;
+		}
+
+		if (preview.value.type !== "ExpressionTag") {
+			this.warn("Preview attribute is not an ExpressionTag", preview);
+			return undefined;
+		}
+
+		if (preview.value.expression.type !== "ObjectExpression") {
+			this.warn("Preview attribute is not an ObjectExpression", preview);
+			return undefined;
+		}
+
+		const previewProps: Record<string, unknown> = {};
+		for (const prop of preview.value.expression.properties) {
+			if (prop.type !== "Property") {
+				this.warn("Preview property is not a Property", prop);
+				return undefined;
+			}
+			if (prop.key.type !== "Identifier") {
+				this.warn("Preview property key is not an Identifier", prop.key);
+				return undefined;
+			}
+
+			let val: unknown;
+			switch (prop.value.type) {
+				case "Literal":
+					val = prop.value.value;
+					break;
+				default:
+					this.warn("Preview property value is not a Literal", prop.value);
+					return undefined;
+			}
+
+			previewProps[prop.key.name] = val;
+		}
+
+		return previewProps;
 	}
 }

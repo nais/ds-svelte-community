@@ -5,19 +5,9 @@
 </script>
 
 <script lang="ts">
-	let {
-		name = "Default",
-		source,
-		locked = false,
-		children,
-	}: {
-		name?: string;
-		source?: string;
-		locked?: boolean;
-		children: StorySnippet;
-	} = $props();
+	let props = $props();
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const used = (..._: unknown[]) => {};
-	used(name, source, locked, children);
+	used(props);
 </script>

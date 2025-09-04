@@ -95,8 +95,6 @@
 		<span class="aksel-checkbox__icon">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				width="0.8125rem"
-				height="0.625rem"
 				viewBox="0 0 13 10"
 				fill="none"
 				focusable="false"
@@ -112,7 +110,7 @@
 		<span class="aksel-checkbox__icon-indeterminate"></span>
 		{#if children}
 			<span class={["aksel-checkbox__content", { "aksel-sr-only": hideLabel }]}>
-				<BodyShort as="span" {size} class="aksel-checkbox__label-text" aria-hidden>
+				<BodyShort as="span" {size} class="aksel-checkbox__label-text">
 					{@render children()}
 				</BodyShort>
 				{#if description}
@@ -120,7 +118,6 @@
 						as="span"
 						class="aksel-form-field__subdescription aksel-checkbox__description"
 						{size}
-						aria-hidden
 					>
 						{description}
 					</BodyShort>

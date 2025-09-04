@@ -32,6 +32,7 @@
 				{ key: "variant", value: '"secondary"' },
 			],
 			lockedProps: [],
+			preview: undefined,
 		},
 		{
 			name: "Click event",
@@ -41,6 +42,7 @@
 			locked: false,
 			props: [{ key: "variant", value: '"secondary"' }],
 			lockedProps: ["onclick"],
+			preview: undefined,
 		},
 	]}
 	{doc}
