@@ -12,7 +12,13 @@
 	import Illustration from "./GuidePanelIllustration.svelte";
 	import type { GuidePanelProps } from "./type";
 
-	let { poster, illustration, children, ...restProps }: GuidePanelProps = $props();
+	let {
+		poster,
+		illustration,
+		children,
+		"data-color": color = "info",
+		...restProps
+	}: GuidePanelProps = $props();
 
 	const theme = GetTheme();
 </script>
@@ -29,6 +35,7 @@
 		},
 	])}
 	data-responsive={poster === undefined}
+	data-color={color}
 >
 	<div class={classes("navds-guide")}>
 		{#if illustration}

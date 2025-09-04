@@ -2,13 +2,13 @@ import type { HTMLElements } from "$lib/components/utils/elements";
 import type {
 	BackgroundColorToken,
 	BorderColorToken,
+	BorderRadiusScale,
 	ResponsiveProp,
 	ShadowToken,
 	SpaceDelimitedAttribute,
 	SpacingScale,
 	SurfaceColorToken,
 } from "$lib/components/utils/types";
-import { type BorderRadiusKeys } from "@navikt/ds-tokens/types";
 import type { Snippet } from "svelte";
 import type { HTMLAnchorAttributes, HTMLAttributes } from "svelte/elements";
 
@@ -23,7 +23,7 @@ export interface BaseBoxProps extends HTMLAttributes<HTMLDivElement> {
 	 * borderRadius='0 full large small'
 	 * borderRadius={{xs: 'small large', sm: '0', md: 'large', lg: 'full'}}
 	 */
-	borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiusKeys | "0">>;
+	borderRadius?: ResponsiveProp<SpaceDelimitedAttribute<BorderRadiusScale | "0">>;
 	/**
 	 * Border-width. If this is not set there will be no border.
 	 * @example

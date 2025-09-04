@@ -22,6 +22,7 @@
 
 	const srOnlyClass = hideLegend ? " navds-sr-only" : "";
 	const inputDescriptionId = `fs-desc-${id}`;
+	const inputLabelId = `fs-legend-${id}`;
 
 	const showErrorMsg = $derived(!disabled && !!error);
 </script>
@@ -37,8 +38,14 @@
 		},
 	])}
 	aria-describedby={description ? inputDescriptionId : undefined}
+	aria-labelledby={inputLabelId}
 >
-	<Label {size} as="legend" class={classes("navds-fieldset__legend" + srOnlyClass)}>
+	<Label
+		{size}
+		as="legend"
+		class={classes("navds-fieldset__legend" + srOnlyClass)}
+		id={inputLabelId}
+	>
 		{#if typeof legend === "string"}
 			{legend}
 		{:else}

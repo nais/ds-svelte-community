@@ -6,11 +6,10 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 -->
 
 <script lang="ts">
-	import Loader from "../Loader/Loader.svelte";
 	import { classes, omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import Detail from "../typography/Detail/Detail.svelte";
-	import SelectedIcon from "./SelectedIcon.svelte";
+	import SwitchIcon from "./SwitchIcon.svelte";
 	import type { SwitchProps } from "./type";
 
 	let {
@@ -51,10 +50,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	/>
 	<span class={classes("navds-switch__track")}>
 		<span class={classes("navds-switch__thumb")}>
-			{#if loading}
-				<Loader size="xsmall" aria-live="polite" variant={checked ? "interaction" : "inverted"} />
-			{/if}
-			<SelectedIcon />
+			<SwitchIcon {size} {checked} {loading} />
 		</span>
 	</span>
 	<label for={id} class={classes("navds-switch__label-wrapper")}>

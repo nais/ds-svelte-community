@@ -21,7 +21,7 @@ describe("Fieldset", () => {
 				opts: {
 					compareAttrs(node, attr) {
 						// Remove attrs known to be unique
-						if (["id", "aria-describedby"].includes(attr)) {
+						if (["id", "aria-describedby", "aria-labelledby"].includes(attr)) {
 							return false;
 						}
 						return true;

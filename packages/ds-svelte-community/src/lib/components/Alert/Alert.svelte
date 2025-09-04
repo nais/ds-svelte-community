@@ -13,6 +13,7 @@
 	import { default as InformationFilledIcon } from "$lib/icons/InformationSquareFillIcon.svelte";
 	import { default as ErrorFilledIcon } from "$lib/icons/XMarkOctagonFillIcon.svelte";
 	import { classes, omit } from "../helpers";
+	import type { AkselColor } from "../Theme/Theme.svelte";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import type { AlertProps } from "./type";
 
@@ -29,6 +30,21 @@
 		onclose = () => {},
 		...restProps
 	}: AlertProps = $props();
+
+	function variantToRole(variant: AlertProps["variant"]): AkselColor {
+		switch (variant) {
+			case "warning":
+				return "warning";
+			case "error":
+				return "danger";
+			case "info":
+				return "info";
+			case "success":
+				return "success";
+			default:
+				return "info";
+		}
+	}
 </script>
 
 <div
@@ -44,6 +60,8 @@
 			"navds-alert--close-button": closeButton,
 		},
 	])}
+	data-color={variantToRole(variant)}
+	data-variant={variant}
 >
 	{#if variant == "error"}
 		<ErrorFilledIcon

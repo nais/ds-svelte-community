@@ -20,7 +20,7 @@
 		forceEditable?: boolean;
 	} = $props();
 
-	let isEditable = $state(false);
+	let isEditable = $derived(forceEditable || false);
 
 	let subType = $derived.by(() => {
 		if (Array.isArray(outerType)) {
@@ -92,10 +92,6 @@
 	});
 	let isSelect = $derived.by(() => {
 		return !!options && !isSwitch;
-	});
-
-	$effect(() => {
-		isEditable = forceEditable;
 	});
 
 	const fromText = (t: string): unknown => {

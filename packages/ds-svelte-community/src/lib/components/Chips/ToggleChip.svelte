@@ -5,6 +5,7 @@
 
 <script lang="ts">
 	import { classes, omit } from "../helpers";
+	import type { AkselColor } from "../Theme/Theme.svelte";
 	import type { ToggleChipProps } from "./type";
 
 	let {
@@ -14,8 +15,20 @@
 		checkmark = true,
 		as = "button",
 		children,
+		"data-color": color,
 		...restProps
 	}: ToggleChipProps = $props();
+
+	function variantToColor(variant?: ToggleChipProps["variant"]): AkselColor | undefined {
+		switch (variant) {
+			case "action":
+				return "accent";
+			case "neutral":
+				return "neutral";
+			default:
+				return undefined;
+		}
+	}
 </script>
 
 <!-- Called when the user clicks the toggle -->
@@ -34,6 +47,7 @@
 	])}
 	aria-pressed={selected}
 	data-pressed={selected}
+	data-color={color ?? variantToColor(variant)}
 	onclick={as == "a"
 		? undefined
 		: (e: unknown) => {
@@ -67,7 +81,7 @@
 					fill-rule="evenodd"
 					clip-rule="evenodd"
 					d="M10 3.125C6.20304 3.125 3.125 6.20304 3.125 10C3.125 13.797 6.20304 16.875 10 16.875C13.797 16.875 16.875 13.797 16.875 10C16.875 6.20304 13.797 3.125 10 3.125ZM1.875 10C1.875 5.51269 5.51269 1.875 10 1.875C14.4873 1.875 18.125 5.51269 18.125 10C18.125 14.4873 14.4873 18.125 10 18.125C5.51269 18.125 1.875 14.4873 1.875 10Z"
-					fill="var(--ax-text-accent, var(--ac-chip-toggle-circle-border, var(--a-border-default)))"
+					fill="var(--ax-text-default, var(--ac-chip-toggle-circle-border, var(--a-border-default)))"
 				/>
 			{/if}
 		</svg>

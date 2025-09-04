@@ -28,6 +28,8 @@
 	const cuid = $props.id();
 
 	let uid = $derived(id || "confirmation-panel-" + cuid);
+
+	const color = $derived(error ? "danger" : checked ? "success" : "warning");
 </script>
 
 <div
@@ -42,7 +44,7 @@
 			"navds-confirmation-panel--checked": !!checked,
 		},
 	])}
-	data-color-role="warning"
+	data-color={color}
 >
 	<div class={classes("navds-confirmation-panel__inner")}>
 		{#if children}

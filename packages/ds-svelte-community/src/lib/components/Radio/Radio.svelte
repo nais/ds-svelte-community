@@ -42,7 +42,7 @@
 	/>
 	<label for={radioID} class={classes("navds-radio__label")}>
 		<span class={classes("navds-radio__content")}>
-			<BodyShort as="span" size={ctx.size} aria-hidden>
+			<BodyShort as="span" size={ctx.size}>
 				{@render children()}
 			</BodyShort>
 			{#if description}
@@ -50,7 +50,6 @@
 					as="span"
 					size={ctx.size}
 					class={classes("navds-form-field__subdescription navds-radio__description")}
-					aria-hidden
 				>
 					{description}
 				</BodyShort>

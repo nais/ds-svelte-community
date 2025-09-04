@@ -5,15 +5,15 @@
 	"version": "0.0.2",
 	"private": true,
 	"devDependencies": {
-		"@types/bun": "1.2.9",
-		"eslint": "^9.24.0",
-		"eslint-config-prettier": "^10.1.1",
-		"eslint-plugin-svelte": "^3.5.1",
-		"prettier": "^3.5.3",
-		"prettier-plugin-svelte": "^3.3.3",
-		"svelte": "5.25.10",
+		"@types/bun": "1.2.21",
+		"eslint": "^9.34.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-svelte": "^3.12.1",
+		"prettier": "^3.6.2",
+		"prettier-plugin-svelte": "^3.4.0",
+		"svelte": "5.38.6",
 		"tsconfig-resolver": "^3.0.1",
-		"typescript": "~5.8.3"
+		"typescript": "~5.9.2"
 	},
 	"scripts": {
 		"build": "tsc -p tsconfig.build.json",
@@ -22,11 +22,11 @@
 		"test": "bun test"
 	},
 	"peerDependencies": {
-		"typescript": "~5.6.3",
-		"vite": "^5.4.10"
+		"typescript": "^5.6.3",
+		"vite": "^6.0.3 || ^7.0.0"
 	},
 	"dependencies": {
-		"svelte2tsx": "0.7.35",
+		"svelte2tsx": "0.7.42",
 		"vite": "^6.2.6"
 	},
 	"publishConfig": {

@@ -6,6 +6,7 @@
 <script lang="ts">
 	import XMarkIcon from "$lib/icons/XMarkIcon.svelte";
 	import { classes, omit } from "../helpers";
+	import type { AkselColor } from "../Theme/Theme.svelte";
 	import type { RemovableChipProps } from "./type";
 
 	let {
@@ -14,8 +15,20 @@
 		children,
 		value,
 		ondelete,
+		"data-color": color,
 		...restProps
 	}: RemovableChipProps = $props();
+
+	function variantToColor(variant?: RemovableChipProps["variant"]): AkselColor | undefined {
+		switch (variant) {
+			case "action":
+				return "accent";
+			case "neutral":
+				return "neutral";
+			default:
+				return undefined;
+		}
+	}
 </script>
 
 <button
@@ -29,6 +42,7 @@
 		"navds-chips--icon-right",
 	])}
 	aria-label={`${value} ${removeLabel}`}
+	data-color={color ?? variantToColor(variant)}
 	onclick={(e) => {
 		e.preventDefault();
 		if (ondelete) {

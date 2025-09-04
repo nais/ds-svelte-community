@@ -9,6 +9,7 @@
 
 <script lang="ts">
 	import Loader from "../Loader/Loader.svelte";
+	import type { AkselColor } from "../Theme/Theme.svelte";
 	import { classes, isSnippet, omit } from "../helpers";
 	import Label from "../typography/Label/Label.svelte";
 	import type { ButtonProps } from "./type";
@@ -23,6 +24,7 @@
 		icon,
 		ref = $bindable(),
 		iconPosition = "left",
+		"data-color": color,
 		...restProps
 	}: ButtonProps = $props();
 
@@ -37,6 +39,38 @@
 	});
 
 	let style = $derived(typeof restProps.style == "string" ? restProps.style : null);
+
+	function variantToColor(variant: ButtonProps["variant"]): AkselColor | undefined {
+		switch (variant) {
+			case "primary-neutral":
+			case "secondary-neutral":
+			case "tertiary-neutral":
+				return "neutral";
+			case "danger":
+				return "danger";
+			default:
+				return undefined;
+		}
+	}
+
+	function variantToSimplifiedVariant(
+		variant: ButtonProps["variant"],
+	): "primary" | "secondary" | "tertiary" {
+		switch (variant) {
+			case "primary":
+			case "primary-neutral":
+			case "danger":
+				return "primary";
+			case "secondary":
+			case "secondary-neutral":
+				return "secondary";
+			case "tertiary":
+			case "tertiary-neutral":
+				return "tertiary";
+			default:
+				return "primary";
+		}
+	}
 </script>
 
 <svelte:element
@@ -60,6 +94,8 @@
 	bind:this={internalRef}
 	role={as != "button" ? "button" : undefined}
 	disabled={disabled || overrideWidth > 0 ? true : undefined}
+	data-color={color ?? variantToColor(variant)}
+	data-variant={variantToSimplifiedVariant(variant)}
 >
 	{#if overrideWidth}
 		<Loader {size} />
