@@ -9,6 +9,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	import { Label } from "$lib";
 	import { setContext } from "svelte";
 	import { classes, omit } from "../helpers";
+	import type { AkselColor } from "../Theme/Theme.svelte";
 	import { contextKey, ToggleGroupContext, type ToggleGroupProps } from "./type.svelte";
 
 	let {
@@ -18,6 +19,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		variant = "action",
 		children,
 		onchange,
+		"data-color": color,
 		...restProps
 	}: ToggleGroupProps = $props();
 
@@ -42,11 +44,23 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	$effect(() => {
 		ctx.value = value;
 	});
+
+	function variantToColor(variant?: ToggleGroupProps["variant"]): AkselColor | undefined {
+		switch (variant) {
+			case "action":
+				return "accent";
+			case "neutral":
+				return "neutral";
+			default:
+				return undefined;
+		}
+	}
 </script>
 
 <div
 	{...omit(restProps, "class")}
 	class={classes([restProps.class, "navds-toggle-group__wrapper"])}
+	data-color={color ?? variantToColor(variant)}
 >
 	{#if label}
 		<Label {size} class={classes("navds-toggle-group__label")}>{label}</Label>

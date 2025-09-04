@@ -1,4 +1,9 @@
-import type { LegacySpacingKeys, SpaceKeys } from "@navikt/ds-tokens/types";
+import type {
+	AkselBorderRadiusToken,
+	AkselLegacyBorderRadiusToken,
+	AkselLegacySpacingToken,
+	AkselSpaceToken,
+} from "@navikt/ds-tokens/types";
 import type { ResponsiveProp } from "./types";
 
 export function getResponsiveValue<T = string>(
@@ -28,7 +33,10 @@ export function getResponsiveValue<T = string>(
 /**
  * Temporary lookup for mapping legacy spacing tokens to new space tokens.
  */
-const legacySpacingTokenLookup: Record<`--ax-spacing-${LegacySpacingKeys}`, `--ax-${SpaceKeys}`> = {
+const legacySpacingTokenLookup: Record<
+	`--ax-spacing-${AkselLegacySpacingToken}`,
+	`--ax-${AkselSpaceToken}`
+> = {
 	"--ax-spacing-32": "--ax-space-128",
 	"--ax-spacing-24": "--ax-space-96",
 	"--ax-spacing-20": "--ax-space-80",
@@ -52,10 +60,21 @@ const legacySpacingTokenLookup: Record<`--ax-spacing-${LegacySpacingKeys}`, `--a
 	"--ax-spacing-0": "--ax-space-0",
 };
 
+const legacyBorderRadiusNameTokenLookup: Record<
+	`${AkselLegacyBorderRadiusToken}`,
+	`${AkselBorderRadiusToken}`
+> = {
+	full: "full",
+	xlarge: "12",
+	large: "8",
+	medium: "4",
+	small: "2",
+};
+
 const translateTokenStringToCSS = (
 	specialLayout: string,
 	tokenString: string,
-	tokenSubgroup: "spacing" | "border-radius",
+	tokenSubgroup: "spacing" | "radius",
 	tokenExceptions: string[],
 	invert: boolean,
 	prefix: string,
@@ -85,8 +104,11 @@ const translateTokenStringToCSS = (
 			} else if (tokenSubgroup === "spacing") {
 				/* Translate old "spacing" tokens to new "space" tokens */
 				const spacingTokenName =
-					`--${prefix}-spacing-${propValue}` as `--ax-spacing-${LegacySpacingKeys}`;
+					`--${prefix}-spacing-${propValue}` as `--ax-spacing-${AkselLegacySpacingToken}`;
 				output = `var(${legacySpacingTokenLookup[spacingTokenName] ?? spacingTokenName})`;
+			} else if (tokenSubgroup === "radius") {
+				const name = legacyBorderRadiusNameTokenLookup[propValue] ?? propValue;
+				output = `var(--${prefix}-radius-${name})`;
 			}
 
 			// Handle inversion for negative values
@@ -105,7 +127,7 @@ export function getResponsiveProps<T extends string>(
 	prefix: string,
 	componentName: string,
 	componentProp: string,
-	tokenSubgroup: "spacing" | "border-radius",
+	tokenSubgroup: "spacing" | "radius",
 	responsiveProp?: ResponsiveProp<T>,
 	invert = false,
 	tokenExceptions: string[] = [],
@@ -144,7 +166,7 @@ export function getResponsiveProps<T extends string>(
 
 export function combineStyles(
 	props: Record<string, unknown>,
-	...args: Record<string, string | number | null>[]
+	...args: Record<string, string | number | null | undefined>[]
 ): string {
 	let styles = "";
 	if (props.style) {
@@ -156,7 +178,7 @@ export function combineStyles(
 		args
 			.map((x) =>
 				Object.entries(x)
-					.filter(([, value]) => value !== null)
+					.filter(([, value]) => value !== null && value !== undefined)
 					.map(([key, value]) => `${key}: ${value};`)
 					.join(""),
 			)

@@ -52,7 +52,7 @@
 	{...omit(restProps, "class")}
 	variant={theme ? "tertiary-neutral" : "tertiary"}
 	aria-current={selected}
-	data-selected={selected}
+	data-pressed={selected}
 	{disabled}
 	{size}
 	{icon}

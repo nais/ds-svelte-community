@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { AkselColor } from "$lib/components/Theme/Theme.svelte";
 	import { classes, omit } from "../../helpers";
 	import type { LinkProps } from "./type";
 
@@ -9,8 +10,22 @@
 		inlineText = false,
 		as = "a",
 		children,
+		"data-color": color,
 		...restProps
 	}: LinkProps = $props();
+
+	function variantToColor(variant?: LinkProps["variant"]): AkselColor | undefined {
+		switch (variant) {
+			case "action":
+				return "accent";
+			case "neutral":
+				return "neutral";
+			case "subtle":
+				return "neutral";
+			default:
+				return undefined;
+		}
+	}
 </script>
 
 {#if as == "a"}
@@ -26,6 +41,8 @@
 				"navds-link--remove-underline": !underline,
 			},
 		])}
+		data-color={color ?? variantToColor(variant)}
+		data-variant={variant}
 	>
 		{@render children()}
 	</a>
@@ -42,6 +59,8 @@
 				"navds-link--remove-underline": !underline,
 			},
 		])}
+		data-color={color ?? variantToColor(variant)}
+		data-variant={variant}
 	>
 		{@render children()}
 	</svelte:element>

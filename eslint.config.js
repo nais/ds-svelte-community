@@ -33,6 +33,7 @@ export default [
 	{
 		rules: {
 			curly: "error",
+			"svelte/no-navigation-without-resolve": "off",
 		},
 	},
 ];

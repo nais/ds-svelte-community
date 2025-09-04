@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { base, resolveRoute } from "$app/paths";
+	import { base, resolve } from "$app/paths";
 	import { page } from "$app/state";
 	import { Box, Detail, Page, PageBlock } from "$lib";
 	import InternalHeader from "$lib/components/InternalHeader/InternalHeader.svelte";
@@ -34,6 +34,12 @@
 		}
 		return base;
 	});
+
+	function customResolve(path: string, params = {}) {
+		// Dirty hack for now to make resolve work without warnings
+
+		return resolve(path as "/[[theme=theme]]", params) as "/";
+	}
 </script>
 
 <svelte:head>
@@ -73,7 +79,7 @@
 										key == "pages" ? `/${component}/` : `/${key}/${component}/`
 									).replaceAll("//", "/")}
 									<li>
-										<!-- eslint-disable-next-line svelte/valid-compile using $ to access stores currently errors the validator -->
+										<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 										<a
 											class="unstyled"
 											class:active={compare(page.route.id, href)}
@@ -98,7 +104,7 @@
 						{#if page.route.id}
 							{#if data.theme != "dark"}
 								<br /><a
-									href={resolveRoute(page.route.id, { ...page.params, theme: "dark" })}
+									href={customResolve(page.route.id, { ...page.params, theme: "dark" })}
 									data-sveltekit-reload={!data.theme}
 									data-sveltekit-noscroll
 								>
@@ -107,7 +113,7 @@
 							{/if}
 							{#if !data.theme || data.theme == "dark"}
 								<br /><a
-									href={resolveRoute(page.route.id, { ...page.params, theme: "light" })}
+									href={customResolve(page.route.id, { ...page.params, theme: "light" })}
 									data-sveltekit-reload={!data.theme}
 									data-sveltekit-noscroll
 								>
@@ -116,7 +122,7 @@
 							{/if}
 							{#if data.theme}
 								<br /><a
-									href={resolveRoute(page.route.id, { ...page.params, theme: undefined })}
+									href={customResolve(page.route.id, { ...page.params, theme: undefined })}
 									data-sveltekit-reload>Remove darkside</a
 								>
 							{/if}

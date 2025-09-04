@@ -1,5 +1,6 @@
 import type { Doc } from "@nais/vite-plugin-svelte-docs";
 import { getContext, setContext, type Snippet } from "svelte";
+import { SvelteMap } from "svelte/reactivity";
 
 const ctxKey = Symbol("doc-context");
 
@@ -17,11 +18,11 @@ export class Context {
 	story: Story | undefined = $state(undefined);
 	stories: Story[] = $state([]);
 
-	private _templates: Map<string, Template>;
+	private _templates: SvelteMap<string, Template>;
 	private _name: string;
 
 	constructor(doc: Doc) {
-		this._templates = new Map();
+		this._templates = new SvelteMap();
 		this._name = doc.name;
 	}
 

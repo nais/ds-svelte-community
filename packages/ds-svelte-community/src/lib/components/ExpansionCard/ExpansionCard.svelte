@@ -20,6 +20,7 @@
 		description,
 		ontoggle,
 		showMoreTitle = "Show more",
+		"data-color": color = "neutral",
 		...restProps
 	}: ExpansionCardProps = $props();
 
@@ -43,6 +44,7 @@
 			"navds-expansioncard--no-animation": startedOpened,
 		},
 	])}
+	data-color={color}
 >
 	<div class={classes("navds-expansioncard__header")} data-open={open}>
 		<div class={classes("navds-expansioncard__header-content")}>

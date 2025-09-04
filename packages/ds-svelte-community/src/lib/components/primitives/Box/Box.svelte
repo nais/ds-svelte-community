@@ -48,20 +48,17 @@
 			"navds-box-shadow": !!shadow,
 		},
 	])}
-	style={combineStyles(
-		restProps,
-		getResponsiveProps(prefix, "box", "border-radius", "border-radius", borderRadius, false, ["0"]),
-		{
-			[`--__${prefix}c-box-background`]: background ? `var(--a-${background})` : null,
-			[`--__${prefix}c-box-border-color`]: borderColor ? `var(--a-${borderColor})` : null,
-			[`--__${prefix}c-box-shadow`]: shadow ? `var(--a-shadow-${shadow})` : null,
-			[`--__${prefix}c-box-border-width`]: borderWidth
-				? borderWidth
-						.split(" ")
-						.map((x) => `${x}px`)
-						.join(" ")
-				: null,
-		},
-	)}
+	style={combineStyles(restProps, {
+		[`--__${prefix}c-box-background`]: background ? `var(--a-${background})` : undefined,
+		[`--__${prefix}c-box-shadow`]: shadow ? `var(--a-shadow-${shadow})` : undefined,
+		[`--__${prefix}c-box-border-color`]: borderColor ? `var(--a-${borderColor})` : undefined,
+		[`--__${prefix}c-box-border-width`]: borderWidth
+			? borderWidth
+					.split(" ")
+					.map((x) => `${x}px`)
+					.join(" ")
+			: undefined,
+		...getResponsiveProps(prefix, "box", "radius", "radius", borderRadius, false, ["0"]),
+	})}
 	{children}
 />
