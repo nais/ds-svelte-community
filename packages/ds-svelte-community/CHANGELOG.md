@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 1.0.3
+
+### Patch Changes
+
+- [#315](https://github.com/nais/ds-svelte-community/pull/315) [`ed59186`](https://github.com/nais/ds-svelte-community/commit/ed591865d5cc7581c3a500d47b08b14f093bcf78) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade dependencies and generate new icons etc
+
 ## 1.0.2
 
 ### Patch Changes
