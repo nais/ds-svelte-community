@@ -1,5 +1,19 @@
 # @nais/ds-svelte-community
 
+## 2.0.0-next.0
+
+### Major Changes
+
+- [#302](https://github.com/nais/ds-svelte-community/pull/302) [`b375e38`](https://github.com/nais/ds-svelte-community/commit/b375e380f5b5605c084273c569fe18972913fb14) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade to Vite 7
+
+- [#277](https://github.com/nais/ds-svelte-community/pull/277) [`783c9fc`](https://github.com/nais/ds-svelte-community/commit/783c9fc815c40c127953ce408e4535de65bc6d47) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Remove ds-svelte-community-preprocess-svelte
+
+### Patch Changes
+
+- [#279](https://github.com/nais/ds-svelte-community/pull/279) [`4b1655f`](https://github.com/nais/ds-svelte-community/commit/4b1655f4039d44443f3da7d49bf1ddf108cff284) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Fix search clear button being submit
+
+- [#317](https://github.com/nais/ds-svelte-community/pull/317) [`7bb16ae`](https://github.com/nais/ds-svelte-community/commit/7bb16ae6890ef60c1d81770624b6f222011a49b1) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade dependencies
+
 ## 1.0.0
 
 ### Major Changes
