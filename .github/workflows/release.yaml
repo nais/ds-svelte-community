@@ -26,7 +26,7 @@ jobs:
 
       - id: "auth"
         name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v2" # ratchet:google-github-actions/auth@v2
+        uses: "google-github-actions/auth@v3" # ratchet:google-github-actions/auth@v3
         with:
           workload_identity_provider: "${{ secrets.NAIS_IO_WORKLOAD_IDENTITY_PROVIDER }}"
           service_account: "gh-ds-svelte-community@nais-io.iam.gserviceaccount.com"
