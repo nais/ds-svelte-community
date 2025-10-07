@@ -22,9 +22,6 @@ describe("which components are implemented", () => {
 		"Dropdown",
 		"DropdownMenu",
 		"DropdownToggle",
-		"ExpansionCardContent",
-		"ExpansionCardDescription",
-		"ExpansionCardHeader",
 		"FileUpload",
 		"FileUploadDropzone",
 		"FileUploadItem",
@@ -88,14 +85,17 @@ describe("which components are implemented", () => {
 		TabPanel: "TabsPanel",
 	};
 
-	// Ignored components are components that we don't want to implement in Svelte, or is implmented in a different way (e.g. slots)
+	// Ignored components are components that we don't want to implement in Svelte, or is implmented in a different way (e.g. Snippets)
 	const ignoredComponents: string[] = [
-		"AccordionHeader", // Slot
-		"AccordionContent", // Slot
-		"ModalHeader", // Slot
-		"ModalBody", // Slot
-		"ModalFooter", // Slot
-		"ConfirmationPanel",
+		"AccordionContent", // Snippet
+		"AccordionHeader", // Snippet
+		"ConfirmationPanel", // Snippet
+		"ExpansionCardContent", // Snippet
+		"ExpansionCardDescription", // Snippet
+		"ExpansionCardHeader", // Snippet
+		"ModalBody", // Snippet
+		"ModalFooter", // Snippet
+		"ModalHeader", // Snippet
 	];
 
 	const reactComponents = Object.keys(allReact).filter(

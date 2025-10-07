@@ -11,6 +11,7 @@ export * from "./components/ExpansionCard";
 export { default as Fieldset } from "./components/Fieldset/Fieldset.svelte";
 export * from "./components/GuidePanel";
 export { default as HelpText } from "./components/HelpText/HelpText.svelte";
+export { default as LinkCard } from "./components/LinkCard/LinkCard.svelte";
 export * from "./components/List";
 export { default as Loader } from "./components/Loader/Loader.svelte";
 export * from "./components/Modal";

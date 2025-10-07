@@ -17,5 +17,6 @@
 		"**/build",
 		"**/.svelte-kit",
 		"**/tests"
-	]
+	],
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -1,3 +1,4 @@
+import type { HTMLElements } from "$lib/components/utils/elements";
 import type { Snippet } from "svelte";
 import type { TypoProps } from "../typo_shared";
 
@@ -16,7 +17,7 @@ export interface BodyLongProps extends TypoProps {
 	/**
 	 * Tag to use for the body
 	 */
-	as?: "p" | "span" | "div";
+	as?: HTMLElements;
 
 	children: Snippet;
 }
