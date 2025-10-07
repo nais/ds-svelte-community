@@ -1,6 +1,6 @@
 import type { Snippet } from "svelte";
-import type { FieldsetProps } from "../Fieldset/type";
 import type { HTMLInputAttributes } from "svelte/elements";
+import type { FieldsetProps } from "../Fieldset/type";
 
 export interface RadioGroupProps<T = unknown>
 	extends Omit<FieldsetProps, "onchange" | "errorPropagation" | "nativeReadOnly"> {
@@ -36,5 +36,9 @@ export interface RadioProps<T = unknown> extends Omit<HTMLInputAttributes, "size
 	/**
 	 * Adds a description to extend the labeling.
 	 */
-	description?: string;
+	description?: Snippet | string;
+	/**
+	 * Changes font-size, padding and gaps.
+	 */
+	size?: "medium" | "small";
 }

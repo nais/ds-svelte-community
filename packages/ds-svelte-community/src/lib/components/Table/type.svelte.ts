@@ -63,6 +63,14 @@ export interface TableRowProps extends HTMLAttributes<HTMLTableRowElement> {
 	 * Row contents.
 	 */
 	children: Snippet;
+
+	/**
+	 * Click handler for row. This differs from onClick by not being called
+	 * when clicking on interactive elements within the row (buttons, links, inputs etc).
+	 *
+	 * **Warning:** This will not be accessible by keyboard! Provide an alternative way to select the row, e.g. a checkbox or a button.
+	 */
+	onRowClick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLTableRowElement }) => void;
 }
 
 export interface TableExpandableRowProps extends TableRowProps {

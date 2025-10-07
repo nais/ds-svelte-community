@@ -18,7 +18,7 @@
 		hideLabel = false,
 		value,
 		indeterminate = false,
-		description = "",
+		description,
 		size,
 		disabled = false,
 		id = "cb-" + uid,
@@ -31,6 +31,7 @@
 	const ctx = GetCheckboxGroupContext();
 
 	const lblID = "cblbl-" + uid;
+	const descriptionID = "cbdesc-" + uid;
 
 	if (ctx && ctx.groupControlled) {
 		if (checked !== undefined) {
@@ -66,63 +67,75 @@
 		},
 	]}
 >
-	<input
-		{...omit(restProps, "class")}
-		{id}
-		type="checkbox"
-		class="aksel-checkbox__input"
-		aria-checked={indeterminate ? "mixed" : undefined}
-		aria-invalid={hasError ? "true" : undefined}
-		aria-labelledby={lblID}
-		bind:indeterminate
-		checked={checkedValue}
-		{value}
-		onchange={(e) => {
-			checked = e.currentTarget.checked;
+	<div class="aksel-checkbox__input-wrapper">
+		<input
+			{...omit(restProps, "class")}
+			{id}
+			type="checkbox"
+			class="aksel-checkbox__input"
+			aria-describedby={restProps["aria-describedby"]
+				? restProps["aria-describedby"]
+				: description
+					? descriptionID
+					: undefined}
+			aria-checked={indeterminate ? "mixed" : undefined}
+			aria-invalid={hasError ? "true" : undefined}
+			aria-labelledby={lblID}
+			bind:indeterminate
+			checked={checkedValue}
+			{value}
+			onchange={(e) => {
+				checked = e.currentTarget.checked;
 
-			if (ctx) {
-				ctx.onchange(value);
-			}
-			/**
-			 * Trigger when the checkbox changes. Will pass the event object as argument.
-			 */
-			if (onchange) {
-				onchange(e);
-			}
-		}}
+				if (ctx) {
+					ctx.onchange(value);
+				}
+				/**
+				 * Trigger when the checkbox changes. Will pass the event object as argument.
+				 */
+				if (onchange) {
+					onchange(e);
+				}
+			}}
+		/>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 13 10"
+			fill="none"
+			focusable="false"
+			role="img"
+			aria-hidden="true"
+			class="aksel-checkbox__icon"
+		>
+			<path
+				d="M4.03524 6.41478L10.4752 0.404669C11.0792 -0.160351 12.029 -0.130672 12.5955 0.47478C13.162 1.08027 13.1296 2.03007 12.5245 2.59621L5.02111 9.59934C4.74099 9.85904 4.37559 10 4.00025 10C3.60651 10 3.22717 9.84621 2.93914 9.56111L0.439143 7.06111C-0.146381 6.47558 -0.146381 5.52542 0.439143 4.93989C1.02467 4.35437 1.97483 4.35437 2.56036 4.93989L4.03524 6.41478Z"
+				fill="currentColor"
+			/>
+		</svg>
+	</div>
+	<BodyShort
+		as="label"
+		for={id}
+		{size}
+		class={[
+			"aksel-checkbox__label",
+			{
+				"aksel-sr-only": hideLabel,
+			},
+		]}
+		{children}
 	/>
-	<label for={id} class="aksel-checkbox__label" id={lblID}>
-		<span class="aksel-checkbox__icon">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 13 10"
-				fill="none"
-				focusable="false"
-				role="img"
-				aria-hidden="true"
-			>
-				<path
-					d="M4.03524 6.41478L10.4752 0.404669C11.0792 -0.160351 12.029 -0.130672 12.5955 0.47478C13.162 1.08027 13.1296 2.03007 12.5245 2.59621L5.02111 9.59934C4.74099 9.85904 4.37559 10 4.00025 10C3.60651 10 3.22717 9.84621 2.93914 9.56111L0.439143 7.06111C-0.146381 6.47558 -0.146381 5.52542 0.439143 4.93989C1.02467 4.35437 1.97483 4.35437 2.56036 4.93989L4.03524 6.41478Z"
-					fill="currentColor"
-				/>
-			</svg>
-		</span>
-		<span class="aksel-checkbox__icon-indeterminate"></span>
-		{#if children}
-			<span class={["aksel-checkbox__content", { "aksel-sr-only": hideLabel }]}>
-				<BodyShort as="span" {size} class="aksel-checkbox__label-text">
-					{@render children()}
-				</BodyShort>
-				{#if description}
-					<BodyShort
-						as="span"
-						class="aksel-form-field__subdescription aksel-checkbox__description"
-						{size}
-					>
-						{description}
-					</BodyShort>
-				{/if}
-			</span>
-		{/if}
-	</label>
+	{#if description}
+		<BodyShort
+			id={descriptionID}
+			{size}
+			class="aksel-form-field__subdescription aksel-checkbox__description"
+		>
+			{#if typeof description === "string"}
+				{description}
+			{:else}
+				{@render description()}
+			{/if}
+		</BodyShort>
+	{/if}
 </div>

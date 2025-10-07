@@ -58,7 +58,7 @@
 
 	<BodyLong
 		as="div"
-		aria-hidden={!open}
+		tabindex={0}
 		class={[
 			"aksel-read-more__content",
 			{

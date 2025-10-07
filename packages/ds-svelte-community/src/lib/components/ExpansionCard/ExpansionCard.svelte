@@ -30,6 +30,8 @@
 
 		ontoggle?.(open);
 	}
+
+	const TODO_THEME_COLOR = "accent";
 </script>
 
 <section
@@ -76,6 +78,7 @@
 
 	<BodyLong
 		as="div"
+		data-color={TODO_THEME_COLOR}
 		class={[
 			"aksel-expansioncard__content",
 			{
