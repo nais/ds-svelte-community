@@ -85,7 +85,7 @@ export interface CheckboxProps extends Omit<HTMLInputAttributes, "size"> {
 	/**
 	 * Adds a description to extend labeling of Checkbox
 	 */
-	description?: string;
+	description?: Snippet | string;
 
 	/**
 	 * Changes font-size, padding and gaps
@@ -110,7 +110,7 @@ export interface CheckboxProps extends Omit<HTMLInputAttributes, "size"> {
 	/**
 	 * Label text
 	 */
-	children?: Snippet;
+	children: Snippet;
 
 	/**
 	 * onchange event

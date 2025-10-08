@@ -4,7 +4,15 @@
 	import { GetRadioGroupContext } from "./RadioGroup.svelte";
 	import type { RadioProps } from "./type";
 
-	let { children, description, value, ...restProps }: RadioProps = $props();
+	let {
+		children,
+		size: localSize,
+		description,
+		value,
+		"data-color": color,
+		readonly,
+		...restProps
+	}: RadioProps = $props();
 
 	const ctx = GetRadioGroupContext<T>();
 	if (!ctx) {
@@ -13,6 +21,9 @@
 
 	const id = $props.id();
 	let radioID = $derived(`radio-${id}`);
+	let descriptionID = $derived(`radiodesc-${id}`);
+
+	const size = $derived(localSize ?? ctx.size ?? "medium");
 </script>
 
 <div
@@ -23,37 +34,40 @@
 		{
 			// "aksel-radio--error": hasError,
 			// "aksel-radio--disabled": ctx.disabled,
-			// "aksel-radio--readonly": ctx.readOnly,
+			"aksel-radio--readonly": readonly, // || ctx.readOnly,
 		},
 	]}
+	data-color={color}
 >
-	<!-- {...omit(inputProps, "aria-invalid")} -->
 	<input
-		{...omit(restProps, "children", "size", "description", "readOnly")}
-		name={ctx.name}
-		id={radioID}
+		{...omit(restProps, "aria-invalid", "aria-describedby")}
+		aria-describedby={restProps["aria-describedby"]
+			? restProps["aria-describedby"]
+			: description
+				? descriptionID
+				: undefined}
 		type="radio"
 		{value}
-		checked={ctx.value == value}
+		id={radioID}
 		class="aksel-radio__input"
+		name={ctx.name}
 		onchange={() => {
 			ctx.onchange(value as never);
 		}}
+		checked={ctx.value == value}
 	/>
-	<label for={radioID} class="aksel-radio__label">
-		<span class="aksel-radio__content">
-			<BodyShort as="span" size={ctx.size}>
-				{@render children()}
-			</BodyShort>
-			{#if description}
-				<BodyShort
-					as="span"
-					size={ctx.size}
-					class="aksel-form-field__subdescription aksel-radio__description"
-				>
-					{description}
-				</BodyShort>
+	<BodyShort as="label" for={radioID} class="aksel-radio__label" {size} {children} />
+	{#if description}
+		<BodyShort
+			id={descriptionID}
+			{size}
+			class="navds-form-field__subdescription navds-radio__description"
+		>
+			{#if typeof description === "string"}
+				{description}
+			{:else}
+				{@render description()}
 			{/if}
-		</span>
-	</label>
+		</BodyShort>
+	{/if}
 </div>

@@ -19,7 +19,6 @@
 					return;
 				}
 
-				console.log("CHANGE TO", value);
 				this.value = value;
 				onchange?.(value);
 			};

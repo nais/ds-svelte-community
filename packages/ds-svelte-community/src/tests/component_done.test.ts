@@ -35,6 +35,7 @@ describe("which components are implemented", () => {
 		"FormSummaryAnswer",
 		"FormSummaryAnswers",
 		"FormSummaryEditLink",
+		"FormSummaryFooter",
 		"FormSummaryHeader",
 		"FormSummaryHeading",
 		"FormSummaryLabel",

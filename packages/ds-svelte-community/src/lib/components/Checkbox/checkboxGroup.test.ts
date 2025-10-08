@@ -137,13 +137,13 @@ describe("CheckboxGroup", () => {
 
 function ignoreKnownUnique(node: HTMLElement, attr: string) {
 	const tag = node.tagName.toLowerCase();
-	if (["input", "fieldset"].includes(tag) && ["aria-labelledby", "id"].includes(attr)) {
+	if (
+		["input", "fieldset"].includes(tag) &&
+		["aria-labelledby", "id", "aria-describedby"].includes(attr)
+	) {
 		return false;
 	}
 	if (tag == "label" && ["for", "id"].includes(attr)) {
-		return false;
-	}
-	if (tag == "span" && attr == "id") {
 		return false;
 	}
 	if (tag == "div" && attr == "id") {
@@ -153,6 +153,9 @@ function ignoreKnownUnique(node: HTMLElement, attr: string) {
 		return false;
 	}
 	if (tag == "legend" && attr == "id") {
+		return false;
+	}
+	if (tag == "p" && attr == "id") {
 		return false;
 	}
 	return true;
