@@ -1,4 +1,3 @@
-import type { HTMLElements } from "$lib/components/utils/elements";
 import type { Component, Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 
@@ -37,7 +36,7 @@ export const variants = [
 
 export const sizes = ["medium", "small", "xsmall"] as const;
 
-export interface TagProps extends Omit<HTMLAttributes<HTMLElement>, "children"> {
+export interface TagSpecificProps {
 	/**
 	 * Changes visual profile of tag.
 	 */
@@ -46,10 +45,6 @@ export interface TagProps extends Omit<HTMLAttributes<HTMLElement>, "children"> 
 	 * Changes font size.
 	 */
 	size?: (typeof sizes)[number];
-	/**
-	 * Tag to use for the element.
-	 */
-	as?: HTMLElements;
 	/**
 	 * Tag content.
 	 */
@@ -60,3 +55,7 @@ export interface TagProps extends Omit<HTMLAttributes<HTMLElement>, "children"> 
 	 */
 	icon?: Snippet | Component;
 }
+
+export interface TagProps
+	extends TagSpecificProps,
+		Omit<HTMLAttributes<HTMLElement>, keyof TagSpecificProps> {}

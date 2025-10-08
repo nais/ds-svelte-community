@@ -1,7 +1,8 @@
 import type { Snippet } from "svelte";
+import type { PolymorphicPropsWithDefault } from "../polymorphic";
 import type { TypoProps } from "../typo_shared";
 
-export interface BodyLongProps extends TypoProps {
+export interface BodyLongSpecificProps extends TypoProps {
 	/**
 	 * The size of the body
 	 * medium: 18px, small: 16px
@@ -13,10 +14,7 @@ export interface BodyLongProps extends TypoProps {
 	 */
 	spacing?: boolean;
 
-	/**
-	 * Tag to use for the body
-	 */
-	as?: "p" | "span" | "div";
-
 	children: Snippet;
 }
+
+export type BodyLongProps = PolymorphicPropsWithDefault<"p", BodyLongSpecificProps>;

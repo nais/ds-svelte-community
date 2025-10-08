@@ -9,20 +9,16 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	import { isSnippet, omit } from "../helpers";
 	import type { AkselColor } from "../Theme/Theme.svelte";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
-	import Detail from "../typography/Detail/Detail.svelte";
 	import type { TagProps } from "./type";
 
 	let {
 		variant = "info",
 		size = "medium",
-		as = "span",
 		children,
 		icon,
 		"data-color": color,
 		...restProps
 	}: TagProps = $props();
-
-	const Component = $derived(size == "medium" ? BodyShort : Detail);
 
 	let filledVariant = $derived(variant?.endsWith("-filled") && "strong");
 	let moderateVariant = $derived(variant?.endsWith("-moderate") && "moderate");
@@ -66,10 +62,9 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	}
 </script>
 
-<Component
-	{as}
+<BodyShort
 	{...omit(restProps, "size", "class")}
-	size={size == "medium" ? "medium" : "small"}
+	as="span"
 	data-color={color ?? variantToColor(variant)}
 	data-variant={filledVariant || moderateVariant || "outline"}
 	class={[restProps.class, "aksel-tag", `aksel-tag--${variant}`, `aksel-tag--${size}`]}
@@ -89,4 +84,4 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	{:else}
 		{@render children()}
 	{/if}
-</Component>
+</BodyShort>

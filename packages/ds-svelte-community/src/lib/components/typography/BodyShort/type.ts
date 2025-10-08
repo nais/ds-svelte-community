@@ -1,15 +1,14 @@
 import type { Snippet } from "svelte";
-import type { SvelteHTMLElements } from "svelte/elements";
+import type { PolymorphicPropsWithDefault } from "../polymorphic";
 import type { TypoProps } from "../typo_shared";
 
-export interface BodyShortProps extends TypoProps {
+export interface BodyShortSpecificProps extends TypoProps {
 	/**
 	 * medium: 18px, small: 16px
 	 */
 	size?: "large" | "medium" | "small";
-	/**
-	 * Tag to use for the body
-	 */
-	as?: keyof SvelteHTMLElements;
+
 	children: Snippet;
 }
+
+export type BodyShortProps = PolymorphicPropsWithDefault<"p", BodyShortSpecificProps>;
