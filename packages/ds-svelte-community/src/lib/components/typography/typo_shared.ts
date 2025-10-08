@@ -1,6 +1,4 @@
-import type { HTMLAttributes } from "svelte/elements";
-
-export interface TypoProps extends HTMLAttributes<HTMLElement> {
+export interface TypoProps {
 	/**
 	 * Truncate text overflow with ellipsis.
 	 */

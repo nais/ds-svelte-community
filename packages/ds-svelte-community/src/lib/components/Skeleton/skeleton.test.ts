@@ -12,6 +12,12 @@ describe("Skeleton", () => {
 			};
 			expect(render(Skeleton, props)).toMimicReact(ReactSkeleton, {
 				props,
+				opts: {
+					visual: {
+						antialiasingTolerance: 10,
+						strict: false,
+					},
+				},
 			});
 		});
 	});

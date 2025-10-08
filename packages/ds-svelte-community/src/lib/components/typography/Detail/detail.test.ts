@@ -7,7 +7,7 @@ import Detail from "./Detail.svelte";
 import type { DetailProps } from "./type";
 
 describe("Detail", () => {
-	[undefined, "span"].forEach((as) => {
+	([undefined, "span"] as (undefined | "span")[]).forEach((as) => {
 		[undefined, true].forEach((uppercase) => {
 			[undefined, true].forEach((spacing) => {
 				it(`renders with HTML similar to ds-react (as: ${as} uppercase: ${uppercase} spacing: ${spacing})`, async () => {
