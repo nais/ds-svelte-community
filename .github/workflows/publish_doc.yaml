@@ -18,9 +18,9 @@ jobs:
     # Only run if @nais/ds-svelte-community is published and version does not contain "-next."
     # It's done with some suboptimal string matching, but it works for now.
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: jdx/mise-action@v2
+      - uses: jdx/mise-action@v3
 
       - name: Install dependencies
         run: |
@@ -35,7 +35,7 @@ jobs:
           bun run build:docs
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: packages/ds-svelte-community/build/
 
