@@ -11,12 +11,14 @@
 		gap,
 		direction = "row",
 		as = "div",
+		children,
 		...restProps
 	}: FullStackProps = $props();
 </script>
 
 <BasePrimitive
 	{as}
+	{children}
 	{...omit(restProps, "class", "style")}
 	class={[
 		restProps.class,

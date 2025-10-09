@@ -1,9 +1,7 @@
-import type { HTMLElements } from "$lib/components/utils/elements";
 import type { ResponsiveProp, SpacingScale } from "$lib/components/utils/types";
-import type { Snippet } from "svelte";
-import type { HTMLAttributes } from "svelte/elements";
+import type { BasePrimitiveProps } from "../base/type";
 
-export interface HGridProps extends HTMLAttributes<HTMLElement> {
+export interface HGridSpecificProps {
 	/**
 	 * Number of columns to display. Can be a number, a string with a unit or tokens for spesific breakpoints.
 	 * Sets `grid-template-columns`, so `fr`, `minmax` etc. works.
@@ -25,11 +23,6 @@ export interface HGridProps extends HTMLAttributes<HTMLElement> {
 	 * Vertical alignment of children. Elements will by default stretch to the height of parent-element.
 	 */
 	align?: "start" | "center" | "end";
-
-	/**
-	 * HTML element to render as.
-	 */
-	as?: HTMLElements;
-
-	children: Snippet;
 }
+
+export type HGridProps = BasePrimitiveProps & HGridSpecificProps;

@@ -1,11 +1,11 @@
 import type { ResponsiveProp, SpacingScale } from "$lib/components/utils/types";
 import type { Snippet } from "svelte";
-import type { HTMLAttributes } from "svelte/elements";
+import type { PolymorphicPropsWithDefault } from "../../typography/polymorphic";
 
 export type BleedSpacingInline = "0" | "full" | "px" | SpacingScale;
 export type BleedSpacingBlock = "0" | "px" | SpacingScale;
 
-export interface BleedProps extends HTMLAttributes<HTMLElement> {
+export interface BleedSpecificProps {
 	/** **Negative** horizontal margin around children.
 	 *  Accepts a spacing token or an object of spacing tokens for different breakpoints.
 	 * @example
@@ -28,11 +28,9 @@ export interface BleedProps extends HTMLAttributes<HTMLElement> {
 	 */
 	reflectivePadding?: boolean;
 	/**
-	 * HTML element to render as.
-	 */
-	as?: string;
-	/**
 	 * Content
 	 */
 	children: Snippet;
 }
+
+export type BleedProps = PolymorphicPropsWithDefault<"div", BleedSpecificProps>;

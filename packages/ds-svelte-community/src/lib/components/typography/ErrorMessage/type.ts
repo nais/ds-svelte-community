@@ -1,7 +1,7 @@
 import type { Snippet } from "svelte";
-import type { HTMLAttributes } from "svelte/elements";
+import type { PolymorphicPropsWithDefault } from "../polymorphic";
 
-export interface ErrorMessageProps extends HTMLAttributes<HTMLParagraphElement> {
+export interface ErrorMessageSpecificProps {
 	/**
 	 * The size of the body
 	 * medium: 18px, small: 16px
@@ -9,10 +9,10 @@ export interface ErrorMessageProps extends HTMLAttributes<HTMLParagraphElement> 
 	size?: "medium" | "small";
 	/** Adds margin-bottom */
 	spacing?: boolean;
-	/** Tag to use for the body */
-	as?: "p" | "span";
 
 	showIcon?: boolean;
 
 	children: Snippet;
 }
+
+export type ErrorMessageProps = PolymorphicPropsWithDefault<"p", ErrorMessageSpecificProps>;

@@ -41,6 +41,7 @@
 
 <BasePrimitive
 	{as}
+	{children}
 	{...omit(restProps, "class", "style")}
 	class={[
 		restProps.class,
@@ -54,5 +55,4 @@
 		},
 	]}
 	style={styles ? styles : undefined}
-	{children}
 />

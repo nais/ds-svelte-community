@@ -129,7 +129,7 @@ export type PolymorphicElement =
  * @template TProps - Additional component-specific props
  */
 export type PolymorphicPropsWithDefault<
-	TDefaultElement extends "p" | "span" | "div",
+	TDefaultElement extends "p" | "span" | "div" | "label",
 	TProps = Record<string, never>,
 > =
 	// Default element (as is optional)
@@ -142,6 +142,9 @@ export type PolymorphicPropsWithDefault<
 			: never)
 	| (TDefaultElement extends "div"
 			? { as?: "div" } & TProps & Omit<HTMLAttributes<HTMLDivElement>, keyof TProps | "children">
+			: never)
+	| (TDefaultElement extends "label"
+			? { as?: "label" } & TProps & Omit<HTMLLabelAttributes, keyof TProps | "children">
 			: never)
 	// Anchor element
 	| ({ as: "a" } & TProps & Omit<HTMLAnchorAttributes, keyof TProps | "children">)
@@ -261,3 +264,165 @@ export type PolymorphicPropsWithDefault<
 	| ({ as: "br" } & TProps & Omit<HTMLAttributes<HTMLBRElement>, keyof TProps | "children">)
 	| ({ as: "dialog" } & TProps &
 			Omit<HTMLAttributes<HTMLDialogElement>, keyof TProps | "children">);
+
+/**
+ * Polymorphic component type with constrained element choices.
+ * Allows you to specify exactly which elements are allowed for a component.
+ *
+ * @template TDefaultElement - The default HTML element when `as` is not provided
+ * @template TAllowedElements - Union of allowed element strings
+ * @template TProps - Additional component-specific props
+ */
+export type PolymorphicPropsWithConstrainedElements<
+	TDefaultElement extends string,
+	TAllowedElements extends string,
+	TProps = Record<string, never>,
+> = TAllowedElements extends infer TElement
+	? TElement extends string
+		? // Default element (as is optional)
+			TElement extends TDefaultElement
+			? { as?: TElement } & TProps & ElementAttributes<TElement, TProps>
+			: { as: TElement } & TProps & ElementAttributes<TElement, TProps>
+		: never
+	: never;
+
+/**
+ * Helper type to get the correct HTML attributes for an element
+ */
+type ElementAttributes<TElement extends string, TProps> = TElement extends "a"
+	? Omit<HTMLAnchorAttributes, keyof TProps | "children">
+	: TElement extends "button"
+		? Omit<HTMLButtonAttributes, keyof TProps | "children">
+		: TElement extends "label"
+			? Omit<HTMLLabelAttributes, keyof TProps | "children">
+			: TElement extends "div"
+				? Omit<HTMLAttributes<HTMLDivElement>, keyof TProps | "children">
+				: TElement extends "span"
+					? Omit<HTMLAttributes<HTMLSpanElement>, keyof TProps | "children">
+					: TElement extends "p"
+						? Omit<HTMLAttributes<HTMLParagraphElement>, keyof TProps | "children">
+						: TElement extends "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
+							? Omit<HTMLAttributes<HTMLHeadingElement>, keyof TProps | "children">
+							: TElement extends
+										| "section"
+										| "article"
+										| "aside"
+										| "header"
+										| "footer"
+										| "main"
+										| "nav"
+								? Omit<HTMLAttributes<HTMLElement>, keyof TProps | "children">
+								: TElement extends "ul"
+									? Omit<HTMLAttributes<HTMLUListElement>, keyof TProps | "children">
+									: TElement extends "ol"
+										? Omit<HTMLAttributes<HTMLOListElement>, keyof TProps | "children">
+										: TElement extends "li"
+											? Omit<HTMLAttributes<HTMLLIElement>, keyof TProps | "children">
+											: TElement extends "table"
+												? Omit<HTMLAttributes<HTMLTableElement>, keyof TProps | "children">
+												: TElement extends "thead" | "tbody" | "tfoot"
+													? Omit<HTMLAttributes<HTMLTableSectionElement>, keyof TProps | "children">
+													: TElement extends "tr"
+														? Omit<HTMLAttributes<HTMLTableRowElement>, keyof TProps | "children">
+														: TElement extends "th" | "td"
+															? Omit<
+																	HTMLAttributes<HTMLTableCellElement>,
+																	keyof TProps | "children"
+																>
+															: TElement extends "legend"
+																? Omit<HTMLAttributes<HTMLLegendElement>, keyof TProps | "children">
+																: TElement extends "fieldset"
+																	? Omit<
+																			HTMLAttributes<HTMLFieldSetElement>,
+																			keyof TProps | "children"
+																		>
+																	: TElement extends "form"
+																		? Omit<
+																				HTMLAttributes<HTMLFormElement>,
+																				keyof TProps | "children"
+																			>
+																		: TElement extends "input"
+																			? Omit<
+																					HTMLAttributes<HTMLInputElement>,
+																					keyof TProps | "children"
+																				>
+																			: TElement extends "textarea"
+																				? Omit<
+																						HTMLAttributes<HTMLTextAreaElement>,
+																						keyof TProps | "children"
+																					>
+																				: TElement extends "select"
+																					? Omit<
+																							HTMLAttributes<HTMLSelectElement>,
+																							keyof TProps | "children"
+																						>
+																					: TElement extends "option"
+																						? Omit<
+																								HTMLAttributes<HTMLOptionElement>,
+																								keyof TProps | "children"
+																							>
+																						: TElement extends "time"
+																							? Omit<
+																									HTMLAttributes<HTMLTimeElement>,
+																									keyof TProps | "children"
+																								>
+																							: TElement extends "img"
+																								? Omit<
+																										HTMLAttributes<HTMLImageElement>,
+																										keyof TProps | "children"
+																									>
+																								: TElement extends "video"
+																									? Omit<
+																											HTMLAttributes<HTMLVideoElement>,
+																											keyof TProps | "children"
+																										>
+																									: TElement extends "audio"
+																										? Omit<
+																												HTMLAttributes<HTMLAudioElement>,
+																												keyof TProps | "children"
+																											>
+																										: TElement extends "canvas"
+																											? Omit<
+																													HTMLAttributes<HTMLCanvasElement>,
+																													keyof TProps | "children"
+																												>
+																											: TElement extends "iframe"
+																												? Omit<
+																														HTMLAttributes<HTMLIFrameElement>,
+																														keyof TProps | "children"
+																													>
+																												: TElement extends "pre"
+																													? Omit<
+																															HTMLAttributes<HTMLPreElement>,
+																															keyof TProps | "children"
+																														>
+																													: TElement extends "blockquote" | "q"
+																														? Omit<
+																																HTMLAttributes<HTMLQuoteElement>,
+																																keyof TProps | "children"
+																															>
+																														: TElement extends "dl"
+																															? Omit<
+																																	HTMLAttributes<HTMLDListElement>,
+																																	keyof TProps | "children"
+																																>
+																															: TElement extends "hr"
+																																? Omit<
+																																		HTMLAttributes<HTMLHRElement>,
+																																		keyof TProps | "children"
+																																	>
+																																: TElement extends "br"
+																																	? Omit<
+																																			HTMLAttributes<HTMLBRElement>,
+																																			keyof TProps | "children"
+																																		>
+																																	: TElement extends "dialog"
+																																		? Omit<
+																																				HTMLAttributes<HTMLDialogElement>,
+																																				keyof TProps | "children"
+																																			>
+																																		: // Default fallback for other elements
+																																			Omit<
+																																				HTMLAttributes<HTMLElement>,
+																																				keyof TProps | "children"
+																																			>;

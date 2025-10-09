@@ -2,17 +2,18 @@
 	import type { HeadingProps } from "./type";
 
 	let {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		level = "1",
 		size = "medium",
 		spacing = false,
-		as,
+		as = "h1",
 		children,
 		...restProps
 	}: HeadingProps = $props();
 </script>
 
 <svelte:element
-	this={as ? as : "h" + level}
+	this={as}
 	{...restProps}
 	class={[
 		restProps.class,

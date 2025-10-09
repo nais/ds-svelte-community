@@ -1,9 +1,7 @@
-import type { HTMLElements } from "$lib/components/utils/elements";
 import type {
 	BorderRadiusScale,
 	ResponsiveProp,
 	SpaceDelimitedAttribute,
-	SpacingScale,
 } from "$lib/components/utils/types";
 import type {
 	AkselColoredBorderToken,
@@ -12,11 +10,9 @@ import type {
 	AkselRootBorderToken,
 	AkselShadowToken,
 } from "@navikt/ds-tokens/types";
-import type { Snippet } from "svelte";
-import type { HTMLAttributes } from "svelte/elements";
 import type { BasePrimitiveProps } from "../base/type";
 
-export interface BaseBoxProps extends HTMLAttributes<HTMLDivElement>, BasePrimitiveProps {
+export interface BoxSpecificProps {
 	/**
 	 * CSS `background-color` property.
 	 * Accepts a [background color token](https://aksel.nav.no/grunnleggende/darkside/design-tokens#backgroundColor).
@@ -57,41 +53,6 @@ export interface BaseBoxProps extends HTMLAttributes<HTMLDivElement>, BasePrimit
 	 * @see {@link AkselShadowToken}
 	 */
 	shadow?: AkselShadowToken;
-
-	/** Spacing around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
-	 * @example
-	 * padding='4'
-	 * padding={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
-	 */
-	padding?: ResponsiveProp<SpacingScale>;
-
-	/** Horizontal padding around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
-	 * @example
-	 * paddingInline='4'
-	 * paddingInline='4 5'
-	 * paddingInline={{xs: '0 32', sm: '3', md: '4 5', lg: '5', xl: '6'}}
-	 */
-	paddingInline?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
-
-	/** Vertical padding around children. Accepts a spacing token or an object of spacing tokens for different breakpoints.
-	 * @example
-	 * paddingBlock='4'
-	 * paddingBlock='4 5'
-	 * paddingBlock={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
-	 */
-	paddingBlock?: ResponsiveProp<SpacingScale | `${SpacingScale} ${SpacingScale}`>;
-
-	/**
-	 * HTML element to render as.
-	 */
-	as?: HTMLElements;
-
-	/**
-	 * Content
-	 */
-	children: Snippet;
-
-	[key: string]: unknown;
 }
 
-export type BoxProps = BaseBoxProps;
+export type BoxProps = BasePrimitiveProps & BoxSpecificProps;

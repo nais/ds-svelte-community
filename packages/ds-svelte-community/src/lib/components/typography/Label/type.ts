@@ -1,7 +1,7 @@
 import type { Snippet } from "svelte";
-import type { HTMLLabelAttributes } from "svelte/elements";
+import type { PolymorphicPropsWithDefault } from "../polymorphic";
 
-export interface LabelProps extends HTMLLabelAttributes {
+export interface LabelSpecificProps {
 	/**
 	 * medium: 18px, small: 16px
 	 */
@@ -10,13 +10,11 @@ export interface LabelProps extends HTMLLabelAttributes {
 	 * Adds margin-bottom
 	 */
 	spacing?: boolean;
-	/**
-	 * Tag to use for the label
-	 */
-	as?: "label" | "legend" | "span";
 
 	/**
 	 * Content
 	 */
 	children: Snippet;
 }
+
+export type LabelProps = PolymorphicPropsWithDefault<"label", LabelSpecificProps>;
