@@ -176,8 +176,15 @@ export interface BasePrimitiveProps {
 	 */
 	gridColumn?: ResponsiveProp<string>;
 
+	/**
+	 * HTML element to render as.
+	 */
 	as?: HTMLElements;
-	children?: Snippet;
+
+	/**
+	 * Content
+	 */
+	children: Snippet;
 
 	[key: string]: unknown;
 }

@@ -1,15 +1,7 @@
 import type { ResponsiveProp, SpacingScale } from "$lib/components/utils/types";
-import type { Snippet } from "svelte";
 import type { BasePrimitiveProps } from "../base/type";
 
-export interface FullStackProps extends StackProps {
-	/**
-	 * flex-direction
-	 */
-	direction?: ResponsiveProp<"row" | "column">;
-}
-
-export interface StackProps extends BasePrimitiveProps {
+export interface StackSpecificProps {
 	/**
 	 * Justify-content
 	 */
@@ -30,6 +22,15 @@ export interface StackProps extends BasePrimitiveProps {
 	 * gap={{xs: '2', sm: '3', md: '4', lg: '5', xl: '6'}}
 	 */
 	gap?: ResponsiveProp<SpacingScale>;
-
-	children: Snippet;
 }
+
+export type StackProps = BasePrimitiveProps & StackSpecificProps;
+
+export interface FullStackSpecificProps extends StackSpecificProps {
+	/**
+	 * flex-direction
+	 */
+	direction?: ResponsiveProp<"row" | "column">;
+}
+
+export type FullStackProps = BasePrimitiveProps & FullStackSpecificProps;

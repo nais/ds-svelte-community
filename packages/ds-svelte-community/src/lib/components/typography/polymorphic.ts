@@ -129,7 +129,7 @@ export type PolymorphicElement =
  * @template TProps - Additional component-specific props
  */
 export type PolymorphicPropsWithDefault<
-	TDefaultElement extends "p" | "span" | "div",
+	TDefaultElement extends "p" | "span" | "div" | "label",
 	TProps = Record<string, never>,
 > =
 	// Default element (as is optional)
@@ -142,6 +142,9 @@ export type PolymorphicPropsWithDefault<
 			: never)
 	| (TDefaultElement extends "div"
 			? { as?: "div" } & TProps & Omit<HTMLAttributes<HTMLDivElement>, keyof TProps | "children">
+			: never)
+	| (TDefaultElement extends "label"
+			? { as?: "label" } & TProps & Omit<HTMLLabelAttributes, keyof TProps | "children">
 			: never)
 	// Anchor element
 	| ({ as: "a" } & TProps & Omit<HTMLAnchorAttributes, keyof TProps | "children">)
