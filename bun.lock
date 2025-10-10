@@ -17,7 +17,7 @@
     },
     "packages/ds-svelte-community": {
       "name": "@nais/ds-svelte-community",
-      "version": "1.0.0",
+      "version": "2.0.0-next.0",
       "dependencies": {
         "@navikt/ds-css": "^7.32.1",
         "@navikt/ds-tokens": "^7.32.1",
@@ -75,7 +75,7 @@
     },
     "packages/vite-plugin-svelte-docs": {
       "name": "@nais/vite-plugin-svelte-docs",
-      "version": "0.0.2",
+      "version": "0.0.3-next.0",
       "dependencies": {
         "svelte2tsx": "0.7.45",
         "vite": "^7.1.9",
