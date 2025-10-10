@@ -21,18 +21,9 @@
 	import { setContext } from "svelte";
 	import { omit } from "../helpers";
 
-	let {
-		variant,
-		headingSize = "small",
-		size = "medium",
-		indent = true,
-		children,
-		...restProps
-	}: AccordionProps = $props();
+	let { size = "medium", indent = true, children, ...restProps }: AccordionProps = $props();
 
 	class Context {
-		variant: AccordionProps["variant"] = $derived(variant);
-		headingSize: AccordionProps["headingSize"] = $derived(headingSize);
 		size: AccordionProps["size"] = $derived(size);
 	}
 

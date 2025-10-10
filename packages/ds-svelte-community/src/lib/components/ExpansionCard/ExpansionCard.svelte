@@ -7,6 +7,7 @@
 
 <script lang="ts">
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
+	import { GetTheme } from "../Theme/Theme.svelte";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import ExpansionCardTitle from "./ExpansionCardTitle.svelte";
 	import type { ExpansionCardProps } from "./type";
@@ -31,7 +32,7 @@
 		ontoggle?.(open);
 	}
 
-	const TODO_THEME_COLOR = "accent";
+	const themeCtx = GetTheme();
 </script>
 
 <section
@@ -78,7 +79,7 @@
 
 	<BodyLong
 		as="div"
-		data-color={TODO_THEME_COLOR}
+		data-color={themeCtx?.color}
 		class={[
 			"aksel-expansioncard__content",
 			{

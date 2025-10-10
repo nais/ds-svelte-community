@@ -3,6 +3,8 @@
 	import { getContext, setContext, untrack, type Snippet } from "svelte";
 	import type { HTMLElements } from "../utils/elements";
 
+	const DEFAULT_COLOR: AkselColor = "accent";
+
 	/* eslint-disable @typescript-eslint/no-empty-object-type */
 	export interface CustomAkselColor {}
 
@@ -12,6 +14,7 @@
 
 	export class ThemeContext {
 		#value?: "dark" | "light" = $state();
+		#color: AkselColor = $state(DEFAULT_COLOR);
 
 		constructor(value: "dark" | "light") {
 			this.#value = value;
@@ -23,6 +26,10 @@
 
 		set theme(value: "dark" | "light") {
 			this.#value = value;
+		}
+
+		get color(): AkselColor {
+			return this.#color;
 		}
 	}
 
@@ -49,10 +56,19 @@
 
 		as?: HTMLElements;
 
+		"data-color": AkselColor;
+
 		[key: string]: unknown;
 	};
 
-	let { theme, hasBackground = true, as = "div", children, ...restProps }: Props = $props();
+	let {
+		theme,
+		hasBackground = true,
+		as = "div",
+		children,
+		"data-color": color,
+		...restProps
+	}: Props = $props();
 
 	const parent = GetTheme();
 
@@ -76,6 +92,7 @@
 	this={as}
 	class={["aksel-theme", restProps?.class, ctx.theme]}
 	data-background={containsBackground}
+	data-color={color ?? ctx.color ?? ""}
 >
 	{@render children()}
 </svelte:element>

@@ -1,27 +1,13 @@
 import type { Snippet } from "svelte";
 import type { HTMLAttributes } from "svelte/elements";
 
-export const variants = ["default", "neutral"] as const;
-
 export const sizes = ["large", "medium", "small"] as const;
 
-export const headingSizes = ["large", "medium", "small", "xsmall"] as const;
-
 export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
-	/**
-	 * The variant of the accordion.
-	 */
-	variant?: (typeof variants)[number];
-
 	/**
 	 * The size of the accordion.
 	 */
 	size?: (typeof sizes)[number];
-
-	/**
-	 * The size of the accordion heading.
-	 */
-	headingSize?: (typeof headingSizes)[number];
 
 	/**
 	 * Whether to indent content or not
@@ -57,7 +43,5 @@ export interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export type AccordionContext = {
-	variant: AccordionProps["variant"];
-	headingSize: AccordionProps["headingSize"];
 	size: AccordionProps["size"];
 };
