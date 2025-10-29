@@ -19,6 +19,7 @@ export { default as Popover } from "./components/Popover/Popover.svelte";
 export * from "./components/primitives";
 export { default as Spacer } from "./components/primitives/Stack/Spacer.svelte";
 export * from "./components/Process";
+export { default as ProgressBar } from "./components/ProgressBar/ProgressBar.svelte";
 export * from "./components/Radio";
 export { default as ReadMore } from "./components/ReadMore/ReadMore.svelte";
 export * from "./components/Search";
