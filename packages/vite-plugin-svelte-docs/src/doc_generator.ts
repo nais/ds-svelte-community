@@ -190,7 +190,10 @@ export class DocGenerator {
 										return;
 									}
 									if (Array.isArray(i) || i.type != "interface") {
-										cctx.log("Expected interface type in inherits", i);
+										cctx.log(
+											"Expected interface type in inherits, got",
+											Array.isArray(i) ? "array" : i.type,
+										);
 										throw new Error(
 											`Expected interface type in inherits, got ${Array.isArray(i) ? "array" : i.type}`,
 										);
@@ -214,12 +217,37 @@ export class DocGenerator {
 							const combined: DocPObject = { type: "object", properties: [] };
 
 							const injectedInherits: string[] = [];
-							props.values.forEach((p) => {
-								if (Array.isArray(p) || p.type != "interface") {
-									cctx.log("Expected interface type in union", p);
-									throw new Error(
-										`Expected interface type in union, got ${Array.isArray(p) ? "array" : p.type}`,
+
+							// Flatten nested unions and process each type
+							const flattenUnion = (values: DocType[]): DocType[] => {
+								const flattened: DocType[] = [];
+								values.forEach((value) => {
+									if (!Array.isArray(value) && value.type === "union") {
+										// Recursively flatten nested unions
+										flattened.push(...flattenUnion(value.values));
+									} else {
+										flattened.push(value);
+									}
+								});
+								return flattened;
+							};
+
+							const flattenedValues = flattenUnion(props.values);
+
+							flattenedValues.forEach((p) => {
+								// Skip unknown types from complex polymorphic conditionals
+								if (Array.isArray(p) || p.type === "unknown") {
+									cctx.log(
+										"Skipping unknown/array type in union",
+										Array.isArray(p) ? "array" : p.type,
 									);
+									return;
+								}
+
+								if (p.type !== "interface") {
+									// Don't throw error for non-interface types, just skip them
+									// This handles cases where union contains literal types, etc.
+									return;
 								}
 
 								parseInterface(p, combined, injectedInherits, true);
@@ -423,8 +451,34 @@ export class DocGenerator {
 				return this.#typeReference(ctx, node as tsm.TypeReferenceNode);
 			case ts.SyntaxKind.ImportSpecifier:
 				return this.#importSpecifier(ctx, node as tsm.ImportSpecifier);
-			case ts.SyntaxKind.TypeAliasDeclaration:
-				return this.#typeOf(ctx, (node as tsm.TypeAliasDeclaration).getTypeNodeOrThrow());
+			case ts.SyntaxKind.TypeAliasDeclaration: {
+				const typeAlias = node as tsm.TypeAliasDeclaration;
+				const typeNode = typeAlias.getTypeNodeOrThrow();
+
+				// Check if this is a polymorphic type alias
+				if (typeNode.isKind(ts.SyntaxKind.TypeReference)) {
+					const typeRef = typeNode as tsm.TypeReferenceNode;
+					const typeName = typeRef.getTypeName().getText();
+
+					if (
+						typeName === "PolymorphicPropsWithDefault" ||
+						typeName === "PolymorphicPropsWithConstrainedElements"
+					) {
+						// Handle polymorphic types by extracting the component-specific props from the second type argument
+						const tas = typeRef.getTypeArguments();
+						if (tas.length >= 2) {
+							// The second argument contains the component-specific props (like DetailSpecificProps)
+							const componentPropsArg = tas[1];
+							return this.#typeOf(ctx, componentPropsArg);
+						} else {
+							return { type: "unknown" };
+						}
+					}
+				}
+
+				// Default behavior for non-polymorphic type aliases
+				return this.#typeOf(ctx, typeNode);
+			}
 			case ts.SyntaxKind.InterfaceDeclaration: {
 				const id = node as tsm.InterfaceDeclaration;
 
@@ -507,11 +561,10 @@ export class DocGenerator {
 						return { type: "interface", name: ewta.getText(), external: true };
 					}
 
-					// console.log("Expression with type argument");
+					// Handle polymorphic types and other complex type arguments
+					// Instead of throwing an error, return unknown for unsupported type expressions
+					ctx.log("Unsupported type expression with type arguments", ewta.getText());
 					return { type: "unknown" };
-
-					const type = ewta.getTypeArguments()[0];
-					return this.#typeOf(ctx, type);
 				}
 				return this.#typeOf(ctx, ewta.getExpression());
 			}
@@ -583,17 +636,27 @@ export class DocGenerator {
 				if (totn.getChildrenOfKind(ts.SyntaxKind.KeyOfKeyword).length > 0) {
 					return this.#keyof(ctx, totn);
 				}
-				console.log("TypeOperator not supported", totn.getText());
-				break;
+				ctx.log("Unsupported TypeOperator", totn.getText());
+				return { type: "unknown" };
 			}
 			case ts.SyntaxKind.TypeLiteral:
-				// ctx.log("TypeLiteral", (node as tsm.TypeLiteralNode).getMembers()[0].getText());
 				return this.#typeLiteral(ctx, node as tsm.TypeLiteralNode);
-			// return this.typeOf(ctx, (node as tsm.TypeLiteralNode).getMembers()[0]);
-			// return this.typeOf((node as tsm.VariableStatement).);
+			// Handle conditional types and other complex TypeScript constructs
+			case ts.SyntaxKind.ConditionalType:
+				ctx.log("Skipping conditional type", node.getText().substring(0, 100) + "...");
+				return { type: "unknown" };
+			case ts.SyntaxKind.MappedType:
+				ctx.log("Skipping mapped type", node.getText().substring(0, 100) + "...");
+				return { type: "unknown" };
+			case ts.SyntaxKind.TemplateLiteralType:
+				ctx.log("Skipping template literal type", node.getText().substring(0, 100) + "...");
+				return { type: "unknown" };
+			case ts.SyntaxKind.NeverKeyword:
+				ctx.log("Skipping never type");
+				return { type: "unknown" };
 		}
 
-		console.log(" unknown kind", node.getKindName(), node.getText());
+		ctx.log("Unknown kind", node.getKindName(), node.getText().substring(0, 100) + "...");
 		return { type: "unknown" };
 	}
 
@@ -693,7 +756,9 @@ export class DocGenerator {
 		// 	return { type: "unknown" };
 		// }
 
-		if (node.getTypeName().getText() === "Snippet") {
+		const typeName = node.getTypeName().getText();
+
+		if (typeName === "Snippet") {
 			const tas = node.getTypeArguments();
 			if (tas.length > 0) {
 				if (tas.length > 1) {
@@ -716,8 +781,25 @@ export class DocGenerator {
 				}
 			}
 			return { type: "snippet", lets: [] };
-		} else if (node.getTypeName().getText() === "Component") {
+		} else if (typeName === "Component") {
 			return { type: "component" };
+		} else if (
+			typeName === "PolymorphicPropsWithDefault" ||
+			typeName === "PolymorphicPropsWithConstrainedElements"
+		) {
+			// Handle polymorphic types by extracting the component-specific props from the second type argument
+			const tas = node.getTypeArguments();
+			if (tas.length >= 2) {
+				console.log(
+					`[DOC-GEN] Processing polymorphic type ${typeName} with ${tas.length} arguments`,
+				);
+				// The second argument contains the component-specific props (like DetailSpecificProps)
+				const componentPropsArg = tas[1];
+				return this.#typeOf(ctx, componentPropsArg);
+			} else {
+				console.log(`[DOC-GEN] Polymorphic type ${typeName} has insufficient arguments`);
+				return { type: "unknown" };
+			}
 		}
 
 		const symbol = node.getTypeName().getSymbol();

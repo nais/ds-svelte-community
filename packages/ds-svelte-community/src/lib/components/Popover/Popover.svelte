@@ -10,17 +10,14 @@
 </script>
 
 <script lang="ts">
-	import { arrow as arrowMW, createFloatingActions } from "svelte-floating-ui";
+	import { createFloatingActions } from "svelte-floating-ui";
 
-	import { writable } from "svelte/store";
 	import { omit } from "../helpers";
-	import { GetTheme } from "../Theme/Theme.svelte";
 	import type { PopoverProps } from "./type";
 
 	let {
 		open = $bindable(false),
 		placement = "top",
-		arrow = true,
 		offset,
 		strategy = "absolute",
 		flip = true,
@@ -30,37 +27,15 @@
 		...restProps
 	}: PopoverProps = $props();
 
-	const theme = GetTheme();
-	const arrowRef = writable<HTMLElement | null>(null);
-
 	const [floatingRef, floatingContent, update] = createFloatingActions({
 		placement,
 		strategy,
 		middleware: [
-			offsetMW(offset ?? (theme ? 8 : arrow ? 16 : 4)),
+			offsetMW(offset ?? 4),
 			flip ? flipMW({ padding: 5, fallbackPlacements: ["bottom", "top"] }) : null,
 			shiftMW({ padding: 12 }),
-			arrow ? arrowMW({ element: arrowRef, padding: 0 }) : null,
 		],
 		autoUpdate: true,
-		onComputed({ placement, middlewareData }) {
-			if (!arrow || $arrowRef == null) {
-				return;
-			}
-			const { x, y } = middlewareData.arrow as { x?: number; y?: number };
-			const staticSide = {
-				top: "bottom",
-				right: "left",
-				bottom: "top",
-				left: "right",
-			}[placement.split("-")[0]];
-
-			Object.assign($arrowRef.style, {
-				left: x != null ? `${x}px` : "",
-				top: y != null ? `${y}px` : "",
-				[staticSide!]: "-0.5rem",
-			});
-		},
 	});
 	let popover: HTMLDivElement;
 
@@ -69,10 +44,9 @@
 			placement,
 			strategy,
 			middleware: [
-				offsetMW(offset ?? (arrow ? 16 : 4)),
+				offsetMW(offset ?? 4),
 				flip ? flipMW({ padding: 5, fallbackPlacements: ["bottom", "top"] }) : null,
 				shiftMW({ padding: 12 }),
-				arrow ? arrowMW({ element: arrowRef, padding: 0 }) : null,
 			],
 		});
 	});
@@ -103,7 +77,4 @@
 	<div class={["aksel-popover__content", contentClass]}>
 		{@render children()}
 	</div>
-	{#if !theme && arrow}
-		<div class="aksel-popover__arrow" bind:this={$arrowRef}></div>
-	{/if}
 </div>

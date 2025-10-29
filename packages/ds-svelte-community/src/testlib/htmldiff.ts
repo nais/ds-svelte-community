@@ -9,6 +9,7 @@ import React from "react";
 import * as ReactDOMServer from "react-dom/server";
 import { themes, type RenderOutput, type RenderResult, type RenderTheme } from "./render";
 import { testInChrome } from "./testChrome";
+import { visualFailureCollector } from "./visualFailureCollector";
 
 export type ReactComponent = unknown;
 
@@ -53,6 +54,38 @@ const defaultOpts: DiffOptions = {
 	after: 5,
 };
 
+/**
+ * Captures the current test name from the call stack
+ */
+function captureTestName(): string {
+	const stack = new Error().stack || "";
+	const lines = stack.split("\n");
+
+	// Look for the test file in the stack trace
+	// Bun test stack traces have lines like: "at /path/to/component.test.ts:10:11"
+	for (const line of lines) {
+		// Match test file paths
+		const match = line.match(/at\s+(.+?([^/]+)\.test\.[jt]s):(\d+):(\d+)/);
+		if (match) {
+			const fileName = match[2]; // Extract just the component name
+			const lineNum = match[3];
+			return `${fileName} (line ${lineNum})`;
+		}
+	}
+
+	// Fallback: try to extract from any .test.ts/.test.js file reference
+	for (const line of lines) {
+		if (line.includes(".test.")) {
+			const fileMatch = line.match(/([^/]+)\.test\.[jt]s/);
+			if (fileMatch) {
+				return fileMatch[1];
+			}
+		}
+	}
+
+	return "unknown-test";
+}
+
 async function singleDiff(
 	svelteResult: RenderOutput,
 	b: HTMLElement,
@@ -81,6 +114,10 @@ async function singleDiff(
 		if (process.env.VISUAL_TESTS && process.env.VISUAL_TESTS === "true" && !opts.visual?.skip) {
 			const screenshots = await testInChrome(svelteResult, bOrig, theme, opts.visual);
 			if (screenshots && typeof screenshots === "string") {
+				// Register the visual failure for reporting
+				const testName = captureTestName();
+				visualFailureCollector.addFailure(testName, screenshots, theme);
+
 				result.push("Visual differences found, see screenshots:");
 				result.push(`Svelte: ${screenshots}`);
 			} else {

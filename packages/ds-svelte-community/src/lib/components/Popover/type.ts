@@ -32,13 +32,8 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
 	 */
 	placement?: (typeof PopoverPlacement)[number];
 	/**
-	 * Adds a arrow from dialog to anchor when true
-	 * @default true
-	 */
-	arrow?: boolean;
-	/**
 	 * Distance from anchor to popover
-	 * @default 16 w/arrow, 4 w/no-arrow
+	 * @default 4
 	 */
 	offset?: number;
 	/**

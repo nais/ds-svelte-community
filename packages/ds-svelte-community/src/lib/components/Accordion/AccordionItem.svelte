@@ -39,7 +39,6 @@
 		"aksel-accordion__item",
 		{
 			"aksel-accordion__item--open": open,
-			"aksel-accordion__item--neutral": ctx?.variant === "neutral",
 			"aksel-accordion__item--no-animation": !shouldAnimate,
 		},
 	]}

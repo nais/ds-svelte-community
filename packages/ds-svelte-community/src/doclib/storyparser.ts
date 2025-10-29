@@ -27,10 +27,25 @@ export class StoryParser {
 	private code: string = "";
 	private magicString: MagicString = new MagicString("");
 	private logLevel: LogLevel = LogLevel.error;
+	private projectCache: Project | null = null;
 
 	constructor(libReplacement: string, logLevel: LogLevel = LogLevel.error) {
 		this.libReplacement = libReplacement;
 		this.logLevel = logLevel;
+	}
+
+	private getProject(): Project {
+		if (!this.projectCache) {
+			this.projectCache = new Project({
+				compilerOptions: {
+					lib: ["esnext"],
+					noEmit: true,
+					allowJs: true,
+					sourceMap: true,
+				},
+			});
+		}
+		return this.projectCache;
 	}
 
 	async compile(code: string, id: string) {
@@ -206,15 +221,19 @@ export class StoryParser {
 	}
 
 	private async formatStory(script: string, story: AST.Component) {
-		const proj = new Project({
-			compilerOptions: {
-				lib: ["esnext"],
-				noEmit: true,
-				allowJs: true,
-				sourceMap: true,
-			},
-		});
-		const sourceFile = proj.createSourceFile("story_format.ts", script);
+		// Get a fresh project instance - still much better than creating it every time during development
+		const project = this.getProject();
+
+		// Use a simpler, unique filename strategy
+		const fileName = `story_${Math.random().toString(36).substr(2, 12)}.ts`;
+
+		// Make sure we don't have file conflicts
+		const existingFile = project.getSourceFile(fileName);
+		if (existingFile) {
+			project.removeSourceFile(existingFile);
+		}
+
+		const sourceFile = project.createSourceFile(fileName, script);
 
 		const split = "export default 1457387;";
 		sourceFile.insertText(sourceFile.getEnd(), "\n\n" + split + "\n\n");
@@ -262,6 +281,9 @@ export class StoryParser {
 		});
 
 		const content = `${ts}\n\n${contentSnippet}`;
+
+		// Clean up the temporary source file to prevent memory leaks
+		project.removeSourceFile(sourceFile);
 
 		return {
 			source: await format(content),
