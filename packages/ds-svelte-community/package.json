@@ -66,9 +66,9 @@
 	},
 	"devDependencies": {
 		"@nais/vite-plugin-svelte-docs": "workspace:*",
-		"@navikt/aksel-icons": "^7.32.1",
-		"@navikt/ds-react": "^7.32.1",
-		"@navikt/ds-tailwind": "^7.32.1",
+		"@navikt/aksel-icons": "^7.32.3",
+		"@navikt/ds-react": "^7.32.3",
+		"@navikt/ds-tailwind": "^7.32.3",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.46.4",
 		"@sveltejs/package": "^2.5.4",
@@ -109,8 +109,8 @@
 		"vite": "^7.1.9"
 	},
 	"dependencies": {
-		"@navikt/ds-css": "^7.32.1",
-		"@navikt/ds-tokens": "^7.32.1"
+		"@navikt/ds-css": "^7.32.3",
+		"@navikt/ds-tokens": "^7.32.3"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
