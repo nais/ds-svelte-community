@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   unit_test:
@@ -38,7 +39,7 @@ jobs:
           bun run check
 
       - name: Report visual test failures
-        if: failure() && github.event_name == 'pull_request'
+        if: steps.test.outcome == 'failure' && github.event_name == 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}

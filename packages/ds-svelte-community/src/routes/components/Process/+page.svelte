@@ -4,7 +4,7 @@
 
 	import Doc from "$doclib/Doc.svelte";
 	import Story from "$doclib/Story.svelte";
-	import { Link, Process, ProcessEvent } from "$lib";
+	import { Process, ProcessEvent } from "$lib";
 	import {
 		BabyWrappedIcon,
 		CheckmarkHeavyIcon,
@@ -31,10 +31,10 @@
 				{#snippet bullet()}
 					<TasklistSendIcon />
 				{/snippet}
-				<Link href="/example">
+				<a href="#application">
 					<FileIcon aria-hidden fontSize="24" />
 					Application for parental benefits at birth
-				</Link>
+				</a>
 			</ProcessEvent>
 			<ProcessEvent
 				status="completed"
@@ -44,20 +44,20 @@
 				{#snippet bullet()}
 					<ThumbUpIcon />
 				{/snippet}
-				<Link href="/example">
+				<a href="#approval">
 					<FileIcon aria-hidden fontSize="24" />
 					Approval letter for Parental Benefits
-				</Link>
+				</a>
 			</ProcessEvent>
 			<ProcessEvent
 				status="completed"
 				title="You have received a response to your application"
 				timestamp="September 08, 2025"
 			>
-				<Link href="/example">
+				<a href="#response">
 					<FileIcon aria-hidden fontSize="24" />
 					Termination of Parental Benefits
-				</Link>
+				</a>
 			</ProcessEvent>
 			<ProcessEvent
 				status="active"
