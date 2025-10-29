@@ -28,7 +28,12 @@ export default [
 		},
 	},
 	{
-		ignores: ["packages/*/build/", "packages/*/.svelte-kit/", "packages/*/dist/"],
+		ignores: [
+			"packages/*/build/",
+			"packages/*/.svelte-kit/",
+			"packages/*/dist/",
+			"packages/*/src/testlib/**/*.d.ts",
+		],
 	},
 	{
 		rules: {

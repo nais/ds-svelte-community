@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	import { page } from "$app/state";
 	import { ThemeStore } from "$doclib/theme.svelte";
 	import { Box, Detail, Page, PageBlock } from "$lib";
@@ -32,7 +33,7 @@
 <Theme theme={ThemeStore.current}>
 	<Page>
 		<InternalHeader>
-			<InternalHeaderTitle as="a" href="/">ds-svelte-community</InternalHeaderTitle>
+			<InternalHeaderTitle as="a" href={resolve("/")}>ds-svelte-community</InternalHeaderTitle>
 			<Spacer />
 			<InternalHeaderButton as="a" href="https://docs.nais.io">Nais Docs</InternalHeaderButton>
 			<InternalHeaderButton data-color="neutral" data-variant="tertiary">
@@ -68,12 +69,10 @@
 						{#each Object.entries(data.paths) as [key, paths] (key)}
 							<strong>{toTitle(key)}</strong>
 							<ul>
-								{#each paths as [component, experimental] (component)}
-									{@const href = (
-										key == "pages" ? `/${component}/` : `/${key}/${component}/`
-									).replaceAll("//", "/")}
+								{#each paths as [component, routePath, experimental] (component)}
+									<!-- eslint-disable-next-line @typescript-eslint/no-explicit-any -->
+									{@const href = resolve(routePath as any)}
 									<li>
-										<!-- eslint-disable-next-line svelte/valid-compile using $ to access stores currently errors the validator -->
 										<a
 											class="unstyled"
 											class:active={compare(page.route.id, href)}
