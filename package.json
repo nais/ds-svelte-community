@@ -18,12 +18,12 @@
 	"dependencies": {
 		"@changesets/cli": "^2.29.7",
 		"@types/eslint": "^9.6.1",
-		"ts-morph": "^27.0.0"
+		"ts-morph": "^27.0.2"
 	},
 	"devDependencies": {
 		"@changesets/changelog-github": "^0.5.1",
 		"glob": "^11.0.3",
 		"source-map-js": "^1.2.1",
-		"svelte-highlight": "^7.8.4"
+		"svelte-highlight": "^7.9.0"
 	}
 }
