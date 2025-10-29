@@ -48,6 +48,16 @@ jobs:
           cd packages/ds-svelte-community
           bun run scripts/visual-test-reporter.ts
 
+      - name: Upload visual test failure images
+        if: steps.test.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-test-failures
+          path: |
+            /tmp/visual-test-failures.json
+            /tmp/ds-svelte-test-*/**/*.png
+          if-no-files-found: ignore
+
       - name: Fail if tests failed
         if: steps.test.outcome == 'failure'
         run: exit 1
