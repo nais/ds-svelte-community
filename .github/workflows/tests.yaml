@@ -33,7 +33,7 @@ jobs:
           VISUAL_TESTS: "true"
         run: |-
           cd packages/ds-svelte-community
-          bun run test --bail --timeout 30000
+          bun run test --timeout 30000
           bun run lint
           bun run check
 
