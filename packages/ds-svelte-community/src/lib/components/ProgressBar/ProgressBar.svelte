@@ -1,3 +1,12 @@
+<!--
+	@component
+	ProgressBar shows the completion of a task.
+
+	Read more about this component in the [Aksel documentation](https://aksel.nav.no/komponenter/core/progressbar).
+
+	All extra props are passed to the root element.
+ -->
+
 <script lang="ts">
 	import { untrack } from "svelte";
 	import { omit } from "../helpers.js";

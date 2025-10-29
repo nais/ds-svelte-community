@@ -40,21 +40,9 @@ describe("which components are implemented", () => {
 		"FormSummaryHeading",
 		"FormSummaryLabel",
 		"FormSummaryValue",
-		"Ingress",
-		"LinkCard",
-		"LinkCardAnchor",
-		"LinkCardDescription",
-		"LinkCardFooter",
-		"LinkCardIcon",
-		"LinkCardImage",
-		"LinkCardTitle",
-		"LinkPanel",
-		"LinkPanelDescription",
-		"LinkPanelTitle",
 		"MonthPicker",
 		"MonthPickerInput",
 		"MonthPickerStandalone",
-		"Panel",
 		"PopoverContent",
 		"Portal",
 		"Provider",
@@ -94,6 +82,12 @@ describe("which components are implemented", () => {
 		"ModalBody", // Slot
 		"ModalFooter", // Slot
 		"ConfirmationPanel",
+		// Deprecated components - don't implement these
+		"Panel", // @deprecated Use Box with padding and border instead
+		"LinkPanel", // @deprecated Use LinkCard instead
+		"LinkPanelDescription", // @deprecated Use LinkCard instead
+		"LinkPanelTitle", // @deprecated Use LinkCard instead
+		"Ingress", // @deprecated Use BodyLong size="large" instead
 	];
 
 	const reactComponents = Object.keys(allReact).filter(
