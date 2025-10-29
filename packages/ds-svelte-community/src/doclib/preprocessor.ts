@@ -10,14 +10,6 @@ export default function storyProcess(): VitePlugin {
 	return {
 		name: "dssc-docs",
 
-		// Handle file changes/deletions to reset parser state
-		watchChange(id) {
-			if (id.includes("routes/") && id.endsWith(".svelte")) {
-				// Reset project cache when route files change to prevent stale state
-				parser.resetProject();
-			}
-		},
-
 		transform: {
 			order: "pre",
 			async handler(code, id) {
