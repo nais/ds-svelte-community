@@ -48,17 +48,6 @@ export class StoryParser {
 		return this.projectCache;
 	}
 
-	// Clean up project cache to prevent memory leaks and stale state
-	resetProject() {
-		if (this.projectCache) {
-			// Remove all source files before discarding the project
-			for (const sourceFile of this.projectCache.getSourceFiles()) {
-				this.projectCache.removeSourceFile(sourceFile);
-			}
-			this.projectCache = null;
-		}
-	}
-
 	async compile(code: string, id: string) {
 		const ast = parse(code, {
 			filename: id,
