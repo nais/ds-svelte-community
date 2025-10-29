@@ -15,7 +15,7 @@
 	} from "$lib/icons";
 </script>
 
-<Doc {doc} extraChildrenDoc={[eventDoc]}>
+<Doc {doc} extraChildrenDoc={[eventDoc]} preview={{ width: "600px" }}>
 	<Story>
 		<Process>
 			<ProcessEvent status="completed" title="The baby was born" timestamp="August 04, 2025">
