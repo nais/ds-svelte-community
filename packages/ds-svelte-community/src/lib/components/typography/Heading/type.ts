@@ -16,6 +16,6 @@ export interface HeadingSpecificProps {
 
 export type HeadingProps = PolymorphicPropsWithConstrainedElements<
 	"h1",
-	"h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span",
+	"h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span" | "div",
 	HeadingSpecificProps
 >;

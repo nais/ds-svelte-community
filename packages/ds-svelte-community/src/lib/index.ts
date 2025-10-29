@@ -18,6 +18,7 @@ export * from "./components/Pagination";
 export { default as Popover } from "./components/Popover/Popover.svelte";
 export * from "./components/primitives";
 export { default as Spacer } from "./components/primitives/Stack/Spacer.svelte";
+export * from "./components/Process";
 export * from "./components/Radio";
 export { default as ReadMore } from "./components/ReadMore/ReadMore.svelte";
 export * from "./components/Search";
