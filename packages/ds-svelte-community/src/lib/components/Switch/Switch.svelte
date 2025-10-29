@@ -8,7 +8,6 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 <script lang="ts">
 	import { omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
-	import Detail from "../typography/Detail/Detail.svelte";
 	import SelectedIcon from "./SelectedIcon.svelte";
 	import type { SwitchProps } from "./type";
 
@@ -54,7 +53,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		</span>
 	</span>
 	<label for={id} class="aksel-switch__label-wrapper">
-		<div
+		<span
 			class={[
 				"aksel-switch__content",
 				{
@@ -63,21 +62,19 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 				},
 			]}
 		>
-			<BodyShort as="div" {size} class="aksel-switch__label">
+			<BodyShort as="span" {size} class="aksel-switch__label">
 				{@render children()}
 			</BodyShort>
 
 			{#if description}
-				{#if size == "medium"}
-					<BodyShort as="div" size="small" class="aksel-switch__description">
-						{description}
-					</BodyShort>
-				{:else}
-					<Detail as="div" class="aksel-switch__description">
-						{description}
-					</Detail>
-				{/if}
+				<BodyShort
+					as="span"
+					{size}
+					class="aksel-form-field__subdescription aksel-switch__description"
+				>
+					{description}
+				</BodyShort>
 			{/if}
-		</div>
+		</span>
 	</label>
 </div>
