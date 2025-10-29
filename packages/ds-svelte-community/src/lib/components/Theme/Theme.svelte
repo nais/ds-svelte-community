@@ -56,7 +56,7 @@
 
 		as?: HTMLElements;
 
-		"data-color": AkselColor;
+		"data-color"?: AkselColor;
 
 		[key: string]: unknown;
 	};

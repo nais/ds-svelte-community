@@ -25,6 +25,7 @@
 		"test": "bun run test:unit",
 		"test:unit": "bun test",
 		"test:unit:watch": "bun test --watch",
+		"test:visual-report": "bun run scripts/visual-test-reporter.ts",
 		"sync": "svelte-kit sync"
 	},
 	"exports": {
