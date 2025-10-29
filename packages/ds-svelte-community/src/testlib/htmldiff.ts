@@ -337,7 +337,14 @@ function renderReact(
 		);
 		console.error = error;
 	}
-	return container.firstChild as HTMLElement;
+
+	// Skip any <link> or <style> tags that React may add before the actual component
+	let firstChild = container.firstChild as HTMLElement | null;
+	while (firstChild && (firstChild.nodeName === "LINK" || firstChild.nodeName === "STYLE")) {
+		firstChild = firstChild.nextSibling as HTMLElement | null;
+	}
+
+	return firstChild as HTMLElement;
 }
 
 export type Options = {
