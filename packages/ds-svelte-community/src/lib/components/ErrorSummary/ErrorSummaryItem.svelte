@@ -5,6 +5,7 @@
 	let { href, children, ...restProps }: ErrorSummaryItemProps = $props();
 </script>
 
+<!-- eslint-disable svelte/no-navigation-without-resolve -->
 <li>
 	<a
 		{...omit(restProps, "class")}

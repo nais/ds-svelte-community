@@ -15,6 +15,7 @@
 
 	let {
 		hideStatusText = false,
+		isTruncated,
 		children,
 		id,
 		ref = $bindable(),
@@ -62,6 +63,7 @@
 <ol
 	bind:this={ref}
 	data-color="info"
+	data-truncated={isTruncated}
 	role="list"
 	{...omit(restProps, "class")}
 	class="aksel-process {restProps.class || ''}"

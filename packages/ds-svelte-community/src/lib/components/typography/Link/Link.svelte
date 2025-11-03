@@ -29,6 +29,7 @@
 </script>
 
 {#if as == "a"}
+	<!-- eslint-disable svelte/no-navigation-without-resolve -->
 	<a
 		{...omit(restProps, "class", "href")}
 		data-color={color ?? variantToColor(variant)}
