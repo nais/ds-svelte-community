@@ -12,6 +12,11 @@ export interface ProcessProps extends Omit<HTMLOlAttributes, "children"> {
 	 */
 	hideStatusText?: boolean;
 	/**
+	 * Indicates that the process is truncated and that there are more Events
+	 * not shown either before, after or on both sides of the current list.
+	 */
+	isTruncated?: "start" | "end" | "both";
+	/**
 	 * Component reference for binding.
 	 */
 	ref?: HTMLOListElement;

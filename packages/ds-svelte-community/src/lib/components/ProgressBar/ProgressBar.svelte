@@ -6,6 +6,9 @@
 
 	All extra props are passed to the root element.
  -->
+<script lang="ts" module>
+	export const experimental = true;
+</script>
 
 <script lang="ts">
 	import { untrack } from "svelte";

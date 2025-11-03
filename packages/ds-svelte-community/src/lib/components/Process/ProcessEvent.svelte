@@ -49,6 +49,7 @@
 	data-process-event=""
 	data-status={status}
 >
+	<span class="aksel-process__line" data-position="start"></span>
 	<div class="aksel-process__item">
 		<BodyShort as="span" weight="semibold" class="aksel-process__bullet" aria-hidden>
 			{#if bullet}
@@ -86,5 +87,5 @@
 			{/if}
 		</div>
 	</div>
-	<span class="aksel-process__line"></span>
+	<span class="aksel-process__line" data-position="end"></span>
 </li>
