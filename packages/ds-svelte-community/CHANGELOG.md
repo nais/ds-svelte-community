@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 2.0.0-next.2
+
+### Patch Changes
+
+- [#344](https://github.com/nais/ds-svelte-community/pull/344) [`5ff6415`](https://github.com/nais/ds-svelte-community/commit/5ff6415317f98e1c002996295adf1ea6dde61782) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Fix tag font size
+
 ## 2.0.0-next.1
 
 ### Minor Changes
