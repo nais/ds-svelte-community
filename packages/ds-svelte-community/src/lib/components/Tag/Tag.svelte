@@ -64,6 +64,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <BodyShort
 	{...omit(restProps, "size", "class")}
+	size={size === "medium" ? "medium" : "small"}
 	as="span"
 	data-color={color ?? variantToColor(variant)}
 	data-variant={filledVariant || moderateVariant || "outline"}
