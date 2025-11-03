@@ -66,11 +66,11 @@
 	},
 	"devDependencies": {
 		"@nais/vite-plugin-svelte-docs": "workspace:*",
-		"@navikt/aksel-icons": "^7.32.3",
-		"@navikt/ds-react": "^7.32.3",
-		"@navikt/ds-tailwind": "^7.32.3",
+		"@navikt/aksel-icons": "^7.33.0",
+		"@navikt/ds-react": "^7.33.0",
+		"@navikt/ds-tailwind": "^7.33.0",
 		"@sveltejs/adapter-static": "^3.0.10",
-		"@sveltejs/kit": "^2.48.3",
+		"@sveltejs/kit": "^2.48.4",
 		"@sveltejs/package": "^2.5.4",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@tailwindcss/vite": "^4.1.16",
@@ -82,12 +82,12 @@
 		"@types/selenium-webdriver": "^4.35.3",
 		"autoprefixer": "^10.4.21",
 		"diff": "^8.0.2",
-		"eslint": "^9.38.0",
+		"eslint": "^9.39.0",
 		"eslint-config-prettier": "^10.1.8",
-		"eslint-plugin-svelte": "^3.12.5",
+		"eslint-plugin-svelte": "^3.13.0",
 		"estree-walker": "^3.0.3",
 		"global-jsdom": "^27.0.0",
-		"jsdom": "^27.0.1",
+		"jsdom": "^27.1.0",
 		"looks-same": "^10.0.1",
 		"magic-string": "^0.30.21",
 		"marked": "^16.4.1",
@@ -101,7 +101,7 @@
 		"resize-observer-polyfill": "^1.5.1",
 		"selenium-webdriver": "^4.38.0",
 		"shiki": "^3.14.0",
-		"svelte": "5.43.0",
+		"svelte": "5.43.2",
 		"svelte-check": "^4.3.3",
 		"svelte-floating-ui": "^1.6.2",
 		"svgo": "4.0.0",
@@ -112,13 +112,10 @@
 		"zimmerframe": "^1.1.4"
 	},
 	"dependencies": {
-		"@navikt/ds-css": "^7.32.3",
-		"@navikt/ds-tokens": "^7.32.3"
+		"@navikt/ds-css": "^7.33.0",
+		"@navikt/ds-tokens": "^7.33.0"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module",
-	"overrides": {
-		"svelte": "$svelte"
-	}
+	"type": "module"
 }
