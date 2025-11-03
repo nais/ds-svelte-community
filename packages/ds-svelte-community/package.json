@@ -59,12 +59,16 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
+		"@navikt/ds-css": "7.33.0",
+		"@navikt/ds-tokens": "7.33.0",
 		"svelte": "^5.20.0"
 	},
 	"optionalDependencies": {
 		"svelte-floating-ui": "^1.6.2"
 	},
 	"devDependencies": {
+		"@navikt/ds-css": "7.33.0",
+		"@navikt/ds-tokens": "7.33.0",
 		"@nais/vite-plugin-svelte-docs": "workspace:*",
 		"@navikt/aksel-icons": "^7.33.0",
 		"@navikt/ds-react": "^7.33.0",
@@ -110,10 +114,6 @@
 		"typescript-eslint": "^8.46.2",
 		"vite": "^7.1.12",
 		"zimmerframe": "^1.1.4"
-	},
-	"dependencies": {
-		"@navikt/ds-css": "^7.33.0",
-		"@navikt/ds-tokens": "^7.33.0"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",

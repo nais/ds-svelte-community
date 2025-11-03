@@ -24,15 +24,13 @@
     "packages/ds-svelte-community": {
       "name": "@nais/ds-svelte-community",
       "version": "2.0.0-next.0",
-      "dependencies": {
-        "@navikt/ds-css": "^7.33.0",
-        "@navikt/ds-tokens": "^7.33.0",
-      },
       "devDependencies": {
         "@nais/vite-plugin-svelte-docs": "workspace:*",
         "@navikt/aksel-icons": "^7.33.0",
+        "@navikt/ds-css": "7.33.0",
         "@navikt/ds-react": "^7.33.0",
         "@navikt/ds-tailwind": "^7.33.0",
+        "@navikt/ds-tokens": "7.33.0",
         "@sveltejs/adapter-static": "^3.0.10",
         "@sveltejs/kit": "^2.48.4",
         "@sveltejs/package": "^2.5.4",
@@ -79,6 +77,8 @@
         "svelte-floating-ui": "^1.6.2",
       },
       "peerDependencies": {
+        "@navikt/ds-css": "7.33.0",
+        "@navikt/ds-tokens": "7.33.0",
         "svelte": "^5.20.0",
       },
     },
