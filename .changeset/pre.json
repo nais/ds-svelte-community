@@ -7,13 +7,18 @@
     "@nais/vite-plugin-svelte-docs": "0.0.2"
   },
   "changesets": [
+    "add-linkcard-component",
+    "angry-phones-search",
     "famous-eggs-bake",
     "fast-crabs-drive",
+    "fix-switch-html-structure",
     "good-yaks-jump",
+    "new-jokes-jog",
     "old-berries-crash",
     "slick-cats-try",
     "slick-mugs-grow",
     "tired-foxes-cover",
+    "two-sites-sell",
     "whole-crews-pay"
   ]
 }

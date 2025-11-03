@@ -1,5 +1,21 @@
 # @nais/ds-svelte-community
 
+## 2.0.0-next.1
+
+### Minor Changes
+
+- [#342](https://github.com/nais/ds-svelte-community/pull/342) [`2c10d9b`](https://github.com/nais/ds-svelte-community/commit/2c10d9bde5e8a760e91199e5b9a6d5306ec0809d) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add LinkCard component with all sub-components (LinkCardTitle, LinkCardAnchor, LinkCardDescription, LinkCardFooter, LinkCardIcon, LinkCardImage). The LinkCard provides a clickable card component with arrow indicator, size variants (small/medium), and flexible content composition.
+
+- [#339](https://github.com/nais/ds-svelte-community/pull/339) [`20d9fc0`](https://github.com/nais/ds-svelte-community/commit/20d9fc06300eb548fe25157ce6ab22074fcfbb40) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add ProgressBar component for visualizing progression in a process. Supports both exact values and simulated loading with timeout callbacks.
+
+### Patch Changes
+
+- [#335](https://github.com/nais/ds-svelte-community/pull/335) [`f426260`](https://github.com/nais/ds-svelte-community/commit/f42626045e17e79ea33865a2730b1576226fee1f) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add Process component
+
+- [#337](https://github.com/nais/ds-svelte-community/pull/337) [`4f1ab9f`](https://github.com/nais/ds-svelte-community/commit/4f1ab9f3e41ffe9d5cb770d3facbacfcdeeabd92) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Fix Switch component HTML structure to match ds-react update. Changed content wrapper and label elements from div to span, and updated description rendering to always use BodyShort with consistent sizing.
+
+- [#343](https://github.com/nais/ds-svelte-community/pull/343) [`d89646e`](https://github.com/nais/ds-svelte-community/commit/d89646ee3db1b2d81703a139fdb50e312daa707d) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade dependencies
+
 ## 2.0.0-next.0
 
 ### Major Changes
