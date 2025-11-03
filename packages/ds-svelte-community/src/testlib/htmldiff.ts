@@ -253,9 +253,18 @@ function cleanTree(el: HTMLElement, opts: DiffOptions, ignoreFunc?: (tag: HTMLEl
 const yellow = (input: string) => "\x1b[33m" + input + "\x1b[0m";
 const red = (input: string) => "\x1b[31m" + input + "\x1b[0m";
 
+// Detect if we're running in an AI context (GitHub Copilot)
+const isAIContext = () => {
+	return process.env.GITHUB_COPILOT === "true" || process.env.AI_CONTEXT === "true";
+};
+
 async function prettyDiff(a: string, b: string, before: number, after: number) {
+	const isAI = isAIContext();
+
 	const lines = [
-		`Pretty diff: ${red("only in svelte")}, ${yellow("only in react")}\n`,
+		isAI
+			? `Pretty diff: [SVELTE_ONLY]only in svelte[/SVELTE_ONLY], [REACT_ONLY]only in react[/REACT_ONLY]\n`
+			: `Pretty diff: ${red("only in svelte")}, ${yellow("only in react")}\n`,
 		"Remember that this diff is a tool, not actualy what's tested.\n",
 		`${before} lines before and ${after} lines after a change are shown.\n`,
 	];
@@ -277,10 +286,18 @@ async function prettyDiff(a: string, b: string, before: number, after: number) {
 	Diff.diffWords(afmt, bfmt).forEach((part) => {
 		if (part.added) {
 			addedOrRemoved++;
-			lines.push(`${yellow(part.value)}`);
+			if (isAI) {
+				lines.push(`[REACT_ONLY]${part.value}[/REACT_ONLY]`);
+			} else {
+				lines.push(`${yellow(part.value)}`);
+			}
 		} else if (part.removed) {
 			addedOrRemoved++;
-			lines.push(`${red(part.value)}`);
+			if (isAI) {
+				lines.push(`[SVELTE_ONLY]${part.value}[/SVELTE_ONLY]`);
+			} else {
+				lines.push(`${red(part.value)}`);
+			}
 		} else {
 			lines.push(part.value);
 		}

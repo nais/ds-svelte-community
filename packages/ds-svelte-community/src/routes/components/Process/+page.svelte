@@ -170,4 +170,22 @@
 			</ProcessEvent>
 		</Process>
 	</Story>
+
+	<Story name="Truncated">
+		<p>
+			Use <code>isTruncated</code> to add a connector line before the first and/or after the last event.
+			This illustrates that the process has more events before/after than what is shown.
+		</p>
+		<Process isTruncated="both">
+			<ProcessEvent title="January 2, 2020 at 10:21">
+				Your payment plan has been updated, read the decision for more information
+			</ProcessEvent>
+			<ProcessEvent title="December 27, 2019 at 14:48">
+				Living expenses, Rent has been processed
+			</ProcessEvent>
+			<ProcessEvent title="December 21, 2019 at 16:52">
+				You have sent 10 attachments to NAV
+			</ProcessEvent>
+		</Process>
+	</Story>
 </Doc>

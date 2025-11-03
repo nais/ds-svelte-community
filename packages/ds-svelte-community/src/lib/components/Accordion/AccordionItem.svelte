@@ -28,7 +28,7 @@
 
 	let headingSize: HeadingProps["size"] = $derived.by(() => {
 		/* Fallback to "medium" Accordion-size if any other sizes are used */
-		return ctx?.size === "small" ? "xsmall" : "small";
+		return ctx?.size === "large" ? "small" : "xsmall";
 	});
 </script>
 
