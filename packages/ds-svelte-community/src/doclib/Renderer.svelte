@@ -9,9 +9,13 @@
 
 <script lang="ts">
 	import { CopyButton } from "$lib";
+	import cssURL from "$lib/css/index.css?url";
+	import { mount, unmount } from "svelte";
 	import type { SvelteMap } from "svelte/reactivity";
 	import Highlight from "./Highlight.svelte";
+	import IframeContent from "./IframeContent.svelte";
 	import type { StorySnippet } from "./Story.svelte";
+	import { ThemeStore } from "./theme.svelte";
 
 	const defaultOptions = {
 		center: true,
@@ -30,10 +34,11 @@
 		componentOptions?: ComponentOptions;
 		children: StorySnippet;
 		source?: string;
-		preview?: { width?: string; extraPaddingBottom?: string };
+		preview?: { width?: string; extraPaddingBottom?: string; useIframe?: boolean };
 	} = $props();
 
 	let showCode = $state(false);
+	let iframeElement = $state<HTMLIFrameElement>();
 
 	const options = { ...defaultOptions, ...componentOptions };
 
@@ -96,17 +101,88 @@
 		});
 		return ret;
 	};
+
+	// Effect to setup iframe rendering
+	$effect(() => {
+		if (!iframeElement) {
+			return;
+		}
+
+		const iframeDoc = iframeElement.contentDocument;
+		if (!iframeDoc) {
+			return;
+		}
+
+		// Setup iframe document structure
+		const head = iframeDoc.head;
+		const body = iframeDoc.body;
+
+		// Get current theme (reactive)
+		const currentTheme = ThemeStore.current;
+
+		// Add CSS link
+		const link = iframeDoc.createElement("link");
+		link.rel = "stylesheet";
+		link.href = cssURL;
+		head.appendChild(link);
+
+		// Add styles to match the non-iframe preview styling
+		const style = iframeDoc.createElement("style");
+		const shouldCenter = options.center;
+		style.textContent = `
+			body {
+				margin: 0;
+				padding: 0;
+				overflow: auto;
+				min-height: 250px;
+			}
+			#mount {
+				min-height: 250px;
+				${shouldCenter ? "display: flex; justify-content: center; align-items: center;" : "margin: 1rem;"}
+			}
+		`;
+		head.appendChild(style);
+
+		// Create mount point
+		const mountPoint = iframeDoc.createElement("div");
+		mountPoint.id = "mount";
+		body.appendChild(mountPoint);
+
+		const props = dejsonify(values);
+		const app = mount(IframeContent, {
+			target: mountPoint,
+			props: {
+				children,
+				props,
+				theme: currentTheme,
+			},
+		});
+
+		// Cleanup function
+		return () => {
+			unmount(app);
+		};
+	});
 </script>
 
 <div class="preview" class:center={options.center} class:show-code={code && showCode}>
-	<div
-		class="preview-wrapper"
-		style="width: {preview?.width}"
-		style:padding-bottom={preview?.extraPaddingBottom}
-	>
-		{@render children({ docProps: dejsonify(values) })}
-		<!-- <svelte:component this={component} children={defaultBody} {...restProps} /> -->
-	</div>
+	{#if preview?.useIframe}
+		<iframe
+			bind:this={iframeElement}
+			class="preview-iframe"
+			title="Component preview"
+			sandbox="allow-same-origin allow-scripts"
+			style="width: 100%;"
+		></iframe>
+	{:else}
+		<div
+			class="preview-wrapper"
+			style="width: {preview?.width}"
+			style:padding-bottom={preview?.extraPaddingBottom}
+		>
+			{@render children({ docProps: dejsonify(values) })}
+		</div>
+	{/if}
 	{#if code}
 		<button class="toggleCode" onclick={() => (showCode = !showCode)}>
 			{showCode ? "Hide" : "Show"} code
@@ -139,6 +215,14 @@
 
 	.preview-wrapper {
 		margin: 1rem;
+	}
+
+	.preview-iframe {
+		width: 100%;
+		height: 100%;
+		min-height: 250px;
+		border: none;
+		display: block;
 	}
 
 	.preview.center {

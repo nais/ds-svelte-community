@@ -94,8 +94,14 @@ export class StoryParser {
 			}
 
 			const snippetName = `docSnippet${index++}`;
+			// Serialize preview as JavaScript object literal instead of JSON to preserve undefined and other values
+			const previewStr = ret.preview
+				? `{${Object.entries(ret.preview)
+						.map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
+						.join(", ")}}`
+				: "undefined";
 			attrStories.push(
-				`{name: "${storyName}", source: "${btoa(ret.source)}", snippet: ${snippetName}, locked: ${ret.locked}, props: ${JSON.stringify(ret.props)}, lockedProps: ${JSON.stringify(ret.lockedProps)}, preview: ${JSON.stringify(ret.preview)}}`,
+				`{name: "${storyName}", source: "${btoa(ret.source)}", snippet: ${snippetName}, locked: ${ret.locked}, props: ${JSON.stringify(ret.props)}, lockedProps: ${JSON.stringify(ret.lockedProps)}, preview: ${previewStr}}`,
 			);
 
 			const snippet = `{#snippet ${snippetName}({docProps}: { docProps: { [key: string]: unknown } })}\n${ret.snippet}\n{/snippet}\n`;
@@ -191,6 +197,7 @@ export class StoryParser {
 				locked,
 				props: [],
 				lockedProps: [],
+				preview: this.parsePreview(story),
 			};
 		}
 		const res = this.parseDocSnippet(snippet);
@@ -406,30 +413,21 @@ export class StoryParser {
 			return undefined;
 		}
 
-		const previewProps: Record<string, unknown> = {};
-		for (const prop of preview.value.expression.properties) {
-			if (prop.type !== "Property") {
-				this.warn("Preview property is not a Property", prop);
-				return undefined;
-			}
-			if (prop.key.type !== "Identifier") {
-				this.warn("Preview property key is not an Identifier", prop.key);
-				return undefined;
-			}
+		// Extract the raw code for the object expression and evaluate it
+		// This is simpler and handles any valid JavaScript expression
+		// Get the code from inside the curly braces of the expression tag
+		const fullExpression = this.code.slice(preview.value.start, preview.value.end);
+		// Remove the surrounding { and }
+		const expressionCode = fullExpression.slice(1, -1).trim();
 
-			let val: unknown;
-			switch (prop.value.type) {
-				case "Literal":
-					val = prop.value.value;
-					break;
-				default:
-					this.warn("Preview property value is not a Literal", prop.value);
-					return undefined;
-			}
-
-			previewProps[prop.key.name] = val;
+		try {
+			// Use Function constructor to safely evaluate the object literal
+			// This is safe because we control the input (it's our own code)
+			const result = new Function(`return ${expressionCode}`)();
+			return result;
+		} catch (e) {
+			this.warn("Failed to evaluate preview expression", expressionCode, e);
+			return undefined;
 		}
-
-		return previewProps;
 	}
 }

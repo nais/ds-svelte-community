@@ -3,18 +3,13 @@
 
 	import Doc from "$doclib/Doc.svelte";
 	import Story from "$doclib/Story.svelte";
-	import { Alert, Bleed, BodyLong, Box, HStack, VStack } from "$lib";
+	import { Bleed, BodyLong, Box, HStack, VStack } from "$lib";
 	import { MagnifyingGlassIcon } from "$lib/icons";
 	import DemoWrapper from "./DemoWrapper.svelte";
 </script>
 
 <Doc {doc}>
-	{#snippet extraDescription()}
-		<Alert variant="info">
-			Because of how the preview is rendered, the Bleed component will not work as expected in the
-			preview. To see it in action, please use the provided examples.
-		</Alert>
-	{/snippet}
+
 	<Story locked>
 		<DemoWrapper>
 			<Bleed marginInline="10">
@@ -86,7 +81,7 @@
 		</DemoWrapper>
 	</Story>
 
-	<Story name="Full" locked>
+	<Story name="Full" locked preview={{ useIframe: true }}>
 		<DemoWrapper>
 			<Bleed marginInline="full">
 				<Box padding="3" class="p" background="meta-purple-moderate">
