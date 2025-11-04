@@ -9,7 +9,6 @@
 </script>
 
 <Doc {doc}>
-
 	<Story locked>
 		<DemoWrapper>
 			<Bleed marginInline="10">
