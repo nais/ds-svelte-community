@@ -47,10 +47,6 @@
 		"./css": {
 			"default": "./dist/css/index.css"
 		},
-		"./vite": {
-			"types": "./dist/import-optimizer.d.ts",
-			"import": "./dist/import-optimizer.js"
-		},
 		"./*": {
 			"types": "./dist/*",
 			"import": "./dist/*",
