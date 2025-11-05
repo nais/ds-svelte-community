@@ -23,7 +23,7 @@
     },
     "packages/ds-svelte-community": {
       "name": "@nais/ds-svelte-community",
-      "version": "2.0.0-next.0",
+      "version": "2.0.0-next.2",
       "devDependencies": {
         "@nais/vite-plugin-svelte-docs": "workspace:*",
         "@navikt/aksel-icons": "^7.33.0",
@@ -84,7 +84,7 @@
     },
     "packages/vite-plugin-svelte-docs": {
       "name": "@nais/vite-plugin-svelte-docs",
-      "version": "0.0.3-next.0",
+      "version": "0.0.3-next.1",
       "dependencies": {
         "svelte2tsx": "0.7.45",
         "vite": "^7.1.12",

@@ -1,7 +1,6 @@
 import type { Snippet } from "svelte";
 import type { HTMLInputAttributes } from "svelte/elements";
 
-export const types = ["number", "email", "password", "tel", "text", "url"] as const;
 export const sizes = ["medium", "small"] as const;
 
 export interface TextFieldProps extends Omit<HTMLInputAttributes, "size"> {
@@ -41,7 +40,7 @@ export interface TextFieldProps extends Omit<HTMLInputAttributes, "size"> {
 	/**
 	 * Type of form control. Picking the correct type helps user fill inn their required information.
 	 */
-	type?: (typeof types)[number];
+	type?: Exclude<HTMLInputAttributes["type"], "object">;
 
 	/**
 	 * Label for input element.
