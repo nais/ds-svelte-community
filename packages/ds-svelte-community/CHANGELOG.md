@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 2.0.0-next.3
+
+### Patch Changes
+
+- [#349](https://github.com/nais/ds-svelte-community/pull/349) [`37b2400`](https://github.com/nais/ds-svelte-community/commit/37b2400848008766cd2804f576fd450c004522bc) Thanks [@rbjornstad](https://github.com/rbjornstad)! - Adds all input types for TextField
+
 ## 2.0.0-next.2
 
 ### Patch Changes
