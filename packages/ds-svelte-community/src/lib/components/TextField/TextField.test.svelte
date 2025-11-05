@@ -5,7 +5,7 @@
 	let props: Omit<Omit<Omit<TextFieldProps, "children">, "label">, "description"> = $props();
 </script>
 
-<TextField {...props} type="time">
+<TextField {...props}>
 	{#snippet label()}Some label{/snippet}
 	{#snippet description()}Some longer description{/snippet}
 </TextField>
