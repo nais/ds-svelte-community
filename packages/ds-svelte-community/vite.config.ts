@@ -4,9 +4,11 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import { defineConfig } from "vite";
 import storyProcess from "./src/doclib/preprocessor";
+import { importOptimizer } from "./src/lib/import-optimizer";
 
 export default defineConfig({
 	plugins: [
+		importOptimizer({ rootDir: __dirname }),
 		tailwindcss(),
 		storyProcess(),
 		sveltekit(),

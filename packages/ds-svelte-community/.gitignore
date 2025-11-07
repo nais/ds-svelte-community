@@ -13,3 +13,4 @@ vite.config.ts.timestamp-*
 /src/testlib/*.d.ts
 !/src/testlib/ambient.d.ts
 .vscode
+src/tests/.test-barrel-optimizer
