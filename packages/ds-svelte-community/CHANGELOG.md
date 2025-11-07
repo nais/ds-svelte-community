@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 2.0.0-next.4
+
+### Patch Changes
+
+- [#351](https://github.com/nais/ds-svelte-community/pull/351) [`fc53453`](https://github.com/nais/ds-svelte-community/commit/fc53453a224873445c1bafa638ec798f775e6423) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Updated anchor (`<a>`) styling to match React Link component appearance. Plain anchor tags now visually match the default React Link behavior with correct colors, spacing, focus states, and hover effects. This ensures consistency when using native HTML anchors instead of a Link component wrapper.
+
 ## 2.0.0-next.3
 
 ### Patch Changes
