@@ -50,7 +50,7 @@ jobs:
 
       - name: Upload visual test failure images
         if: steps.test.outcome == 'failure'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: visual-test-failures
           path: |
