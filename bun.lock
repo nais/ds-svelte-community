@@ -23,14 +23,14 @@
     },
     "packages/ds-svelte-community": {
       "name": "@nais/ds-svelte-community",
-      "version": "2.0.0-next.2",
+      "version": "2.0.0-next.4",
       "devDependencies": {
         "@nais/vite-plugin-svelte-docs": "workspace:*",
-        "@navikt/aksel-icons": "^7.33.0",
-        "@navikt/ds-css": "7.33.0",
-        "@navikt/ds-react": "^7.33.0",
-        "@navikt/ds-tailwind": "^7.33.0",
-        "@navikt/ds-tokens": "7.33.0",
+        "@navikt/aksel-icons": "^7.33.2",
+        "@navikt/ds-css": "7.33.2",
+        "@navikt/ds-react": "^7.33.2",
+        "@navikt/ds-tailwind": "^7.33.2",
+        "@navikt/ds-tokens": "7.33.2",
         "@sveltejs/adapter-static": "^3.0.10",
         "@sveltejs/kit": "^2.48.4",
         "@sveltejs/package": "^2.5.4",
@@ -77,8 +77,8 @@
         "svelte-floating-ui": "^1.6.2",
       },
       "peerDependencies": {
-        "@navikt/ds-css": "7.33.0",
-        "@navikt/ds-tokens": "7.33.0",
+        "@navikt/ds-css": "7.33.2",
+        "@navikt/ds-tokens": "7.33.2",
         "svelte": "^5.20.0",
       },
     },
@@ -286,15 +286,15 @@
 
     "@nais/vite-plugin-svelte-docs": ["@nais/vite-plugin-svelte-docs@workspace:packages/vite-plugin-svelte-docs"],
 
-    "@navikt/aksel-icons": ["@navikt/aksel-icons@7.33.0", "", {}, "sha512-P/UGa9Ir6OVSsJYilPgKSOMHRuJAIe/NaaSf9fJzFNH/ZLZtIf+jVm7D+E/hNIkAW0x+e+9R5euZkZYKYdGyVw=="],
+    "@navikt/aksel-icons": ["@navikt/aksel-icons@7.33.2", "", {}, "sha512-yF676LoUCSVQoN9X03ONh0gi3svpTpWScpjmHqxxjBPDJf0okIBQKFztI6iGOrFIB/kVyI4M8Qy8EsBuop1KAA=="],
 
-    "@navikt/ds-css": ["@navikt/ds-css@7.33.0", "", {}, "sha512-lEsQLHeq0WBSHt0O3YTBmViE1MrCAjkYjtUWDAWrbpdTX7mQRV2HP+LF5VcARQqgFmiFOILEWHbGo9lw3NApUw=="],
+    "@navikt/ds-css": ["@navikt/ds-css@7.33.2", "", {}, "sha512-isd/GMpXLLrfEl1fLXVZmwxCQUa+tb7qY8V4zt+OqKVXxb9RkNvYONEAVmR7pFTklhPYafU4sJDt6mPfWBrhZw=="],
 
-    "@navikt/ds-react": ["@navikt/ds-react@7.33.0", "", { "dependencies": { "@floating-ui/react": "0.27.8", "@floating-ui/react-dom": "^2.1.6", "@navikt/aksel-icons": "^7.33.0", "@navikt/ds-tokens": "^7.33.0", "clsx": "^2.1.0", "date-fns": "^4.0.0", "react-day-picker": "9.7.0" }, "peerDependencies": { "@types/react": "^17.0.30 || ^18 || ^19", "react": "^17 || ^18 || ^19", "react-dom": "^17 || ^18 || ^19" }, "optionalPeers": ["@types/react"] }, "sha512-BlOMH4iFaM6A2ztZfcU/YyZSIdaDp2Yw39RB1mw4SlPl1G3rLJerCdQfT/UcVw+LzQbECYjdgpIyrIlBtS0J9A=="],
+    "@navikt/ds-react": ["@navikt/ds-react@7.33.2", "", { "dependencies": { "@floating-ui/react": "0.27.8", "@floating-ui/react-dom": "^2.1.6", "@navikt/aksel-icons": "^7.33.2", "@navikt/ds-tokens": "^7.33.2", "clsx": "^2.1.0", "date-fns": "^4.0.0", "react-day-picker": "9.7.0" }, "peerDependencies": { "@types/react": "^17.0.30 || ^18 || ^19", "react": "^17 || ^18 || ^19", "react-dom": "^17 || ^18 || ^19" }, "optionalPeers": ["@types/react"] }, "sha512-RHVraNiRxn2zTDtbJSsWRGSVc6qQLhV0HiALcvU9vSSzrQ5AFXhdEEmCbWsl6Dy4/TjxJJYV/KhHX2ZH1ZMwjw=="],
 
-    "@navikt/ds-tailwind": ["@navikt/ds-tailwind@7.33.0", "", {}, "sha512-X4SeSx/eKp+qF6qGxR0Jo2vp3/C57dqxgPT0rcVAnMkUabciHgSXlL7avC84lqfaMc1c7X1b3ZSMgb3bmig0TA=="],
+    "@navikt/ds-tailwind": ["@navikt/ds-tailwind@7.33.2", "", {}, "sha512-K23rvGfMmzijR3k0LEKpV8SjlSCfApsIh+aJDtZX6xegpuBcttdSWYYcJALjVGxQ1IVchZtxWlwe2QqoAPtHhg=="],
 
-    "@navikt/ds-tokens": ["@navikt/ds-tokens@7.33.0", "", {}, "sha512-WKYiD2vz8SPaNjwHKOw/ZmIRoMdyVy8tMZZy4jM0eVr2wQR+nQQy8sVx9SHBue84Ysz3JPtNf0ozLj2RCpZpHA=="],
+    "@navikt/ds-tokens": ["@navikt/ds-tokens@7.33.2", "", {}, "sha512-8BdcWjTFV+FJr2BWAvBj/fLgh4tfWrGYwM4fWN2fCS4VQsTdG3dpP/xgBd5xcHK2DSfaBGEaebWi3jfvV/QOsg=="],
 
     "@nodelib/fs.scandir": ["@nodelib/fs.scandir@2.1.5", "", { "dependencies": { "@nodelib/fs.stat": "2.0.5", "run-parallel": "^1.1.9" } }, "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="],
 
