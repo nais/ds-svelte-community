@@ -5,7 +5,8 @@ export const sizes = ["medium", "small"] as const;
 export const variants = ["primary", "secondary", "simple"] as const;
 
 export interface SearchProps
-	extends Omit<HTMLInputAttributes, "size" | "value" | "type" | "role" | "onclick">,
+	extends
+		Omit<HTMLInputAttributes, "size" | "value" | "type" | "role" | "onclick">,
 		Pick<HTMLButtonAttributes, "onclick"> {
 	/**
 	 * Search label.

@@ -57,5 +57,4 @@ export interface TagSpecificProps {
 }
 
 export interface TagProps
-	extends TagSpecificProps,
-		Omit<HTMLAttributes<HTMLElement>, keyof TagSpecificProps> {}
+	extends TagSpecificProps, Omit<HTMLAttributes<HTMLElement>, keyof TagSpecificProps> {}

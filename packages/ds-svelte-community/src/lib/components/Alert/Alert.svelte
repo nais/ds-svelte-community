@@ -51,9 +51,9 @@
 			return closeButtonIconText;
 		}
 		if (["error", "warning"].includes(variant)) {
-			return "Close alert";
+			return "Close";
 		}
-		return "Close message";
+		return "Close";
 	});
 	// TODO: I18n
 </script>
