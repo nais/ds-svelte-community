@@ -35,6 +35,7 @@ export * from "./components/Switch";
 export * from "./components/Table";
 export * from "./components/Tabs";
 export * from "./components/Tag";
+export * from "./components/Textarea";
 export * from "./components/TextField";
 export { default as Theme } from "./components/Theme/Theme.svelte";
 export * from "./components/ToggleGroup";

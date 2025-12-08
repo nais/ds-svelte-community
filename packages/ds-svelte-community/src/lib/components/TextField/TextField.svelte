@@ -6,7 +6,8 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 -->
 
 <script lang="ts">
-	import { BodyShort, Detail, ErrorMessage, Label } from "$lib";
+	import { BodyShort, ErrorMessage, Label } from "$lib";
+	import PadlockLockedFillIcon from "$lib/icons/PadlockLockedFillIcon.svelte";
 	import { omit } from "../helpers";
 	import type { TextFieldProps } from "./type";
 
@@ -27,7 +28,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		...restProps
 	}: TextFieldProps = $props();
 
-	const inputDescriptionId = `tf-desc-${id}`;
+	const inputDescriptionId = $derived(`tf-desc-${id}`);
 </script>
 
 <div
@@ -39,10 +40,15 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 			"aksel-text-field--error": !!error,
 			"aksel-text-field--disabled": disabled,
 			"aksel-form-field--disabled": disabled,
+			"aksel-form-field--readonly": restProps.readonly,
+			"aksel-text-field--readonly": restProps.readonly,
 		},
 	]}
 >
 	<Label for={id} {size} class={["aksel-form-field__label", { "aksel-sr-only": hideLabel }]}>
+		{#if restProps.readonly}
+			<PadlockLockedFillIcon aria-hidden class="aksel-form-field__readonly-icon" />
+		{/if}
 		{#if typeof label === "string"}
 			{label}
 		{:else}
@@ -51,37 +57,25 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	</Label>
 
 	{#if description}
-		{#if size == "medium"}
-			<BodyShort
-				class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]}
-				id={inputDescriptionId}
-				as="div"
-			>
-				{#if typeof description === "string"}
-					{description}
-				{:else}
-					{@render description()}
-				{/if}
-			</BodyShort>
-		{:else}
-			<Detail
-				class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]}
-				id={inputDescriptionId}
-				as="div"
-			>
-				{#if typeof description === "string"}
-					{description}
-				{:else}
-					{@render description()}
-				{/if}
-			</Detail>
-		{/if}
+		<BodyShort
+			class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]}
+			id={inputDescriptionId}
+			{size}
+			as="div"
+		>
+			{#if typeof description === "string"}
+				{description}
+			{:else}
+				{@render description()}
+			{/if}
+		</BodyShort>
 	{/if}
 
 	<input
 		{type}
 		{id}
-		{...omit(restProps, "id", "class", "aria-invalid", "size")}
+		{disabled}
+		{...omit(restProps, "id", "class", "aria-invalid", "size", "disabled")}
 		aria-invalid={error ? "true" : undefined}
 		aria-describedby={inputDescriptionId}
 		class={["aksel-text-field__input", "aksel-body-short", "aksel-body-short--" + size]}
@@ -95,7 +89,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		aria-live="polite"
 	>
 		{#if error}
-			<ErrorMessage {size}>
+			<ErrorMessage {size} showIcon>
 				{error}
 			</ErrorMessage>
 		{/if}
