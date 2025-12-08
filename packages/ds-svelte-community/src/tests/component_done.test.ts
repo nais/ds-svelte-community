@@ -14,8 +14,6 @@ describe("which components are implemented", () => {
 		"ActionMenuSubTrigger",
 		"ActionMenuTrigger",
 		"BoxNew",
-		"Chat",
-		"ChatBubble",
 		"DatePicker",
 		"DatePickerInput",
 		"DatePickerStandalone",
