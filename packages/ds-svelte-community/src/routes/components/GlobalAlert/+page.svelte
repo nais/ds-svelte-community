@@ -1,9 +1,9 @@
 <script lang="ts">
-	import doc from "$lib/components/GlobalAlert/GlobalAlert.svelte?doc";
-	import closeButtonDoc from "$lib/components/GlobalAlert/GlobalAlertCloseButton.svelte?doc";
-	import contentDoc from "$lib/components/GlobalAlert/GlobalAlertContent.svelte?doc";
-	import headerDoc from "$lib/components/GlobalAlert/GlobalAlertHeader.svelte?doc";
-	import titleDoc from "$lib/components/GlobalAlert/GlobalAlertTitle.svelte?doc";
+	import doc from "$lib/components/alerts/GlobalAlert/GlobalAlert.svelte?doc";
+	import closeButtonDoc from "$lib/components/alerts/GlobalAlert/GlobalAlertCloseButton.svelte?doc";
+	import contentDoc from "$lib/components/alerts/GlobalAlert/GlobalAlertContent.svelte?doc";
+	import headerDoc from "$lib/components/alerts/GlobalAlert/GlobalAlertHeader.svelte?doc";
+	import titleDoc from "$lib/components/alerts/GlobalAlert/GlobalAlertTitle.svelte?doc";
 
 	import Doc from "$doclib/Doc.svelte";
 	import Story from "$doclib/Story.svelte";
