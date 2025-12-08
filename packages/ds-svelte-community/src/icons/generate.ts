@@ -5,7 +5,7 @@ import * as path from "path";
 import { parse } from "svelte/compiler";
 import { optimize } from "svgo";
 
-const source = "../../node_modules/@navikt/aksel-icons/dist/svg";
+const source = "./node_modules/@navikt/aksel-icons/dist/svg";
 const target = "src/lib/icons";
 
 const files = fs.readdirSync(source);

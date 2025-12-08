@@ -63,6 +63,8 @@ export { default as BellDotFillIcon } from "./BellDotFillIcon.svelte";
 export { default as BellDotIcon } from "./BellDotIcon.svelte";
 export { default as BellFillIcon } from "./BellFillIcon.svelte";
 export { default as BellIcon } from "./BellIcon.svelte";
+export { default as BellSlashFillIcon } from "./BellSlashFillIcon.svelte";
+export { default as BellSlashIcon } from "./BellSlashIcon.svelte";
 export { default as BicycleIcon } from "./BicycleIcon.svelte";
 export { default as BoatFillIcon } from "./BoatFillIcon.svelte";
 export { default as BoatIcon } from "./BoatIcon.svelte";
@@ -667,6 +669,8 @@ export { default as PersonTallShortFillIcon } from "./PersonTallShortFillIcon.sv
 export { default as PersonTallShortIcon } from "./PersonTallShortIcon.svelte";
 export { default as PhoneFillIcon } from "./PhoneFillIcon.svelte";
 export { default as PhoneIcon } from "./PhoneIcon.svelte";
+export { default as PhoneSlashFillIcon } from "./PhoneSlashFillIcon.svelte";
+export { default as PhoneSlashIcon } from "./PhoneSlashIcon.svelte";
 export { default as PieChartFillIcon } from "./PieChartFillIcon.svelte";
 export { default as PieChartIcon } from "./PieChartIcon.svelte";
 export { default as PiggybankFillIcon } from "./PiggybankFillIcon.svelte";
