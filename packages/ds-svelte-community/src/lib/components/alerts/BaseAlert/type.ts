@@ -13,16 +13,23 @@ export type BaseAlertType = (typeof baseAlertTypes)[number];
 
 export interface BaseAlertContext {
 	size: BaseAlertSize;
-	status: BaseAlertStatus;
-	color: AkselColor;
+	status?: BaseAlertStatus;
+	color?: AkselColor;
 	statusId: string;
 }
 
 export interface BaseAlertProps extends Omit<HTMLAttributes<HTMLElement>, "children"> {
 	/**
 	 * Alert status. Changes the icon and colors.
+	 * Required for GlobalAlert and LocalAlert, optional for InfoCard.
 	 */
-	status: BaseAlertStatus;
+	status?: BaseAlertStatus;
+
+	/**
+	 * Overrides the color derived from status.
+	 * Used by InfoCard which doesn't have a status.
+	 */
+	"data-color"?: AkselColor;
 
 	/**
 	 * Changes the size of the alert.
@@ -50,6 +57,12 @@ export interface BaseAlertProps extends Omit<HTMLAttributes<HTMLElement>, "child
 	 * @default "section"
 	 */
 	as?: "section" | "div";
+
+	/**
+	 * Role attribute for the inner content wrapper.
+	 * GlobalAlert and LocalAlert use "alert", InfoCard uses undefined.
+	 */
+	role?: "alert";
 
 	/**
 	 * Alert content.

@@ -41,15 +41,17 @@
 
 	let {
 		status,
+		"data-color": dataColorProp,
 		size = "medium",
 		type = "strong",
 		global = false,
 		as = "section",
+		role,
 		children,
 		...restProps
 	}: BaseAlertProps = $props();
 
-	const color = $derived(statusToDataColor(status));
+	const color = $derived(dataColorProp ?? (status ? statusToDataColor(status) : undefined));
 	const statusId = `base-alert-status-${uid}`;
 
 	class Context implements BaseAlertContext {
@@ -59,28 +61,38 @@
 		statusId: string = statusId;
 	}
 
-	const ctx = new Context();
-	setContext<BaseAlertContext>(contextKey, ctx);
-
 	const statusLabels: Record<BaseAlertStatus, string> = {
 		announcement: "Announcement",
 		success: "Success",
 		warning: "Warning",
 		error: "Error",
 	};
+
+	const ariaLabel = $derived.by(() => {
+		if (restProps["aria-label"]) {
+			return restProps["aria-label"];
+		}
+		if (as === "section" && status) {
+			return statusLabels[status];
+		}
+		return undefined;
+	});
+
+	const ctx = new Context();
+	setContext<BaseAlertContext>(contextKey, ctx);
 </script>
 
 <svelte:element
 	this={as}
 	{...omit(restProps, "class")}
-	aria-label={restProps["aria-label"] ?? (as === "section" ? statusLabels[status] : undefined)}
+	aria-label={ariaLabel}
 	class={[restProps.class, "aksel-base-alert"]}
 	data-size={size}
 	data-color={color}
 	data-variant={type}
 	data-global={global}
 >
-	<div role="alert">
+	<div {role}>
 		{@render children()}
 	</div>
 </svelte:element>

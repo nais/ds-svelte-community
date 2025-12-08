@@ -17,6 +17,6 @@
 	let { children, ...restProps }: LocalAlertProps = $props();
 </script>
 
-<BaseAlert {...restProps} global={false} type="strong">
+<BaseAlert {...restProps} global={false} type="strong" role="alert">
 	{@render children()}
 </BaseAlert>
