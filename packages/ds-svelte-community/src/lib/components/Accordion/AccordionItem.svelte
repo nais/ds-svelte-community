@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { dev } from "$app/environment";
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
 	import { omit } from "../helpers";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
@@ -20,10 +19,10 @@
 	};
 
 	$effect(() => {
-		if (dev && !heading) {
+		if (!heading) {
 			console.error("<AccordionItem> was used without a 'heading' snippet or `heading` prop");
 		}
-		if (dev && !ctx) {
+		if (!ctx) {
 			console.error("<AccordionItem> was used outside of an <Accordion> component");
 		}
 	});

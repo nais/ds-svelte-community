@@ -116,7 +116,7 @@
 	<BodyShort
 		as="label"
 		for={id}
-		{usedSize}
+		size={usedSize}
 		class={[
 			"aksel-checkbox__label",
 			{
@@ -128,7 +128,7 @@
 	{#if description}
 		<BodyShort
 			id={descriptionID}
-			{usedSize}
+			size={usedSize}
 			class="aksel-form-field__subdescription aksel-checkbox__description"
 		>
 			{#if typeof description === "string"}
