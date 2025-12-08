@@ -47,7 +47,6 @@ describe("which components are implemented", () => {
 		"Portal",
 		"Provider",
 		"TableColumnHeader",
-		"Textarea",
 		"Timeline",
 		"TimelinePeriod",
 		"TimelinePin",
