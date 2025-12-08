@@ -173,6 +173,8 @@
 		{:else if isSelect}
 			<div>
 				<Select
+					label="Select value"
+					hideLabel
 					bind:value
 					size="small"
 					onchange={() => {

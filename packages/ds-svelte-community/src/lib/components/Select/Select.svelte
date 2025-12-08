@@ -7,15 +7,15 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <script lang="ts">
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
+	import PadlockLockedFillIcon from "$lib/icons/PadlockLockedFillIcon.svelte";
 	import { omit } from "../helpers";
-	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
-	import Detail from "../typography/Detail/Detail.svelte";
+	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import ErrorMessage from "../typography/ErrorMessage/ErrorMessage.svelte";
 	import Label from "../typography/Label/Label.svelte";
 	import type { SelectProps } from "./type";
 
 	let {
-		label = "",
+		label,
 		hideLabel = false,
 		style,
 		size = "medium",
@@ -28,10 +28,30 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	}: SelectProps = $props();
 
 	const baseID = $props.id();
-	const id = "select-" + baseID;
-	const errorID = "select-error-" + baseID;
+	const id = $derived("select-" + baseID);
+	const errorID = $derived("select-error-" + baseID);
+	const descriptionID = $derived("select-desc-" + baseID);
 
-	let hasError = $derived(!!error);
+	const hasError = $derived(!!error);
+	const readOnly = $derived(!!restProps.readonly);
+
+	const describedBy = $derived(
+		[description ? descriptionID : null, hasError ? errorID : null].filter(Boolean).join(" ") ||
+			undefined,
+	);
+
+	function handleMouseDown(evt: MouseEvent) {
+		if (readOnly) {
+			evt.preventDefault();
+			(evt.target as HTMLSelectElement)?.focus();
+		}
+	}
+
+	function handleKeyDown(evt: KeyboardEvent) {
+		if (readOnly && ["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", " "].includes(evt.key)) {
+			evt.preventDefault();
+		}
+	}
 </script>
 
 <div
@@ -41,44 +61,45 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		`aksel-form-field--${size}`,
 		{
 			"aksel-form-field--disabled": disabled,
+			"aksel-form-field--readonly": readOnly,
 			"aksel-select--error": hasError,
+			"aksel-select--readonly": readOnly,
 		},
 	]}
 >
 	<Label for={id} {size} class={["aksel-form-field__label", { "aksel-sr-only": hideLabel }]}>
-		{label}
+		{#if readOnly}
+			<PadlockLockedFillIcon title="Read-only" class="aksel-form-field__readonly-icon" />
+		{/if}
+		{#if typeof label === "string"}
+			{label}
+		{:else if label}
+			{@render label()}
+		{/if}
 	</Label>
 
 	{#if description}
-		{#if size === "medium"}
-			<BodyLong
-				class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]}
-				size="small"
-				as="div"
-			>
-				{@render description()}
-			</BodyLong>
-		{:else}
-			<Detail class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]} as="div">
-				{@render description()}
-			</Detail>
-		{/if}
+		<BodyShort
+			class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]}
+			id={descriptionID}
+			{size}
+			as="div"
+		>
+			{@render description()}
+		</BodyShort>
 	{/if}
 
 	<div class="aksel-select__container" {style}>
 		<select
-			{...omit(restProps, "class")}
+			{...omit(restProps, "class", "readonly")}
 			bind:value
-			class={[
-				restProps.class,
-				"aksel-select__input",
-				"aksel-body-short",
-				`aksel-body-short--${size ?? "medium"}`,
-			]}
+			class={["aksel-select__input", "aksel-body-short", `aksel-body-short--${size}`]}
 			{id}
 			{disabled}
 			aria-invalid={hasError ? true : undefined}
-			aria-describedby={hasError ? errorID : undefined}
+			aria-describedby={describedBy}
+			onmousedown={handleMouseDown}
+			onkeydown={handleKeyDown}
 		>
 			{@render children()}
 		</select>
@@ -92,7 +113,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		aria-live="polite"
 	>
 		{#if hasError}
-			<ErrorMessage {size}>{error}</ErrorMessage>
+			<ErrorMessage {size} showIcon>{error}</ErrorMessage>
 		{/if}
 	</div>
 </div>

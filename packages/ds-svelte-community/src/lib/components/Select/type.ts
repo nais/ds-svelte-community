@@ -10,7 +10,7 @@ export interface SelectProps extends Omit<HTMLSelectAttributes, "size"> {
 	/**
 	 * Label for select.
 	 */
-	label?: string;
+	label: string | Snippet;
 	/**
 	 * If enabled shows the label and description for screen readers only.
 	 */
@@ -36,16 +36,17 @@ export interface SelectProps extends Omit<HTMLSelectAttributes, "size"> {
 	 * Selected value.
 	 */
 	value?: string;
-
 	/**
 	 * List of `<option>` elements.
 	 */
 	children: Snippet;
-
 	/**
 	 * Extra description.
 	 */
 	description?: Snippet;
-
-	[key: string]: unknown;
+	/**
+	 * Makes the select field read-only.
+	 * Note: HTML select doesn't natively support readonly, this is implemented via event handlers.
+	 */
+	readonly?: boolean;
 }
