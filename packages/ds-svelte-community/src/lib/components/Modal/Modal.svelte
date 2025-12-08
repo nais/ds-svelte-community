@@ -10,11 +10,10 @@
 
 <script lang="ts">
 	import XMarkIcon from "$lib/icons/XMarkIcon.svelte";
-	import { onMount } from "svelte";
-	import { writable } from "svelte/store";
 	import Button from "../Button/Button.svelte";
 	import { omit } from "../helpers";
 	import Heading from "../typography/Heading/Heading.svelte";
+	import { acquireScrollLock } from "./scrollLock";
 	import { sizes, type ModalProps } from "./type";
 
 	let {
@@ -30,6 +29,7 @@
 	}: ModalProps = $props();
 
 	let dialog: HTMLDialogElement;
+	let releaseScrollLock: (() => void) | null = null;
 
 	$effect(() => {
 		if (dialog && open && dialog.showModal) {
@@ -40,24 +40,27 @@
 			}
 		}
 	});
+
 	$effect(() => {
 		if (dialog && !open) {
 			dialog.close();
 		}
 	});
 
-	const openStore = writable(open);
 	$effect(() => {
-		openStore.set(open);
-	});
-	onMount(() => {
-		return openStore.subscribe((value) => {
-			if (dialog && value) {
-				window.document.getElementsByTagName("body")[0].style.overflow = "hidden";
-			} else {
-				window.document.getElementsByTagName("body")[0].style.overflow = "auto";
+		if (open && isModal) {
+			releaseScrollLock = acquireScrollLock();
+		} else if (releaseScrollLock) {
+			releaseScrollLock();
+			releaseScrollLock = null;
+		}
+
+		return () => {
+			if (releaseScrollLock) {
+				releaseScrollLock();
+				releaseScrollLock = null;
 			}
-		});
+		};
 	});
 
 	const isKnownSize = (w: unknown) => (w ? sizes.includes(w as never) : false);
