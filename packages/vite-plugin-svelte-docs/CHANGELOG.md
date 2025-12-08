@@ -1,5 +1,11 @@
 # @nais/vite-plugin-svelte-docs
 
+## 0.0.3-next.2
+
+### Patch Changes
+
+- [#359](https://github.com/nais/ds-svelte-community/pull/359) [`a031cec`](https://github.com/nais/ds-svelte-community/commit/a031cecbcfe1e011da966d46a132b772b052ea53) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade dependencies
+
 ## 0.0.3-next.1
 
 ### Patch Changes
