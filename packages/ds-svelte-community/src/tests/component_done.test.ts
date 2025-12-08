@@ -44,7 +44,6 @@ describe("which components are implemented", () => {
 		"InfoCardContent",
 		"InfoCardHeader",
 		"InfoCardTitle",
-		"InlineMessage",
 		"MonthPicker",
 		"MonthPickerInput",
 		"MonthPickerStandalone",
