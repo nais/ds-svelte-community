@@ -1,6 +1,8 @@
 <!--
 	@component
-	GlobalAlertHeader is the header section of a GlobalAlert, containing the icon, title, and optionally a close button.
+	BaseAlertHeader is the header section of a BaseAlert, containing the icon, title, and optionally a close button.
+
+	This is an internal component - use GlobalAlertHeader or LocalAlertHeader instead.
 -->
 
 <script lang="ts">
@@ -8,16 +10,16 @@
 	import { default as ExclamationmarkTriangleFillIcon } from "$lib/icons/ExclamationmarkTriangleFillIcon.svelte";
 	import { default as MegaphoneSpeakingFillIcon } from "$lib/icons/MegaphoneSpeakingFillIcon.svelte";
 	import { default as XMarkOctagonFillIcon } from "$lib/icons/XMarkOctagonFillIcon.svelte";
-	import { omit } from "../helpers";
-	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
-	import { GetGlobalAlertContext } from "./GlobalAlert.svelte";
-	import type { GlobalAlertHeaderProps, GlobalAlertStatus } from "./type";
+	import { omit } from "../../helpers";
+	import BodyShort from "../../typography/BodyShort/BodyShort.svelte";
+	import { GetBaseAlertContext } from "./BaseAlert.svelte";
+	import type { BaseAlertHeaderProps, BaseAlertStatus } from "./type";
 
-	let { children, ...restProps }: GlobalAlertHeaderProps = $props();
+	let { children, icon, ...restProps }: BaseAlertHeaderProps = $props();
 
-	const ctx = GetGlobalAlertContext();
+	const ctx = GetBaseAlertContext();
 
-	const statusLabels: Record<GlobalAlertStatus, string> = {
+	const statusLabels: Record<BaseAlertStatus, string> = {
 		announcement: "Announcement",
 		success: "Success",
 		warning: "Warning",
@@ -31,7 +33,9 @@
 	class={[restProps.class, "aksel-base-alert__header"]}
 >
 	<div class="aksel-base-alert__icon">
-		{#if ctx?.status === "announcement"}
+		{#if icon}
+			{@render icon()}
+		{:else if ctx?.status === "announcement"}
 			<MegaphoneSpeakingFillIcon aria-hidden="true" />
 		{:else if ctx?.status === "success"}
 			<CheckmarkCircleFillIcon aria-hidden="true" />

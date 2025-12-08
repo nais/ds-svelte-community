@@ -758,6 +758,56 @@ export class DocGenerator {
 
 		const typeName = node.getTypeName().getText();
 
+		// Handle Omit utility type
+		if (typeName === "Omit") {
+			const tas = node.getTypeArguments();
+			if (tas.length >= 2) {
+				const baseType = tas[0];
+				const keysToOmit = tas.slice(1);
+
+				// Get the keys to omit as strings
+				const omitKeys: string[] = [];
+				keysToOmit.forEach((k) => {
+					if (k.isKind(ts.SyntaxKind.LiteralType)) {
+						const lit = (k as tsm.LiteralTypeNode).getLiteral();
+						if (lit.isKind(ts.SyntaxKind.StringLiteral)) {
+							omitKeys.push(lit.getLiteralValue());
+						}
+					} else if (k.isKind(ts.SyntaxKind.UnionType)) {
+						// Handle union of literals like "global" | "type"
+						(k as tsm.UnionTypeNode).getTypeNodes().forEach((t) => {
+							if (t.isKind(ts.SyntaxKind.LiteralType)) {
+								const lit = (t as tsm.LiteralTypeNode).getLiteral();
+								if (lit.isKind(ts.SyntaxKind.StringLiteral)) {
+									omitKeys.push(lit.getLiteralValue());
+								}
+							}
+						});
+					}
+				});
+
+				// Resolve the base type
+				const o = this.#typeOf(ctx, baseType);
+				if (Array.isArray(o)) {
+					ctx.log("Expected non-array type for Omit base");
+					return { type: "unknown" };
+				}
+
+				// Filter out omitted keys from interface/object types
+				if (o.type === "interface" && o.members) {
+					o.members = o.members.filter((m) => !omitKeys.includes(m.name));
+					return o;
+				} else if (o.type === "object" && o.properties) {
+					o.properties = o.properties.filter((p) => !omitKeys.includes(p.name));
+					return o;
+				}
+
+				// For other types, just return as-is
+				return o;
+			}
+			return { type: "unknown" };
+		}
+
 		if (typeName === "Snippet") {
 			const tas = node.getTypeArguments();
 			if (tas.length > 0) {

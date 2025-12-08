@@ -2,6 +2,8 @@
 
 export * from "./components/Accordion";
 export { default as Alert } from "./components/Alert/Alert.svelte";
+export * from "./components/alerts/GlobalAlert";
+export * from "./components/alerts/LocalAlert";
 export { default as Button } from "./components/Button/Button.svelte";
 export * from "./components/Checkbox";
 export * from "./components/Chips";
@@ -9,7 +11,6 @@ export { default as CopyButton } from "./components/CopyButton/CopyButton.svelte
 export * from "./components/ErrorSummary";
 export * from "./components/ExpansionCard";
 export { default as Fieldset } from "./components/Fieldset/Fieldset.svelte";
-export * from "./components/GlobalAlert";
 export * from "./components/GuidePanel";
 export { default as HelpText } from "./components/HelpText/HelpText.svelte";
 export * from "./components/LinkCard";

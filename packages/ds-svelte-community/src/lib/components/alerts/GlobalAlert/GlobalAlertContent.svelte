@@ -4,19 +4,12 @@
 -->
 
 <script lang="ts">
-	import { omit } from "../helpers";
-	import { GetTheme } from "../Theme/Theme.svelte";
+	import BaseAlertContent from "../BaseAlert/BaseAlertContent.svelte";
 	import type { GlobalAlertContentProps } from "./type";
 
 	let { children, ...restProps }: GlobalAlertContentProps = $props();
-
-	const themeCtx = GetTheme();
 </script>
 
-<div
-	{...omit(restProps, "class")}
-	data-color={themeCtx ? themeCtx.color : undefined}
-	class={[restProps.class, "aksel-base-alert__content"]}
->
+<BaseAlertContent {...restProps}>
 	{@render children()}
-</div>
+</BaseAlertContent>
