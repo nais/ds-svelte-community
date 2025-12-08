@@ -6,6 +6,7 @@ export * from "./components/alerts/GlobalAlert";
 export * from "./components/alerts/InfoCard";
 export * from "./components/alerts/LocalAlert";
 export { default as Button } from "./components/Button/Button.svelte";
+export * from "./components/Chat";
 export * from "./components/Checkbox";
 export * from "./components/Chips";
 export { default as CopyButton } from "./components/CopyButton/CopyButton.svelte";
