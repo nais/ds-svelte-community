@@ -104,7 +104,7 @@
 					{@render icon()}
 				{:else}
 					{@const Icon = icon}
-					<Icon />
+					<Icon aria-hidden="true" />
 				{/if}
 			</span>
 		{/if}
@@ -118,7 +118,7 @@
 					{@render icon()}
 				{:else}
 					{@const Icon = icon}
-					<Icon />
+					<Icon aria-hidden="true" />
 				{/if}
 			</span>
 		{/if}
