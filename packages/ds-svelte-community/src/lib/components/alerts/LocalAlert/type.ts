@@ -19,7 +19,13 @@ export {
 } from "../BaseAlert/type";
 
 // LocalAlert uses BaseAlert with global=false and type="strong", so omit those props
-export type LocalAlertProps = Omit<BaseAlertProps, "global" | "type">;
+// Status is required for LocalAlert (unlike BaseAlert where it's optional for InfoCard)
+export type LocalAlertProps = Omit<BaseAlertProps, "global" | "type" | "status" | "data-color"> & {
+	/**
+	 * Alert status. Changes the icon and colors.
+	 */
+	status: BaseAlertStatus;
+};
 
 // Subcomponent props are the same as BaseAlert, but Header omits "icon" (auto-determined by status)
 export type LocalAlertHeaderProps = Omit<BaseAlertHeaderProps, "icon">;
