@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { dev } from "$app/environment";
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
 	import { omit } from "../helpers";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
@@ -9,7 +10,7 @@
 
 	let { open = false, heading, children, ...restProps }: AccordionItemProps = $props();
 
-	let shouldAnimate = $state(!open);
+	let shouldAnimate = $derived(!open);
 
 	const ctx = GetAccordionContext();
 
@@ -18,13 +19,14 @@
 		shouldAnimate = true;
 	};
 
-	if (!heading) {
-		console.error("<AccordionItem> was used without a 'heading' snippet or `heading` prop");
-	}
-
-	if (!ctx) {
-		console.error("<AccordionItem> was used outside of an <Accordion> component");
-	}
+	$effect(() => {
+		if (dev && !heading) {
+			console.error("<AccordionItem> was used without a 'heading' snippet or `heading` prop");
+		}
+		if (dev && !ctx) {
+			console.error("<AccordionItem> was used outside of an <Accordion> component");
+		}
+	});
 
 	let headingSize: HeadingProps["size"] = $derived.by(() => {
 		/* Fallback to "medium" Accordion-size if any other sizes are used */

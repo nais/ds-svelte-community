@@ -2,8 +2,10 @@ import type { Snippet } from "svelte";
 import type { HTMLInputAttributes } from "svelte/elements";
 import type { FieldsetProps } from "../Fieldset/type";
 
-export interface RadioGroupProps<T = unknown>
-	extends Omit<FieldsetProps, "onchange" | "errorPropagation" | "nativeReadOnly"> {
+export interface RadioGroupProps<T = unknown> extends Omit<
+	FieldsetProps,
+	"onchange" | "errorPropagation" | "nativeReadOnly"
+> {
 	/**
 	 * Collection of `<Radio />`-elements
 	 */

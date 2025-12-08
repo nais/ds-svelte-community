@@ -72,6 +72,7 @@
 
 	const parent = GetTheme();
 
+	// svelte-ignore state_referenced_locally
 	const ctx = newContext(theme ?? parent?.theme ?? "light");
 
 	$effect(() => {

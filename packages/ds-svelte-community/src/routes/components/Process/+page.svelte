@@ -68,8 +68,8 @@
 				{#snippet bullet()}
 					<ChildHairEyesIcon />
 				{/snippet}
-				You must use the parental benefits before the baby turns 3 years old. If you are expecting a
-				new baby, you must use the parental benefits before the new parental benefit period starts.
+				You must use the parental benefits before the baby turns 3 years old. If you are expecting a new
+				baby, you must use the parental benefits before the new parental benefit period starts.
 			</ProcessEvent>
 		</Process>
 	</Story>

@@ -53,14 +53,14 @@
 	const hasErrorStore = ctx ? ctx.hasError : null;
 	let hasError = $derived(hasErrorStore ? hasErrorStore : error);
 
-	size = size ? size : ctx ? ctx.size : "medium";
+	let usedSize = $derived(size ? size : ctx ? ctx.size : "medium");
 </script>
 
 <div
 	class={[
 		restProps.class,
 		"aksel-checkbox",
-		`aksel-checkbox--${size}`,
+		`aksel-checkbox--${usedSize}`,
 		{
 			"aksel-checkbox--error": hasError,
 			"aksel-checkbox--disabled": disabled,
@@ -116,7 +116,7 @@
 	<BodyShort
 		as="label"
 		for={id}
-		{size}
+		{usedSize}
 		class={[
 			"aksel-checkbox__label",
 			{
@@ -128,7 +128,7 @@
 	{#if description}
 		<BodyShort
 			id={descriptionID}
-			{size}
+			{usedSize}
 			class="aksel-form-field__subdescription aksel-checkbox__description"
 		>
 			{#if typeof description === "string"}
