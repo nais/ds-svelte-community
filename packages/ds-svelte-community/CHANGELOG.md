@@ -1,5 +1,31 @@
 # @nais/ds-svelte-community
 
+## 2.0.0-next.5
+
+### Minor Changes
+
+- [#366](https://github.com/nais/ds-svelte-community/pull/366) [`6e4b0e7`](https://github.com/nais/ds-svelte-community/commit/6e4b0e7b13f4394c668235ea2da297b7b3b83d9d) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Textarea: New component for multi-line text input with auto-resize, character counter, and full parity with React.
+
+  TextField: Add `readonly` support with padlock icon, and `showIcon` on error messages to match React.
+
+- [#361](https://github.com/nais/ds-svelte-community/pull/361) [`ba499a3`](https://github.com/nais/ds-svelte-community/commit/ba499a334ae20f1ed8f428fad6bc667c1bef370d) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add new GlobalAlert component with subcomponents (GlobalAlertHeader, GlobalAlertTitle, GlobalAlertContent, GlobalAlertCloseButton) for displaying prominent alerts about your app, such as system status or important announcements.
+
+- [#363](https://github.com/nais/ds-svelte-community/pull/363) [`468a65c`](https://github.com/nais/ds-svelte-community/commit/468a65c36bbc0c9a056fdec116ab3be8693d6fa2) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add InlineMessage component with full parity to React's InlineMessage. This component is used to highlight short messages next to other content.
+
+- [#364](https://github.com/nais/ds-svelte-community/pull/364) [`e15f984`](https://github.com/nais/ds-svelte-community/commit/e15f9848e7f6d9c20d69f9663219ae067c087069) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add InfoCard component with full parity to React's InfoCard. This component is used for displaying informational content in a card format with a moderate visual style, typically for non-urgent informational messages.
+
+- [#362](https://github.com/nais/ds-svelte-community/pull/362) [`84dec3d`](https://github.com/nais/ds-svelte-community/commit/84dec3d658bd2b4a1f11f5a4a6792a0d92ef1cef) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add LocalAlert component with full parity to React's LocalAlert. Refactor GlobalAlert and LocalAlert to share a common BaseAlert internal component, reducing code duplication and matching the React architecture.
+
+- [#368](https://github.com/nais/ds-svelte-community/pull/368) [`22283b1`](https://github.com/nais/ds-svelte-community/commit/22283b1dd6d401c831dee42b86cf261a5d380d5e) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add Chat and ChatBubble components for displaying dialog between two or more parties. The components support variants (neutral, subtle, info), positions (left, right), sizes (medium, small), and customizable avatars.
+
+### Patch Changes
+
+- [#367](https://github.com/nais/ds-svelte-community/pull/367) [`be498b5`](https://github.com/nais/ds-svelte-community/commit/be498b54933dc7c093260be97834b8ed0a6f9627) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Select: Update to match React implementation - use BodyShort with size prop for description, add readOnly support with padlock icon, add showIcon on error messages, improve aria-describedby handling, and make label required.
+
+- [#365](https://github.com/nais/ds-svelte-community/pull/365) [`d32fddf`](https://github.com/nais/ds-svelte-community/commit/d32fddf73823b19fb3ada044a3faf98c68a49476) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Modal: Improve scroll lock to properly preserve and restore original styles, handle sticky elements correctly, and support nested modals via reference counting.
+
+- [#359](https://github.com/nais/ds-svelte-community/pull/359) [`a031cec`](https://github.com/nais/ds-svelte-community/commit/a031cecbcfe1e011da966d46a132b772b052ea53) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade dependencies
+
 ## 2.0.0-next.4
 
 ### Patch Changes
