@@ -18,7 +18,9 @@
 		"prepublishOnly": "bun run test:unit && bun run check && bun run lint && bun run package",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --log-level warn --check . && eslint .",
+		"lint": "prettier --log-level warn --check . && eslint . && bun run check-peer-deps",
+		"sync-peer-deps": "bun run scripts/sync-peer-deps.ts",
+		"check-peer-deps": "bun run scripts/sync-peer-deps.ts --check",
 		"format": "prettier --log-level warn --write .",
 		"generate-icons": "./hack/generate-icons.sh",
 		"prepare": "svelte-kit sync || echo ''",
@@ -59,8 +61,8 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"@navikt/ds-css": "7.33.0",
-		"@navikt/ds-tokens": "7.33.0",
+		"@navikt/ds-css": "7.35.1",
+		"@navikt/ds-tokens": "7.35.1",
 		"svelte": "^5.20.0"
 	},
 	"optionalDependencies": {
