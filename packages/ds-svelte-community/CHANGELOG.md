@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 2.0.0-next.6
+
+### Patch Changes
+
+- [#369](https://github.com/nais/ds-svelte-community/pull/369) [`76f050a`](https://github.com/nais/ds-svelte-community/commit/76f050adad3c1ee5a0e50a4c23a6e1ba52752383) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Fix peerDependencies for @navikt/ds-css and @navikt/ds-tokens to match devDependencies versions (7.35.1). Added a sync script to ensure peer and dev dependencies stay in sync.
+
 ## 2.0.0-next.5
 
 ### Minor Changes
