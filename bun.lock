@@ -24,14 +24,14 @@
     },
     "packages/ds-svelte-community": {
       "name": "@nais/ds-svelte-community",
-      "version": "2.0.0-next.4",
+      "version": "2.0.0-next.6",
       "devDependencies": {
         "@nais/vite-plugin-svelte-docs": "workspace:*",
-        "@navikt/aksel-icons": "^7.35.1",
-        "@navikt/ds-css": "7.35.1",
-        "@navikt/ds-react": "^7.35.1",
-        "@navikt/ds-tailwind": "^7.35.1",
-        "@navikt/ds-tokens": "7.35.1",
+        "@navikt/aksel-icons": "^7.35.2",
+        "@navikt/ds-css": "7.35.2",
+        "@navikt/ds-react": "^7.35.2",
+        "@navikt/ds-tailwind": "^7.35.2",
+        "@navikt/ds-tokens": "7.35.2",
         "@sveltejs/adapter-static": "^3.0.10",
         "@sveltejs/kit": "^2.49.1",
         "@sveltejs/package": "^2.5.7",
@@ -78,14 +78,14 @@
         "svelte-floating-ui": "^1.6.2",
       },
       "peerDependencies": {
-        "@navikt/ds-css": "7.33.0",
-        "@navikt/ds-tokens": "7.33.0",
+        "@navikt/ds-css": "7.35.2",
+        "@navikt/ds-tokens": "7.35.2",
         "svelte": "^5.20.0",
       },
     },
     "packages/vite-plugin-svelte-docs": {
       "name": "@nais/vite-plugin-svelte-docs",
-      "version": "0.0.3-next.1",
+      "version": "0.0.3-next.2",
       "dependencies": {
         "svelte2tsx": "0.7.45",
         "vite": "^7.2.7",
@@ -285,15 +285,15 @@
 
     "@nais/vite-plugin-svelte-docs": ["@nais/vite-plugin-svelte-docs@workspace:packages/vite-plugin-svelte-docs"],
 
-    "@navikt/aksel-icons": ["@navikt/aksel-icons@7.35.1", "", {}, "sha512-O+hpKCF278r37YqAUW2ZGf7Cy9ZEwMANWNEMcIiFdOLpnwaLr8Jy08kbRTC7hQmftvIFBmCeeEH+nw+jXfIUMg=="],
+    "@navikt/aksel-icons": ["@navikt/aksel-icons@7.35.2", "", {}, "sha512-0jI+QdY7zjQ9sOlNDnvMu7QFCMSLMZB8GVJnJFJoYDB5k+1zefmYnuOEvq51zHugbnUIyFYglkTXCuZiwX+Waw=="],
 
-    "@navikt/ds-css": ["@navikt/ds-css@7.35.1", "", {}, "sha512-0ph6eaxhW2VlYwwhZZ+jk0xW8PzL6mRvSyndJDhaQh0biE8caF5JcgIhjbI0Ulgm4pk7hhSzlVx3RsLNIE6nog=="],
+    "@navikt/ds-css": ["@navikt/ds-css@7.35.2", "", {}, "sha512-JIYjT05GLLVPe45ewWvIUK2VPifPesxNl2Om5/aXuSGeNJUnFZ2EZ9a+/Q8BO5/w3QDh94toqIjQoLgG3Rsb3w=="],
 
-    "@navikt/ds-react": ["@navikt/ds-react@7.35.1", "", { "dependencies": { "@floating-ui/react": "0.27.8", "@floating-ui/react-dom": "^2.1.6", "@navikt/aksel-icons": "^7.35.1", "@navikt/ds-tokens": "^7.35.1", "clsx": "^2.1.0", "date-fns": "^4.0.0", "react-day-picker": "9.7.0" }, "peerDependencies": { "@types/react": "^17.0.30 || ^18 || ^19", "react": "^17 || ^18 || ^19", "react-dom": "^17 || ^18 || ^19" }, "optionalPeers": ["@types/react"] }, "sha512-aYgeTSY2HejC3wEZDJgeDENIYC7gyq1t12BckpAqCPUhOOpE9W6bCad+YfwANcpM1UEKUsq5UdERAP2atU2D4g=="],
+    "@navikt/ds-react": ["@navikt/ds-react@7.35.2", "", { "dependencies": { "@floating-ui/react": "0.27.8", "@floating-ui/react-dom": "^2.1.6", "@navikt/aksel-icons": "^7.35.2", "@navikt/ds-tokens": "^7.35.2", "clsx": "^2.1.0", "date-fns": "^4.0.0", "react-day-picker": "9.7.0" }, "peerDependencies": { "@types/react": "^17.0.30 || ^18 || ^19", "react": "^17 || ^18 || ^19", "react-dom": "^17 || ^18 || ^19" }, "optionalPeers": ["@types/react"] }, "sha512-xf/ZWr3kyR3YpE5K8ZsojD9X8LstiHmEOLD/Mr9igbUAimqnSrDa76FkrXYd4EpI70YvGHmArewTe7qG3B9b3g=="],
 
-    "@navikt/ds-tailwind": ["@navikt/ds-tailwind@7.35.1", "", {}, "sha512-vQZzhttLTkmlN83unWX5Kn3fuMtjdZwPcCS8yJcYBrm71SnyraC/yVuoU5ypCV/vnHMxl9L4H2C9Ry9QH2z6HA=="],
+    "@navikt/ds-tailwind": ["@navikt/ds-tailwind@7.35.2", "", {}, "sha512-yiHuPxaVhGbKbQwx+M8+/HRc1rW0OZ4iwqjxzFatWYs+Cou3eTaW0NOdE7fZz0gLtC6gCUP9rfsJGV9IY2y61g=="],
 
-    "@navikt/ds-tokens": ["@navikt/ds-tokens@7.35.1", "", {}, "sha512-A9a9qJSgj/TKtNdn/n+tkCpaMIuYkBYzAEn+KvAkV5RVaOCQB9P7pJsgm62ZZh2UdT1Ytv3Hh9DY3YeUeCArhA=="],
+    "@navikt/ds-tokens": ["@navikt/ds-tokens@7.35.2", "", {}, "sha512-RNrGyyII13paXbzi0BlOqODudJqMylR4LxvbQvTGgpsFLJBMs76eZEwjEKqWahX5PRi0zoplwL3VdppCnzWmyw=="],
 
     "@nodelib/fs.scandir": ["@nodelib/fs.scandir@2.1.5", "", { "dependencies": { "@nodelib/fs.stat": "2.0.5", "run-parallel": "^1.1.9" } }, "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="],
 
