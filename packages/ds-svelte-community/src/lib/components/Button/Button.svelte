@@ -78,7 +78,6 @@
 	class={[
 		restProps.class,
 		"aksel-button",
-		`aksel-button--${variant}`,
 		`aksel-button--${size}`,
 		{
 			"aksel-button--loading": loading,

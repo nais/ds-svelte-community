@@ -11,7 +11,7 @@
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();
-	let { filled, stroked } = data;
+	let { filled, stroked } = $derived(data);
 
 	let variant = $state("stroked");
 

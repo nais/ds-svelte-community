@@ -17,10 +17,16 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		offset = 10,
 		maxChar = 80,
 		delay = 150,
-		keys = [],
+		keys,
 		children,
 		class: klass,
 	}: TooltipProps = $props();
+
+	function isNestedKeys(k: TooltipProps["keys"]): k is [string[], string[]] {
+		return Array.isArray(k) && k.length > 0 && Array.isArray(k[0]);
+	}
+
+	const hasKeys = $derived(keys && keys.length > 0);
 
 	const theme = GetTheme();
 
@@ -168,13 +174,28 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		>
 			{content}
 
-			{#if keys.length > 0}
+			{#if hasKeys}
 				<span class="aksel-tooltip__keys">
-					{#each keys as key (key)}
-						<Detail as="kbd" class="aksel-tooltip__key">
-							{key}
-						</Detail>
-					{/each}
+					{#if isNestedKeys(keys)}
+						{#each keys as group, groupIndex (groupIndex)}
+							<span style="display: flex; gap: var(--ax-space-4, 0.25rem);">
+								{#each group as key (key)}
+									<Detail as="kbd" class="aksel-tooltip__key">
+										{key}
+									</Detail>
+								{/each}
+							</span>
+							{#if groupIndex < keys.length - 1}
+								<span> eller </span>
+							{/if}
+						{/each}
+					{:else if keys}
+						{#each keys as key (key)}
+							<Detail as="kbd" class="aksel-tooltip__key">
+								{key}
+							</Detail>
+						{/each}
+					{/if}
 				</span>
 			{/if}
 			{#if !theme && arrow}

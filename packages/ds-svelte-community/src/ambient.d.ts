@@ -1,4 +1,7 @@
-declare module "@navikt/ds-css/darkside" {}
+declare module "@navikt/ds-css" {
+	const css: string;
+	export default css;
+}
 
 declare module "*.svelte?doc" {
 	export type DocUnknown = {

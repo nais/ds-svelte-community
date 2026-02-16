@@ -15,6 +15,7 @@
 
 	const ctx = getTableContext();
 
+	// svelte-ignore state_referenced_locally
 	if (sortable && !sortKey) {
 		throw new Error("HeaderCell: sortable is true, but sortKey is not set");
 	}

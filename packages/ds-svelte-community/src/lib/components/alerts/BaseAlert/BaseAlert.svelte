@@ -45,6 +45,7 @@
 		size = "medium",
 		type = "strong",
 		global = false,
+		centered,
 		as = "section",
 		role,
 		children,
@@ -87,6 +88,7 @@
 	{...omit(restProps, "class")}
 	aria-label={ariaLabel}
 	class={[restProps.class, "aksel-base-alert"]}
+	data-centered={centered}
 	data-size={size}
 	data-color={color}
 	data-variant={type}

@@ -24,12 +24,8 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	let style = $derived.by(() => {
 		const style = combineStyles(
 			restProps,
-			getResponsiveProps("bleed", "margin-inline", "spacing", marginInline, true, [
-				"0",
-				"full",
-				"px",
-			]),
-			getResponsiveProps("bleed", "margin-block", "spacing", marginBlock, true, ["0", "px"]),
+			getResponsiveProps("bleed", "margin-inline", "space", marginInline, true),
+			getResponsiveProps("bleed", "margin-block", "space", marginBlock, true),
 		);
 		if (!reflectivePadding) {
 			return style;
@@ -37,12 +33,8 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 		return combineStyles(
 			{ style },
-			getResponsiveProps("bleed", "padding-inline", "spacing", marginInline, false, [
-				"0",
-				"full",
-				"px",
-			]),
-			getResponsiveProps("bleed", "padding-block", "spacing", marginBlock, false, ["0", "px"]),
+			getResponsiveProps("bleed", "padding-inline", "space", marginInline, false),
+			getResponsiveProps("bleed", "padding-block", "space", marginBlock, false),
 		);
 	});
 </script>

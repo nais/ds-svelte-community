@@ -1,5 +1,5 @@
 import svelteCSS from "$lib/css/index.css";
-import reactCSS from "@navikt/ds-css/darkside";
+import reactCSS from "@navikt/ds-css";
 import tailwindcss from "@tailwindcss/vite";
 import looksSame from "looks-same";
 import { mkdir, mkdtemp } from "node:fs/promises";

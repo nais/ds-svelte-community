@@ -1,2 +1,2 @@
-@import "@navikt/ds-css/darkside";
+@import "@navikt/ds-css";
 @import "./a.css" layer(aksel.components);

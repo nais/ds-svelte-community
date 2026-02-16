@@ -8,7 +8,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 <script lang="ts">
 	import { setContext } from "svelte";
 	import { omit } from "../helpers";
-	import { StepperContext, contextKey, type StepperProps } from "./type.svelte";
+	import { contextKey, type StepperContext, type StepperProps } from "./type.svelte";
 
 	let {
 		orientation = "vertical",
@@ -19,13 +19,40 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		...restProps
 	}: StepperProps = $props();
 
-	const context = new StepperContext(activeStep, orientation, interactive, onchange);
-	$effect(() => {
-		context.activeStep = activeStep;
-		context.orientation = orientation;
-		context.interactive = interactive;
-		context.onchange = onchange;
-	});
+	let steps = $state<string[]>([]);
+
+	const context: StepperContext = {
+		get activeStep() {
+			return activeStep;
+		},
+		get orientation() {
+			return orientation;
+		},
+		get interactive() {
+			return interactive;
+		},
+		get onchange() {
+			return onchange;
+		},
+		get steps() {
+			return steps;
+		},
+		register(el: string) {
+			steps.push(el);
+			return steps.length;
+		},
+		unregister(el: string) {
+			const index = steps.indexOf(el);
+			if (index > -1) {
+				steps.splice(index, 1);
+			}
+		},
+		setStep(step: number, event: MouseEvent) {
+			if (onchange) {
+				onchange(step, event);
+			}
+		},
+	};
 
 	setContext<StepperContext>(contextKey, context);
 </script>

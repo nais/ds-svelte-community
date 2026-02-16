@@ -24,8 +24,6 @@
 		...restProps
 	}: ExpansionCardProps = $props();
 
-	const startedOpened = open;
-
 	function toggleOpen() {
 		open = !open;
 
@@ -37,19 +35,11 @@
 
 <section
 	{...restProps}
-	class={[
-		restProps.class,
-		"aksel-expansioncard",
-		`aksel-expansioncard--${size}`,
-		{
-			"aksel-expansioncard--open": open,
-			"aksel-expansioncard--no-animation": startedOpened,
-		},
-	]}
+	class={[restProps.class, "aksel-expansioncard", `aksel-expansioncard--${size}`]}
 	data-color={color}
 >
 	<div class="aksel-expansioncard__header" data-open={open}>
-		<div class="aksel-expansioncard__header-content">
+		<div>
 			{#if typeof header === "string"}
 				<ExpansionCardTitle>{header}</ExpansionCardTitle>
 			{:else}
@@ -79,7 +69,6 @@
 
 	<BodyLong
 		as="div"
-		data-color={themeCtx?.color}
 		class={[
 			"aksel-expansioncard__content",
 			{
@@ -90,7 +79,7 @@
 		{size}
 		data-open={open}
 	>
-		<div class="aksel-expansioncard__content-inner">
+		<div class="aksel-expansioncard__content-inner" data-color={themeCtx?.color}>
 			{@render children()}
 		</div>
 	</BodyLong>

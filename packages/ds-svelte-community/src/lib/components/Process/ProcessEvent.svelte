@@ -28,7 +28,7 @@
 	}: ProcessEventProps = $props();
 
 	const baseID = $props.id();
-	const eventId = id || `process-event-${baseID}`;
+	let eventId = $derived(id || `process-event-${baseID}`);
 
 	const processContext = getContext<{
 		hideStatusText: boolean;

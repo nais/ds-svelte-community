@@ -1,10 +1,11 @@
 import { getContext, type Snippet } from "svelte";
 import type { HTMLAttributes, HTMLButtonAttributes } from "svelte/elements";
+import type { AkselColor } from "../Theme/Theme.svelte";
 
-export class ToggleGroupContext {
-	value: string = $state("");
-	size: "medium" | "small" = $state("medium");
-	setValue: (value: string) => void = () => {};
+export interface ToggleGroupContext {
+	readonly value: string;
+	readonly size: "medium" | "small";
+	setValue(value: string): void;
 }
 
 export const contextKey = Symbol("ToggleGroupContext");
@@ -34,9 +35,21 @@ export interface ToggleGroupProps extends Omit<HTMLAttributes<HTMLDivElement>, "
 	 */
 	label?: string;
 	/**
+	 * @deprecated Use `data-color` prop instead.
 	 * Changes design and interaction-visuals.
 	 */
 	variant?: (typeof variants)[number];
+	/**
+	 * Overrides inherited color.
+	 *
+	 * We recommend only using `accent` and `neutral`.
+	 */
+	"data-color"?: AkselColor;
+	/**
+	 * Stretch each button to fill available space in container.
+	 * @default false
+	 */
+	fill?: boolean;
 	/**
 	 * List of ToggleGroupItem.
 	 */

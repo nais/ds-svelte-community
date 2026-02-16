@@ -9,6 +9,15 @@ describe("which components are implemented", () => {
 	// The test will fail if we have the component, but it's still listed here.
 	const missingComponents: string[] = [
 		"ActionMenuContent",
+		"Dialog",
+		"DialogBody",
+		"DialogCloseTrigger",
+		"DialogDescription",
+		"DialogFooter",
+		"DialogHeader",
+		"DialogPopup",
+		"DialogTitle",
+		"DialogTrigger",
 		"ActionMenuLabel",
 		"ActionMenuSubContent",
 		"ActionMenuSubTrigger",

@@ -38,8 +38,6 @@
 			console.error(
 				"Checkbox is part of a controlled CheckboxGroup, and should not have a checked prop.",
 			);
-		} else {
-			checked = ctx.values.includes(value);
 		}
 	}
 

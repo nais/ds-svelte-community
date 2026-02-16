@@ -31,7 +31,8 @@
 	role="menuitemradio"
 	tabindex="0"
 	aria-checked={checked}
-	class="ds-svelte-action-menu__item aksel-action-menu__item aksel-action-menu__item--has-icon"
+	class="ds-svelte-action-menu__item aksel-action-menu__item"
+	data-marker="left"
 	style="border: none;"
 	data-state={state}
 	onclick={() => {

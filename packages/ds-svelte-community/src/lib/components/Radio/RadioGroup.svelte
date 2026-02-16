@@ -6,24 +6,14 @@
 <script lang="ts" module>
 	import { getContext, hasContext, setContext } from "svelte";
 
-	export class RadioGroupContext<T = unknown> {
-		name: string = $state("");
-		value: T | undefined = $state(undefined);
-		required: boolean = $state(false);
-		onchange: (value: T) => void;
-		size: "small" | "medium" = $state("medium");
-
-		constructor(onchange?: (value: T) => void) {
-			this.onchange = (value: T) => {
-				if (this.value === value) {
-					return;
-				}
-
-				this.value = value;
-				onchange?.(value);
-			};
-		}
+	export interface RadioGroupContext<T = unknown> {
+		readonly name: string;
+		value: T | undefined;
+		required: boolean;
+		readonly size: "small" | "medium";
+		onchange(value: T): void;
 	}
+
 	const contextKey = Symbol("RadioGroupContext");
 
 	export function GetRadioGroupContext<T>(): RadioGroupContext<T> | undefined {
@@ -51,19 +41,28 @@
 
 	const nameId = $props.id();
 
-	const context = new RadioGroupContext((v: T) => {
-		value = v;
-		onchange?.(v);
-	});
-	context.name = name ?? `radioGroupName-${nameId}`;
-	context.value = value;
-	context.size = size;
-
-	$effect(() => {
-		context.name = name ?? context.name;
-		context.value = value;
-		context.size = size;
-	});
+	const context: RadioGroupContext<T> = {
+		get name() {
+			return name ?? `radioGroupName-${nameId}`;
+		},
+		get value() {
+			return value;
+		},
+		set value(v: T | undefined) {
+			value = v;
+		},
+		required: false,
+		get size() {
+			return size;
+		},
+		onchange(v: T) {
+			if (value === v) {
+				return;
+			}
+			value = v;
+			onchange?.(v);
+		},
+	};
 
 	setContext(contextKey, context);
 </script>

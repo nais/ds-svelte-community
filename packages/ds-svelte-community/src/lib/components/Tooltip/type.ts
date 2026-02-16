@@ -35,8 +35,10 @@ export interface TooltipProps {
 	delay?: number;
 	/**
 	 * List of Keyboard-keys for shortcuts.
+	 * Can be a flat array of keys (e.g. `["Ctrl", "C"]`) or
+	 * an array of key groups for multiple shortcuts (e.g. `[["Ctrl", "C"], ["Cmd", "C"]]`).
 	 */
-	keys?: string[];
+	keys?: string[] | [string[], string[]];
 
 	class?: ClassValue;
 

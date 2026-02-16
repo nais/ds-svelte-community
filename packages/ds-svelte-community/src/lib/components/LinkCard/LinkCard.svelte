@@ -22,16 +22,15 @@
 		arrowPosition = "baseline",
 		size = "medium",
 		children,
-		ref = $bindable(),
 		...restProps
 	}: LinkCardProps = $props();
 
-	// Provide size context for child components
-	setContext("linkcard-size", size);
+	// Provide size context for child components as a getter for reactivity
+	setContext("linkcard-size", () => size);
 </script>
 
 <BodyLong
-	{...omit(restProps, "class")}
+	{...omit(restProps, "class", "ref")}
 	as="div"
 	{size}
 	data-color="neutral"

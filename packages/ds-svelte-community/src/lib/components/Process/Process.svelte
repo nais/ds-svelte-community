@@ -23,12 +23,16 @@
 	}: ProcessProps = $props();
 
 	const baseID = $props.id();
-	const rootId = id || `process-${baseID}`;
+	let rootId = $derived(id || `process-${baseID}`);
 
 	// Create a context to share with ProcessEvent components
 	const processContext = {
-		hideStatusText,
-		rootId,
+		get hideStatusText() {
+			return hideStatusText;
+		},
+		get rootId() {
+			return rootId;
+		},
 		get activeChildId() {
 			if (!ref) {
 				return undefined;
@@ -53,10 +57,6 @@
 	};
 
 	setContext("process", processContext);
-
-	$effect(() => {
-		processContext.hideStatusText = hideStatusText;
-	});
 </script>
 
 <!-- biome-ignore lint/a11y/noRedundantRoles: ol elements with list-style: none; tends to be ignored by voiceover on Safari -->

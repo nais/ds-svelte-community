@@ -21,6 +21,11 @@
 		 */
 		icon?: Snippet | Component;
 		/**
+		 * Position of icon.
+		 * @default "left"
+		 */
+		iconPosition?: "left" | "right";
+		/**
 		 * Callback when the item is selected.
 		 */
 		onSelect?: () => void;
@@ -30,7 +35,14 @@
 		children: Snippet;
 	}
 
-	let { shortcut, variant, disabled = false, children, icon: Icon }: Props = $props();
+	let {
+		shortcut,
+		variant,
+		disabled = false,
+		children,
+		icon: Icon,
+		iconPosition = "left",
+	}: Props = $props();
 
 	let keys = $derived(shortcut && shortcut.split("+").map((key) => key.trim()));
 </script>
@@ -42,16 +54,17 @@
 		"ds-svelte-action-menu__item",
 		"aksel-action-menu__item",
 		{
-			"aksel-action-menu__item--has-icon": !!Icon,
 			"aksel-action-menu__item--danger": variant === "danger",
 		},
 	]}
 	aria-disabled={disabled}
 	data-disabled={disabled}
+	data-marker={Icon ? iconPosition : undefined}
+	aria-keyshortcuts={shortcut ?? undefined}
 >
 	{@render children()}
 	{#if Icon}
-		<ActionMenuMarker placement="left" class="aksel-action-menu__marker-icon">
+		<ActionMenuMarker placement={iconPosition} class="aksel-action-menu__marker-icon">
 			{#if isSnippet(Icon)}
 				{@render Icon()}
 			{:else}
