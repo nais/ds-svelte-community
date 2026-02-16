@@ -9,10 +9,10 @@
 <script lang="ts">
 	import { ToggleGroup, ToggleGroupItem } from ".";
 
-	let { value, items }: ToggleGroupTestProps = $props();
+	let { value, items, ...restProps }: ToggleGroupTestProps = $props();
 </script>
 
-<ToggleGroup {value}>
+<ToggleGroup {value} {...restProps}>
 	{#each items as item (item)}
 		<ToggleGroupItem value={item}>{item}</ToggleGroupItem>
 	{/each}

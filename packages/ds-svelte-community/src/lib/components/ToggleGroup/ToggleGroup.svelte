@@ -9,6 +9,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	import { Label } from "$lib";
 	import { setContext } from "svelte";
 	import { omit } from "../helpers";
+	import type { AkselColor } from "../Theme/Theme.svelte";
 	import { contextKey, type ToggleGroupContext, type ToggleGroupProps } from "./type.svelte";
 
 	let {
@@ -16,10 +17,26 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		value = $bindable(),
 		label = "",
 		variant,
+		fill = false,
 		children,
 		onchange,
 		...restProps
 	}: ToggleGroupProps = $props();
+
+	const labelId = $props.id();
+
+	function variantToColor(v: ToggleGroupProps["variant"]): AkselColor | undefined {
+		switch (v) {
+			case "action":
+				return "accent";
+			case "neutral":
+				return "neutral";
+			default:
+				return undefined;
+		}
+	}
+
+	const dataColor = $derived(restProps["data-color"] ?? variantToColor(variant));
 
 	const ctx: ToggleGroupContext = {
 		get size() {
@@ -37,18 +54,23 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	setContext<ToggleGroupContext>(contextKey, ctx);
 </script>
 
-<div {...omit(restProps, "class")} class={[restProps.class, "aksel-toggle-group__wrapper"]}>
+<div
+	{...omit(restProps, "class", "data-color")}
+	class={[
+		restProps.class,
+		"aksel-toggle-group__wrapper",
+		{ "aksel-toggle-group__wrapper--fill": fill },
+	]}
+	data-color={dataColor}
+>
 	{#if label}
-		<Label {size} class="aksel-toggle-group__label">{label}</Label>
+		<Label as="div" {size} class="aksel-toggle-group__label" id={labelId}>{label}</Label>
 	{/if}
 
 	<div
 		role="radiogroup"
-		class={[
-			"aksel-toggle-group",
-			`aksel-toggle-group--${size}`,
-			{ [`aksel-toggle-group--${variant}`]: variant !== undefined },
-		]}
+		aria-labelledby={label ? labelId : undefined}
+		class={["aksel-toggle-group", `aksel-toggle-group--${size}`]}
 		tabindex="0"
 	>
 		{@render children()}

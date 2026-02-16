@@ -25,7 +25,8 @@
 	role="menuitemcheckbox"
 	tabindex="0"
 	aria-checked="mixed"
-	class="ds-svelte-action-menu__item aksel-action-menu__item aksel-action-menu__item--has-icon"
+	class="ds-svelte-action-menu__item aksel-action-menu__item"
+	data-marker="left"
 	data-state={state}
 	data-index="0"
 	style="user-select: none;"
