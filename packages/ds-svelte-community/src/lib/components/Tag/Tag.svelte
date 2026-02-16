@@ -68,7 +68,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	as="span"
 	data-color={color ?? variantToColor(variant)}
 	data-variant={filledVariant || moderateVariant || "outline"}
-	class={[restProps.class, "aksel-tag", `aksel-tag--${variant}`, `aksel-tag--${size}`]}
+	class={[restProps.class, "aksel-tag", `aksel-tag--${size}`]}
 >
 	{#if icon}
 		<span class="aksel-tag__icon--left">

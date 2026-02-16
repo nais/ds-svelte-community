@@ -86,9 +86,9 @@
 				"aksel-progress-bar__foreground--indeterminate": simulated?.seconds !== undefined,
 			},
 		]}
-		style:--__ac-progress-bar-simulated={simulated?.seconds !== undefined
+		style:--__axc-progress-bar-simulated={simulated?.seconds !== undefined
 			? `${simulated.seconds}s`
 			: undefined}
-		style:--__ac-progress-bar-translate={`-${translateX}%`}
+		style:--__axc-progress-bar-translate={`-${translateX}%`}
 	></div>
 </div>

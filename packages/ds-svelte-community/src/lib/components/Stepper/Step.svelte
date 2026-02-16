@@ -31,14 +31,8 @@
 </script>
 
 <li
-	class={[
-		"aksel-stepper__item",
-		{
-			"aksel-stepper__item--behind": index < ctx.activeStep,
-			"aksel-stepper__item--non-interactive": !isInteractive,
-			"aksel-stepper__item--completed": completed,
-		},
-	]}
+	class="aksel-stepper__item"
+	data-interactive={isInteractive}
 	data-color={isInteractive ? undefined : "neutral"}
 >
 	<span class={["aksel-stepper__line", "aksel-stepper__line--1"]}></span>

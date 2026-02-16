@@ -45,7 +45,7 @@
 	]}
 	style={combineStyles(
 		restProps,
-		getResponsiveProps(`hgrid`, "gap", "spacing", gap),
+		getResponsiveProps(`hgrid`, "gap", "space", gap),
 		getResponsiveValue(`hgrid`, "columns", formatGrid(columns)),
 	)}
 	style:--__axc-hgrid-align={align}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ChevronDownIcon from "$lib/icons/ChevronDownIcon.svelte";
 	import { omit } from "../helpers";
+	import { GetTheme } from "../Theme/Theme.svelte";
 	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import Heading from "../typography/Heading/Heading.svelte";
 	import type { HeadingProps } from "../typography/Heading/type";
@@ -9,13 +10,11 @@
 
 	let { open = false, heading, children, ...restProps }: AccordionItemProps = $props();
 
-	let shouldAnimate = $derived(!open);
-
 	const ctx = GetAccordionContext();
+	const themeContext = GetTheme();
 
 	const handleClick = () => {
 		open = !open;
-		shouldAnimate = true;
 	};
 
 	$effect(() => {
@@ -40,7 +39,6 @@
 		"aksel-accordion__item",
 		{
 			"aksel-accordion__item--open": open,
-			"aksel-accordion__item--no-animation": !shouldAnimate,
 		},
 	]}
 	data-expanded={open}
@@ -49,7 +47,7 @@
 		<span class="aksel-accordion__icon-wrapper">
 			<ChevronDownIcon class="aksel-accordion__header-chevron" aria-hidden="true" />
 		</span>
-		<Heading size={headingSize} as="span" class="aksel-accordion__header-content">
+		<Heading size={headingSize} as="span">
 			{#if typeof heading === "string"}
 				{heading}
 			{:else if heading}
@@ -61,10 +59,9 @@
 	<!-- <div transition:slide={{ duration: 300 }}> -->
 	<BodyLong
 		as="div"
-		aria-hidden={open ? undefined : true}
 		class={["aksel-accordion__content", { "aksel-accordion__content--closed": !open }]}
 	>
-		<div class="aksel-accordion__content-inner">
+		<div class="aksel-accordion__content-inner" data-color={themeContext?.color}>
 			{@render children()}
 		</div>
 	</BodyLong>

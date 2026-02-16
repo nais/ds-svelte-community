@@ -70,15 +70,14 @@
 <nav
 	{...omit(restProps, "class")}
 	class={[restProps.class, "aksel-pagination", `aksel-pagination--${size}`]}
+	data-color="neutral"
 >
 	<ul class="aksel-pagination__list">
 		<li>
 			<Item
 				class={[
-					"aksel-pagination__prev-next",
 					{
 						"aksel-pagination--invisible": page === 1,
-						"aksel-pagination--prev-next--with-text": prevNextTexts,
 					},
 				]}
 				disabled={page === 1}
@@ -118,10 +117,8 @@
 		<li>
 			<Item
 				class={[
-					"aksel-pagination__prev-next",
 					{
 						"aksel-pagination--invisible": page === count,
-						"aksel-pagination--prev-next--with-text": prevNextTexts,
 					},
 				]}
 				disabled={page === count}

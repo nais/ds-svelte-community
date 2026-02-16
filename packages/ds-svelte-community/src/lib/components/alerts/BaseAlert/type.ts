@@ -50,6 +50,12 @@ export interface BaseAlertProps extends Omit<HTMLAttributes<HTMLElement>, "child
 	global?: boolean;
 
 	/**
+	 * Centers the alert content.
+	 * @default undefined
+	 */
+	centered?: boolean;
+
+	/**
 	 * Changes the HTML element used for the root element.
 	 *
 	 * **Testing**: When using `axe-core` for accessibility testing, `section` might warn about unique landmarks if you have multiple Alerts on page with the same status.

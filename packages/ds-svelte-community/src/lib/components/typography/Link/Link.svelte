@@ -33,13 +33,11 @@
 	<a
 		{...omit(restProps, "class", "href")}
 		data-color={color ?? variantToColor(variant)}
-		data-variant={variant}
 		{href}
 		class={[
 			restProps.class,
 			"aksel-link",
 			"unstyled",
-			"aksel-link--" + variant,
 			{
 				"aksel-link--inline-text": inlineText,
 				"aksel-link--remove-underline": !underline,
@@ -52,13 +50,11 @@
 	<svelte:element
 		this={as}
 		data-color={color ?? variantToColor(variant)}
-		data-variant={variant}
 		{...omit({ ...restProps, href }, "class")}
 		class={[
 			restProps.class,
 			"aksel-link",
 			"unstyled",
-			"aksel-link--" + variant,
 			{
 				"aksel-link--inline-text": inlineText,
 				"aksel-link--remove-underline": !underline,

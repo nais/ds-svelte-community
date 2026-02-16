@@ -25,6 +25,12 @@ export type GlobalAlertProps = Omit<BaseAlertProps, "global" | "type" | "status"
 	 * Alert status. Changes the icon and colors.
 	 */
 	status: BaseAlertStatus;
+
+	/**
+	 * Centers the alert content.
+	 * @default true
+	 */
+	centered?: boolean;
 };
 
 // Subcomponent props are the same as BaseAlert, but Header omits "icon" (auto-determined by status)

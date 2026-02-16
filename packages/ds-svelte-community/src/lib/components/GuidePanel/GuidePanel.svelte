@@ -7,6 +7,7 @@
 
 <script lang="ts">
 	import { omit } from "../helpers";
+	import { GetTheme } from "../Theme/Theme.svelte";
 	import GuidePanelDarksideIllustration from "./GuidePanelDarksideIllustration.svelte";
 	import type { GuidePanelProps } from "./type";
 
@@ -17,21 +18,16 @@
 		"data-color": color = "info",
 		...restProps
 	}: GuidePanelProps = $props();
+
+	const themeContext = GetTheme();
 </script>
 
 <div
 	{...omit(restProps, "class")}
-	class={[
-		restProps.class,
-		"aksel-guide-panel",
-		{
-			"aksel-guide-panel--poster": poster === true,
-			"aksel-guide-panel--not-poster": poster === false,
-			"aksel-guide-panel--responsive-poster": poster === undefined,
-		},
-	]}
+	class={[restProps.class, "aksel-guide-panel"]}
 	data-color={color}
 	data-responsive={poster === undefined}
+	data-poster={poster}
 >
 	<div class="aksel-guide">
 		{#if illustration}
@@ -61,6 +57,8 @@
 				fill="var(--ax-border-default)"
 			/>
 		</svg>
-		<div class="aksel-guide-panel__content-inner">{@render children()}</div>
+		<div class="aksel-guide-panel__content-inner" data-color={themeContext?.color}>
+			{@render children()}
+		</div>
 	</div>
 </div>

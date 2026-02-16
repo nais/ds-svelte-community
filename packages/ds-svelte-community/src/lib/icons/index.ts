@@ -527,6 +527,8 @@ export { default as LinkBrokenIcon } from "./LinkBrokenIcon.svelte";
 export { default as LinkIcon } from "./LinkIcon.svelte";
 export { default as LocationPinFillIcon } from "./LocationPinFillIcon.svelte";
 export { default as LocationPinIcon } from "./LocationPinIcon.svelte";
+export { default as MagnifyingGlassCheckmarkFillIcon } from "./MagnifyingGlassCheckmarkFillIcon.svelte";
+export { default as MagnifyingGlassCheckmarkIcon } from "./MagnifyingGlassCheckmarkIcon.svelte";
 export { default as MagnifyingGlassFillIcon } from "./MagnifyingGlassFillIcon.svelte";
 export { default as MagnifyingGlassIcon } from "./MagnifyingGlassIcon.svelte";
 export { default as MeasuringTapeFillIcon } from "./MeasuringTapeFillIcon.svelte";

@@ -1,27 +1,44 @@
 import type {
 	AkselBorderRadiusToken,
 	AkselBreakpointToken,
-	AkselLegacyBackgroundColorToken,
-	AkselLegacyBorderColorToken,
-	AkselLegacyBorderRadiusToken,
-	AkselLegacyShadowToken,
-	AkselLegacySpacingToken,
-	AkselLegacySurfaceColorToken,
 	AkselSpaceToken,
 } from "@navikt/ds-tokens/types";
-
-export type BackgroundColorToken = AkselLegacyBackgroundColorToken;
-export type SurfaceColorToken = AkselLegacySurfaceColorToken;
-export type BorderColorToken = AkselLegacyBorderColorToken;
-export type ShadowToken = AkselLegacyShadowToken;
 
 export type BreakpointsAlias = Extract<
 	AkselBreakpointToken,
 	"xs" | "sm" | "md" | "lg" | "xl" | "2xl"
 >;
 
-export type SpacingScale = AkselLegacySpacingToken | AkselSpaceToken;
-export type BorderRadiusScale = AkselLegacyBorderRadiusToken | AkselBorderRadiusToken;
+/**
+ * Numeric spacing tokens from the legacy spacing scale.
+ * These are still accepted at runtime and produce `var(--ax-{value})` CSS variable references.
+ * Kept for backwards compatibility with existing usage.
+ */
+type NumericSpacingToken =
+	| "0"
+	| "05"
+	| "1"
+	| "1-alt"
+	| "2"
+	| "3"
+	| "4"
+	| "5"
+	| "6"
+	| "7"
+	| "8"
+	| "9"
+	| "10"
+	| "11"
+	| "12"
+	| "14"
+	| "16"
+	| "18"
+	| "20"
+	| "24"
+	| "32";
+
+export type SpacingScale = AkselSpaceToken | NumericSpacingToken;
+export type BorderRadiusScale = AkselBorderRadiusToken;
 
 export type SpaceDelimitedAttribute<T extends string> =
 	| T

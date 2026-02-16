@@ -58,7 +58,6 @@
 
 	<BodyLong
 		as="div"
-		tabindex={0}
 		class={[
 			"aksel-read-more__content",
 			{
