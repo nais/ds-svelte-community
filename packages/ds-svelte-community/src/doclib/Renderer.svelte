@@ -40,7 +40,7 @@
 	let showCode = $state(false);
 	let iframeElement = $state<HTMLIFrameElement>();
 
-	const options = { ...defaultOptions, ...componentOptions };
+	let options = $derived({ ...defaultOptions, ...componentOptions });
 
 	const code = $derived.by(() => {
 		if (!source) {

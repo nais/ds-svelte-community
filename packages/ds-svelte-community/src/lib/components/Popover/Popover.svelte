@@ -28,13 +28,6 @@
 	}: PopoverProps = $props();
 
 	const [floatingRef, floatingContent, update] = createFloatingActions({
-		placement,
-		strategy,
-		middleware: [
-			offsetMW(offset ?? 4),
-			flip ? flipMW({ padding: 5, fallbackPlacements: ["bottom", "top"] }) : null,
-			shiftMW({ padding: 12 }),
-		],
 		autoUpdate: true,
 	});
 	let popover: HTMLDivElement;

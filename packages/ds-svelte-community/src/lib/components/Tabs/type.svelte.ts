@@ -4,42 +4,21 @@ import type { HTMLAttributes } from "svelte/elements";
 export const sizes = ["small", "medium"] as const;
 export const iconPositions = ["left", "top"] as const;
 
-export class TabContext {
-	value: string = $state("");
-	loop: boolean = $state(false);
-	iconPosition: (typeof iconPositions)[number] = $state("left");
-	size: (typeof sizes)[number] = $state("medium");
-	selectionFollowsFocus: boolean = $state(false);
-	tabs: HTMLElement[] = $state([]);
-	tabIndex: Record<string, HTMLElement> = $state({});
-	activeTab?: HTMLElement = $state();
-	baseID: string;
-
-	constructor(value: string, baseID: string) {
-		this.value = value;
-		this.baseID = baseID;
-	}
-	activate(value: string) {
-		this.value = value;
-	}
-	register(el: HTMLElement, value: string) {
-		if (this.value === value) {
-			this.activeTab = el;
-		}
-		this.tabs.push(el);
-		this.tabIndex[value] = el;
-	}
-	focusOn(el: HTMLElement) {
-		this.activeTab = el;
-	}
-	blur(el: HTMLElement) {
-		if (this.activeTab === el) {
-			this.activeTab = this.tabIndex[this.value];
-		}
-	}
-	idFor(typ: "panel" | "tab", val: string) {
-		return `tabs-${typ}-${this.baseID}-${val}`;
-	}
+export interface TabContext {
+	value: string;
+	readonly loop: boolean;
+	readonly iconPosition: (typeof iconPositions)[number];
+	readonly size: (typeof sizes)[number];
+	readonly selectionFollowsFocus: boolean;
+	readonly tabs: HTMLElement[];
+	readonly tabIndex: Record<string, HTMLElement>;
+	activeTab?: HTMLElement;
+	readonly baseID: string;
+	activate(value: string): void;
+	register(el: HTMLElement, value: string): void;
+	focusOn(el: HTMLElement): void;
+	blur(el: HTMLElement): void;
+	idFor(typ: "panel" | "tab", val: string): string;
 }
 
 export const contextKey = Symbol("tab-context");

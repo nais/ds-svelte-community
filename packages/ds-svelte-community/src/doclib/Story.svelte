@@ -5,9 +5,6 @@
 </script>
 
 <script lang="ts">
-	let props = $props();
-
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const used = (..._: unknown[]) => {};
-	used(props);
+	let props = $props();
 </script>

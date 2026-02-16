@@ -10,29 +10,14 @@
 	import { getContext } from "svelte";
 	import { sizes, type CheckboxGroupProps } from "./type";
 
-	export class CheckboxGroupContext {
-		values: unknown[] = $state([]);
-		groupControlled: boolean | undefined = $state(undefined);
-		hasError = $state(false);
-		size: (typeof sizes)[number] = $state("medium");
-		// change: (value: unknown) => void;
-		// groupControlled: boolean;
-		// values: Readable<unknown[]>;
-		// hasError: Readable<boolean>;
-		// size: (typeof sizes)[number];
-
-		onchange(value: unknown) {
-			if (!this.groupControlled) {
-				return;
-			}
-
-			if (this.values.includes(value)) {
-				this.values.splice(this.values.indexOf(value), 1);
-			} else {
-				this.values.push(value);
-			}
-		}
+	export interface CheckboxGroupContext {
+		readonly values: unknown[];
+		readonly groupControlled: boolean | undefined;
+		readonly hasError: boolean;
+		readonly size: (typeof sizes)[number];
+		onchange(value: unknown): void;
 	}
+
 	const contextKey = Symbol("CheckboxGroupContext");
 
 	export function GetCheckboxGroupContext(): CheckboxGroupContext | undefined {
@@ -63,10 +48,31 @@
 		...restProps
 	}: CheckboxGroupProps = $props();
 
-	const ctx = new CheckboxGroupContext();
-	ctx.values = value;
-	ctx.groupControlled = value !== undefined;
-	ctx.hasError = !!error;
+	const ctx: CheckboxGroupContext = {
+		get values() {
+			return value;
+		},
+		get groupControlled() {
+			return value !== undefined;
+		},
+		get hasError() {
+			return !!error;
+		},
+		get size() {
+			return size as (typeof sizes)[number];
+		},
+		onchange(v: unknown) {
+			if (!this.groupControlled) {
+				return;
+			}
+
+			if (this.values.includes(v)) {
+				value.splice(value.indexOf(v), 1);
+			} else {
+				value.push(v);
+			}
+		},
+	};
 
 	setContext(contextKey, ctx);
 </script>

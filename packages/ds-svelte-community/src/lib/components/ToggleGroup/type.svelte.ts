@@ -1,10 +1,10 @@
 import { getContext, type Snippet } from "svelte";
 import type { HTMLAttributes, HTMLButtonAttributes } from "svelte/elements";
 
-export class ToggleGroupContext {
-	value: string = $state("");
-	size: "medium" | "small" = $state("medium");
-	setValue: (value: string) => void = () => {};
+export interface ToggleGroupContext {
+	readonly value: string;
+	readonly size: "medium" | "small";
+	setValue(value: string): void;
 }
 
 export const contextKey = Symbol("ToggleGroupContext");

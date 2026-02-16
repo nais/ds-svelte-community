@@ -46,7 +46,7 @@ export function focusable(focusable: HTMLElement[], focus: Focus) {
 		throw new Error("Missing Focus.First, Focus.Last, Focus.Previous or Focus.Next");
 	})();
 
-	let next: HTMLElement | null = null;
+	let next: HTMLElement | null;
 	let offset = 0;
 	do {
 		if (offset >= focusable.length) {

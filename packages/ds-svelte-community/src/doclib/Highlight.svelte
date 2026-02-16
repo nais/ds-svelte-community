@@ -8,10 +8,12 @@
 	}: { code: string; lang?: BundledLanguage; theme?: BundledTheme } = $props();
 
 	// TODO: We can probably make this global
-	const highlighter = getSingletonHighlighter({
-		themes: [theme],
-		langs: [lang],
-	});
+	let highlighter = $derived(
+		getSingletonHighlighter({
+			themes: [theme],
+			langs: [lang],
+		}),
+	);
 </script>
 
 <div>
