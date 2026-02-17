@@ -24,9 +24,9 @@ describe("Box", () => {
 
 	it("renders with HTML similar to ds-react", async () => {
 		const props: BoxProps = {
-			padding: "6",
-			paddingInline: "4",
-			paddingBlock: "0 6",
+			padding: "space-24",
+			paddingInline: "space-16",
+			paddingBlock: "space-0 space-24",
 			borderRadius: "8",
 			borderWidth: "4",
 			background: "accent-moderate",

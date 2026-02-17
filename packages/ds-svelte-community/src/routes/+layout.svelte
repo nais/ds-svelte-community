@@ -122,7 +122,7 @@
 						{/if} -->
 					</Detail>
 				</div>
-				<Box style="flex-grow: 1;" paddingInline="3">
+				<Box style="flex-grow: 1;" paddingInline="space-12">
 					{@render children()}
 				</Box>
 			</div>
@@ -155,13 +155,13 @@
 		min-width: 200px;
 		max-width: 200px;
 		padding: 1rem 0;
-		padding-inline-start: var(--ax-space-12, var(--a-spacing-3));
-		border-right: 1px solid var(--ax-border-neutral-subtle, var(--a-border-divider));
+		padding-inline-start: var(--ax-space-12);
+		border-right: 1px solid var(--ax-border-neutral-subtle);
 	}
 
 	.section {
 		& > strong {
-			font-size: var(--ax-font-size-medium, var(--a-font-size-medium));
+			font-size: var(--ax-font-size-medium);
 		}
 
 		ul {
@@ -175,18 +175,18 @@
 			}
 
 			a {
-				color: var(--ax-text-neutral, var(--a-grayalpha-800));
+				color: var(--ax-text-neutral);
 				font-feature-settings: normal;
-				font-size: var(--ax-font-size-medium, var(--a-font-size-medium));
-				line-height: var(--ax-font-line-height-large, var(--a-font-line-height-large));
+				font-size: var(--ax-font-size-medium);
+				line-height: var(--ax-font-line-height-large);
 				padding: 0.125rem 0;
-				padding-inline: var(--ax-space-12, var(--a-spacing-3)) var(--ax-space-8, var(--a-spacing-2));
+				padding-inline: var(--ax-space-12) var(--ax-space-8);
 				text-decoration: none;
 				text-underline-offset: 2px;
 				width: 100%;
 				display: block;
-				border-top-left-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
-				border-bottom-left-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
+				border-top-left-radius: var(--ax-border-radius-medium);
+				border-bottom-left-radius: var(--ax-border-radius-medium);
 
 				&:hover {
 					background-color: var(--ax-bg-meta-purple-strong-hover);
@@ -194,12 +194,12 @@
 				}
 
 				&:active {
-					background-color: var(--ax-bg-meta-purple-strong-pressed, var(--a-surface-alt-1-subtle));
+					background-color: var(--ax-bg-meta-purple-strong-pressed);
 				}
 
 				&.active {
-					background-color: var(--ax-bg-meta-purple-strong, var(--a-surface-alt-1));
-					color: var(--ax-text-meta-purple-contrast, var(--a-text-on-alt-1));
+					background-color: var(--ax-bg-meta-purple-strong);
+					color: var(--ax-text-meta-purple-contrast);
 				}
 			}
 		}
@@ -219,10 +219,10 @@
 			min-width: unset;
 			max-width: unset;
 			border: 0;
-			padding-inline: var(--ax-space-12, var(--a-spacing-3));
-			border-bottom: 2px solid var(--ax-border-neutral, var(--a-border-divider));
+			padding-inline: var(--ax-space-12);
+			border-bottom: 2px solid var(--ax-border-neutral);
 			position: absolute;
-			background: var(--ax-bg-default, var(--__ac-page-background));
+			background: var(--ax-bg-default);
 			display: none;
 			z-index: 100;
 
@@ -236,7 +236,7 @@
 
 				a {
 					border-radius: 0;
-					border-radius: var(--ax-border-radius-medium, var(--a-border-radius-medium));
+					border-radius: var(--ax-border-radius-medium);
 				}
 			}
 		}

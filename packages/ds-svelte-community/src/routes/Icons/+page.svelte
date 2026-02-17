@@ -138,7 +138,7 @@
 
 		&:hover {
 			cursor: pointer;
-			outline: 2px solid var(--a-border-default);
+			outline: 2px solid var(--ax-border-neutral);
 		}
 
 		&.active {

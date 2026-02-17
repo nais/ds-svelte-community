@@ -41,10 +41,7 @@
 		extraDescription?: Snippet;
 	} = $props();
 
-	let tab = $derived("Default");
-	$effect.pre(() => {
-		tab = page.url.searchParams.get("tab") || "Default";
-	});
+	let tab = $derived(page.url.searchParams.get("tab") || "Default");
 
 	const story = $derived(stories?.find((s) => s.name === tab));
 
@@ -55,7 +52,7 @@
 	<title>{customTitle ?? doc.name} &bullet; ds-svelte-community</title>
 </svelte:head>
 
-<Box as="header" paddingBlock="4 2">
+<Box as="header" paddingBlock="space-16 space-8">
 	<Heading level="1" size="large">{customTitle ?? doc.name}</Heading>
 </Box>
 
@@ -109,7 +106,7 @@
 </Heading>
 
 {#if extraChildrenDoc.length > 0}
-	<Box paddingBlock="4 0">
+	<Box paddingBlock="space-16 space-0">
 		<Heading level="3" size="small">{doc.name} {@render experimental(doc.experimental)}</Heading>
 	</Box>
 {/if}
@@ -123,7 +120,7 @@
 {/key}
 
 {#each extraChildrenDoc as doc (doc.name)}
-	<Box paddingBlock="4 0">
+	<Box paddingBlock="space-16 space-0">
 		<Heading level="3" size="small">{doc.name} {@render experimental(doc.experimental)}</Heading>
 	</Box>
 	{#if doc.description}

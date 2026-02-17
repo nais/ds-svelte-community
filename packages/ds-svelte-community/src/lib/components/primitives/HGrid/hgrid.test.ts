@@ -9,7 +9,7 @@ describe("HGrid", () => {
 	it("renders with HTML similar to ds-react", async () => {
 		const props: Partial<HGridSpecificProps> = {
 			columns: { sm: 1, md: 1, lg: "1fr auto", xl: "1fr auto" },
-			gap: { sm: "2", md: "2", lg: "6", xl: "6" },
+			gap: { sm: "space-8", md: "space-8", lg: "space-24", xl: "space-24" },
 			align: "end",
 		};
 

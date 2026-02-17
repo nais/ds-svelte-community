@@ -9,7 +9,7 @@
 
 <Doc {doc} extraChildrenDoc={[bubbleDoc]}>
 	<Story>
-		<VStack gap="10">
+		<VStack gap="space-40">
 			<Chat avatar="EVA" name="EVA" timestamp="01.01.21 14:00">
 				<ChatBubble>Hi! My name is Eva.</ChatBubble>
 				<ChatBubble>What can I help you with?</ChatBubble>
@@ -22,7 +22,7 @@
 	</Story>
 
 	<Story name="Position">
-		<VStack gap="10">
+		<VStack gap="space-40">
 			<Chat avatar="AB" name="Alice" timestamp="01.01.21 14:00" position="left">
 				<ChatBubble>This message is positioned on the left.</ChatBubble>
 			</Chat>
@@ -33,7 +33,7 @@
 	</Story>
 
 	<Story name="Variants">
-		<VStack gap="10">
+		<VStack gap="space-40">
 			<Chat avatar="N" name="Neutral" timestamp="01.01.21 14:00" variant="neutral">
 				<ChatBubble>This is a neutral variant bubble.</ChatBubble>
 			</Chat>
@@ -47,7 +47,7 @@
 	</Story>
 
 	<Story name="Sizes">
-		<VStack gap="10">
+		<VStack gap="space-40">
 			<Chat avatar="M" name="Medium" timestamp="01.01.21 14:00" size="medium">
 				<ChatBubble>This is a medium size bubble (default).</ChatBubble>
 			</Chat>
