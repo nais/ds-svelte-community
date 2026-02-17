@@ -9,8 +9,8 @@ import type { BleedProps } from "./type";
 describe("Bleed", () => {
 	it("renders with HTML similar to ds-react", async () => {
 		const props: BleedProps = {
-			marginInline: "4",
-			marginBlock: "4",
+			marginInline: "space-16",
+			marginBlock: "space-16",
 			reflectivePadding: true,
 			children: createRawSnippet(() => ({
 				render() {
