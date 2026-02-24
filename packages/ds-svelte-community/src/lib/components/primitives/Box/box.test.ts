@@ -16,7 +16,7 @@ describe("Box", () => {
 			})),
 		};
 
-		expect(render(Box, props)).toMimicReact(ReactBox.New, {
+		expect(render(Box, props)).toMimicReact(ReactBox, {
 			props,
 			children: [React.createElement("span", {}, "Box body")],
 		});
@@ -39,7 +39,7 @@ describe("Box", () => {
 			})),
 		};
 
-		expect(render(Box, props)).toMimicReact(ReactBox.New, {
+		expect(render(Box, props)).toMimicReact(ReactBox, {
 			props,
 			children: [React.createElement("span", {}, "Box body")],
 		});

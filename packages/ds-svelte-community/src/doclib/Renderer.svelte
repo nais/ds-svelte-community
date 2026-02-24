@@ -236,9 +236,6 @@
 		position: relative;
 
 		.copy-code {
-			--ac-copybutton-neutral-text: var(--ax-text-default);
-			--ac-copybutton-neutral-hover-text: var(--ax-text-meta-purple);
-			--ac-copybutton-neutral-active-text: var(--ax-text-meta-purple-strong);
 			display: none;
 
 			position: absolute;
@@ -248,6 +245,18 @@
 
 		&:hover .copy-code {
 			display: block;
+		}
+
+		.copy-code :global(.aksel-copybutton) {
+			color: var(--ax-text-default);
+		}
+
+		.copy-code :global(.aksel-copybutton:hover) {
+			color: var(--ax-text-meta-purple);
+		}
+
+		.copy-code :global(.aksel-copybutton:active) {
+			color: var(--ax-text-meta-purple-strong);
 		}
 
 		& :global(pre) {

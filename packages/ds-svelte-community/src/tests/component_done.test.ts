@@ -22,7 +22,6 @@ describe("which components are implemented", () => {
 		"ActionMenuSubContent",
 		"ActionMenuSubTrigger",
 		"ActionMenuTrigger",
-		"BoxNew",
 		"DatePicker",
 		"DatePickerInput",
 		"DatePickerStandalone",
@@ -94,6 +93,7 @@ describe("which components are implemented", () => {
 		"LinkPanelDescription", // @deprecated Use LinkCard instead
 		"LinkPanelTitle", // @deprecated Use LinkCard instead
 		"Ingress", // @deprecated Use BodyLong size="large" instead
+		"BoxNew", // @deprecated Use Box instead
 	];
 
 	const reactComponents = Object.keys(allReact).filter(
