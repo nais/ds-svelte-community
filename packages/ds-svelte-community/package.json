@@ -110,7 +110,7 @@
 		"svelte": "5.51.2",
 		"svelte-check": "^4.4.0",
 		"svelte-floating-ui": "^1.6.2",
-		"svgo": "4.0.0",
+		"svgo": "4.0.1",
 		"tailwindcss": "^4.1.18",
 		"typescript": "5.9.3",
 		"typescript-eslint": "^8.55.0",
