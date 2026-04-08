@@ -53,6 +53,7 @@ describe("which components are implemented", () => {
 		"PopoverContent",
 		"Portal",
 		"Provider",
+		"InfoCardMessage",
 		"TableColumnHeader",
 		"Timeline",
 		"TimelinePeriod",

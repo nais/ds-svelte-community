@@ -51,6 +51,7 @@
 		id={radioID}
 		class="aksel-radio__input"
 		name={ctx.name}
+		data-standalone="false"
 		onchange={() => {
 			ctx.onchange(value as never);
 		}}

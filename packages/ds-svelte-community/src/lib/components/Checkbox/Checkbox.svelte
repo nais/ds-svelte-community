@@ -65,7 +65,7 @@
 		},
 	]}
 >
-	<div class="aksel-checkbox__input-wrapper">
+	<div class="aksel-checkbox__input-wrapper" data-standalone="false">
 		<input
 			{...omit(restProps, "class")}
 			{id}
@@ -121,6 +121,7 @@
 				"aksel-sr-only": hideLabel,
 			},
 		]}
+		id={lblID}
 		{children}
 	/>
 	{#if description}

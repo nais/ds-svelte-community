@@ -12,7 +12,7 @@
 	import { default as XMarkOctagonFillIcon } from "$lib/icons/XMarkOctagonFillIcon.svelte";
 	import { omit } from "../helpers";
 	import { GetTheme } from "../Theme/Theme.svelte";
-	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
+	import BodyLong from "../typography/BodyLong/BodyLong.svelte";
 	import type { InlineMessageProps, InlineMessageStatus } from "./type";
 
 	const uid = $props.id();
@@ -34,7 +34,7 @@
 	};
 </script>
 
-<BodyShort
+<BodyLong
 	{...omit(restProps, "class")}
 	as="div"
 	class={[restProps.class, "aksel-inline-message"]}
@@ -51,10 +51,10 @@
 	{:else if status === "error"}
 		<XMarkOctagonFillIcon class="aksel-inline-message__icon" aria-hidden="true" />
 	{/if}
-	<BodyShort id={statusId} aria-hidden="true" visuallyHidden>
+	<BodyLong id={statusId} aria-hidden="true" visuallyHidden>
 		{statusLabels[status]}:
-	</BodyShort>
+	</BodyLong>
 	<span data-color={themeCtx?.color} id={contentId} aria-labelledby="{statusId} {contentId}">
 		{@render children()}
 	</span>
-</BodyShort>
+</BodyLong>

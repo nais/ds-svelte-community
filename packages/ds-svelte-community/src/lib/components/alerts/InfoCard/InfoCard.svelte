@@ -17,11 +17,12 @@
 	let {
 		"data-color": dataColor = "info",
 		as = "div",
+		size = "medium",
 		children,
 		...restProps
 	}: InfoCardProps = $props();
 </script>
 
-<BaseAlert {...restProps} {as} data-color={dataColor} global={false} type="moderate">
+<BaseAlert {...restProps} {as} data-color={dataColor} global={false} type="moderate" {size}>
 	{@render children()}
 </BaseAlert>

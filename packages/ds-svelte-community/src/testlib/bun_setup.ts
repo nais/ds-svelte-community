@@ -1,7 +1,6 @@
-import { plugin, type OnLoadCallback } from "bun";
+import { plugin, Transpiler, type OnLoadCallback } from "bun";
 import "global-jsdom/register";
 import rop from "resize-observer-polyfill";
-import { transformWithEsbuild } from "vite";
 
 // Add polyfill for ResizeObserver
 global.ResizeObserver = rop;
@@ -11,6 +10,10 @@ await plugin({
 	async setup(builder) {
 		const { compile, compileModule } = await import("svelte/compiler");
 		const { readFileSync } = await import("fs");
+		const tsTranspiler = new Transpiler({
+			loader: "ts",
+			target: "bun",
+		});
 
 		const renderSvelte: OnLoadCallback = async ({ path }) => {
 			const before = readFileSync(path, "utf8");
@@ -36,19 +39,7 @@ await plugin({
 		const renderSvelteTS: OnLoadCallback = async ({ path }) => {
 			let contents: string;
 			// We need to strip out typescript types from .svelte.ts files
-			const { code } = await transformWithEsbuild(readFileSync(path, "utf8"), path, {
-				loader: "ts",
-				target: "esnext",
-				tsconfigRaw: {
-					compilerOptions: {
-						// svelte typescript needs this flag to work with type imports
-						importsNotUsedAsValues: "preserve",
-						preserveValueImports: true,
-					},
-				},
-			});
-
-			const content = code;
+			const content = tsTranspiler.transformSync(readFileSync(path, "utf8"));
 			try {
 				contents = compileModule(content, {
 					filename: path,

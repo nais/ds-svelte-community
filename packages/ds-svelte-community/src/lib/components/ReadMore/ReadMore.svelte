@@ -17,6 +17,7 @@
 		children,
 		open = $bindable(false),
 		onopenchange,
+		variant = "ghost",
 		...restProps
 	}: ReadMoreProps = $props();
 
@@ -30,13 +31,9 @@
 </script>
 
 <div
-	class={[
-		restProps.class,
-		"aksel-read-more",
-		`aksel-read-more--${size}`,
-		{ "aksel-read-more--open": open },
-	]}
-	data-volume="low"
+	class={[restProps.class, "aksel-read-more", `aksel-read-more--${size}`]}
+	data-variant={variant}
+	data-state={open ? "open" : "closed"}
 >
 	<button
 		{...omit(restProps, "class")}
@@ -50,22 +47,10 @@
 		]}
 		onclick={toggleOpen}
 		aria-expanded={open}
-		data-state={open ? "open" : "closed"}
 	>
 		<ChevronDownIcon class="aksel-read-more__expand-icon" aria-hidden />
 		<span>{header}</span>
 	</button>
 
-	<BodyLong
-		as="div"
-		class={[
-			"aksel-read-more__content",
-			{
-				"aksel-read-more__content--closed": !open,
-			},
-		]}
-		size={typoSize}
-		data-state={open ? "open" : "closed"}
-		{children}
-	/>
+	<BodyLong as="div" class="aksel-read-more__content" size={typoSize} {children} />
 </div>

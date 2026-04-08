@@ -8,6 +8,8 @@ export interface ReadMoreProps extends Omit<HTMLButtonAttributes, "ontoggle"> {
 
 	size?: "large" | "medium" | "small";
 
+	variant?: "moderate" | "ghost";
+
 	children: Snippet;
 
 	onopenchange?: (open: boolean) => void;
