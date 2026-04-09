@@ -13,7 +13,8 @@ Create an expandable row in a table. `content` will be shown when the row is exp
 	import type { TableExpandableRowProps } from "./type.svelte";
 
 	let {
-		open = $bindable(false),
+		defaultOpen = false,
+		open = $bindable(defaultOpen),
 		children,
 		content,
 		togglePlacement = "left",

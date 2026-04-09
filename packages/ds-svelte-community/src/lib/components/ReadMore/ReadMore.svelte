@@ -15,9 +15,11 @@
 		size = "medium",
 		header,
 		children,
-		open = $bindable(false),
+		defaultOpen = false,
+		open = $bindable(defaultOpen),
 		onopenchange,
 		variant = "ghost",
+		"data-color": dataColor,
 		...restProps
 	}: ReadMoreProps = $props();
 
@@ -34,6 +36,7 @@
 	class={[restProps.class, "aksel-read-more", `aksel-read-more--${size}`]}
 	data-variant={variant}
 	data-state={open ? "open" : "closed"}
+	data-color={dataColor}
 >
 	<button
 		{...omit(restProps, "class")}

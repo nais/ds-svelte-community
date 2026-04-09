@@ -62,7 +62,7 @@
 		<BodyShort
 			id={descriptionID}
 			{size}
-			class="navds-form-field__subdescription navds-radio__description"
+			class="aksel-form-field__subdescription aksel-radio__description"
 		>
 			{#if typeof description === "string"}
 				{description}

@@ -3,6 +3,11 @@ import type { HTMLAnchorAttributes, HTMLAttributes } from "svelte/elements";
 
 export interface LinkCardProps extends HTMLAttributes<HTMLDivElement> {
 	/**
+	 * Color variant for the card.
+	 * @default "neutral"
+	 */
+	"data-color"?: "neutral" | "accent" | string;
+	/**
 	 * @default true
 	 */
 	arrow?: boolean;

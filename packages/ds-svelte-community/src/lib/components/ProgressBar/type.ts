@@ -20,6 +20,14 @@ interface ProgressBarPropsBase extends Omit<HTMLAttributes<HTMLDivElement>, "rol
 	 */
 	valueMax?: number;
 	/**
+	 * Overrides the auto-generated aria-valuetext.
+	 */
+	valueText?: string;
+	/**
+	 * Overrides progress bar color.
+	 */
+	"data-color"?: string;
+	/**
 	 * Visually simulates loading.
 	 * ProgressBar grows with a preset animation for set number of seconds,
 	 * then shows an indeterminate animation on timeout.

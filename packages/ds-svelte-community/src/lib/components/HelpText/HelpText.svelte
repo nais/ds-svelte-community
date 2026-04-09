@@ -32,6 +32,7 @@
 		class={[restProps.class, "aksel-help-text__button"]}
 		type="button"
 		aria-expanded={open}
+		aria-label={title}
 	>
 		<HelpTextIcon {title} />
 		<HelpTextIcon filled {title} />

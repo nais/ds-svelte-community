@@ -12,7 +12,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	import type { TagProps } from "./type";
 
 	let {
-		variant = "info",
+		variant = "neutral",
 		size = "medium",
 		children,
 		icon,

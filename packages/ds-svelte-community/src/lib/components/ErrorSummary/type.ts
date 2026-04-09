@@ -11,8 +11,9 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
 	size?: (typeof sizes)[number];
 	/**
 	 * Heading text.
+	 * @default "You must fix these errors before you can continue"
 	 */
-	heading: string;
+	heading?: string;
 	/**
 	 * Allows setting a different HTML h-tag.
 	 */

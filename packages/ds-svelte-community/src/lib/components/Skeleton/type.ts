@@ -3,11 +3,18 @@ import type { HTMLAttributes } from "svelte/elements";
 
 export const variants = ["circle", "rectangle", "rounded", "text"] as const;
 
-export interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
+export interface SkeletonProps extends HTMLAttributes<HTMLDivElement | HTMLSpanElement> {
 	/**
 	 * Changes the shape of the skeleton.
+	 * @default "text"
 	 */
-	variant: "circle" | "rectangle" | "rounded" | "text";
+	variant?: "circle" | "rectangle" | "rounded" | "text";
+
+	/**
+	 * Changes the HTML element used for the skeleton.
+	 * @default "div"
+	 */
+	as?: "div" | "span";
 
 	/**
 	 * When not inferring height from children, you must specify height.

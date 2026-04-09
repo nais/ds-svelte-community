@@ -54,7 +54,7 @@
 	<BodyLong id={statusId} aria-hidden="true" visuallyHidden>
 		{statusLabels[status]}:
 	</BodyLong>
-	<span data-color={themeCtx?.color} id={contentId} aria-labelledby="{statusId} {contentId}">
+	<span data-color={themeCtx?.color} id={contentId} aria-labelledby={`${statusId} ${contentId}`}>
 		{@render children()}
 	</span>
 </BodyLong>

@@ -10,7 +10,14 @@
 	import { SetListContext } from "./context";
 	import type { ListProps } from "./types";
 
-	let { as = "ul", size = "medium", children, ...restProps }: ListProps = $props();
+	let {
+		as = "ul",
+		size = "medium",
+		children,
+		"aria-label": ariaLabel,
+		"aria-labelledby": ariaLabelledBy,
+		...restProps
+	}: ListProps = $props();
 
 	class Context {
 		size: ListProps["size"] = $derived(size);
@@ -27,7 +34,7 @@
 	{size}
 	class={[restProps.class, "aksel-list", `aksel-list--${size}`]}
 >
-	<svelte:element this={as} role="list">
+	<svelte:element this={as} role="list" aria-label={ariaLabel} aria-labelledby={ariaLabelledBy}>
 		{@render children()}
 	</svelte:element>
 </BodyLong>

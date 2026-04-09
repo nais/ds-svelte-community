@@ -45,6 +45,7 @@
 		toptextPosition,
 		size = "medium",
 		toptextHeadingLevel = "3",
+		"data-color": color,
 		...restProps
 	}: ChatProps = $props();
 
@@ -92,7 +93,7 @@
 		`aksel-chat--${size}`,
 		`aksel-chat--${variant}`,
 	]}
-	data-color={variantToColor(variant)}
+	data-color={color ?? variantToColor(variant)}
 	data-variant={variant}
 >
 	{#if avatar}

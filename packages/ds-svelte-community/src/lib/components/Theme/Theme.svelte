@@ -44,6 +44,7 @@
 </script>
 
 <script lang="ts">
+	import { omit } from "../helpers";
 	type Props = {
 		/**
 		 * The theme to apply.
@@ -91,6 +92,7 @@
 
 <svelte:element
 	this={as}
+	{...omit(restProps, "class")}
 	class={["aksel-theme", restProps?.class, ctx.theme]}
 	data-background={containsBackground}
 	data-color={color ?? ctx.color ?? ""}

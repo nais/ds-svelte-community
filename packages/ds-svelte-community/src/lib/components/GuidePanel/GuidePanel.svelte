@@ -14,6 +14,7 @@
 	let {
 		poster,
 		illustration,
+		illustrationLabel = "Illustration",
 		children,
 		"data-color": color = "info",
 		...restProps
@@ -33,7 +34,7 @@
 		{#if illustration}
 			{@render illustration()}
 		{:else}
-			<GuidePanelDarksideIllustration />
+			<GuidePanelDarksideIllustration title={illustrationLabel} />
 		{/if}
 	</div>
 	<div class="aksel-guide-panel__content">

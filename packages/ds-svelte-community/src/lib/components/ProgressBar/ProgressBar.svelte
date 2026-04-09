@@ -22,6 +22,8 @@
 		"aria-labelledby": ariaLabelledBy,
 		"aria-label": ariaLabel,
 		"aria-hidden": ariaHidden,
+		"data-color": dataColor,
+		valueText,
 		simulated,
 		ref = $bindable(),
 		...restProps
@@ -71,9 +73,10 @@
 	bind:this={ref}
 	{...omit(restProps, "class")}
 	class={["aksel-progress-bar", `aksel-progress-bar--${size}`, restProps.class]}
+	data-color={dataColor}
 	aria-valuemax={simulated?.seconds ? 0 : Math.round(valueMax)}
 	aria-valuenow={simulated?.seconds ? 0 : Math.round(value)}
-	aria-valuetext={progressText}
+	aria-valuetext={valueText ?? progressText}
 	aria-hidden={ariaHidden}
 	aria-labelledby={ariaLabelledBy}
 	aria-label={ariaLabel}

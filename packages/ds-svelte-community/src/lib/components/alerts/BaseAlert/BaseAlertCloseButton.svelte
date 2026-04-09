@@ -11,7 +11,7 @@
 	import { omit } from "../../helpers";
 	import type { BaseAlertCloseButtonProps } from "./type";
 
-	let { onclick, ...restProps }: BaseAlertCloseButtonProps = $props();
+	let { onclick, title = "Close", ...restProps }: BaseAlertCloseButtonProps = $props();
 </script>
 
 <Button
@@ -21,7 +21,7 @@
 	variant="tertiary-neutral"
 	class={[restProps.class, "aksel-base-alert__close-button"]}
 	size="small"
-	title="Close"
+	{title}
 	icon={XMarkIcon}
 	{onclick}
 />

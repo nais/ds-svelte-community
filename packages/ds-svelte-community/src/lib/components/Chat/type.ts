@@ -56,9 +56,9 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
 	toptextHeadingLevel?: "2" | "3" | "4" | "5" | "6";
 
 	/**
-	 * Overriding Chat color is not supported.
+	 * Overrides the default background color of the chat bubbles.
 	 */
-	"data-color"?: never;
+	"data-color"?: string;
 }
 
 export interface ChatBubbleProps extends HTMLAttributes<HTMLDivElement> {

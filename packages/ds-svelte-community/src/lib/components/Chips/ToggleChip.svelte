@@ -42,7 +42,6 @@
 		{
 			unstyled: as == "a",
 			"aksel-chips__toggle--with-checkmark": checkmark,
-			[`aksel-chips__toggle--${variant}`]: variant,
 		},
 	]}
 	aria-pressed={selected}
