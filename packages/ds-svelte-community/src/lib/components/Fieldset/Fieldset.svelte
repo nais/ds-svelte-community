@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PadlockLockedFillIcon from "$lib/icons/PadlockLockedFillIcon.svelte";
 	import { omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import ErrorMessage from "../typography/ErrorMessage/ErrorMessage.svelte";
@@ -13,13 +14,16 @@
 		errorId = "fserr-" + uid,
 		size = "medium",
 		disabled = false,
+		readonly,
 		legend,
 		children,
 		description,
 		...restProps
 	}: FieldsetProps = $props();
 
-	const showErrorMsg = $derived(!disabled && !!error);
+	let readOnly = $derived(!!readonly && !disabled);
+	let hasError = $derived(!disabled && !readOnly && !!error);
+	const showErrorMsg = $derived(!disabled && !readOnly && !!error && typeof error !== "boolean");
 </script>
 
 <fieldset
@@ -29,11 +33,15 @@
 		"aksel-fieldset",
 		`aksel-fieldset--${size}`,
 		{
-			"aksel-fieldset--error": !!error,
+			"aksel-fieldset--error": hasError,
+			"aksel-fieldset--readonly": readOnly,
 		},
 	]}
 >
-	<Label {size} as="legend" class={["aksel-fieldset__legend", { "aksel-sr-only": hideLegend }]}>
+	<Label {size} as="legend" class="aksel-fieldset__legend" visuallyHidden={hideLegend}>
+		{#if readOnly}
+			<PadlockLockedFillIcon aria-hidden class="aksel-form-field__readonly-icon" />
+		{/if}
 		{#if typeof legend === "string"}
 			{legend}
 		{:else}
@@ -42,11 +50,7 @@
 	</Label>
 
 	{#if description}
-		<BodyShort
-			class={["aksel-fieldset__description", { "aksel-sr-only": hideLegend }]}
-			{size}
-			as="div"
-		>
+		<BodyShort class="aksel-fieldset__description" visuallyHidden={hideLegend} {size} as="div">
 			{#if typeof description === "string"}
 				{description}
 			{:else}

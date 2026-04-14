@@ -20,7 +20,7 @@ export interface SearchProps
 	hideLabel?: boolean;
 
 	/**
-	 * aria-label on clear button.
+	 * aria-label on clear button. @default "Clear field"
 	 */
 	clearButtonLabel?: string;
 	/**
@@ -57,6 +57,21 @@ export interface SearchProps
 	 * Aria label on search icon.
 	 */
 	searchIconText?: string;
+
+	/**
+	 * HTML size attribute. Specifies the width of the input, in characters.
+	 */
+	htmlSize?: number | string;
+
+	/**
+	 * Callback for value-change in input.
+	 */
+	onChange?: (value: string) => void;
+
+	/**
+	 * Callback for Search-button submit.
+	 */
+	onSearchClick?: (value: string) => void;
 
 	/**
 	 * Event when the input is cleared

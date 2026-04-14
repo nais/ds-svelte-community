@@ -7,6 +7,27 @@
 
 <script lang="ts" module>
 	import { flip as flipMW, offset as offsetMW, shift as shiftMW } from "svelte-floating-ui/dom";
+
+	const oppositeSideMap: Record<string, string> = {
+		top: "bottom",
+		bottom: "top",
+		left: "right",
+		right: "left",
+	};
+
+	/**
+	 * Match React's flip fallback logic:
+	 * - left/right placements fallback to bottom/top
+	 * - top/bottom placements fallback to the opposite side, preserving alignment
+	 */
+	function getOppositePlacement(p: string): string[] {
+		if (p.startsWith("left") || p.startsWith("right")) {
+			return ["bottom", "top"];
+		}
+		const [side, alignment] = p.split("-");
+		const oppSide = oppositeSideMap[side] ?? "bottom";
+		return [alignment ? `${oppSide}-${alignment}` : oppSide];
+	}
 </script>
 
 <script lang="ts">
@@ -22,6 +43,7 @@
 		strategy = "absolute",
 		flip = true,
 		anchorEl,
+		onClose,
 		contentClass,
 		children,
 		...restProps
@@ -37,8 +59,10 @@
 			placement,
 			strategy,
 			middleware: [
-				offsetMW(offset ?? 4),
-				flip ? flipMW({ padding: 5, fallbackPlacements: ["bottom", "top"] }) : null,
+				offsetMW(offset ?? 8),
+				flip
+					? flipMW({ padding: 5, fallbackPlacements: getOppositePlacement(placement) as never })
+					: null,
 				shiftMW({ padding: 12 }),
 			],
 		});
@@ -46,10 +70,20 @@
 
 	$effect(() => {
 		if (anchorEl && popover) {
-			floatingRef(anchorEl as HTMLElement);
-			anchorEl.addEventListener("focusout", () => {
+			const el = anchorEl as HTMLElement;
+			floatingRef(el);
+			const handleFocusOut = (e: FocusEvent) => {
+				const relatedTarget = e.relatedTarget as Node | null;
+				if (relatedTarget && popover.contains(relatedTarget)) {
+					return;
+				}
 				open = false;
-			});
+				onClose?.();
+			};
+			el.addEventListener("focusout", handleFocusOut);
+			return () => {
+				el.removeEventListener("focusout", handleFocusOut);
+			};
 		}
 	});
 </script>
@@ -57,6 +91,7 @@
 <div
 	use:floatingContent
 	bind:this={popover}
+	{...omit(restProps, "class")}
 	class={[
 		restProps.class,
 		"aksel-popover",
@@ -65,7 +100,7 @@
 		},
 	]}
 	data-placement={placement}
-	{...omit(restProps, "class")}
+	aria-hidden={!open || !anchorEl}
 >
 	<div class={["aksel-popover__content", contentClass]}>
 		{@render children()}

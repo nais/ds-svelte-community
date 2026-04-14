@@ -10,6 +10,7 @@ export interface TabContext {
 	readonly iconPosition: (typeof iconPositions)[number];
 	readonly size: (typeof sizes)[number];
 	readonly selectionFollowsFocus: boolean;
+	readonly fill: boolean;
 	readonly tabs: HTMLElement[];
 	readonly tabIndex: Record<string, HTMLElement>;
 	activeTab?: HTMLElement;
@@ -38,6 +39,10 @@ export interface TabProps extends HTMLAttributes<HTMLElement> {
 	value: string;
 	/**
 	 * Label of the tab.
+	 */
+	label?: string;
+	/**
+	 * Label of the tab as a snippet.
 	 */
 	children?: Snippet;
 	/**
@@ -71,6 +76,11 @@ export interface TabPanelProps extends HTMLAttributes<HTMLDivElement> {
 	 * Content of the tab panel.
 	 */
 	children: Snippet;
+	/**
+	 * If true, will only render children when selected.
+	 * @default true
+	 */
+	lazy?: boolean;
 }
 
 export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
@@ -81,7 +91,11 @@ export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
 	/**
 	 * Controlled selected value.
 	 */
-	value: string;
+	value?: string;
+	/**
+	 * If not controlled, a default-value needs to be set.
+	 */
+	defaultValue?: string;
 	/**
 	 * Loops back to start when navigating past last item.
 	 */
@@ -94,6 +108,15 @@ export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
 	 * Automatically activates tab on focus/navigation.
 	 */
 	selectionFollowsFocus?: boolean;
+	/**
+	 * onChange callback for selected Tab.
+	 */
+	onChange?: (value: string) => void;
+	/**
+	 * Stretches each tab to fill available space in container.
+	 * @default false
+	 */
+	fill?: boolean;
 	/**
 	 * `TabList` and `TabPanel` components.
 	 */

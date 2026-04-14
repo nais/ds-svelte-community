@@ -27,7 +27,7 @@
 	let {
 		label,
 		hideLabel = true,
-		clearButtonLabel = "Clear",
+		clearButtonLabel = "Clear field",
 		clearButton = true,
 		variant = "primary",
 		description = "",
@@ -36,6 +36,9 @@
 		disabled = false,
 		loading = false,
 		searchIconText = "Search",
+		htmlSize,
+		onSearchClick,
+		onChange,
 		button,
 		onclear,
 		"data-color": dataColor,
@@ -82,6 +85,7 @@
 		{
 			"aksel-search--error": hasError,
 			"aksel-search--disabled": disabled,
+			"aksel-search--with-size": htmlSize,
 		},
 	]}
 	data-color={dataColor}
@@ -93,7 +97,7 @@
 		<BodyShort
 			as="div"
 			class={["aksel-form-field__description", { "aksel-sr-only": hideLabel }]}
-			id={baseID}
+			id={baseID + "-description"}
 			{size}
 		>
 			{description}
@@ -107,11 +111,7 @@
 						<Loader />
 					</span>
 				{:else}
-					<MagnifyingGlassIcon
-						title={searchIconText}
-						aria-hidden
-						class="aksel-search__search-icon"
-					/>
+					<MagnifyingGlassIcon aria-hidden class="aksel-search__search-icon" />
 				{/if}
 			{/if}
 			<input
@@ -119,6 +119,7 @@
 				bind:this={input}
 				bind:value
 				id={baseID}
+				size={htmlSize ? Number(htmlSize) : undefined}
 				type="search"
 				class={[
 					"aksel-search__input",
@@ -128,6 +129,9 @@
 					`aksel-body-short--${size}`,
 				]}
 				onkeypress={handleInputKeypress}
+				oninput={(e) => {
+					onChange?.(e.currentTarget.value);
+				}}
 			/>
 			{#if value && clearButton}
 				<Button
@@ -151,7 +155,12 @@
 			{@render button()}
 		{:else if variant != "simple"}
 			<SearchButton
-				onclick={restProps?.onclick}
+				onclick={(e) => {
+					onSearchClick?.(value);
+					if (restProps?.onclick && typeof restProps.onclick === "function") {
+						(restProps.onclick as (e: MouseEvent) => void)(e);
+					}
+				}}
 				{disabled}
 				{variant}
 				{size}
@@ -161,7 +170,12 @@
 			/>
 		{/if}
 	</div>
-	<div class="aksel-form-field__error" aria-relevant="additions removals" aria-live="polite">
+	<div
+		id={baseID + "-error"}
+		class="aksel-form-field__error"
+		aria-relevant="additions removals"
+		aria-live="polite"
+	>
 		<!-- {showErrorMsg && (
             <ErrorMessage size={size}>{props.error}</ErrorMessage>
           )} -->

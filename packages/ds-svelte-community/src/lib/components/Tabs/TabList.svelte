@@ -73,7 +73,6 @@
 		}}
 		{...omit(restProps, "class", "role", "aria-orientation")}
 		class={[restProps.class, "aksel-tabs__tablist"]}
-		data-orientation="horizontal"
 		role="tablist"
 		aria-orientation="horizontal"
 	>

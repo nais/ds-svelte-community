@@ -10,12 +10,6 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
 	hideLegend?: boolean;
 
 	/**
-	 * Toggles error propagation to child-elements
-	 * @default true
-	 */
-	// errorPropagation : boolean;
-
-	/**
 	 * Error message for element
 	 */
 	error?: string;
@@ -34,6 +28,12 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
 	 * @note Avoid using if possible for accessibility purposes
 	 */
 	disabled?: boolean;
+
+	/**
+	 * Read-only state.
+	 * @note Avoid using if possible for accessibility purposes
+	 */
+	readonly?: boolean;
 
 	/**
 	 * Override internal id

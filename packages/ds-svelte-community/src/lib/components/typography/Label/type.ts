@@ -10,6 +10,10 @@ export interface LabelSpecificProps {
 	 * Adds margin-bottom
 	 */
 	spacing?: boolean;
+	/**
+	 * Visually hide text. Text will still be accessible for screen readers.
+	 */
+	visuallyHidden?: boolean;
 
 	/**
 	 * Content

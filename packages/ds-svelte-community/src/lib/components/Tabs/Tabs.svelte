@@ -13,10 +13,13 @@
 
 	let {
 		size = "medium",
-		value = $bindable(),
+		defaultValue,
+		value = $bindable(defaultValue ?? ""),
 		selectionFollowsFocus = false,
-		loop = false,
+		loop = true,
 		iconPosition = "left",
+		fill = false,
+		onChange,
 		children,
 		...restProps
 	}: TabsProps = $props();
@@ -29,10 +32,11 @@
 
 	const ctx: TabContext = {
 		get value() {
-			return value;
+			return value ?? "";
 		},
 		set value(v: string) {
 			value = v;
+			onChange?.(v);
 		},
 		get loop() {
 			return loop;
@@ -45,6 +49,9 @@
 		},
 		get selectionFollowsFocus() {
 			return selectionFollowsFocus;
+		},
+		get fill() {
+			return fill;
 		},
 		get tabs() {
 			return tabs;
@@ -61,6 +68,7 @@
 		baseID: id,
 		activate(v: string) {
 			value = v;
+			onChange?.(v);
 		},
 		register(el: HTMLElement, v: string) {
 			if (value === v) {
@@ -74,7 +82,7 @@
 		},
 		blur(el: HTMLElement) {
 			if (activeTab === el) {
-				activeTab = tabIndex[value];
+				activeTab = tabIndex[value ?? ""];
 			}
 		},
 		idFor(typ: "panel" | "tab", val: string) {
@@ -88,7 +96,6 @@
 <div
 	{...omit(restProps, "class", "dir")}
 	class={[restProps.class, "aksel-tabs", `aksel-tabs--${size}`]}
-	data-orientation="horizontal"
 >
 	{@render children()}
 </div>

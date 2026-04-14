@@ -71,7 +71,7 @@ export interface CheckboxProps extends Omit<HTMLInputAttributes, "size"> {
 	error?: boolean;
 
 	/**
-	 * Adds error indication on checkbox
+	 * Visually hides label and description, and makes it viewable for screen-readers only.
 	 */
 	hideLabel?: boolean;
 
@@ -111,6 +111,17 @@ export interface CheckboxProps extends Omit<HTMLInputAttributes, "size"> {
 	 * Label text
 	 */
 	children: Snippet;
+
+	/**
+	 * Makes the checkbox read-only.
+	 * @note Avoid using if possible for accessibility purposes
+	 */
+	readonly?: boolean;
+
+	/**
+	 * Overrides the color of the form field.
+	 */
+	"data-color"?: string;
 
 	/**
 	 * onchange event
