@@ -5,15 +5,13 @@ import looksSame from "looks-same";
 import { mkdir, mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { Browser, Builder, type WebDriver } from "selenium-webdriver";
-import { Options } from "selenium-webdriver/chrome";
 import { build } from "vite";
 import type { RenderOutput, RenderTheme } from "./render";
 
 export const testPages = await mkdtemp(join(tmpdir(), "ds-svelte-test-"));
 let testCase = 0;
 
-let driver: WebDriver | undefined = undefined;
+let view: InstanceType<typeof Bun.WebView> | undefined = undefined;
 
 export async function testInChrome(
 	svelteComponent: RenderOutput,
@@ -21,16 +19,13 @@ export async function testInChrome(
 	theme: RenderTheme,
 	opts: looksSame.LooksSameOptions = {},
 ) {
-	if (!driver) {
-		const builder = new Builder();
-		const chromeOptions = new Options();
-		chromeOptions.addArguments("--headless");
-		chromeOptions.addArguments("--disable-infobars");
-		chromeOptions.addArguments("--disable-gpu");
-		chromeOptions.addArguments("--disable-dev-shm-usage");
-		chromeOptions.addArguments("--lang=en-GB");
-		builder.setChromeOptions(chromeOptions);
-		driver = await builder.forBrowser(Browser.CHROME).build();
+	if (!view) {
+		view = new Bun.WebView({
+			headless: true,
+			backend: "chrome",
+			width: 800,
+			height: 600,
+		});
 	}
 
 	testCase++;
@@ -43,14 +38,13 @@ export async function testInChrome(
 	await Bun.file(join(testDir, "svelte.html")).write(htmlBody(css.svelte, svelteComponent, theme));
 	await Bun.file(join(testDir, "react.html")).write(htmlBody(css.react, reactComponent, theme));
 
-	await driver.get(`file://${join(testDir, "svelte.html")}`);
-	const svelteScreenshot = await driver.takeScreenshot();
+	await view.navigate(`file://${join(testDir, "svelte.html")}`);
+	const svelteBlob = await view.screenshot({ format: "png" });
+	const svelteBuffer = Buffer.from(await svelteBlob.arrayBuffer());
 
-	await driver.get(`file://${join(testDir, "react.html")}`);
-	const reactScreenshot = await driver.takeScreenshot();
-
-	const svelteBuffer = Buffer.from(svelteScreenshot, "base64");
-	const reactBuffer = Buffer.from(reactScreenshot, "base64");
+	await view.navigate(`file://${join(testDir, "react.html")}`);
+	const reactBlob = await view.screenshot({ format: "png" });
+	const reactBuffer = Buffer.from(await reactBlob.arrayBuffer());
 
 	opts.createDiffImage = true;
 	opts.strict = opts.strict ?? true;
@@ -88,7 +82,7 @@ async function compileCSS(file: string) {
 		configFile: false,
 		build: {
 			outDir: out,
-			emptyOutDir: false, // We only want to clear the out directory on the first build event
+			emptyOutDir: false,
 			rollupOptions: {
 				input: file,
 				output: {
@@ -123,9 +117,9 @@ function htmlBody(css: string, content: string | RenderOutput, theme: RenderThem
 }
 
 export async function closeDriver() {
-	if (driver) {
-		console.log("Closing Selenium WebDriver...");
-		await driver.quit();
-		driver = undefined;
+	if (view) {
+		console.log("Closing Bun WebView...");
+		await view[Symbol.asyncDispose]();
+		view = undefined;
 	}
 }
