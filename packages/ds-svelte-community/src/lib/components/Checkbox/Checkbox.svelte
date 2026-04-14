@@ -25,12 +25,13 @@
 		checked = $bindable(undefined),
 		children,
 		onchange,
+		"data-color": color,
+		readonly,
 		...restProps
 	}: CheckboxProps = $props();
 
 	const ctx = GetCheckboxGroupContext();
 
-	const lblID = "cblbl-" + uid;
 	const descriptionID = "cbdesc-" + uid;
 
 	if (ctx && ctx.groupControlled) {
@@ -62,10 +63,12 @@
 		{
 			"aksel-checkbox--error": hasError,
 			"aksel-checkbox--disabled": disabled,
+			"aksel-checkbox--readonly": readonly,
 		},
 	]}
+	data-color={hasError ? "danger" : color}
 >
-	<div class="aksel-checkbox__input-wrapper">
+	<div class="aksel-checkbox__input-wrapper" data-standalone="false">
 		<input
 			{...omit(restProps, "class")}
 			{id}
@@ -78,11 +81,18 @@
 					: undefined}
 			aria-checked={indeterminate ? "mixed" : undefined}
 			aria-invalid={hasError ? "true" : undefined}
-			aria-labelledby={lblID}
 			bind:indeterminate
 			checked={checkedValue}
 			{value}
+			onclick={(e) => {
+				if (readonly) {
+					e.preventDefault();
+				}
+			}}
 			onchange={(e) => {
+				if (readonly) {
+					return;
+				}
 				checked = e.currentTarget.checked;
 
 				if (ctx) {
@@ -115,12 +125,8 @@
 		as="label"
 		for={id}
 		size={usedSize}
-		class={[
-			"aksel-checkbox__label",
-			{
-				"aksel-sr-only": hideLabel,
-			},
-		]}
+		class="aksel-checkbox__label"
+		visuallyHidden={hideLabel}
 		{children}
 	/>
 	{#if description}
@@ -128,6 +134,7 @@
 			id={descriptionID}
 			size={usedSize}
 			class="aksel-form-field__subdescription aksel-checkbox__description"
+			visuallyHidden={hideLabel}
 		>
 			{#if typeof description === "string"}
 				{description}

@@ -22,6 +22,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		disabled = false,
 		error = "",
 		value = $bindable(""),
+		readOnlyIconText = "Read-only",
 		children,
 		description,
 		...restProps
@@ -69,7 +70,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 >
 	<Label for={id} {size} class={["aksel-form-field__label", { "aksel-sr-only": hideLabel }]}>
 		{#if readOnly}
-			<PadlockLockedFillIcon title="Read-only" class="aksel-form-field__readonly-icon" />
+			<PadlockLockedFillIcon title={readOnlyIconText} class="aksel-form-field__readonly-icon" />
 		{/if}
 		{#if typeof label === "string"}
 			{label}

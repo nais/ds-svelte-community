@@ -4,6 +4,7 @@
 	let {
 		size = "medium",
 		spacing = false,
+		visuallyHidden = false,
 		as = "label",
 		children,
 		...restProps
@@ -19,6 +20,7 @@
 		{
 			"aksel-label--small": size == "small",
 			"aksel-typo--spacing": spacing,
+			"aksel-typo--visually-hidden": visuallyHidden,
 		},
 	]}
 >

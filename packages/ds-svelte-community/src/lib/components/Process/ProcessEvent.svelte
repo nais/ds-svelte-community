@@ -22,6 +22,7 @@
 		bullet,
 		hideContent = false,
 		status = "uncompleted",
+		activeLabel = "Active",
 		id,
 		ref = $bindable(),
 		...restProps
@@ -65,7 +66,7 @@
 			{/if}
 
 			{#if isActive && !processContext?.hideStatusText}
-				<BodyShort size="small" class="aksel-process__active-label">Active</BodyShort>
+				<BodyShort size="small" class="aksel-process__active-label">{activeLabel}</BodyShort>
 			{/if}
 
 			{#if timestamp}

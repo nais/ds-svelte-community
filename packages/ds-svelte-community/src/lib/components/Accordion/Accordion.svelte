@@ -21,17 +21,30 @@
 	import { setContext } from "svelte";
 	import { omit } from "../helpers";
 
-	let { size = "medium", indent = true, children, ...restProps }: AccordionProps = $props();
+	let {
+		size = "medium",
+		indent = true,
+		as = "div",
+		children,
+		"data-color": dataColor,
+		...restProps
+	}: AccordionProps = $props();
 
-	class Context {
-		size: AccordionProps["size"] = $derived(size);
-	}
+	const ctx: AccordionContext = {
+		get size() {
+			return size;
+		},
+		get color() {
+			return dataColor;
+		},
+		mounted: true,
+	};
 
-	const ctx = new Context();
 	setContext<AccordionContext>(contextKey, ctx);
 </script>
 
-<div
+<svelte:element
+	this={as}
 	{...omit(restProps, "class")}
 	class={[
 		restProps.class,
@@ -43,4 +56,4 @@
 	]}
 >
 	{@render children()}
-</div>
+</svelte:element>

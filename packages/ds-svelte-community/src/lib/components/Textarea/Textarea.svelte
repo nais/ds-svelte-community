@@ -118,7 +118,13 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	}
 
 	const describedBy = $derived(
-		[inputDescriptionId, hasMaxLength ? maxLengthId : null].filter(Boolean).join(" "),
+		[
+			description ? inputDescriptionId : null,
+			hasMaxLength ? maxLengthId : null,
+			error ? errorId : null,
+		]
+			.filter(Boolean)
+			.join(" ") || undefined,
 	);
 </script>
 
@@ -195,7 +201,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 	{#if hasMaxLength && !restProps.readonly && !disabled}
 		<span id={maxLengthId} class="aksel-sr-only">
-			Text area with a {maxlength} character limit.
+			{i18n?.maxLengthText ?? `Text area with a ${maxlength} character limit.`}
 		</span>
 
 		<BodyShort

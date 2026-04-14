@@ -2,9 +2,6 @@
 	@component
 	Modals are useful tools when you have critical information a user needs to take a stance on.
 
-	**Note**: This component differs from the `@navikt/ds-react` component in that it uses the `dialog` element instead of custom markup.
-	This reduces the amount of properties available. If this doesn't work for you, reach out.
-
 	Read more about this component in the [Aksel documentation](https://aksel.nav.no/komponenter/core/modal).
 -->
 
@@ -12,9 +9,12 @@
 	import XMarkIcon from "$lib/icons/XMarkIcon.svelte";
 	import Button from "../Button/Button.svelte";
 	import { omit } from "../helpers";
+	import Detail from "../typography/Detail/Detail.svelte";
 	import Heading from "../typography/Heading/Heading.svelte";
 	import { acquireScrollLock } from "./scrollLock";
-	import { sizes, type ModalProps } from "./type";
+	import { sizes, type ModalHeaderProps, type ModalProps } from "./type";
+
+	const uid = $props.id();
 
 	let {
 		open = $bindable(false),
@@ -25,11 +25,62 @@
 		header,
 		children,
 		footer,
+		closeOnBackdropClick = true,
+		placement,
+		onBeforeClose,
 		...restProps
 	}: ModalProps = $props();
 
 	let dialog: HTMLDialogElement;
 	let releaseScrollLock: (() => void) | null = null;
+
+	const ariaLabelId = "modal-heading-" + uid;
+
+	/**
+	 * Determine if header is a structured object (not a string and not a snippet).
+	 * Snippets are functions, and so are objects — but ModalHeaderProps has a `heading` key.
+	 */
+	function isHeaderObject(h: unknown): h is ModalHeaderProps {
+		return typeof h === "object" && h !== null && "heading" in h;
+	}
+
+	/**
+	 * Determine if header is a snippet (function).
+	 */
+	function isHeaderSnippet(h: unknown): h is import("svelte").Snippet {
+		return typeof h === "function";
+	}
+
+	let headerObj = $derived(isHeaderObject(header) ? header : null);
+
+	let showCloseButton = $derived.by(() => {
+		if (headerObj) {
+			return headerObj.closeButton !== false;
+		}
+		return closeButton;
+	});
+
+	let mergedAriaLabelledBy = $derived.by(() => {
+		const explicit = restProps["aria-labelledby"];
+		if (explicit) {
+			return explicit;
+		}
+		if (restProps["aria-label"]) {
+			return undefined;
+		}
+		if (headerObj) {
+			return ariaLabelId;
+		}
+		return undefined;
+	});
+
+	function tryClose(): boolean {
+		if (onBeforeClose && onBeforeClose() === false) {
+			return false;
+		}
+		open = false;
+		return true;
+	}
 
 	$effect(() => {
 		if (dialog && open && dialog.showModal) {
@@ -78,21 +129,34 @@
 </script>
 
 <dialog
-	{...omit(restProps, "class")}
+	{...omit(restProps, "class", "aria-labelledby")}
 	bind:this={dialog}
+	aria-labelledby={mergedAriaLabelledBy}
 	onclose={(e) => {
 		open = false;
 		if (restProps.onclose && typeof restProps.onclose === "function") {
 			restProps.onclose(e);
 		}
 	}}
-	onclick={({ target, clientX, clientY }) => {
-		const { left, right, top, bottom } = dialog.getBoundingClientRect();
-		if (
-			target === dialog &&
-			(clientX < left || clientX > right || clientY < top || clientY > bottom)
-		) {
-			dialog.close();
+	oncancel={(e) => {
+		if (onBeforeClose && onBeforeClose() === false) {
+			e.preventDefault();
+		}
+	}}
+	onclick={closeOnBackdropClick
+		? ({ target, clientX, clientY }) => {
+				const { left, right, top, bottom } = dialog.getBoundingClientRect();
+				if (
+					target === dialog &&
+					(clientX < left || clientX > right || clientY < top || clientY > bottom)
+				) {
+					tryClose();
+				}
+			}
+		: undefined}
+	onkeydown={(e) => {
+		if (e.key === "Escape") {
+			e.stopPropagation();
 		}
 	}}
 	class={[
@@ -101,18 +165,24 @@
 			[`aksel-modal--${width}`]: isKnownSize(width),
 			"aksel-modal": open,
 			"aksel-modal--autowidth": !width,
+			"aksel-modal--top": placement === "top",
 		},
 	]}
 	style={styles(width)}
 >
 	<div class="aksel-modal__header">
-		{#if closeButton}
+		{#if showCloseButton}
 			<Button
 				type="button"
 				class="aksel-modal__button"
 				size="small"
 				variant="tertiary-neutral"
-				onclick={() => (open = false)}
+				onclick={() => tryClose()}
+				onkeydown={(e: KeyboardEvent) => {
+					if (["Enter", " "].includes(e.key) && e.repeat) {
+						e.preventDefault();
+					}
+				}}
 			>
 				{#snippet icon()}
 					<XMarkIcon title={closeIconText} />
@@ -120,10 +190,22 @@
 			</Button>
 		{/if}
 
-		{#if header}
+		{#if headerObj}
+			{#if headerObj.label}
+				<Detail class="aksel-modal__label">{headerObj.label}</Detail>
+			{/if}
+			<Heading size={headerObj.size ?? "medium"} level="1" id={ariaLabelId}>
+				{#if headerObj.icon}
+					<span class="aksel-modal__header-icon">
+						<headerObj.icon aria-hidden />
+					</span>
+				{/if}
+				{headerObj.heading}
+			</Heading>
+		{:else if header}
 			{#if typeof header === "string"}
 				<Heading level="1" size="large">{header}</Heading>
-			{:else}
+			{:else if isHeaderSnippet(header)}
 				{@render header()}
 			{/if}
 		{/if}

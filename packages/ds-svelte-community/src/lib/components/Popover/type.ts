@@ -26,6 +26,10 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
 	 */
 	open: boolean;
 	/**
+	 * Callback when popover is dismissed (e.g. focus leaves, Escape pressed).
+	 */
+	onClose?: () => void;
+	/**
 	 * Orientation for popover
 	 * @note Try to keep general usage to "top", "bottom", "left", "right"
 	 * @default "top"
@@ -33,7 +37,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
 	placement?: (typeof PopoverPlacement)[number];
 	/**
 	 * Distance from anchor to popover
-	 * @default 4
+	 * @default 8
 	 */
 	offset?: number;
 	/**

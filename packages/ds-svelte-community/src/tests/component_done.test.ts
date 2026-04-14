@@ -53,6 +53,7 @@ describe("which components are implemented", () => {
 		"PopoverContent",
 		"Portal",
 		"Provider",
+		"InfoCardMessage",
 		"TableColumnHeader",
 		"Timeline",
 		"TimelinePeriod",
@@ -82,8 +83,8 @@ describe("which components are implemented", () => {
 
 	// Ignored components are components that we don't want to implement in Svelte, or is implmented in a different way (e.g. slots)
 	const ignoredComponents: string[] = [
-		"AccordionHeader", // Slot
-		"AccordionContent", // Slot
+		"AccordionHeader", // Snippet
+		"AccordionContent", // Snippet
 		"ModalHeader", // Slot
 		"ModalBody", // Slot
 		"ModalFooter", // Slot

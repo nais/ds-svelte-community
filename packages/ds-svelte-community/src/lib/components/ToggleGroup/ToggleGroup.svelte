@@ -71,7 +71,6 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		role="radiogroup"
 		aria-labelledby={label ? labelId : undefined}
 		class={["aksel-toggle-group", `aksel-toggle-group--${size}`]}
-		tabindex="0"
 	>
 		{@render children()}
 	</div>

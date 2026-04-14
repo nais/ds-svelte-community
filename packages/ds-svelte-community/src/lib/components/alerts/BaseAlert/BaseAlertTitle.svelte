@@ -14,17 +14,22 @@
 	let { as = "h2", children, ...restProps }: BaseAlertTitleProps = $props();
 
 	const ctx = GetBaseAlertContext();
+	const uid = $props.id();
+	const titleId = `base-alert-title-${uid}`;
 
 	const bodySize = $derived(ctx?.size === "medium" ? "large" : "medium");
+
+	const ariaLabelledBy = $derived([ctx?.statusId, titleId].filter(Boolean).join(" ") || undefined);
 </script>
 
 <BodyShort
 	{...omit(restProps, "class")}
 	{as}
+	id={titleId}
 	size={bodySize}
 	weight="semibold"
 	class={[restProps.class, "aksel-base-alert__title"]}
-	aria-labelledby={ctx?.statusId}
+	aria-labelledby={ariaLabelledBy}
 >
 	{@render children()}
 </BodyShort>

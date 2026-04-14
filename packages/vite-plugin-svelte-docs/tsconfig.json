@@ -2,6 +2,7 @@
 	"compilerOptions": {
 		"declaration": true,
 		"downlevelIteration": true,
+		"rootDir": "./src",
 		"lib": ["esnext"],
 		"outDir": "dist",
 		"allowJs": true,
@@ -17,8 +18,8 @@
 		"moduleResolution": "bundler",
 		"module": "esnext",
 		"target": "esnext",
-		"ignoreDeprecations": "5.0",
-		"moduleDetection": "force"
+		"ignoreDeprecations": "6.0",
+		"moduleDetection": "force",
 	},
-	"include": ["src/**/*"]
+	"include": ["src/**/*"],
 }

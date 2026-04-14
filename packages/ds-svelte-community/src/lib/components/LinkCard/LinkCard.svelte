@@ -22,6 +22,7 @@
 		arrowPosition = "baseline",
 		size = "medium",
 		children,
+		"data-color": dataColor = "neutral",
 		...restProps
 	}: LinkCardProps = $props();
 
@@ -33,7 +34,7 @@
 	{...omit(restProps, "class", "ref")}
 	as="div"
 	{size}
-	data-color="neutral"
+	data-color={dataColor}
 	data-align-arrow={arrowPosition}
 	class={[
 		"aksel-link-anchor__overlay",

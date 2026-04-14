@@ -47,7 +47,8 @@
 
 <Button
 	{...omit(restProps, "class")}
-	variant="tertiary-neutral"
+	variant="tertiary"
+	data-color="neutral"
 	aria-current={selected}
 	data-pressed={selected}
 	{disabled}

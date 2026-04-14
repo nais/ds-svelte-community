@@ -8,7 +8,7 @@
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
 	import { getTabsContext, type TabProps } from "./type.svelte";
 
-	let { value, as = "button", children, icon, ...restProps }: TabProps = $props();
+	let { value, as = "button", label, children, icon, ...restProps }: TabProps = $props();
 
 	const ctx = getTabsContext();
 	let self: HTMLElement | undefined = $state();
@@ -57,6 +57,8 @@
 		}
 		ctx.blur(self);
 	};
+
+	const hasLabel = $derived(!!label || !!children);
 </script>
 
 <svelte:element
@@ -69,7 +71,8 @@
 		`aksel-tabs__tab--${ctx.size}`,
 		`aksel-tabs__tab-icon--${ctx.iconPosition}`,
 		{
-			"aksel-tabs__tab--icon-only": icon && !children,
+			"aksel-tabs__tab--icon-only": icon && !hasLabel,
+			"aksel-tabs__tab--fill": ctx.fill,
 			unstyled: as === "a",
 		},
 	]}
@@ -79,14 +82,14 @@
 	aria-controls={ctx.idFor("panel", value)}
 	id={ctx.idFor("tab", value)}
 	aria-selected={`${ctx.value == value}`}
-	tabindex={self !== undefined && ctx.activeTab == self ? 0 : -1}
+	tabindex={(self !== undefined ? ctx.activeTab == self : ctx.value == value) ? 0 : -1}
 	onclick={() => as != "a" && ctx.activate(value)}
 	onkeydown={handleKeydown}
 	onfocus={handleFocus}
 	onblur={handleBlur}
 >
 	<BodyShort as="span" class="aksel-tabs__tab-inner" size={ctx.size}>
-		<span aria-hidden={!!children}>
+		<span aria-hidden={hasLabel}>
 			{#if icon}
 				{@render icon()}
 			{/if}
@@ -95,6 +98,8 @@
 		<span>
 			{#if children}
 				{@render children()}
+			{:else if label}
+				{label}
 			{/if}
 		</span>
 	</BodyShort>

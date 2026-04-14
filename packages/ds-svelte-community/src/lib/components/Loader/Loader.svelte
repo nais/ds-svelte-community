@@ -16,12 +16,13 @@
 		title = "Waiting…",
 		transparent = false,
 		variant = "neutral",
+		id: propId,
 		"data-color": color,
 		...restProps
 	}: LoaderProps = $props();
 
 	const uid = $props.id();
-	const id = "ldr" + uid;
+	const titleId = $derived(propId ?? "ldr" + uid);
 
 	function variantToColor(variant: LoaderProps["variant"]): AkselColor | undefined {
 		switch (variant) {
@@ -51,11 +52,11 @@
 	focusable="false"
 	viewBox="0 0 50 50"
 	preserveAspectRatio="xMidYMid"
-	aria-labelledby={id}
+	aria-labelledby={titleId}
 	data-color={color ?? variantToColor(variant)}
 	data-variant={variant}
 >
-	<title {id}>{title}</title>
+	<title id={titleId}>{title}</title>
 	<circle
 		class="aksel-loader__background"
 		xmlns="http://www.w3.org/2000/svg"

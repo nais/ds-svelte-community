@@ -55,12 +55,18 @@
 	const color = $derived(dataColorProp ?? (status ? statusToDataColor(status) : undefined));
 	const statusId = `base-alert-status-${uid}`;
 
-	class Context implements BaseAlertContext {
-		size: BaseAlertContext["size"] = $derived(size);
-		status: BaseAlertContext["status"] = $derived(status);
-		color: BaseAlertContext["color"] = $derived(color);
-		statusId: string = statusId;
-	}
+	const ctx: BaseAlertContext = {
+		get size() {
+			return size;
+		},
+		get status() {
+			return status;
+		},
+		get color() {
+			return color;
+		},
+		statusId,
+	};
 
 	const statusLabels: Record<BaseAlertStatus, string> = {
 		announcement: "Announcement",
@@ -79,13 +85,12 @@
 		return undefined;
 	});
 
-	const ctx = new Context();
 	setContext<BaseAlertContext>(contextKey, ctx);
 </script>
 
 <svelte:element
 	this={as}
-	{...omit(restProps, "class")}
+	{...omit(restProps, "class", "role", "size")}
 	aria-label={ariaLabel}
 	class={[restProps.class, "aksel-base-alert"]}
 	data-centered={centered}
@@ -94,7 +99,11 @@
 	data-variant={type}
 	data-global={global}
 >
-	<div {role}>
+	{#if role}
+		<div {role}>
+			{@render children()}
+		</div>
+	{:else}
 		{@render children()}
-	</div>
+	{/if}
 </svelte:element>

@@ -1,11 +1,6 @@
 <script lang="ts">
 	type Props = {
 		/**
-		 * The title of the icon
-		 */
-		title?: string;
-
-		/**
 		 * Whether the icon should be filled
 		 */
 		filled?: boolean;
@@ -13,10 +8,7 @@
 		[key: string]: unknown;
 	};
 
-	let { title, filled, ...restProps }: Props = $props();
-
-	const uid = $props.id();
-	const titleId = "ht-" + uid;
+	let { filled, ...restProps }: Props = $props();
 </script>
 
 <svg
@@ -26,8 +18,7 @@
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 	focusable="false"
-	role="img"
-	aria-labelledby={titleId}
+	aria-hidden="true"
 	class={[
 		restProps.class,
 		"aksel-help-text__icon",
@@ -36,9 +27,6 @@
 		},
 	]}
 >
-	{#if title}
-		<title id={titleId}>{title}</title>
-	{/if}
 	<circle
 		cx="12"
 		cy="12"

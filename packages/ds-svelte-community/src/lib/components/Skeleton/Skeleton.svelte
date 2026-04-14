@@ -9,7 +9,14 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	import { omit } from "../helpers";
 	import type { SkeletonProps } from "./type";
 
-	let { variant, height, width, children, ...restProps }: SkeletonProps = $props();
+	let {
+		variant = "text",
+		as = "div",
+		height,
+		width,
+		children,
+		...restProps
+	}: SkeletonProps = $props();
 
 	const style = (
 		restProps: { [index: string]: unknown },
@@ -35,7 +42,8 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	};
 </script>
 
-<div
+<svelte:element
+	this={as}
 	{...omit(restProps, "class", "style")}
 	class={[
 		restProps.class,
@@ -45,6 +53,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 			"aksel-skeleton--has-children": !!children,
 			"aksel-skeleton--no-height": !height,
 			"aksel-skeleton--no-width": !width,
+			"aksel-skeleton--inline": as === "span",
 		},
 	]}
 	style={style(restProps, width, height)}
@@ -53,4 +62,4 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	{#if children}
 		{@render children()}
 	{/if}
-</div>
+</svelte:element>

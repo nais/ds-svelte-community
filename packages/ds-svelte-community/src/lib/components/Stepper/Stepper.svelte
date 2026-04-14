@@ -59,13 +59,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 <ol
 	{...omit(restProps, "class")}
-	class={[
-		restProps.class,
-		"aksel-stepper",
-		{
-			"aksel-stepper--horizontal": orientation === "horizontal",
-		},
-	]}
+	class={[restProps.class, "aksel-stepper"]}
 	data-orientation={orientation}
 >
 	{@render children()}

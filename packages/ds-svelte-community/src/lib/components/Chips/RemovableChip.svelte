@@ -40,7 +40,7 @@
 		"aksel-chips__removable",
 		"aksel-chips--icon-right",
 		{
-			[`navds-chips__removable--${variant}`]: variant,
+			[`aksel-chips__removable--${variant}`]: variant,
 		},
 	]}
 	aria-label={`${value} ${removeLabel}`}

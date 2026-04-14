@@ -42,5 +42,21 @@ export interface PaginationProps extends Omit<HTMLAttributes<HTMLDivElement>, "o
 	 */
 	prevNextTexts?: boolean;
 
+	/**
+	 * Adds an invisible heading for screen readers above the pagination.
+	 */
+	srHeading?: {
+		/**
+		 * Text content of the sr-only heading.
+		 * @default "Navigation"
+		 */
+		text?: string;
+		/**
+		 * Heading tag to use.
+		 * @default "h2"
+		 */
+		tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+	};
+
 	onchange?: (_: { page: number }) => void;
 }

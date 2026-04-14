@@ -36,6 +36,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		{
 			"aksel-switch--disabled": disabled ?? loading,
 			"aksel-switch--loading": loading,
+			"aksel-switch--standalone": hideLabel,
 		},
 	]}
 >

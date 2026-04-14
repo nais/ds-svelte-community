@@ -15,6 +15,13 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
 	illustration?: Snippet;
 
 	/**
+	 * Override the default illustration's accessible label.
+	 * Only used when no custom `illustration` snippet is provided.
+	 * @default "Illustration"
+	 */
+	illustrationLabel?: string;
+
+	/**
 	 * Content
 	 */
 	children: Snippet;

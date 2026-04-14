@@ -133,6 +133,92 @@ describe("CheckboxGroup", () => {
 			},
 		);
 	});
+
+	it(`renders CheckboxGroup with hideLabel hiding both label and description`, async () => {
+		const props: Omit<CheckboxGroupProps, "children"> = {
+			legend: "Checkbox legend",
+			value: [],
+		};
+
+		const items: { value: string; description?: string; hideLabel?: boolean; content: string }[] = [
+			{
+				value: "val1",
+				description: "Hidden desc",
+				hideLabel: true,
+				content: someRandomText,
+			},
+		];
+
+		const svelteItems: CheckboxProps[] = items.map((v) => {
+			return {
+				value: v.value,
+				description: v.description,
+				hideLabel: v.hideLabel,
+				children: someRandomTextSnippet,
+			};
+		});
+		expect(render(Checkbox, { wrapper: props, items: svelteItems })).toMimicReact(
+			ReactCheckboxGroup,
+			{
+				props: {
+					legend: props.legend!,
+					defaultValue: props.value,
+				},
+				children: items.map((v, i) => {
+					return React.createElement(ReactCheckbox, {
+						value: v.value,
+						description: v.description,
+						hideLabel: v.hideLabel,
+						children: v.content,
+						key: i,
+					});
+				}),
+				opts: {
+					compareAttrs: ignoreKnownUnique,
+				},
+			},
+		);
+	});
+
+	it(`renders CheckboxGroup with readOnly checkbox`, async () => {
+		const props: Omit<CheckboxGroupProps, "children"> = {
+			legend: "Checkbox legend",
+			value: ["val1"],
+		};
+
+		const items: { value: string; readOnly?: boolean; content: string }[] = [
+			{ value: "val1", readOnly: true, content: someRandomText },
+			{ value: "val2", content: someRandomText },
+		];
+
+		const svelteItems: CheckboxProps[] = items.map((v) => {
+			return {
+				value: v.value,
+				readonly: v.readOnly,
+				children: someRandomTextSnippet,
+			};
+		});
+		expect(render(Checkbox, { wrapper: props, items: svelteItems })).toMimicReact(
+			ReactCheckboxGroup,
+			{
+				props: {
+					legend: props.legend!,
+					defaultValue: props.value,
+				},
+				children: items.map((v, i) => {
+					return React.createElement(ReactCheckbox, {
+						value: v.value,
+						readOnly: v.readOnly,
+						children: v.content,
+						key: i,
+					});
+				}),
+				opts: {
+					compareAttrs: ignoreKnownUnique,
+				},
+			},
+		);
+	});
 });
 
 function ignoreKnownUnique(node: HTMLElement, attr: string) {

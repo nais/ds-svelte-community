@@ -56,5 +56,7 @@ export interface TextareaProps extends Omit<HTMLTextareaAttributes, "size"> {
 		counterLeft?: string;
 		/** @default "characters too many" */
 		counterTooMuch?: string;
+		/** Override for the screen-reader max length description */
+		maxLengthText?: string;
 	};
 }

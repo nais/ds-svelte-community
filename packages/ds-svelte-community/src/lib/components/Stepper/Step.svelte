@@ -51,8 +51,6 @@
 		]}
 		aria-current={index == ctx.activeStep ? "step" : undefined}
 		onclick={isInteractive ? handleClick : null}
-		role={isInteractive ? "button" : undefined}
-		tabindex={isInteractive ? 0 : undefined}
 		data-active={index == ctx.activeStep}
 		data-completed={completed}
 		data-interactive={isInteractive}

@@ -36,6 +36,10 @@ export interface TableProps extends HTMLTableAttributes {
 	 */
 	zebraStripes?: boolean;
 	/**
+	 * Makes the table header sticky.
+	 */
+	stickyHeader?: boolean;
+	/**
 	 * Sort state.
 	 */
 	sort?: TableSortState;
@@ -78,6 +82,10 @@ export interface TableExpandableRowProps extends TableRowProps {
 	 * Placement of toggle button
 	 */
 	togglePlacement?: "left" | "right";
+	/**
+	 * If true, the row will be open on initial render.
+	 */
+	defaultOpen?: boolean;
 	/**
 	 * Opens component if 'true', closes if 'false'
 	 * Using this prop removes automatic control of open-state

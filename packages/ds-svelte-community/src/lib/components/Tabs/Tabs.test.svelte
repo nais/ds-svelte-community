@@ -2,16 +2,17 @@
 	export interface TabsTestProps {
 		data: { value: string; tab: string; content: string }[];
 		value: string;
+		fill?: boolean;
 	}
 </script>
 
 <script lang="ts">
 	import { Tab, TabList, TabPanel, Tabs } from "./";
 
-	let { data, value }: TabsTestProps = $props();
+	let { data, value, fill }: TabsTestProps = $props();
 </script>
 
-<Tabs {value}>
+<Tabs {value} {fill}>
 	<TabList>
 		{#each data as t (t.value)}
 			<Tab value={t.value}>{t.tab}</Tab>

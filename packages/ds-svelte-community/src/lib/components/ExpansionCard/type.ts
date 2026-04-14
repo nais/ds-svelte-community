@@ -4,6 +4,12 @@ import type { HTMLAttributes } from "svelte/elements";
 export interface ExpansionCardProps extends Omit<HTMLAttributes<HTMLElement>, "ontoggle"> {
 	header: string | Snippet;
 
+	/**
+	 * Initial open state for uncontrolled usage.
+	 * @default false
+	 */
+	defaultOpen?: boolean;
+
 	open?: boolean;
 
 	size?: "small" | "medium";

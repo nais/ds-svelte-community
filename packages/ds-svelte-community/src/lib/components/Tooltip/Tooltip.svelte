@@ -4,23 +4,34 @@ A tooltip is a small box with text that is activated on focus or hover. The tool
 
 Read more about this component in the [Aksel documentation](https://aksel.nav.no/komponenter/core/tooltip).
 -->
+<script lang="ts" module>
+	import { flip as flipMW, offset as offsetMW, shift as shiftMW } from "svelte-floating-ui/dom";
+</script>
+
 <script lang="ts">
 	import { Detail } from "$lib";
-	import { GetTheme } from "../Theme/Theme.svelte";
+	import { createArrowRef, createFloatingActions, arrow as svelteArrow } from "svelte-floating-ui";
 	import type { TooltipProps } from "./type";
 
 	let {
 		content,
-		open = false,
+		defaultOpen = false,
+		open = $bindable(defaultOpen),
+		onOpenChange,
 		placement = "top",
-		arrow = true,
-		offset = 10,
+		arrow: _arrow = true,
+		offset,
 		maxChar = 80,
 		delay = 150,
 		keys,
+		describesChild = false,
+		id: idProp,
+		shortcutSeparator = "or",
 		children,
 		class: klass,
 	}: TooltipProps = $props();
+
+	const generatedId = $props.id();
 
 	function isNestedKeys(k: TooltipProps["keys"]): k is [string[], string[]] {
 		return Array.isArray(k) && k.length > 0 && Array.isArray(k[0]);
@@ -28,7 +39,46 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 	const hasKeys = $derived(keys && keys.length > 0);
 
-	const theme = GetTheme();
+	const tooltipId = $derived(idProp ?? `tooltip-${generatedId}`);
+
+	// Floating UI setup
+	const arrowRef = createArrowRef();
+
+	let arrowX = $state<number | undefined>(undefined);
+	let arrowY = $state<number | undefined>(undefined);
+	let actualPlacement = $derived(placement);
+	let computedPlacement = $state<string | undefined>(undefined);
+
+	const [floatingRef, floatingContent, update] = createFloatingActions({
+		autoUpdate: true,
+		onComputed(computed) {
+			arrowX = computed.middlewareData.arrow?.x;
+			arrowY = computed.middlewareData.arrow?.y;
+			computedPlacement = computed.placement;
+		},
+	});
+
+	// Sync arrow element with store
+	let arrowEl = $state<HTMLElement | undefined>();
+
+	$effect(() => {
+		if (arrowEl) {
+			arrowRef.set(arrowEl);
+		}
+	});
+
+	$effect(() => {
+		const effectiveOffset = offset ?? (_arrow ? 8 : 4);
+		update({
+			placement,
+			middleware: [
+				offsetMW(effectiveOffset),
+				shiftMW(),
+				flipMW({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+				_arrow ? svelteArrow({ element: arrowRef, padding: 5 }) : null,
+			].filter(Boolean) as never,
+		});
+	});
 
 	$effect(() => {
 		if (content.length > maxChar) {
@@ -38,144 +88,102 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 
 	let timeout: ReturnType<typeof setTimeout>;
 
+	function setOpen(value: boolean) {
+		open = value;
+		onOpenChange?.(value);
+	}
+
 	function handleMouseEnter() {
 		timeout = setTimeout(() => {
-			open = true;
+			setOpen(true);
 		}, delay);
 	}
 
 	function handleMouseLeave() {
 		clearTimeout(timeout);
-		open = false;
+		setOpen(false);
 	}
 
-	let width: number = $state(0);
-	let height: number = $state(0);
-	let tooltipWidth: number = $state(0);
-	let tooltipHeight: number = $state(0);
+	function handleFocus() {
+		setOpen(true);
+	}
 
-	const calculateTooltipStyles = (
-		width: number,
-		height: number,
-		tooltipWidth: number,
-		tooltipHeight: number,
-		position: typeof placement,
-	) => {
-		const styles: {
-			[key: string]: string;
-		} = {
-			top: "unset",
-			right: "unset",
-			bottom: "unset",
-			left: "unset",
-		};
+	function handleBlur() {
+		setOpen(false);
+	}
 
-		switch (position) {
-			case "right":
-				styles.top = `${height / 2 - tooltipHeight / 2}px`;
-				styles.right = `-${tooltipWidth + offset}px`;
-				break;
-			case "bottom":
-				styles.bottom = `-${tooltipHeight + offset}px`;
-				styles.left = `${width / 2 - tooltipWidth / 2}px`;
-				break;
-			case "left":
-				styles.top = `${height / 2 - tooltipHeight / 2}px`;
-				styles.left = `-${tooltipWidth + offset}px`;
-				break;
-			default: //	case "top":
-				styles.top = `-${tooltipHeight + offset}px`;
-				styles.left = `${width / 2 - tooltipWidth / 2}px`;
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === "Escape") {
+			setOpen(false);
 		}
+	}
 
-		return Object.keys(styles)
-			.reduce((acc, key) => {
-				const value = styles[key];
-				if (value !== "unset") {
-					acc.push(`${key}: ${value};`);
-				}
-				return acc;
-			}, [] as string[])
-			.join(" ");
-	};
-
-	const calculateArrowStyles = (
-		_width: number,
-		_height: number,
-		_tooltipWidth: number,
-		tooltipHeight: number,
-		position: typeof placement,
-	) => {
-		const styles: {
-			[key: string]: string;
-		} = {
-			top: "unset",
-			right: "unset",
-			bottom: "unset",
-			left: "unset",
-		};
-
-		switch (position) {
-			case "right":
-				styles.left = "-3.5px";
-				styles.top = `${tooltipHeight / 2 - 3.5}px`;
-				break;
-			case "bottom":
-				styles.top = "-3.5px";
-				break;
-			case "left":
-				styles.right = "-3.5px";
-				styles.top = `${tooltipHeight / 2 - 3.5}px`;
-				break;
-			default: //	case "top":
-				styles.bottom = "-3.5px";
+	/**
+	 * Compute aria-keyshortcuts attribute value.
+	 * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-keyshortcuts
+	 */
+	function ariaShortcuts(shortcuts: TooltipProps["keys"]): string | undefined {
+		if (!shortcuts) {
+			return undefined;
 		}
+		if (isNestedKeys(shortcuts)) {
+			return shortcuts.map((key) => key.join("+")).join(" ");
+		}
+		return shortcuts.join("+");
+	}
 
-		return Object.keys(styles)
-			.reduce((acc, key) => {
-				const value = styles[key];
-				if (value !== "unset") {
-					acc.push(`${key}: ${value};`);
-				}
-				return acc;
-			}, [] as string[])
-			.join(" ");
-	};
+	const labelProps = $derived.by(() => {
+		if (describesChild) {
+			return open ? { "aria-describedby": tooltipId } : { title: content };
+		}
+		return { "aria-label": content };
+	});
 
-	let tooltipStyles = $derived(
-		calculateTooltipStyles(width, height, tooltipWidth, tooltipHeight, placement),
-	);
-	let arrowStyles = $derived(
-		calculateArrowStyles(width, height, tooltipWidth, tooltipHeight, placement),
-	);
+	const arrowStyle = $derived.by(() => {
+		const side = (computedPlacement ?? actualPlacement).split("-")[0];
+		const staticSide =
+			({ top: "bottom", right: "left", bottom: "top", left: "right" } as Record<string, string>)[
+				side
+			] ?? "bottom";
+		const parts: string[] = [];
+		if (arrowX != null) {
+			parts.push(`left: ${arrowX}px`);
+		}
+		if (arrowY != null) {
+			parts.push(`top: ${arrowY}px`);
+		}
+		parts.push(`${staticSide}: -3.5px`);
+		return parts.join("; ");
+	});
 </script>
 
 <div
+	use:floatingRef
 	class="ds-svelte-tooltip-wrapper"
 	onmouseenter={handleMouseEnter}
 	onmouseleave={handleMouseLeave}
-	bind:clientWidth={width}
-	bind:clientHeight={height}
-	role="tooltip"
+	onfocus={handleFocus}
+	onblur={handleBlur}
+	onkeydown={handleKeydown}
+	aria-keyshortcuts={ariaShortcuts(keys)}
+	{...labelProps}
 >
 	{@render children()}
 
 	{#if open}
 		<div
+			use:floatingContent
 			tabindex="-1"
 			role="tooltip"
-			id="r7"
+			id={tooltipId}
 			class={[klass, "aksel-tooltip", "aksel-detail", "aksel-detail--small"]}
-			data-side={placement}
-			data-state={open ? "open" : "closed"}
-			style="position: absolute;  visibility: visible; {tooltipStyles}"
-			bind:clientWidth={tooltipWidth}
-			bind:clientHeight={tooltipHeight}
+			data-side={computedPlacement ?? actualPlacement}
+			data-state="open"
 		>
 			{content}
 
 			{#if hasKeys}
-				<span class="aksel-tooltip__keys">
+				<span class="aksel-tooltip__keys" aria-hidden="true">
 					{#if isNestedKeys(keys)}
 						{#each keys as group, groupIndex (groupIndex)}
 							<span style="display: flex; gap: var(--ax-space-4, 0.25rem);">
@@ -186,7 +194,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 								{/each}
 							</span>
 							{#if groupIndex < keys.length - 1}
-								<span> eller </span>
+								<span> {shortcutSeparator} </span>
 							{/if}
 						{/each}
 					{:else if keys}
@@ -198,8 +206,9 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 					{/if}
 				</span>
 			{/if}
-			{#if !theme && arrow}
-				<div class="aksel-tooltip__arrow" style={arrowStyles}></div>
+
+			{#if _arrow}
+				<div class="aksel-tooltip__arrow" bind:this={arrowEl} style={arrowStyle}></div>
 			{/if}
 		</div>
 	{/if}

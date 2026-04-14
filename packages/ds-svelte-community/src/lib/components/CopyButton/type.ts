@@ -9,6 +9,11 @@ export interface CopyButtonProps extends HTMLButtonAttributes {
 	variant?: (typeof variants)[number];
 
 	/**
+	 * Override the color of the copy button.
+	 */
+	"data-color"?: string;
+
+	/**
 	 * Text to copy to clipboard.
 	 */
 	copyText: string;

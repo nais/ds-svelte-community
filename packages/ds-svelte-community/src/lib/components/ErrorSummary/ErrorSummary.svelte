@@ -13,7 +13,7 @@
 
 	let {
 		size = "medium",
-		heading,
+		heading = "You must fix these errors before you can continue",
 		headingTag = "h2",
 		children,
 		...restProps

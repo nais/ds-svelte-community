@@ -62,6 +62,13 @@
 
 	let overrideWidth = $derived(ref && loading ? ref.getBoundingClientRect().width : 0);
 
+	function handleKeyUp(e: KeyboardEvent) {
+		if (as !== "button" && e.key === " ") {
+			e.preventDefault();
+			(e.currentTarget as HTMLElement)?.click();
+		}
+	}
+
 	let style = $derived(typeof restProps.style == "string" ? restProps.style : null);
 
 	// const themeCtx = GetTheme();
@@ -70,6 +77,7 @@
 <svelte:element
 	this={as}
 	{...omit(disabled ? omit(restProps, "href", "class") : restProps, "class")}
+	onkeyup={as !== "button" ? handleKeyUp : undefined}
 	data-color={color ?? variantToColor(variant)}
 	data-variant={variantToSimplifiedVariant(variant)}
 	style={overrideWidth
@@ -91,10 +99,29 @@
 	disabled={disabled || overrideWidth > 0 || loading ? true : undefined}
 >
 	{#if overrideWidth || loading}
+		{#if icon && iconPosition == "left"}
+			<span class="aksel-button__icon">
+				{#if isSnippet(icon)}
+					{@render icon()}
+				{:else}
+					{@const Icon = icon}
+					<Icon aria-hidden="true" />
+				{/if}
+			</span>
+		{/if}
 		<Loader {size} />
-
 		{#if children}
 			<Label as="span" size={size === "medium" ? "medium" : "small"} {children} />
+		{/if}
+		{#if icon && iconPosition == "right"}
+			<span class="aksel-button__icon">
+				{#if isSnippet(icon)}
+					{@render icon()}
+				{:else}
+					{@const Icon = icon}
+					<Icon aria-hidden="true" />
+				{/if}
+			</span>
 		{/if}
 	{:else}
 		{#if icon && iconPosition == "left"}

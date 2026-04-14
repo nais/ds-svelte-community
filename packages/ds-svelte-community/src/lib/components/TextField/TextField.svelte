@@ -29,6 +29,10 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 	}: TextFieldProps = $props();
 
 	const inputDescriptionId = $derived(`tf-desc-${id}`);
+	const describedBy = $derived(
+		[description ? inputDescriptionId : null, error ? errorId : null].filter(Boolean).join(" ") ||
+			undefined,
+	);
 </script>
 
 <div
@@ -77,7 +81,7 @@ Read more about this component in the [Aksel documentation](https://aksel.nav.no
 		{disabled}
 		{...omit(restProps, "id", "class", "aria-invalid", "size", "disabled")}
 		aria-invalid={error ? "true" : undefined}
-		aria-describedby={inputDescriptionId}
+		aria-describedby={describedBy}
 		class={["aksel-text-field__input", "aksel-body-short", "aksel-body-short--" + size]}
 		size={htmlSize}
 		bind:value

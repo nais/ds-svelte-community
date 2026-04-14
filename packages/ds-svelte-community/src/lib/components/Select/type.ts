@@ -49,4 +49,9 @@ export interface SelectProps extends Omit<HTMLSelectAttributes, "size"> {
 	 * Note: HTML select doesn't natively support readonly, this is implemented via event handlers.
 	 */
 	readonly?: boolean;
+	/**
+	 * Text for the readonly icon tooltip.
+	 * @default "Read-only"
+	 */
+	readOnlyIconText?: string;
 }

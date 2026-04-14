@@ -51,6 +51,7 @@
 		id={radioID}
 		class="aksel-radio__input"
 		name={ctx.name}
+		data-standalone="false"
 		onchange={() => {
 			ctx.onchange(value as never);
 		}}
@@ -61,7 +62,7 @@
 		<BodyShort
 			id={descriptionID}
 			{size}
-			class="navds-form-field__subdescription navds-radio__description"
+			class="aksel-form-field__subdescription aksel-radio__description"
 		>
 			{#if typeof description === "string"}
 				{description}

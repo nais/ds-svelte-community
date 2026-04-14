@@ -10,6 +10,7 @@
 	import ChevronRightIcon from "$lib/icons/ChevronRightIcon.svelte";
 	import { omit } from "../helpers";
 	import BodyShort from "../typography/BodyShort/BodyShort.svelte";
+	import Heading from "../typography/Heading/Heading.svelte";
 	import Item from "./Item.svelte";
 	import type { PaginationProps } from "./type";
 
@@ -24,9 +25,12 @@
 		nextText = "Next",
 		prevText = "Previous",
 		prevNextTexts = false,
+		srHeading,
 		onchange,
 		...restProps
 	}: PaginationProps = $props();
+
+	const headingId = $props.id();
 
 	const getSteps = (page: number) => {
 		const range = (start: number, end: number) =>
@@ -71,7 +75,13 @@
 	{...omit(restProps, "class")}
 	class={[restProps.class, "aksel-pagination", `aksel-pagination--${size}`]}
 	data-color="neutral"
+	aria-labelledby={srHeading ? headingId : undefined}
 >
+	{#if srHeading}
+		<Heading size="xsmall" as={srHeading.tag ?? "h2"} class="aksel-sr-only" id={headingId}>
+			{srHeading.text ?? "Navigation"}
+		</Heading>
+	{/if}
 	<ul class="aksel-pagination__list">
 		<li>
 			<Item

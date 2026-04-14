@@ -49,6 +49,11 @@ export interface ProcessEventProps extends Omit<HTMLLiAttributes, "children"> {
 	 */
 	status?: "active" | "completed" | "uncompleted";
 	/**
+	 * Label text shown when the event is active.
+	 * @default "Active"
+	 */
+	activeLabel?: string;
+	/**
 	 * Component reference for binding.
 	 */
 	ref?: HTMLLIElement;

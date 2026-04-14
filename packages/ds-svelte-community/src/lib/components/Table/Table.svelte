@@ -15,6 +15,7 @@ The component names differ from `@navikt/ds-react` to align with the HTML standa
 	let {
 		size = "medium",
 		zebraStripes = false,
+		stickyHeader = false,
 		sort,
 		children,
 		onsortchange,
@@ -41,6 +42,7 @@ The component names differ from `@navikt/ds-react` to align with the HTML standa
 		`aksel-table--${size}`,
 		{
 			"aksel-table--zebra-stripes": zebraStripes,
+			"aksel-table--sticky-header": stickyHeader,
 		},
 	]}
 >
