@@ -2,18 +2,73 @@ import svelteCSS from "$lib/css/index.css";
 import reactCSS from "@navikt/ds-css";
 import tailwindcss from "@tailwindcss/vite";
 import looksSame from "looks-same";
-import { mkdir, mkdtemp } from "node:fs/promises";
+import { mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { Browser, Builder, type WebDriver } from "selenium-webdriver";
-import { Options } from "selenium-webdriver/chrome";
 import { build } from "vite";
 import type { RenderOutput, RenderTheme } from "./render";
 
 export const testPages = await mkdtemp(join(tmpdir(), "ds-svelte-test-"));
 let testCase = 0;
 
-let driver: WebDriver | undefined = undefined;
+let svelteView: InstanceType<typeof Bun.WebView> | undefined = undefined;
+let reactView: InstanceType<typeof Bun.WebView> | undefined = undefined;
+let initialized = false;
+let currentTheme: RenderTheme | undefined = undefined;
+
+async function screenshotToBuffer(view: InstanceType<typeof Bun.WebView>): Promise<Buffer> {
+	const blob = await view.screenshot({ format: "png" });
+	return Buffer.from(await blob.arrayBuffer());
+}
+
+async function ensureInitialized(theme: RenderTheme) {
+	if (initialized) {
+		return;
+	}
+
+	const css = await cssMap();
+
+	svelteView = new Bun.WebView({
+		headless: true,
+		backend: "chrome",
+		width: 800,
+		height: 600,
+	});
+
+	reactView = new Bun.WebView({
+		headless: true,
+		backend: "chrome",
+		width: 800,
+		height: 600,
+	});
+
+	const svelteTemplate = templateHTML(css.svelte, theme);
+	const reactTemplate = templateHTML(css.react, theme);
+
+	const templateDir = await mkdtemp(join(tmpdir(), "ds-svelte-test-tpl-"));
+	await Bun.file(join(templateDir, "svelte.html")).write(svelteTemplate);
+	await Bun.file(join(templateDir, "react.html")).write(reactTemplate);
+
+	// Navigate both views in parallel — navigate() is safe to call concurrently
+	// across different views (they are separate Chrome tabs).
+	await Promise.all([
+		svelteView.navigate(`file://${join(templateDir, "svelte.html")}`),
+		reactView.navigate(`file://${join(templateDir, "react.html")}`),
+	]);
+
+	currentTheme = theme;
+	initialized = true;
+}
+
+/**
+ * Build a JS expression that safely sets innerHTML on #root.
+ * We use JSON.stringify to serialize the HTML string so that any characters
+ * (quotes, backticks, angle brackets, SVG markup, null bytes, etc.) are
+ * safely embedded inside a JS string literal.
+ */
+function setInnerHTMLExpr(html: string): string {
+	return `document.getElementById('root').innerHTML = ${JSON.stringify(html)}`;
+}
 
 export async function testInChrome(
 	svelteComponent: RenderOutput,
@@ -21,36 +76,30 @@ export async function testInChrome(
 	theme: RenderTheme,
 	opts: looksSame.LooksSameOptions = {},
 ) {
-	if (!driver) {
-		const builder = new Builder();
-		const chromeOptions = new Options();
-		chromeOptions.addArguments("--headless");
-		chromeOptions.addArguments("--disable-infobars");
-		chromeOptions.addArguments("--disable-gpu");
-		chromeOptions.addArguments("--disable-dev-shm-usage");
-		chromeOptions.addArguments("--lang=en-GB");
-		builder.setChromeOptions(chromeOptions);
-		driver = await builder.forBrowser(Browser.CHROME).build();
+	await ensureInitialized(theme);
+
+	// If theme changed, update the theme class on both views.
+	// evaluate() cannot be called concurrently on the SAME view,
+	// but we can run them in parallel across different views.
+	if (currentTheme !== theme) {
+		const themeExpr = `document.getElementById('root').className = ${JSON.stringify("aksel-theme " + theme)}`;
+		await Promise.all([svelteView!.evaluate(themeExpr), reactView!.evaluate(themeExpr)]);
+		currentTheme = theme;
 	}
 
-	testCase++;
-	const testDir = (await mkdir(join(testPages, (testCase++).toString()), {
-		recursive: true,
-	})) as string;
+	const svelteBody = typeof svelteComponent === "object" ? svelteComponent.body : svelteComponent;
 
-	const css = await cssMap();
+	// Swap content on both views in parallel — each evaluate() targets a different view.
+	await Promise.all([
+		svelteView!.evaluate(setInnerHTMLExpr(svelteBody)),
+		reactView!.evaluate(setInnerHTMLExpr(reactComponent)),
+	]);
 
-	await Bun.file(join(testDir, "svelte.html")).write(htmlBody(css.svelte, svelteComponent, theme));
-	await Bun.file(join(testDir, "react.html")).write(htmlBody(css.react, reactComponent, theme));
-
-	await driver.get(`file://${join(testDir, "svelte.html")}`);
-	const svelteScreenshot = await driver.takeScreenshot();
-
-	await driver.get(`file://${join(testDir, "react.html")}`);
-	const reactScreenshot = await driver.takeScreenshot();
-
-	const svelteBuffer = Buffer.from(svelteScreenshot, "base64");
-	const reactBuffer = Buffer.from(reactScreenshot, "base64");
+	// Take screenshots in parallel — each screenshot() targets a different view.
+	const [svelteBuffer, reactBuffer] = await Promise.all([
+		screenshotToBuffer(svelteView!),
+		screenshotToBuffer(reactView!),
+	]);
 
 	opts.createDiffImage = true;
 	opts.strict = opts.strict ?? true;
@@ -64,9 +113,11 @@ export async function testInChrome(
 		return true;
 	}
 
-	await diffImage.save(join(testDir, "diff.png"));
+	testCase++;
+	const diffPath = join(testPages, `diff-${testCase}.png`);
+	await diffImage.save(diffPath);
 
-	return join(testDir, "diff.png");
+	return diffPath;
 }
 
 let cache: { react: string; svelte: string } | undefined = undefined;
@@ -88,7 +139,7 @@ async function compileCSS(file: string) {
 		configFile: false,
 		build: {
 			outDir: out,
-			emptyOutDir: false, // We only want to clear the out directory on the first build event
+			emptyOutDir: false,
 			rollupOptions: {
 				input: file,
 				output: {
@@ -104,11 +155,7 @@ async function compileCSS(file: string) {
 	return await Bun.file(join(out, "index.css")).text();
 }
 
-function htmlBody(css: string, content: string | RenderOutput, theme: RenderTheme) {
-	if (typeof content === "object") {
-		content = content.body;
-	}
-
+function templateHTML(css: string, theme: RenderTheme) {
 	return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,15 +164,23 @@ function htmlBody(css: string, content: string | RenderOutput, theme: RenderThem
 		<style>${css}</style>
 	</head>
 	<body>
-		<div class="aksel-theme ${theme}" data-background="true" data-color="accent" style="height: 100vh;">${content}</div>
+		<div id="root" class="aksel-theme ${theme}" data-background="true" data-color="accent" style="height: 100vh;"></div>
 	</body>
 </html>`;
 }
 
 export async function closeDriver() {
-	if (driver) {
-		console.log("Closing Selenium WebDriver...");
-		await driver.quit();
-		driver = undefined;
+	if (svelteView || reactView) {
+		console.log("Closing Bun WebViews...");
 	}
+	const sv = svelteView;
+	const rv = reactView;
+	svelteView = undefined;
+	reactView = undefined;
+	initialized = false;
+	currentTheme = undefined;
+	await Promise.all([
+		sv ? sv[Symbol.asyncDispose]() : undefined,
+		rv ? rv[Symbol.asyncDispose]() : undefined,
+	]);
 }
