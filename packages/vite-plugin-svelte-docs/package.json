@@ -5,13 +5,13 @@
 	"version": "0.0.3-next.2",
 	"private": true,
 	"devDependencies": {
-		"@types/bun": "1.3.11",
+		"@types/bun": "1.3.12",
 		"eslint": "^10.2.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.17.0",
-		"prettier": "^3.8.1",
+		"prettier": "^3.8.2",
 		"prettier-plugin-svelte": "^3.5.1",
-		"svelte": "5.55.2",
+		"svelte": "5.55.3",
 		"tsconfig-resolver": "^3.0.1",
 		"typescript": "~6.0.2"
 	},
@@ -26,7 +26,7 @@
 	},
 	"dependencies": {
 		"svelte2tsx": "0.7.53",
-		"vite": "^8.0.7"
+		"vite": "^8.0.8"
 	},
 	"publishConfig": {
 		"types": "./dist/index.d.ts",

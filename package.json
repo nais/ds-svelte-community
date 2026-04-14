@@ -26,10 +26,10 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.17.0",
 		"glob": "^13.0.6",
-		"globals": "^17.4.0",
+		"globals": "^17.5.0",
 		"prettier-plugin-svelte": "^3.5.1",
 		"source-map-js": "^1.2.1",
 		"svelte-highlight": "^7.9.0",
-		"typescript-eslint": "^8.58.1"
+		"typescript-eslint": "^8.58.2"
 	}
 }
