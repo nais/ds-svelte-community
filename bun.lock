@@ -78,8 +78,8 @@
         "svelte-floating-ui": "^1.6.2",
       },
       "peerDependencies": {
-        "@navikt/ds-css": "8.4.1",
-        "@navikt/ds-tokens": "8.4.1",
+        "@navikt/ds-css": "8.9.1",
+        "@navikt/ds-tokens": "8.9.1",
         "svelte": "^5.20.0",
       },
     },
@@ -1102,10 +1102,6 @@
     "@manypkg/get-packages/@changesets/types": ["@changesets/types@4.1.0", "", {}, "sha512-LDQvVDv5Kb50ny2s25Fhm3d9QSZimsoUGBsUioj6MC3qbMUCuC8GPIvk/M6IvXx3lYhAs0lwWUQLb+VIEUCECw=="],
 
     "@manypkg/get-packages/fs-extra": ["fs-extra@8.1.0", "", { "dependencies": { "graceful-fs": "^4.2.0", "jsonfile": "^4.0.0", "universalify": "^0.1.0" } }, "sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g=="],
-
-    "@nais/ds-svelte-community/@navikt/ds-css": ["@navikt/ds-css@8.4.1", "", {}, "sha512-VgsP5KSTEc6d8yRcBu4n2xacwt4iA45cpui5VSBmboQ5TZj87gttg3Vz+Dqq0anhiZqFDTwP5qhrsJhoauoZGA=="],
-
-    "@nais/ds-svelte-community/@navikt/ds-tokens": ["@navikt/ds-tokens@8.4.1", "", {}, "sha512-MafU7Om2zj5sn7uL5P57EAeV0n6/duU1IKuBW0ghUZE47A/cRJS/oG+PQTwg3FYBgXKkpInsx70k0oL+D7NR5A=="],
 
     "@nais/vite-plugin-svelte-docs/typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
 
