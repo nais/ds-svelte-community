@@ -1,5 +1,165 @@
 # @nais/ds-svelte-community
 
+## 2.0.0-next.7
+
+### Minor Changes
+
+- [#398](https://github.com/nais/ds-svelte-community/pull/398) [`d35e1e9`](https://github.com/nais/ds-svelte-community/commit/d35e1e97a1a119226b2c331cfe710da786f93850) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Checkbox: React parity fixes
+
+  **Breaking changes:**
+
+  - `hideLabel` now hides both the label **and** the description (previously only hid the label). This matches React's behavior where `hideLabel` applies `visuallyHidden` to both.
+  - Label visually-hidden class changed from `aksel-sr-only` to `aksel-typo--visually-hidden` (matching React's class).
+  - Removed `aria-labelledby` from the checkbox input and `id` from the label element. React uses `for`/`htmlFor` association instead, which was already in place.
+
+  **New features:**
+
+  - Added `readonly` prop with `aksel-checkbox--readonly` class, click prevention, and change blocking.
+  - Added `data-color` attribute support (`data-color={hasError ? "danger" : color}`).
+
+  **Bug fixes:**
+
+  - Fixed `hideLabel` JSDoc (was a copy-paste of the error prop description).
+
+- [#398](https://github.com/nais/ds-svelte-community/pull/398) [`d35e1e9`](https://github.com/nais/ds-svelte-community/commit/d35e1e97a1a119226b2c331cfe710da786f93850) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Fieldset: React parity fixes
+
+  **Breaking changes:**
+
+  - Replaced `aksel-sr-only` class with `visuallyHidden` prop on Label and BodyShort (now uses `aksel-typo--visually-hidden`, matching React). Code targeting the old `aksel-sr-only` class on hidden legends/descriptions will need updating.
+  - Error state (`hasError`, `showErrorMsg`) is now suppressed when `readOnly` is true, matching React's `useFormField` behavior. Fieldsets that previously showed errors alongside `readOnly` will no longer do so.
+
+  **New features:**
+
+  - Added `readOnly` prop with `aksel-fieldset--readonly` class.
+  - Added PadlockLockedFillIcon (with `aria-hidden`) in legend when `readOnly` is true, matching React's `ReadOnlyIcon` variant used by Fieldset.
+  - Added `visuallyHidden` support to the Label component (was missing, needed by Fieldset and others).
+
+- [#379](https://github.com/nais/ds-svelte-community/pull/379) [`b9cfcab`](https://github.com/nais/ds-svelte-community/commit/b9cfcab2bae9b378c5f9a7a32b552b529cd4dd6b) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Upgrade to Aksel v8 (`@navikt/ds-css`, `@navikt/ds-tokens`, `@navikt/ds-react`, `@navikt/aksel-icons` 8.4.1)
+
+  - Updated spacing token mapping from `--ax-space-X` to `--ax-X` format and changed `tokenSubgroup` from `"spacing"` to `"space"` across all primitives
+  - Removed legacy spacing token lookup in `css.ts`
+  - Removed legacy token type imports (`AkselLegacySpacingToken`, `AkselLegacyBackgroundColorToken`, etc.)
+  - Accordion: removed `aria-hidden` from content, removed redundant `aksel-accordion__header-content` and `--no-animation` classes, added `data-color` to content-inner
+  - Button: removed variant-specific class (now uses only `data-variant` and `data-color`)
+  - Tag: removed variant-specific class
+  - Link: removed variant class and `data-variant` attribute
+  - Chips: updated toggle icon fill to `var(--ax-text-default)`
+  - ExpansionCard: removed `--open` and `--no-animation` classes
+  - GuidePanel: removed poster CSS classes in favor of `data-poster` attribute, added `data-color` to content-inner
+  - Pagination: removed `aksel-pagination__prev-next` classes, added `data-color="neutral"` to nav
+  - ProgressBar: fixed CSS variable prefix from `--__ac-` to `--__axc-`
+  - Stepper: removed conditional classes from `<li>`, added `data-interactive` attribute
+  - ReadMore: removed `tabIndex` from content
+  - GlobalAlert: added `centered` prop support
+  - Regenerated icons from `@navikt/aksel-icons` v8
+
+- [#398](https://github.com/nais/ds-svelte-community/pull/398) [`d35e1e9`](https://github.com/nais/ds-svelte-community/commit/d35e1e97a1a119226b2c331cfe710da786f93850) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Modal: React parity fixes
+
+  **New features:**
+
+  - Added `header` prop as object (`ModalHeaderProps`: `heading`, `label?`, `icon?`, `size?`, `closeButton?`) for rendering a structured header with optional label, icon, and close button — matching React's compound header API.
+  - Added `closeOnBackdropClick` prop (default `true`) to control whether clicking the backdrop closes the modal.
+  - Added `placement` prop (`"top" | "center"`) with `aksel-modal--top` class for top-aligned modals.
+  - Added `onBeforeClose` callback that can prevent close by returning `false`.
+  - Auto-set `aria-labelledby` on `<dialog>` when header object is used.
+
+  **Bug fixes:**
+
+  - Close button now goes through `tryClose()` which respects `onBeforeClose`.
+  - Added `oncancel` handler on dialog for Escape key interception via `onBeforeClose`.
+  - Added `onkeydown` on close button to prevent repeated Enter/Space from closing.
+  - Added `onkeydown` on dialog to stop Escape propagation (matching React).
+
+- [#398](https://github.com/nais/ds-svelte-community/pull/398) [`d35e1e9`](https://github.com/nais/ds-svelte-community/commit/d35e1e97a1a119226b2c331cfe710da786f93850) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Popover: React parity fixes
+
+  **Breaking changes:**
+
+  - Default `offset` changed from `4` to `8` (matching React). Popovers will appear slightly further from their anchor element.
+  - Flip fallback placements now match React's logic: left/right placements fall back to bottom/top; top/bottom placements fall back to the opposite side preserving alignment. This may change where popovers reposition when near viewport edges.
+
+  **New features:**
+
+  - Added `onClose` callback prop, called when the popover is dismissed via focusout.
+  - Added `aria-hidden` attribute on root popover element (reflects `!open || !anchorEl`).
+
+  **Bug fixes:**
+
+  - Fixed focusout handler: now checks if focus moved into the popover before closing, preventing premature dismissal.
+  - Fixed focusout event listener cleanup on component destroy.
+  - Fixed restProps spread order (spread before class, per project convention).
+
+- [#398](https://github.com/nais/ds-svelte-community/pull/398) [`d35e1e9`](https://github.com/nais/ds-svelte-community/commit/d35e1e97a1a119226b2c331cfe710da786f93850) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Search: React parity fixes
+
+  **Breaking changes:**
+
+  - `clearButtonLabel` default changed from `"Clear"` to `"Clear field"` (matching React i18n default).
+  - Removed `title` from simple variant `MagnifyingGlassIcon` — icon now only has `aria-hidden` (matching React).
+
+  **New features:**
+
+  - Added `onChange` callback prop, called with the value string on input change.
+  - Added `onSearchClick` callback prop, called with the current value when the search button is clicked.
+  - Added `htmlSize` prop that sets the native `size` attribute on the input and adds `aksel-search--with-size` class.
+
+  **Bug fixes:**
+
+  - Fixed description `id` bug: description element previously shared the same id as the input, now correctly uses a `"-description"` suffix.
+  - Added `id` to error div for accessibility parity.
+
+- [#398](https://github.com/nais/ds-svelte-community/pull/398) [`d35e1e9`](https://github.com/nais/ds-svelte-community/commit/d35e1e97a1a119226b2c331cfe710da786f93850) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Tabs: React parity fixes
+
+  **Breaking changes:**
+
+  - `loop` default changed from `false` to `true` (matching React). If you relied on the default non-looping behavior, explicitly pass `loop={false}`.
+  - Removed `data-orientation="horizontal"` from root `<div>` and `TabList` inner `<div>` (React does not render these).
+
+  **New features:**
+
+  - Added `defaultValue` prop for uncontrolled initial tab selection.
+  - Added `onChange` callback, invoked when the active tab changes.
+  - Added `fill` prop to stretch tabs to fill available container space (adds `aksel-tabs__tab--fill` class).
+  - Added `label` string prop to `Tab` as an alternative to children snippets.
+  - Added `lazy` prop to `TabPanel` (default `true`); set to `false` to always render panel content regardless of selection state.
+  - `TabPanel` now renders `data-state="active"|"inactive"` (matching React).
+  - `Tab` `value` prop is now optional (supports either `value` or `defaultValue`).
+
+  **Bug fixes:**
+
+  - Selected tab now correctly gets `tabindex="0"` in SSR (previously all tabs got `-1` because `bind:this` is undefined server-side).
+
+- [#398](https://github.com/nais/ds-svelte-community/pull/398) [`d35e1e9`](https://github.com/nais/ds-svelte-community/commit/d35e1e97a1a119226b2c331cfe710da786f93850) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Tooltip: React parity fixes
+
+  **Breaking changes:**
+
+  - `offset` default changed from `10` to `8` (with arrow) / `4` (without arrow), matching React's defaults. Tooltip positioning will shift slightly closer to the anchor element.
+  - Removed `role="tooltip"` from the wrapper `<div>`. The role is now correctly placed only on the tooltip content `<div>`. Code that queries the wrapper by `role="tooltip"` will need to be updated.
+  - Keyboard shortcut separator changed from Norwegian `" eller "` to English `"or"` (matching React's i18n default). Use the new `shortcutSeparator` prop to customize.
+  - Arrow now always renders when `arrow={true}` (the default). Previously it was hidden when a theme context existed; this no longer affects arrow rendering.
+  - Tooltip positioning replaced from manual CSS calculation to `svelte-floating-ui` with `offset`, `shift`, `flip`, and `arrow` middleware, matching React's `@floating-ui/react` setup. Positioning behavior is improved but may differ from the previous implementation.
+
+  **New features:**
+
+  - Added `defaultOpen` prop to start the tooltip in an open state.
+  - Added `onOpenChange` callback, invoked when the tooltip open state changes.
+  - Added `describesChild` prop: when `false` (default), applies `aria-label` to the wrapper; when `true`, applies `aria-describedby` (open) or `title` (closed).
+  - Added `id` prop to override the auto-generated tooltip id.
+  - Added `shortcutSeparator` prop (default `"or"`) for i18n customization of keyboard shortcut group separators.
+  - Added `aria-keyshortcuts` attribute on wrapper element when `keys` are provided.
+  - Added `aria-hidden="true"` on keyboard shortcuts `<span>` (matching React).
+  - Added `onfocus`/`onblur` handlers and `Escape` key dismissal for keyboard accessibility.
+
+  **Bug fixes:**
+
+  - Tooltip id is now uniquely generated via `$props.id()` instead of being hardcoded as `"r7"`.
+
+- [#379](https://github.com/nais/ds-svelte-community/pull/379) [`b9cfcab`](https://github.com/nais/ds-svelte-community/commit/b9cfcab2bae9b378c5f9a7a32b552b529cd4dd6b) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Update components to match Aksel React v8:
+
+  - **ToggleGroup**: Add `fill` and `data-color` props, `aria-labelledby` on radiogroup, `Label as="div"` with id, remove variant-specific class in favor of `data-color`
+  - **Tooltip**: Update `keys` prop type to support multiple shortcut groups (`string[] | [string[], string[]]`)
+  - **InternalHeader.User**: Support `Snippet` for `name` and `description` props, change inner wrapper from `<span>` to `<div>` to match React
+  - **ActionMenu.Item**: Add `iconPosition` prop for right-aligned icons, use `data-marker` attribute instead of `--has-icon` class
+  - **ActionMenu.CheckboxItem / RadioItem**: Replace `--has-icon` class with `data-marker="left"` attribute
+
 ## 2.0.0-next.6
 
 ### Patch Changes
