@@ -6,7 +6,6 @@ const libReplacemenet = "@nais/ds-svelte-community";
 // storyProcess walks through Svelte files, and adds the story source code as an
 // attribute to the Story component.
 export default function storyProcess(): VitePlugin {
-	const parser = new StoryParser(libReplacemenet);
 	return {
 		name: "dssc-docs",
 
@@ -17,6 +16,7 @@ export default function storyProcess(): VitePlugin {
 					return;
 				}
 
+				const parser = new StoryParser(libReplacemenet);
 				return parser.parse(code, id);
 			},
 		},

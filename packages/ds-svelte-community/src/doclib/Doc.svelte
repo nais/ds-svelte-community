@@ -41,7 +41,15 @@
 		extraDescription?: Snippet;
 	} = $props();
 
-	let tab = $derived(page.url.searchParams.get("tab") || "Default");
+	// `page.url.searchParams` is disabled during prerender (it throws on access),
+	// so fall back to the default tab in that case.
+	let tab = $derived.by(() => {
+		try {
+			return page.url.searchParams.get("tab") || "Default";
+		} catch {
+			return "Default";
+		}
+	});
 
 	const story = $derived(stories?.find((s) => s.name === tab));
 
