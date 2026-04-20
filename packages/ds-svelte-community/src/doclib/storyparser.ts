@@ -27,7 +27,7 @@ export class StoryParser {
 	private code: string = "";
 	private magicString: MagicString = new MagicString("");
 	private logLevel: LogLevel = LogLevel.error;
-	private projectCache: Project | null = null;
+	private static projectCache: Project | null = null;
 
 	constructor(libReplacement: string, logLevel: LogLevel = LogLevel.error) {
 		this.libReplacement = libReplacement;
@@ -35,8 +35,8 @@ export class StoryParser {
 	}
 
 	private getProject(): Project {
-		if (!this.projectCache) {
-			this.projectCache = new Project({
+		if (!StoryParser.projectCache) {
+			StoryParser.projectCache = new Project({
 				compilerOptions: {
 					lib: ["esnext"],
 					noEmit: true,
@@ -45,7 +45,7 @@ export class StoryParser {
 				},
 			});
 		}
-		return this.projectCache;
+		return StoryParser.projectCache;
 	}
 
 	async compile(code: string, id: string) {
