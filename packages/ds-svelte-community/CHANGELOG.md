@@ -1,5 +1,11 @@
 # @nais/ds-svelte-community
 
+## 2.0.0-next.8
+
+### Patch Changes
+
+- [#402](https://github.com/nais/ds-svelte-community/pull/402) [`7cbb16c`](https://github.com/nais/ds-svelte-community/commit/7cbb16c7ff96d4606cd2d365b2f69ac24672483a) Thanks [@thokra-nav](https://github.com/thokra-nav)! - Add documentation pages and examples for existing components, primitives, and typography to achieve parity with Aksel: Fieldset, Theme, HGrid, Page, Hide, Show, Stack, HStack, VStack, Heading, Label, ErrorMessage, and Link.
+
 ## 2.0.0-next.7
 
 ### Minor Changes
