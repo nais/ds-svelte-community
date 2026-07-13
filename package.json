@@ -16,20 +16,20 @@
 		"packages/*"
 	],
 	"dependencies": {
-		"@changesets/cli": "^2.30.0",
+		"@changesets/cli": "^2.31.0",
 		"@types/eslint": "^9.6.1",
-		"ts-morph": "^27.0.2"
+		"ts-morph": "^28.0.0"
 	},
 	"devDependencies": {
-		"@changesets/changelog-github": "^0.6.0",
+		"@changesets/changelog-github": "^0.7.0",
 		"@eslint/js": "^10.0.1",
 		"eslint-config-prettier": "^10.1.8",
-		"eslint-plugin-svelte": "^3.17.0",
+		"eslint-plugin-svelte": "^3.20.0",
 		"glob": "^13.0.6",
-		"globals": "^17.5.0",
-		"prettier-plugin-svelte": "^3.5.1",
+		"globals": "^17.7.0",
+		"prettier-plugin-svelte": "^4.1.1",
 		"source-map-js": "^1.2.1",
-		"svelte-highlight": "^7.9.0",
-		"typescript-eslint": "^8.58.2"
+		"svelte-highlight": "^7.13.0",
+		"typescript-eslint": "^8.62.0"
 	}
 }
